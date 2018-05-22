@@ -9,7 +9,7 @@ function ajax_level(level){
 
 function load_prebuilt_level(responseText){
     webgl_load_level({
-      'level': responseText,
+      'json': responseText,
     });
 
     core_escape();
