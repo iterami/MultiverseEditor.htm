@@ -30,4 +30,9 @@ function repo_init(){
       },
       'title': 'MultiverseEditor.htm',
     });
+
+    var level = window.location.search.substring(1);
+    if(level.length > 0){
+        core_escape();
+    }
 }
