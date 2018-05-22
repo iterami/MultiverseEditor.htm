@@ -8,7 +8,7 @@ function ajax_level(level){
 }
 
 function load_prebuilt_level(responseText){
-    webgl_level_load({
+    webgl_load_level({
       'level': responseText,
     });
 
