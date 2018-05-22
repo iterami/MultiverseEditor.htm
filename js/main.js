@@ -37,13 +37,8 @@ function repo_init(){
       'title': 'MultiverseEditor.htm',
     });
 
-    if(window.location.protocol !== 'file:'){
-        var level = window.location.search.substring(1);
-        if(level.length > 0){
-            ajax_level(level);
-        }
-
-    }else{
-        document.getElementById('load_prebuilt').disabled = true;
+    var level = window.location.search.substring(1);
+    if(level.length > 0){
+        ajax_level(level);
     }
 }
