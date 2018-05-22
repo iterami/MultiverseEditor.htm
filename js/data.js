@@ -11,6 +11,4 @@ function load_prebuilt_level(responseText){
     webgl_load_level({
       'json': responseText,
     });
-
-    core_escape();
 }
