@@ -20,7 +20,7 @@ function repo_init(){
         },
       },
       'info': '<table><tr><td><input id=json type=file><td><input id=load_file type=button value="Load Level From File">'
-        + '<tr><td><select id=level_select><option value=trains>Trains</option></select><td><input id=load_prebuilt type=button value="Load Prebuilt Level"></table>',
+        + '<tr><td><select id=level_select></select><td><input id=load_prebuilt type=button value="Load Prebuilt Level"></table>',
       'keybinds': {
         32: {},
         67: {},
@@ -37,8 +37,19 @@ function repo_init(){
       'title': 'MultiverseEditor.htm',
     });
 
-    var level = window.location.search.substring(1);
-    if(level.length > 0){
-        ajax_level(level);
+    // Populate prebuilt level select.
+    var levels = {
+      'trains': 'Trains',
+    };
+    var level_select = '';
+    for(var level in levels){
+        level_select += '<option value="' + level + '">' + levels[level] + '</option>';
+    }
+    document.getElementById('level_select').innerHTML = level_select;
+
+    // Handle prebuilt level url args.
+    var level_arg = window.location.search.substring(1);
+    if(level_arg.length > 0){
+        ajax_level(level_arg);
     }
 }
