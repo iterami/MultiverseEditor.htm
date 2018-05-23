@@ -39,6 +39,7 @@ function repo_init(){
 
     // Populate prebuilt level select.
     var levels = {
+      'citymaze': 'City Maze',
       'trains': 'Trains',
     };
     var level_select = '';
