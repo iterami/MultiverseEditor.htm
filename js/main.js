@@ -1,6 +1,7 @@
 'use strict';
 
 function logic(){
+    webgl_properties['camera']['speed'] = core_storage_data['camera-speed'];
 }
 
 function repo_init(){
@@ -34,6 +35,10 @@ function repo_init(){
           'todo': webgl_camera_first,
         },
       },
+      'storage': {
+        'camera-speed': .2,
+      },
+      'storage-menu': '<table><tr><td><input id=camera-speed><td>Camera Speed</table>',
       'title': 'MultiverseEditor.htm',
     });
 
