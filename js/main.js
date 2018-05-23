@@ -15,7 +15,7 @@ function repo_init(){
         },
         'load_prebuilt': {
           'onclick': function(){
-              ajax_level(level_select.value);
+              ajax_level(document.getElementById('level_select').value);
           },
         },
       },
