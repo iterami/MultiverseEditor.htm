@@ -10,6 +10,7 @@ function repo_init(){
         'load_file': {
           'onclick': function(){
               webgl_load_level({
+                'character': false,
                 'json': document.getElementById('json').files[0] || false,
               });
           },
