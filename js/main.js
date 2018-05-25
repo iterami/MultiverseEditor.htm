@@ -1,7 +1,7 @@
 'use strict';
 
 function logic(){
-    webgl_properties['camera']['speed'] = core_storage_data['camera-speed'];
+    webgl_character['camera-speed'] = core_storage_data['camera-speed'];
 }
 
 function repo_init(){
