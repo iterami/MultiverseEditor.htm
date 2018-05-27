@@ -43,17 +43,14 @@ function repo_init(){
       'title': 'MultiverseEditor.htm',
     });
 
-    // Populate prebuilt level select.
-    var levels = {
-      'citymaze': 'City Maze',
-      'desertstreetmarket': 'Desert Street Market',
-      'trains': 'Trains',
-    };
-    var level_select = '';
-    for(var level in levels){
-        level_select += '<option value="' + level + '">' + levels[level] + '</option>';
+    // Populate prebuilt level select if multiverselevels defined.
+    if('multiverselevels' in window){
+        var level_select = '';
+        for(var level in multiverselevels){
+            level_select += '<option value="' + level + '">' + multiverselevels[level] + '</option>';
+        }
+        document.getElementById('level_select').innerHTML = level_select;
     }
-    document.getElementById('level_select').innerHTML = level_select;
 
     // Handle prebuilt level url args.
     var level_arg = window.location.search.substring(1);
