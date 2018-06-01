@@ -38,8 +38,9 @@ function repo_init(){
       },
       'storage': {
         'camera-speed': .2,
+        'editing': false,
       },
-      'storage-menu': '<table><tr><td><input id=camera-speed><td>Camera Speed</table>',
+      'storage-menu': '<table><tr><td><input id=camera-speed><td>Camera Speed<tr><td><input id=editing type=checkbox><td>Editing Mode</table>',
       'title': 'MultiverseEditor.htm',
     });
 
