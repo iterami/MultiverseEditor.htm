@@ -20,9 +20,13 @@ function repo_init(){
               ajax_level(document.getElementById('level_select').value);
           },
         },
+        'origin': {
+          'onclick': webgl_camera_reset,
+        },
       },
       'info': '<table><tr><td><input id=json type=file><td><input id=load_file type=button value="Load Level From File">'
-        + '<tr><td><select id=level_select></select><td><input id=load_prebuilt type=button value="Load Prebuilt Level"></table>',
+        + '<tr><td><select id=level_select></select><td><input id=load_prebuilt type=button value="Load Prebuilt Level"></table>'
+        + '<hr><input id=origin type=button value="Return to Origin">',
       'keybinds': {
         32: {},
         67: {},
