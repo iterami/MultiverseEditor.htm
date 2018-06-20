@@ -33,9 +33,6 @@ function repo_init(){
       },
       'menu': true,
       'mousebinds': {
-        'mousedown': {
-          'todo': core_requestpointerlock,
-        },
         'mousemove': {
           'todo': webgl_camera_handle,
         },
