@@ -8,7 +8,8 @@ function repo_init(){
     core_repo_init({
       'beforeunload': {
         'todo': function(){
-            if(webgl_character_level() > -2){
+            if(webgl_character_level() > -2
+              && core_storage_data['beforeunload-warning']){
                 return 'Exit?';
             }
         },
@@ -49,10 +50,11 @@ function repo_init(){
         },
       },
       'storage': {
+        'beforeunload-warning': true,
         'camera-speed': .4,
         'editing': false,
       },
-      'storage-menu': '<table><tr><td><input id=camera-speed><td>Camera Speed<tr><td><input id=editing type=checkbox><td>Editing Mode</table>',
+      'storage-menu': '<table><tr><td><input id=beforeunload-warning type=checkbox><td>beforeunload Warning<tr><td><input id=camera-speed><td>Camera Speed<tr><td><input id=editing type=checkbox><td>Editing Mode</table>',
       'title': 'MultiverseEditor.htm',
     });
 
