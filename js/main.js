@@ -2,6 +2,7 @@
 
 function logic(){
     webgl_character['camera-speed'] = core_storage_data['camera-speed'];
+    webgl_character['collides'] = core_storage_data['character-collides'];
 }
 
 function repo_init(){
@@ -52,9 +53,10 @@ function repo_init(){
       'storage': {
         'beforeunload-warning': true,
         'camera-speed': .4,
+        'character-collides': true,
         'editing': false,
       },
-      'storage-menu': '<table><tr><td><input id=beforeunload-warning type=checkbox><td>beforeunload Warning<tr><td><input id=camera-speed><td>Camera Speed<tr><td><input id=editing type=checkbox><td>Editing Mode</table>',
+      'storage-menu': '<table><tr><td><input id=beforeunload-warning type=checkbox><td>beforeunload Warning<tr><td><input id=camera-speed><td>Camera Speed<tr><td><input id=character-collides type=checkbox><td>Character Collides<tr><td><input id=editing type=checkbox><td>Editing Mode</table>',
       'title': 'MultiverseEditor.htm',
     });
 
