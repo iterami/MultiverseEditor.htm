@@ -1,7 +1,7 @@
 'use strict';
 
 function logic(){
-    webgl_character['camera-speed'] = core_storage_data['camera-speed'];
+    webgl_character['speed'] = core_storage_data['camera-speed'];
     webgl_character['collides'] = core_storage_data['character-collides'];
 }
 
