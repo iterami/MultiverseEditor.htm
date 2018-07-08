@@ -62,15 +62,15 @@ function repo_init(){
 
     // Populate prebuilt level select if multiverselevels defined.
     if('multiverselevels' in window){
-        var level_select = '';
-        for(var level in multiverselevels){
+        let level_select = '';
+        for(let level in multiverselevels){
             level_select += '<option value="' + level + '">' + multiverselevels[level] + '</option>';
         }
         document.getElementById('level_select').innerHTML = level_select;
     }
 
     // Handle prebuilt level url args.
-    var level_arg = window.location.search.substring(1);
+    let level_arg = window.location.search.substring(1);
     if(level_arg.length > 0){
         ajax_level(level_arg);
     }
