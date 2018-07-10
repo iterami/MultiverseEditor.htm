@@ -77,9 +77,38 @@ function repo_init(){
 
     // Create level export tab.
     core_tab_create({
-      'content': '<input id=update_json type=button value="Update Level JSON"><br><textarea></textarea>',
+      'content': '<input id=update_json type=button value="Update Level JSON"><br><textarea id=exported></textarea>',
       'group': 'core-menu',
       'id': 'export',
       'label': 'Export Level',
+    });
+    core_events_bind({
+      'elements': {
+        'update_json': {
+          'onclick': function(){
+              let json = {
+                'character': false,
+                'entities': [],
+              };
+
+              Object.assign(
+                json,
+                webgl_properties
+              );
+              if(webgl_character_level() > 0){
+                  json['character'] = {};
+                  Object.assign(
+                    json,
+                    webgl_character
+                  );
+              }
+              for(let entity in core_entities){
+                  json['entities'].push(core_entities[entity]);
+              }
+
+              document.getElementById('exported').value = JSON.stringify(json);
+          },
+        },
+      },
     });
 }
