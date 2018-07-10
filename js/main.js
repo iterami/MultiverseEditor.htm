@@ -74,4 +74,12 @@ function repo_init(){
     if(level_arg.length > 0){
         ajax_level(level_arg);
     }
+
+    // Create level export tab.
+    core_tab_create({
+      'content': '<input id=update_json type=button value="Update Level JSON"><br><textarea></textarea>',
+      'group': 'core-menu',
+      'id': 'export',
+      'label': 'Export Level',
+    });
 }
