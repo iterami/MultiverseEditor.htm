@@ -86,10 +86,7 @@ function repo_init(){
       'elements': {
         'update_json': {
           'onclick': function(){
-              let json = {
-                'character': false,
-                'entities': [],
-              };
+              let json = {};
 
               Object.assign(
                 json,
@@ -102,6 +99,7 @@ function repo_init(){
                     webgl_character
                   );
               }
+              json['entities'] = [];
               for(let entity in core_entities){
                   json['entities'].push(core_entities[entity]);
               }
