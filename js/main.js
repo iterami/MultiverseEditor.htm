@@ -86,25 +86,9 @@ function repo_init(){
       'elements': {
         'update_json': {
           'onclick': function(){
-              let json = {};
-
-              Object.assign(
-                json,
-                webgl_properties
-              );
-              if(webgl_character_level() > 0){
-                  json['character'] = {};
-                  Object.assign(
-                    json,
-                    webgl_character
-                  );
-              }
-              json['entities'] = [];
-              for(let entity in core_entities){
-                  json['entities'].push(core_entities[entity]);
-              }
-
-              document.getElementById('exported').value = JSON.stringify(json);
+              webgl_json_export({
+                'character': false,
+              });
           },
         },
       },
