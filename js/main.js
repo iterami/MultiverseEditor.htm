@@ -30,12 +30,15 @@ function repo_init(){
           },
         },
         'origin': {
-          'onclick': webgl_camera_reset,
+          'onclick': webgl_camera_origin,
+        },
+        'spawn': {
+          'onclick': webgl_camera_spawn,
         },
       },
       'info': '<table><tr><td><input id=json type=file><td><input id=load_file type=button value="Load Level From File">'
         + '<tr><td><select id=level_select></select><td><input id=load_prebuilt type=button value="Load Prebuilt Level"></table>'
-        + '<hr><input id=origin type=button value="Return to Origin">',
+        + '<hr><input id=origin type=button value="Return to Origin"><input id=spawn type=button value="Return to Spawn">',
       'keybinds': {
         32: {},
         67: {},
