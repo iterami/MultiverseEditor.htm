@@ -3,6 +3,17 @@
 function logic(){
     webgl_character['speed'] = core_storage_data['camera-speed'];
     webgl_character['collides'] = core_storage_data['character-collides'];
+
+    core_ui_update({
+      'ids': {
+        'rotate-x': webgl_character['camera-rotate-x'],
+        'rotate-y': webgl_character['camera-rotate-y'],
+        'rotate-z': webgl_character['camera-rotate-z'],
+        'translate-x': webgl_character['translate-x'],
+        'translate-y': webgl_character['translate-y'],
+        'translate-z': webgl_character['translate-z'],
+      },
+    });
 }
 
 function repo_init(){
@@ -38,7 +49,9 @@ function repo_init(){
       },
       'info': '<table><tr><td><input id=json type=file><td><input id=load_file type=button value="Load Level From File">'
         + '<tr><td><select id=level_select></select><td><input id=load_prebuilt type=button value="Load Prebuilt Level"></table>'
-        + '<hr><input id=origin type=button value="Return to Origin"><input id=spawn type=button value="Return to Spawn">',
+        + '<hr><input id=origin type=button value="Return to Origin"><input id=spawn type=button value="Return to Spawn"><br>'
+        + '<span id=ui-translate-x></span>x, <span id=ui-translate-y></span>y, <span id=ui-translate-z></span>z<br>'
+        + '<span id=ui-rotate-x></span>x°, <span id=ui-rotate-y></span>y°, <span id=ui-rotate-z></span>z°',
       'keybinds': {
         32: {},
         67: {},
