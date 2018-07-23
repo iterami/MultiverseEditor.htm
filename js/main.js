@@ -55,7 +55,7 @@ function repo_init(){
       },
       'storage': {
         'beforeunload-warning': true,
-        'camera-speed': .4,
+        'camera-speed': .5,
         'character-collides': true,
         'editing': false,
       },
