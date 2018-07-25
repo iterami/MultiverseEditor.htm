@@ -40,6 +40,39 @@ function repo_init(){
               ajax_level(document.getElementById('level_select').value);
           },
         },
+        'rotate-x': {
+          'onclick': function(){
+              webgl_character['camera-rotate-x'] = 0;
+              webgl_character['camera-rotate-radians-x'] = 0;
+          },
+        },
+        'rotate-y': {
+          'onclick': function(){
+              webgl_character['camera-rotate-y'] = 0;
+              webgl_character['camera-rotate-radians-y'] = 0;
+          },
+        },
+        'rotate-z': {
+          'onclick': function(){
+              webgl_character['camera-rotate-z'] = 0;
+              webgl_character['camera-rotate-radians-z'] = 0;
+          },
+        },
+        'translate-x': {
+          'onclick': function(){
+              webgl_character['translate-x'] = 0;
+          },
+        },
+        'translate-y': {
+          'onclick': function(){
+              webgl_character['translate-y'] = 0;
+          },
+        },
+        'translate-z': {
+          'onclick': function(){
+              webgl_character['translate-z'] = 0;
+          },
+        },
         'origin': {
           'onclick': webgl_camera_origin,
         },
@@ -50,8 +83,8 @@ function repo_init(){
       'info': '<table><tr><td><input id=json type=file><td><input id=load_file type=button value="Load Level From File">'
         + '<tr><td><select id=level_select></select><td><input id=load_prebuilt type=button value="Load Prebuilt Level"></table>'
         + '<hr><input id=origin type=button value="Return to Origin"><input id=spawn type=button value="Return to Spawn"><br>'
-        + '<span id=ui-translate-x></span>x, <span id=ui-translate-y></span>y, <span id=ui-translate-z></span>z<br>'
-        + '<span id=ui-rotate-x></span>x°, <span id=ui-rotate-y></span>y°, <span id=ui-rotate-z></span>z°',
+        + '<input id=translate-x type=button value="x">=<span id=ui-translate-x></span> <input id=translate-y type=button value="y">=<span id=ui-translate-y></span> <input id=translate-z type=button value="z">=<span id=ui-translate-z></span><br>'
+        + '<input id=rotate-x type=button value="x°">=<span id=ui-rotate-x></span> <input id=rotate-y type=button value="y°">=<span id=ui-rotate-y></span> <input id=rotate-z type=button value="z°">=<span id=ui-rotate-z></span>',
       'keybinds': {
         32: {},
         67: {},
