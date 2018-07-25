@@ -44,18 +44,24 @@ function repo_init(){
           'onclick': function(){
               webgl_character['camera-rotate-x'] = 0;
               webgl_character['camera-rotate-radians-x'] = 0;
+              webgl_character['rotate-x'] = 0;
+              webgl_character['rotate-radians-x'] = 0;
           },
         },
         'rotate-y': {
           'onclick': function(){
               webgl_character['camera-rotate-y'] = 0;
               webgl_character['camera-rotate-radians-y'] = 0;
+              webgl_character['rotate-y'] = 0;
+              webgl_character['rotate-radians-y'] = 0;
           },
         },
         'rotate-z': {
           'onclick': function(){
               webgl_character['camera-rotate-z'] = 0;
               webgl_character['camera-rotate-radians-z'] = 0;
+              webgl_character['rotate-z'] = 0;
+              webgl_character['rotate-radians-z'] = 0;
           },
         },
         'translate-x': {
