@@ -1,17 +1,17 @@
 'use strict';
 
 function logic(){
-    webgl_character['speed'] = core_storage_data['camera-speed'];
-    webgl_character['collides'] = core_storage_data['character-collides'];
+    webgl_characters['_me']['speed'] = core_storage_data['camera-speed'];
+    webgl_characters['_me']['collides'] = core_storage_data['character-collides'];
 
     core_ui_update({
       'ids': {
-        'rotate-x': webgl_character['camera-rotate-x'],
-        'rotate-y': webgl_character['camera-rotate-y'],
-        'rotate-z': webgl_character['camera-rotate-z'],
-        'translate-x': webgl_character['translate-x'],
-        'translate-y': webgl_character['translate-y'],
-        'translate-z': webgl_character['translate-z'],
+        'rotate-x': webgl_characters['_me']['camera-rotate-x'],
+        'rotate-y': webgl_characters['_me']['camera-rotate-y'],
+        'rotate-z': webgl_characters['_me']['camera-rotate-z'],
+        'translate-x': webgl_characters['_me']['translate-x'],
+        'translate-y': webgl_characters['_me']['translate-y'],
+        'translate-z': webgl_characters['_me']['translate-z'],
       },
     });
 }
@@ -42,48 +42,48 @@ function repo_init(){
         },
         'rotate-x': {
           'onclick': function(){
-              webgl_character['camera-rotate-x'] = 0;
-              webgl_character['camera-rotate-radians-x'] = 0;
-              webgl_character['rotate-x'] = 0;
-              webgl_character['rotate-radians-x'] = 0;
+              webgl_characters['_me']['camera-rotate-x'] = 0;
+              webgl_characters['_me']['camera-rotate-radians-x'] = 0;
+              webgl_characters['_me']['rotate-x'] = 0;
+              webgl_characters['_me']['rotate-radians-x'] = 0;
           },
         },
         'rotate-y': {
           'onclick': function(){
-              webgl_character['camera-rotate-y'] = 0;
-              webgl_character['camera-rotate-radians-y'] = 0;
-              webgl_character['rotate-y'] = 0;
-              webgl_character['rotate-radians-y'] = 0;
+              webgl_characters['_me']['camera-rotate-y'] = 0;
+              webgl_characters['_me']['camera-rotate-radians-y'] = 0;
+              webgl_characters['_me']['rotate-y'] = 0;
+              webgl_characters['_me']['rotate-radians-y'] = 0;
           },
         },
         'rotate-z': {
           'onclick': function(){
-              webgl_character['camera-rotate-z'] = 0;
-              webgl_character['camera-rotate-radians-z'] = 0;
-              webgl_character['rotate-z'] = 0;
-              webgl_character['rotate-radians-z'] = 0;
+              webgl_characters['_me']['camera-rotate-z'] = 0;
+              webgl_characters['_me']['camera-rotate-radians-z'] = 0;
+              webgl_characters['_me']['rotate-z'] = 0;
+              webgl_characters['_me']['rotate-radians-z'] = 0;
           },
         },
         'translate-x': {
           'onclick': function(){
-              webgl_character['translate-x'] = 0;
+              webgl_characters['_me']['translate-x'] = 0;
           },
         },
         'translate-y': {
           'onclick': function(){
-              webgl_character['translate-y'] = 0;
+              webgl_characters['_me']['translate-y'] = 0;
           },
         },
         'translate-z': {
           'onclick': function(){
-              webgl_character['translate-z'] = 0;
+              webgl_characters['_me']['translate-z'] = 0;
           },
         },
         'origin': {
-          'onclick': webgl_camera_origin,
+          'onclick': webgl_character_origin,
         },
         'spawn': {
-          'onclick': webgl_camera_spawn,
+          'onclick': webgl_character_spawn,
         },
       },
       'info': '<table><tr><td><input id=json type=file><td><input id=load_file type=button value="Load Level From File">'
