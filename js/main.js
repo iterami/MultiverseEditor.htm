@@ -1,17 +1,17 @@
 'use strict';
 
 function logic(){
-    webgl_characters['_me']['speed'] = core_storage_data['camera-speed'];
-    webgl_characters['_me']['collides'] = core_storage_data['character-collides'];
+    webgl_characters[webgl_character_id]['speed'] = core_storage_data['camera-speed'];
+    webgl_characters[webgl_character_id]['collides'] = core_storage_data['character-collides'];
 
     core_ui_update({
       'ids': {
-        'rotate-x': webgl_characters['_me']['camera-rotate-x'],
-        'rotate-y': webgl_characters['_me']['camera-rotate-y'],
-        'rotate-z': webgl_characters['_me']['camera-rotate-z'],
-        'translate-x': webgl_characters['_me']['translate-x'],
-        'translate-y': webgl_characters['_me']['translate-y'],
-        'translate-z': webgl_characters['_me']['translate-z'],
+        'rotate-x': webgl_characters[webgl_character_id]['camera-rotate-x'],
+        'rotate-y': webgl_characters[webgl_character_id]['camera-rotate-y'],
+        'rotate-z': webgl_characters[webgl_character_id]['camera-rotate-z'],
+        'translate-x': webgl_characters[webgl_character_id]['translate-x'],
+        'translate-y': webgl_characters[webgl_character_id]['translate-y'],
+        'translate-z': webgl_characters[webgl_character_id]['translate-z'],
       },
     });
 }
@@ -42,41 +42,41 @@ function repo_init(){
         },
         'rotate-x': {
           'onclick': function(){
-              webgl_characters['_me']['camera-rotate-x'] = 0;
-              webgl_characters['_me']['camera-rotate-radians-x'] = 0;
-              webgl_characters['_me']['rotate-x'] = 0;
-              webgl_characters['_me']['rotate-radians-x'] = 0;
+              webgl_characters[webgl_character_id]['camera-rotate-x'] = 0;
+              webgl_characters[webgl_character_id]['camera-rotate-radians-x'] = 0;
+              webgl_characters[webgl_character_id]['rotate-x'] = 0;
+              webgl_characters[webgl_character_id]['rotate-radians-x'] = 0;
           },
         },
         'rotate-y': {
           'onclick': function(){
-              webgl_characters['_me']['camera-rotate-y'] = 0;
-              webgl_characters['_me']['camera-rotate-radians-y'] = 0;
-              webgl_characters['_me']['rotate-y'] = 0;
-              webgl_characters['_me']['rotate-radians-y'] = 0;
+              webgl_characters[webgl_character_id]['camera-rotate-y'] = 0;
+              webgl_characters[webgl_character_id]['camera-rotate-radians-y'] = 0;
+              webgl_characters[webgl_character_id]['rotate-y'] = 0;
+              webgl_characters[webgl_character_id]['rotate-radians-y'] = 0;
           },
         },
         'rotate-z': {
           'onclick': function(){
-              webgl_characters['_me']['camera-rotate-z'] = 0;
-              webgl_characters['_me']['camera-rotate-radians-z'] = 0;
-              webgl_characters['_me']['rotate-z'] = 0;
-              webgl_characters['_me']['rotate-radians-z'] = 0;
+              webgl_characters[webgl_character_id]['camera-rotate-z'] = 0;
+              webgl_characters[webgl_character_id]['camera-rotate-radians-z'] = 0;
+              webgl_characters[webgl_character_id]['rotate-z'] = 0;
+              webgl_characters[webgl_character_id]['rotate-radians-z'] = 0;
           },
         },
         'translate-x': {
           'onclick': function(){
-              webgl_characters['_me']['translate-x'] = 0;
+              webgl_characters[webgl_character_id]['translate-x'] = 0;
           },
         },
         'translate-y': {
           'onclick': function(){
-              webgl_characters['_me']['translate-y'] = 0;
+              webgl_characters[webgl_character_id]['translate-y'] = 0;
           },
         },
         'translate-z': {
           'onclick': function(){
-              webgl_characters['_me']['translate-z'] = 0;
+              webgl_characters[webgl_character_id]['translate-z'] = 0;
           },
         },
         'origin': {
