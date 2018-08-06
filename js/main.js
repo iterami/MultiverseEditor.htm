@@ -1,12 +1,13 @@
 'use strict';
 
 function logic(){
-    webgl_characters[webgl_character_id]['speed'] = core_storage_data['camera-speed'];
-    webgl_characters[webgl_character_id]['collides'] = core_storage_data['character-collides'];
 }
 
 function repo_escape(){
     if(webgl_character_level() > -2){
+        webgl_characters[webgl_character_id]['collides'] = core_storage_data['character-collides'];
+        webgl_characters[webgl_character_id]['speed'] = core_storage_data['camera-speed'];
+
         core_ui_update({
           'ids': {
             'rotate-x': webgl_characters[webgl_character_id]['camera-rotate-x'],
