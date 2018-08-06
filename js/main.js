@@ -6,7 +6,7 @@ function logic(){
 function repo_escape(){
     if(webgl_character_level() > -2){
         webgl_characters[webgl_character_id]['collides'] = core_storage_data['character-collides'];
-        webgl_characters[webgl_character_id]['speed'] = core_storage_data['camera-speed'];
+        webgl_characters[webgl_character_id]['speed'] = core_storage_data['character-speed'];
 
         core_ui_update({
           'ids': {
@@ -112,11 +112,11 @@ function repo_init(){
       },
       'storage': {
         'beforeunload-warning': true,
-        'camera-speed': .5,
         'character-collides': true,
+        'character-speed': 1,
         'editing': false,
       },
-      'storage-menu': '<table><tr><td><input id=beforeunload-warning type=checkbox><td>beforeunload Warning<tr><td><input id=camera-speed><td>Camera Speed<tr><td><input id=character-collides type=checkbox><td>Character Collides<tr><td><input id=editing type=checkbox><td>Editing Mode</table>',
+      'storage-menu': '<table><tr><td><input id=beforeunload-warning type=checkbox><td>beforeunload Warning<tr><td><input id=character-collides type=checkbox><td>Character Collides<tr><td><input id=character-speed><td>Camera Speed<tr><td><input id=editing type=checkbox><td>Editing Mode</table>',
       'title': 'MultiverseEditor.htm',
     });
 
