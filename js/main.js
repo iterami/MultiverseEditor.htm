@@ -3,17 +3,21 @@
 function logic(){
     webgl_characters[webgl_character_id]['speed'] = core_storage_data['camera-speed'];
     webgl_characters[webgl_character_id]['collides'] = core_storage_data['character-collides'];
+}
 
-    core_ui_update({
-      'ids': {
-        'rotate-x': webgl_characters[webgl_character_id]['camera-rotate-x'],
-        'rotate-y': webgl_characters[webgl_character_id]['camera-rotate-y'],
-        'rotate-z': webgl_characters[webgl_character_id]['camera-rotate-z'],
-        'translate-x': webgl_characters[webgl_character_id]['translate-x'],
-        'translate-y': webgl_characters[webgl_character_id]['translate-y'],
-        'translate-z': webgl_characters[webgl_character_id]['translate-z'],
-      },
-    });
+function repo_escape(){
+    if(webgl_character_level() > -2){
+        core_ui_update({
+          'ids': {
+            'rotate-x': webgl_characters[webgl_character_id]['camera-rotate-x'],
+            'rotate-y': webgl_characters[webgl_character_id]['camera-rotate-y'],
+            'rotate-z': webgl_characters[webgl_character_id]['camera-rotate-z'],
+            'translate-x': webgl_characters[webgl_character_id]['translate-x'],
+            'translate-y': webgl_characters[webgl_character_id]['translate-y'],
+            'translate-z': webgl_characters[webgl_character_id]['translate-z'],
+          },
+        });
+    }
 }
 
 function repo_init(){
