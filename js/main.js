@@ -116,7 +116,7 @@ function repo_init(){
         'character-speed': 1,
         'editing': false,
       },
-      'storage-menu': '<table><tr><td><input id=beforeunload-warning type=checkbox><td>beforeunload Warning<tr><td><input id=character-collides type=checkbox><td>Character Collides<tr><td><input id=character-speed><td>Camera Speed<tr><td><input id=editing type=checkbox><td>Editing Mode</table>',
+      'storage-menu': '<table><tr><td><input id=beforeunload-warning type=checkbox><td>beforeunload Warning<tr><td><input id=character-collides type=checkbox><td>Character Collides<tr><td><input id=character-speed><td>Character Speed<tr><td><input id=editing type=checkbox><td>Editing Mode</table>',
       'title': 'MultiverseEditor.htm',
     });
 
