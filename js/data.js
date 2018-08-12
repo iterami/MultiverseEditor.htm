@@ -25,3 +25,15 @@ function toggle_fog(){
 
     webgl_shader_update();
 }
+
+function toggle_lighting_directional(){
+    if(webgl_character_level() < -1){
+        return;
+    }
+
+    webgl_properties['directional-state'] = webgl_properties['directional-state']
+      ? 0
+      : 1;
+
+    webgl_shader_update();
+}

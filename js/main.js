@@ -93,13 +93,16 @@ function repo_init(){
         'toggle-fog': {
           'onclick': toggle_fog,
         },
+        'toggle-lighting-directional': {
+          'onclick': toggle_lighting_directional,
+        },
       },
       'info': '<table><tr><td><input id=json type=file><td><input id=load_file type=button value="Load Level From File">'
         + '<tr><td><select id=level_select></select><td><input id=load_prebuilt type=button value="Load Prebuilt Level"></table>'
         + '<hr><input id=origin type=button value="Return to Origin"><input id=spawn type=button value="Return to Spawn"><br>'
         + '<input id=translate-x type=button value="x">=<span id=ui-translate-x></span> <input id=translate-y type=button value="y">=<span id=ui-translate-y></span> <input id=translate-z type=button value="z">=<span id=ui-translate-z></span><br>'
         + '<input id=rotate-x type=button value="x°">=<span id=ui-rotate-x></span> <input id=rotate-y type=button value="y°">=<span id=ui-rotate-y></span> <input id=rotate-z type=button value="z°">=<span id=ui-rotate-z></span>'
-        + '<hr><input id=toggle-fog type=button value="Toggle Fog">',
+        + '<hr><input id=toggle-lighting-directional type=button value="Toggle Directional Lighting"><input id=toggle-fog type=button value="Toggle Fog">',
       'keybinds': {
         32: {},
         67: {},
