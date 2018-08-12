@@ -13,3 +13,15 @@ function load_prebuilt_level(responseText){
       'json': responseText,
     });
 }
+
+function toggle_fog(){
+    if(webgl_character_level() < -1){
+        return;
+    }
+
+    webgl_properties['fog-state'] = webgl_properties['fog-state']
+      ? 0
+      : 1;
+
+    webgl_shader_update();
+}
