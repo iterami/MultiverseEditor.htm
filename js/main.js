@@ -104,8 +104,8 @@ function repo_init(){
         + '<hr><input id=origin type=button value="Return to Origin"><input id=spawn type=button value="Return to Spawn"><br>'
         + '<input id=translate-x type=button value="x">=<input id=ui-translate-x><input id=rotate-x type=button value="x°">=<input id=ui-rotate-x><br>'
         + '<input id=translate-y type=button value="y">=<input id=ui-translate-y><input id=rotate-y type=button value="y°">=<input id=ui-rotate-y><br>'
-        + '<input id=translate-z type=button value="z">=<input id=ui-translate-z><input id=rotate-z type=button value="z°">=<input id=ui-rotate-z>'
-        + '<hr><input id=toggle-lighting-directional type=button value="Toggle Directional Lighting"><input id=toggle-fog type=button value="Toggle Fog">',
+        + '<input id=translate-z type=button value="z">=<input id=ui-translate-z><input id=rotate-z type=button value="z°">=<input id=ui-rotate-z><br>'
+        + '<input id=toggle-lighting-directional type=button value="Toggle Directional Lighting"><input id=toggle-fog type=button value="Toggle Fog">',
       'keybinds': {
         32: {},
         67: {},
