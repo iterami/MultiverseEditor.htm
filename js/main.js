@@ -1,8 +1,5 @@
 'use strict';
 
-function logic(){
-}
-
 function repo_escape(){
     if(webgl_character_level() < -1){
         return;
@@ -163,4 +160,7 @@ function repo_init(){
         },
       },
     });
+}
+
+function repo_logic(){
 }
