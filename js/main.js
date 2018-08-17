@@ -4,21 +4,23 @@ function logic(){
 }
 
 function repo_escape(){
-    if(webgl_character_level() > -2){
-        webgl_characters[webgl_character_id]['collides'] = core_storage_data['character-collides'];
-        webgl_characters[webgl_character_id]['speed'] = core_storage_data['character-speed'];
-
-        core_ui_update({
-          'ids': {
-            'rotate-x': webgl_characters[webgl_character_id]['camera-rotate-x'],
-            'rotate-y': webgl_characters[webgl_character_id]['camera-rotate-y'],
-            'rotate-z': webgl_characters[webgl_character_id]['camera-rotate-z'],
-            'translate-x': webgl_characters[webgl_character_id]['translate-x'],
-            'translate-y': webgl_characters[webgl_character_id]['translate-y'],
-            'translate-z': webgl_characters[webgl_character_id]['translate-z'],
-          },
-        });
+    if(webgl_character_level() < -1){
+        return;
     }
+
+    webgl_characters[webgl_character_id]['collides'] = core_storage_data['character-collides'];
+    webgl_characters[webgl_character_id]['speed'] = core_storage_data['character-speed'];
+
+    core_ui_update({
+      'ids': {
+        'rotate-x': webgl_characters[webgl_character_id]['camera-rotate-x'],
+        'rotate-y': webgl_characters[webgl_character_id]['camera-rotate-y'],
+        'rotate-z': webgl_characters[webgl_character_id]['camera-rotate-z'],
+        'translate-x': webgl_characters[webgl_character_id]['translate-x'],
+        'translate-y': webgl_characters[webgl_character_id]['translate-y'],
+        'translate-z': webgl_characters[webgl_character_id]['translate-z'],
+      },
+    });
 }
 
 function repo_init(){
@@ -100,8 +102,9 @@ function repo_init(){
       'info': '<table><tr><td><input id=json type=file><td><input id=load_file type=button value="Load Level From File">'
         + '<tr><td><select id=level_select></select><td><input id=load_prebuilt type=button value="Load Prebuilt Level"></table>'
         + '<hr><input id=origin type=button value="Return to Origin"><input id=spawn type=button value="Return to Spawn"><br>'
-        + '<input id=translate-x type=button value="x">=<span id=ui-translate-x></span> <input id=translate-y type=button value="y">=<span id=ui-translate-y></span> <input id=translate-z type=button value="z">=<span id=ui-translate-z></span><br>'
-        + '<input id=rotate-x type=button value="x°">=<span id=ui-rotate-x></span> <input id=rotate-y type=button value="y°">=<span id=ui-rotate-y></span> <input id=rotate-z type=button value="z°">=<span id=ui-rotate-z></span>'
+        + '<input id=translate-x type=button value="x">=<input id=ui-translate-x><input id=rotate-x type=button value="x°">=<input id=ui-rotate-x><br>'
+        + '<input id=translate-y type=button value="y">=<input id=ui-translate-y><input id=rotate-y type=button value="y°">=<input id=ui-rotate-y><br>'
+        + '<input id=translate-z type=button value="z">=<input id=ui-translate-z><input id=rotate-z type=button value="z°">=<input id=ui-rotate-z>'
         + '<hr><input id=toggle-lighting-directional type=button value="Toggle Directional Lighting"><input id=toggle-fog type=button value="Toggle Fog">',
       'keybinds': {
         32: {},
