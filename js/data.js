@@ -2,15 +2,13 @@
 
 function ajax_level(level){
     core_ajax({
-      'todo': load_prebuilt_level,
+      'todo': function(responseText){
+          webgl_load_level({
+            'character': -1,
+            'json': responseText,
+          });
+      },
       'url': '../MultiverseLevels.htm/json/' + level + '.json',
-    });
-}
-
-function load_prebuilt_level(responseText){
-    webgl_load_level({
-      'character': -1,
-      'json': responseText,
     });
 }
 
