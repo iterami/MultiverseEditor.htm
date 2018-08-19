@@ -31,17 +31,17 @@ function repo_init(){
         },
       },
       'events': {
-        'load_file': {
+        'level-load': {
           'onclick': function(){
               webgl_level_load({
                 'character': -1,
-                'json': document.getElementById('json').files[0] || false,
+                'json': document.getElementById('level-json').files[0] || false,
               });
           },
         },
-        'load_prebuilt': {
+        'prebuilt-load': {
           'onclick': function(){
-              ajax_level(document.getElementById('level_select').value);
+              ajax_level(document.getElementById('level-select').value);
           },
         },
         'rotate-x': {
@@ -96,8 +96,8 @@ function repo_init(){
           'onclick': toggle_lighting_directional,
         },
       },
-      'info': '<table><tr><td><input id=json type=file><td><input id=load_file type=button value="Load Level From File">'
-        + '<tr><td><select id=level_select></select><td><input id=load_prebuilt type=button value="Load Prebuilt Level"></table>'
+      'info': '<table><tr><td><input id=level-json type=file><td><input id=level-load type=button value="Load Level From File">'
+        + '<tr><td><select id=level-select></select><td><input id=prebuilt-load type=button value="Load Prebuilt Level"></table>'
         + '<hr><input id=origin type=button value="Return to Origin"><input id=spawn type=button value="Return to Spawn"><br>'
         + '<input id=translate-x type=button value="x">=<input id=ui-translate-x><input id=rotate-x type=button value="x°">=<input id=ui-rotate-x><br>'
         + '<input id=translate-y type=button value="y">=<input id=ui-translate-y><input id=rotate-y type=button value="y°">=<input id=ui-rotate-y><br>'
@@ -133,7 +133,7 @@ function repo_init(){
         for(let level in multiverselevels){
             level_select += '<option value="' + level + '">' + multiverselevels[level] + '</option>';
         }
-        document.getElementById('level_select').innerHTML = level_select;
+        document.getElementById('level-select').innerHTML = level_select;
     }
 
     // Handle prebuilt level url args.
@@ -144,14 +144,14 @@ function repo_init(){
 
     // Create level export tab.
     core_tab_create({
-      'content': '<input id=update_json type=button value="Update Level JSON"><br><textarea id=exported></textarea>',
+      'content': '<input id=update-json type=button value="Update Level JSON"><br><textarea id=exported></textarea>',
       'group': 'core-menu',
       'id': 'export',
       'label': 'Export Level',
     });
     core_events_bind({
       'elements': {
-        'update_json': {
+        'update-json': {
           'onclick': function(){
               webgl_json_export({
                 'character': false,
