@@ -21,6 +21,15 @@ function repo_escape(){
 }
 
 function repo_init(){
+    // Create level loading tab.
+    core_tab_create({
+      'content': '<table><tr><td><input id=level-json type=file><td><input id=level-load type=button value="Load Level From File">'
+        + '<tr><td><select id=level-select></select><td><input id=prebuilt-load type=button value="Load Prebuilt Level"></table>',
+      'group': 'core-menu',
+      'id': 'load',
+      'label': 'Load Levels',
+    });
+
     core_repo_init({
       'beforeunload': {
         'todo': function(){
@@ -96,9 +105,7 @@ function repo_init(){
           'onclick': toggle_lighting_directional,
         },
       },
-      'info': '<table><tr><td><input id=level-json type=file><td><input id=level-load type=button value="Load Level From File">'
-        + '<tr><td><select id=level-select></select><td><input id=prebuilt-load type=button value="Load Prebuilt Level"></table>'
-        + '<hr><input id=origin type=button value="Return to Origin"><input id=spawn type=button value="Return to Spawn"><br>'
+      'info': '<input id=origin type=button value="Return to Origin"><input id=spawn type=button value="Return to Spawn"><br>'
         + '<input id=translate-x type=button value="x">=<input id=ui-translate-x><input id=rotate-x type=button value="x°">=<input id=ui-rotate-x><br>'
         + '<input id=translate-y type=button value="y">=<input id=ui-translate-y><input id=rotate-y type=button value="y°">=<input id=ui-rotate-y><br>'
         + '<input id=translate-z type=button value="z">=<input id=ui-translate-z><input id=rotate-z type=button value="z°">=<input id=ui-rotate-z><br>'
@@ -159,6 +166,10 @@ function repo_init(){
           },
         },
       },
+    });
+
+    core_tab_switch({
+      'id': 'tab_core-menu_load',
     });
 }
 
