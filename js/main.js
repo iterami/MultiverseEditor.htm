@@ -104,6 +104,13 @@ function repo_init(){
         'toggle-lighting-directional': {
           'onclick': toggle_lighting_directional,
         },
+        'update-json': {
+          'onclick': function(){
+              webgl_json_export({
+                'character': false,
+              });
+          },
+        },
       },
       'info': '<input id=origin type=button value="Return to Origin"><input id=spawn type=button value="Return to Spawn"><br>'
         + '<input id=translate-x type=button value="x">=<input id=ui-translate-x><input id=rotate-x type=button value="x°">=<input id=ui-rotate-x><br>'
@@ -131,6 +138,20 @@ function repo_init(){
         'editing': false,
       },
       'storage-menu': '<table><tr><td><input id=beforeunload-warning type=checkbox><td>beforeunload Warning<tr><td><input id=character-collides type=checkbox><td>Character Collides<tr><td><input id=character-speed><td>Character Speed<tr><td><input id=editing type=checkbox><td>Editing Mode</table>',
+      'tabs': {
+        'export': {
+          'content': '<input id=update-json type=button value="Update Level JSON"><br><textarea id=exported></textarea>',
+          'group': 'core-menu',
+          'label': 'Export Level',
+        },
+        'load': {
+          'content': '<table><tr><td><input id=level-json type=file><td><input id=level-load type=button value="Load Level From File">'
+            + '<tr><td><select id=level-select></select><td><input id=prebuilt-load type=button value="Load Prebuilt Level"></table>',
+          'default': true,
+          'group': 'core-menu',
+          'label': 'Load Levels',
+        },
+      },
       'title': 'MultiverseEditor.htm',
     });
 
@@ -148,29 +169,6 @@ function repo_init(){
     if(level_arg.length > 0){
         ajax_level(level_arg);
     }
-
-    // Create level export tab.
-    core_tab_create({
-      'content': '<input id=update-json type=button value="Update Level JSON"><br><textarea id=exported></textarea>',
-      'group': 'core-menu',
-      'id': 'export',
-      'label': 'Export Level',
-    });
-    core_events_bind({
-      'elements': {
-        'update-json': {
-          'onclick': function(){
-              webgl_json_export({
-                'character': false,
-              });
-          },
-        },
-      },
-    });
-
-    core_tab_switch({
-      'id': 'tab_core-menu_load',
-    });
 }
 
 function repo_logic(){
