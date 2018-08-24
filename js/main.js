@@ -21,15 +21,6 @@ function repo_escape(){
 }
 
 function repo_init(){
-    // Create level loading tab.
-    core_tab_create({
-      'content': '<table><tr><td><input id=level-json type=file><td><input id=level-load type=button value="Load Level From File">'
-        + '<tr><td><select id=level-select></select><td><input id=prebuilt-load type=button value="Load Prebuilt Level"></table>',
-      'group': 'core-menu',
-      'id': 'load',
-      'label': 'Load Levels',
-    });
-
     core_repo_init({
       'beforeunload': {
         'todo': function(){
