@@ -46,6 +46,10 @@ function repo_init(){
         },
         'rotate-x': {
           'onclick': function(){
+              if(!webgl_characters[webgl_character_id]){
+                  return;
+              }
+
               webgl_characters[webgl_character_id]['camera-rotate-x'] = 0;
               webgl_characters[webgl_character_id]['camera-rotate-radians-x'] = 0;
               webgl_characters[webgl_character_id]['rotate-x'] = 0;
@@ -54,6 +58,10 @@ function repo_init(){
         },
         'rotate-y': {
           'onclick': function(){
+              if(!webgl_characters[webgl_character_id]){
+                  return;
+              }
+
               webgl_characters[webgl_character_id]['camera-rotate-y'] = 0;
               webgl_characters[webgl_character_id]['camera-rotate-radians-y'] = 0;
               webgl_characters[webgl_character_id]['rotate-y'] = 0;
@@ -62,6 +70,10 @@ function repo_init(){
         },
         'rotate-z': {
           'onclick': function(){
+              if(!webgl_characters[webgl_character_id]){
+                  return;
+              }
+
               webgl_characters[webgl_character_id]['camera-rotate-z'] = 0;
               webgl_characters[webgl_character_id]['camera-rotate-radians-z'] = 0;
               webgl_characters[webgl_character_id]['rotate-z'] = 0;
@@ -70,16 +82,28 @@ function repo_init(){
         },
         'translate-x': {
           'onclick': function(){
+              if(!webgl_characters[webgl_character_id]){
+                  return;
+              }
+
               webgl_characters[webgl_character_id]['translate-x'] = 0;
           },
         },
         'translate-y': {
           'onclick': function(){
+              if(!webgl_characters[webgl_character_id]){
+                  return;
+              }
+
               webgl_characters[webgl_character_id]['translate-y'] = 0;
           },
         },
         'translate-z': {
           'onclick': function(){
+              if(!webgl_characters[webgl_character_id]){
+                  return;
+              }
+
               webgl_characters[webgl_character_id]['translate-z'] = 0;
           },
         },
