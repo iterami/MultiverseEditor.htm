@@ -28,9 +28,11 @@ function repo_escape(){
                 webgl_properties['fog-density'] = core_storage_data['fog-density'];
             }
         }
-        webgl_properties['gravity-acceleration'] = core_storage_data['gravity-acceleration'];
-        webgl_properties['gravity-axis'] = core_storage_data['gravity-axis'];
-        webgl_properties['gravity-max'] = core_storage_data['gravity-max'];
+        if(core_storage_data['gravity-state']){
+            webgl_properties['gravity-acceleration'] = core_storage_data['gravity-acceleration'];
+            webgl_properties['gravity-axis'] = core_storage_data['gravity-axis'];
+            webgl_properties['gravity-max'] = core_storage_data['gravity-max'];
+        }
         webgl_properties['multiplier-jump'] = core_storage_data['multiplier-jump'];
         webgl_properties['multiplier-speed'] = core_storage_data['multiplier-speed'];
 
@@ -170,6 +172,7 @@ function repo_init(){
         'gravity-acceleration': -.05,
         'gravity-axis': 'dy',
         'gravity-max': -2,
+        'gravity-state': false,
         'multiplier-jump': 1,
         'multiplier-speed': 1,
       },
@@ -179,6 +182,7 @@ function repo_init(){
         + '<tr><td><select id=directional-state><option value=0>Use Level Properties</option><option value=1>Override On</option><option value=2>Override Off</option></select><td>Directional Lighting'
         + '<tr><td><select id=fog-state><option value=0>Use Level Properties</option><option value=1>Override On</option><option value=2>Override Off</option></select><td>Fog'
         + '<tr><td><input id=fog-density><td>Fog Density'
+        + '<tr><td><input id=gravity-state type=checkbox><td>Gravity Override'
         + '<tr><td><input id=gravity-acceleration><td>Gravity Acceleration'
         + '<tr><td><select id=gravity-axis><option value=dx>x</option><option selected value=dy>y</option><option value=dz>z</option></select><td>Gravity Axis'
         + '<tr><td><input id=gravity-max><td>Gravity Max'
