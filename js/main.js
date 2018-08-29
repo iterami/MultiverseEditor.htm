@@ -31,6 +31,8 @@ function repo_escape(){
         webgl_properties['gravity-acceleration'] = core_storage_data['gravity-acceleration'];
         webgl_properties['gravity-axis'] = core_storage_data['gravity-axis'];
         webgl_properties['gravity-max'] = core_storage_data['gravity-max'];
+        webgl_properties['multiplier-jump'] = core_storage_data['multiplier-jump'];
+        webgl_properties['multiplier-speed'] = core_storage_data['multiplier-speed'];
 
         webgl_characters[webgl_character_id]['collides'] = core_storage_data['character-collides'];
         webgl_characters[webgl_character_id]['speed'] = core_storage_data['character-speed'];
@@ -168,6 +170,8 @@ function repo_init(){
         'gravity-acceleration': -.05,
         'gravity-axis': 'dy',
         'gravity-max': -2,
+        'multiplier-jump': 1,
+        'multiplier-speed': 1,
       },
       'storage-menu': '<table><tr><td><input id=beforeunload-warning type=checkbox><td>beforeunload Warning'
         + '<tr><td><input id=character-collides type=checkbox><td>Character Collides'
@@ -177,7 +181,9 @@ function repo_init(){
         + '<tr><td><input id=fog-density><td>Fog Density'
         + '<tr><td><input id=gravity-acceleration><td>Gravity Acceleration'
         + '<tr><td><select id=gravity-axis><option value=dx>x</option><option selected value=dy>y</option><option value=dz>z</option></select><td>Gravity Axis'
-        + '<tr><td><input id=gravity-max><td>Gravity Max</table>',
+        + '<tr><td><input id=gravity-max><td>Gravity Max'
+        + '<tr><td><input id=multiplier-jump><td>Multiplier Jump'
+        + '<tr><td><input id=multiplier-speed><td>Multiplier Speed</table>',
       'tabs': {
         'export': {
           'content': '<input id=update-json type=button value="Update Level JSON"><br><textarea id=exported></textarea>',
