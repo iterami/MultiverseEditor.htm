@@ -153,11 +153,10 @@ function repo_init(){
         'character-collides': true,
         'character-speed': 1,
         'directional-lighting': true,
-        'editing': false,
         'fog': false,
         'gravity-axis': 'dy',
       },
-      'storage-menu': '<table><tr><td><input id=beforeunload-warning type=checkbox><td>beforeunload Warning<tr><td><input id=character-collides type=checkbox><td>Character Collides<tr><td><input id=character-speed><td>Character Speed<tr><td><input id=directional-lighting type=checkbox><td>Directional Lighting<tr><td><input id=editing type=checkbox><td>Editing Mode<tr><td><input id=fog type=checkbox><td>Fog<tr><td><select id=gravity-axis><option value=dx>x</option><option selected value=dy>y</option><option value=dz>z</option></select><td>Gravity Axis</table>',
+      'storage-menu': '<table><tr><td><input id=beforeunload-warning type=checkbox><td>beforeunload Warning<tr><td><input id=character-collides type=checkbox><td>Character Collides<tr><td><input id=character-speed><td>Character Speed<tr><td><input id=directional-lighting type=checkbox><td>Directional Lighting<tr><td><input id=fog type=checkbox><td>Fog<tr><td><select id=gravity-axis><option value=dx>x</option><option selected value=dy>y</option><option value=dz>z</option></select><td>Gravity Axis</table>',
       'tabs': {
         'export': {
           'content': '<input id=update-json type=button value="Update Level JSON"><br><textarea id=exported></textarea>',
