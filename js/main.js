@@ -5,21 +5,28 @@ function repo_escape(){
         return;
     }
 
-    webgl_properties['gravity-axis'] = core_storage_data['gravity-axis'];
+    if(core_menu_open){
+        core_ui_update({
+          'ids': {
+            'rotate-x': webgl_characters[webgl_character_id]['camera-rotate-x'],
+            'rotate-y': webgl_characters[webgl_character_id]['camera-rotate-y'],
+            'rotate-z': webgl_characters[webgl_character_id]['camera-rotate-z'],
+            'translate-x': webgl_characters[webgl_character_id]['translate-x'],
+            'translate-y': webgl_characters[webgl_character_id]['translate-y'],
+            'translate-z': webgl_characters[webgl_character_id]['translate-z'],
+          },
+        });
 
-    webgl_characters[webgl_character_id]['collides'] = core_storage_data['character-collides'];
-    webgl_characters[webgl_character_id]['speed'] = core_storage_data['character-speed'];
+    }else{
+        webgl_properties['directional-state'] = core_storage_data['directional-lighting'];
+        webgl_properties['fog-state'] = core_storage_data['fog'];
+        webgl_properties['gravity-axis'] = core_storage_data['gravity-axis'];
 
-    core_ui_update({
-      'ids': {
-        'rotate-x': webgl_characters[webgl_character_id]['camera-rotate-x'],
-        'rotate-y': webgl_characters[webgl_character_id]['camera-rotate-y'],
-        'rotate-z': webgl_characters[webgl_character_id]['camera-rotate-z'],
-        'translate-x': webgl_characters[webgl_character_id]['translate-x'],
-        'translate-y': webgl_characters[webgl_character_id]['translate-y'],
-        'translate-z': webgl_characters[webgl_character_id]['translate-z'],
-      },
-    });
+        webgl_characters[webgl_character_id]['collides'] = core_storage_data['character-collides'];
+        webgl_characters[webgl_character_id]['speed'] = core_storage_data['character-speed'];
+
+        webgl_shader_update();
+    }
 }
 
 function repo_init(){
@@ -115,12 +122,6 @@ function repo_init(){
         'spawn': {
           'onclick': webgl_character_spawn,
         },
-        'toggle-fog': {
-          'onclick': toggle_fog,
-        },
-        'toggle-lighting-directional': {
-          'onclick': toggle_lighting_directional,
-        },
         'update-json': {
           'onclick': function(){
               webgl_json_export({
@@ -132,8 +133,7 @@ function repo_init(){
       'info': '<input id=origin type=button value="Return to Origin"><input id=spawn type=button value="Return to Spawn"><br>'
         + '<input id=translate-x type=button value="x">=<input id=ui-translate-x><input id=rotate-x type=button value="x°">=<input id=ui-rotate-x><br>'
         + '<input id=translate-y type=button value="y">=<input id=ui-translate-y><input id=rotate-y type=button value="y°">=<input id=ui-rotate-y><br>'
-        + '<input id=translate-z type=button value="z">=<input id=ui-translate-z><input id=rotate-z type=button value="z°">=<input id=ui-rotate-z><br>'
-        + '<input id=toggle-lighting-directional type=button value="Toggle Directional Lighting"><input id=toggle-fog type=button value="Toggle Fog">',
+        + '<input id=translate-z type=button value="z">=<input id=ui-translate-z><input id=rotate-z type=button value="z°">=<input id=ui-rotate-z>',
       'keybinds': {
         32: {},
         67: {},
@@ -152,10 +152,12 @@ function repo_init(){
         'beforeunload-warning': true,
         'character-collides': true,
         'character-speed': 1,
+        'directional-lighting': true,
         'editing': false,
+        'fog': false,
         'gravity-axis': 'dy',
       },
-      'storage-menu': '<table><tr><td><input id=beforeunload-warning type=checkbox><td>beforeunload Warning<tr><td><input id=character-collides type=checkbox><td>Character Collides<tr><td><input id=character-speed><td>Character Speed<tr><td><input id=editing type=checkbox><td>Editing Mode<tr><td><select id=gravity-axis><option value=dx>x</option><option selected value=dy>y</option><option value=dz>z</option></select><td>Gravity Axis</table>',
+      'storage-menu': '<table><tr><td><input id=beforeunload-warning type=checkbox><td>beforeunload Warning<tr><td><input id=character-collides type=checkbox><td>Character Collides<tr><td><input id=character-speed><td>Character Speed<tr><td><input id=directional-lighting type=checkbox><td>Directional Lighting<tr><td><input id=editing type=checkbox><td>Editing Mode<tr><td><input id=fog type=checkbox><td>Fog<tr><td><select id=gravity-axis><option value=dx>x</option><option selected value=dy>y</option><option value=dz>z</option></select><td>Gravity Axis</table>',
       'tabs': {
         'export': {
           'content': '<input id=update-json type=button value="Update Level JSON"><br><textarea id=exported></textarea>',
