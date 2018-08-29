@@ -173,8 +173,8 @@ function repo_init(){
         + '<tr><td><input id=character-collides type=checkbox><td>Character Collides'
         + '<tr><td><input id=character-speed><td>Character Speed'
         + '<tr><td><select id=directional-state><option value=0>Use Level Properties</option><option value=1>Override On</option><option value=2>Override Off</option></select><td>Directional Lighting'
-        + '<tr><td><input id=fog-density><td>Fog Density'
         + '<tr><td><select id=fog-state><option value=0>Use Level Properties</option><option value=1>Override On</option><option value=2>Override Off</option></select><td>Fog'
+        + '<tr><td><input id=fog-density><td>Fog Density'
         + '<tr><td><input id=gravity-acceleration><td>Gravity Acceleration'
         + '<tr><td><select id=gravity-axis><option value=dx>x</option><option selected value=dy>y</option><option value=dz>z</option></select><td>Gravity Axis'
         + '<tr><td><input id=gravity-max><td>Gravity Max</table>',
