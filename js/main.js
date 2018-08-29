@@ -5,6 +5,8 @@ function repo_escape(){
         return;
     }
 
+    webgl_properties['gravity-axis'] = core_storage_data['gravity-axis'];
+
     webgl_characters[webgl_character_id]['collides'] = core_storage_data['character-collides'];
     webgl_characters[webgl_character_id]['speed'] = core_storage_data['character-speed'];
 
@@ -151,8 +153,9 @@ function repo_init(){
         'character-collides': true,
         'character-speed': 1,
         'editing': false,
+        'gravity-axis': 'dy',
       },
-      'storage-menu': '<table><tr><td><input id=beforeunload-warning type=checkbox><td>beforeunload Warning<tr><td><input id=character-collides type=checkbox><td>Character Collides<tr><td><input id=character-speed><td>Character Speed<tr><td><input id=editing type=checkbox><td>Editing Mode</table>',
+      'storage-menu': '<table><tr><td><input id=beforeunload-warning type=checkbox><td>beforeunload Warning<tr><td><input id=character-collides type=checkbox><td>Character Collides<tr><td><input id=character-speed><td>Character Speed<tr><td><input id=editing type=checkbox><td>Editing Mode<tr><td><select id=gravity-axis><option value=dx>x</option><option selected value=dy>y</option><option value=dz>z</option></select><td>Gravity Axis</table>',
       'tabs': {
         'export': {
           'content': '<input id=update-json type=button value="Update Level JSON"><br><textarea id=exported></textarea>',
