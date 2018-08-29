@@ -162,7 +162,15 @@ function repo_init(){
         'gravity-axis': 'dy',
         'gravity-max': -2,
       },
-      'storage-menu': '<table><tr><td><input id=beforeunload-warning type=checkbox><td>beforeunload Warning<tr><td><input id=character-collides type=checkbox><td>Character Collides<tr><td><input id=character-speed><td>Character Speed<tr><td><input id=directional-state type=checkbox><td>Directional Lighting<tr><td><input id=fog-density><td>Fog Density<tr><td><input id=fog-state type=checkbox><td>Fog<tr><td><input id=gravity-acceleration><td>Gravity Acceleration<tr><td><select id=gravity-axis><option value=dx>x</option><option selected value=dy>y</option><option value=dz>z</option></select><td>Gravity Axis<tr><td><input id=gravity-max><td>Gravity Max</table>',
+      'storage-menu': '<table><tr><td><input id=beforeunload-warning type=checkbox><td>beforeunload Warning'
+        + '<tr><td><input id=character-collides type=checkbox><td>Character Collides'
+        + '<tr><td><input id=character-speed><td>Character Speed'
+        + '<tr><td><input id=directional-state type=checkbox><td>Directional Lighting'
+        + '<tr><td><input id=fog-density><td>Fog Density'
+        + '<tr><td><input id=fog-state type=checkbox><td>Fog'
+        + '<tr><td><input id=gravity-acceleration><td>Gravity Acceleration'
+        + '<tr><td><select id=gravity-axis><option value=dx>x</option><option selected value=dy>y</option><option value=dz>z</option></select><td>Gravity Axis'
+        + '<tr><td><input id=gravity-max><td>Gravity Max</table>',
       'tabs': {
         'export': {
           'content': '<input id=update-json type=button value="Update Level JSON"><br><textarea id=exported></textarea>',
