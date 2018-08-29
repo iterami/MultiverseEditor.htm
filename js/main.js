@@ -18,9 +18,16 @@ function repo_escape(){
         });
 
     }else{
-        webgl_properties['directional-state'] = core_storage_data['directional-state'];
-        webgl_properties['fog-density'] = core_storage_data['fog-density'];
-        webgl_properties['fog-state'] = core_storage_data['fog-state'];
+        if(core_storage_data['directional-state'] !== 0){
+            webgl_properties['directional-state'] = core_storage_data['directional-state'] === 1;
+        }
+        if(core_storage_data['fog-state'] !== 0){
+            webgl_properties['fog-state'] = core_storage_data['fog-state'] === 1;
+
+            if(webgl_properties['fog-state']){
+                webgl_properties['fog-density'] = core_storage_data['fog-density'];
+            }
+        }
         webgl_properties['gravity-acceleration'] = core_storage_data['gravity-acceleration'];
         webgl_properties['gravity-axis'] = core_storage_data['gravity-axis'];
         webgl_properties['gravity-max'] = core_storage_data['gravity-max'];
@@ -155,9 +162,9 @@ function repo_init(){
         'beforeunload-warning': true,
         'character-collides': true,
         'character-speed': 1,
-        'directional-state': true,
+        'directional-state': 0,
         'fog-density': .0001,
-        'fog-state': false,
+        'fog-state': 0,
         'gravity-acceleration': -.05,
         'gravity-axis': 'dy',
         'gravity-max': -2,
@@ -165,9 +172,9 @@ function repo_init(){
       'storage-menu': '<table><tr><td><input id=beforeunload-warning type=checkbox><td>beforeunload Warning'
         + '<tr><td><input id=character-collides type=checkbox><td>Character Collides'
         + '<tr><td><input id=character-speed><td>Character Speed'
-        + '<tr><td><input id=directional-state type=checkbox><td>Directional Lighting'
+        + '<tr><td><select id=directional-state><option value=0>Use Level Properties</option><option value=1>Override On</option><option value=2>Override Off</option></select><td>Directional Lighting'
         + '<tr><td><input id=fog-density><td>Fog Density'
-        + '<tr><td><input id=fog-state type=checkbox><td>Fog'
+        + '<tr><td><select id=fog-state><option value=0>Use Level Properties</option><option value=1>Override On</option><option value=2>Override Off</option></select><td>Fog'
         + '<tr><td><input id=gravity-acceleration><td>Gravity Acceleration'
         + '<tr><td><select id=gravity-axis><option value=dx>x</option><option selected value=dy>y</option><option value=dz>z</option></select><td>Gravity Axis'
         + '<tr><td><input id=gravity-max><td>Gravity Max</table>',
