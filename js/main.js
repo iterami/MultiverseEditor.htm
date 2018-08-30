@@ -19,10 +19,18 @@ function repo_escape(){
         });
 
     }else{
+        if(core_storage_data['ambient-state'] !== 0){
+            webgl_properties['ambient-blue'] = core_storage_data['ambient-blue'];
+            webgl_properties['ambient-green'] = core_storage_data['ambient-green'];
+            webgl_properties['ambient-red'] = core_storage_data['ambient-red'];
+        }
         if(core_storage_data['directional-state'] !== 0){
             webgl_properties['directional-state'] = core_storage_data['directional-state'] === 1;
 
             if(webgl_properties['directional-state']){
+                webgl_properties['directional-blue'] = core_storage_data['directional-blue'];
+                webgl_properties['directional-green'] = core_storage_data['directional-green'];
+                webgl_properties['directional-red'] = core_storage_data['directional-red'];
                 webgl_properties['directional-vector'] = core_storage_data['directional-vector'];
             }
         }
@@ -179,10 +187,17 @@ function repo_init(){
         },
       },
       'storage': {
+        'ambient-blue': 1,
+        'ambient-green': 1,
+        'ambient-red': 1,
+        'ambient-state': 0,
         'beforeunload-warning': true,
         'character-collide-range': 2.5,
         'character-collides': true,
         'character-speed': 1,
+        'directional-blue': 1,
+        'directional-green': 1,
+        'directional-red': 1,
         'directional-state': 0,
         'directional-vector': '0, 1, 0',
         'fog-density': .0001,
@@ -194,11 +209,18 @@ function repo_init(){
         'multiplier-jump': 1,
         'multiplier-speed': 1,
       },
-      'storage-menu': '<table><tr><td><input id=beforeunload-warning type=checkbox><td>beforeunload Warning'
+      'storage-menu': '<table><tr><td><select id=ambient-state><option value=0>Use Level Properties</option><option value=1>Override On</option><option value=2>Override Off</option></select><td>Ambient Lighting'
+        + '<tr><td><input id=ambient-blue><td>Ambient Lighting Blue'
+        + '<tr><td><input id=ambient-green><td>Ambient Lighting Green'
+        + '<tr><td><input id=ambient-red><td>Ambient Lighting Red'
+        + '<tr><td><input id=beforeunload-warning type=checkbox><td>beforeunload Warning'
         + '<tr><td><input id=character-collide-range><td>Character Collide Range'
         + '<tr><td><input id=character-collides type=checkbox><td>Character Collides'
         + '<tr><td><input id=character-speed><td>Character Speed'
         + '<tr><td><select id=directional-state><option value=0>Use Level Properties</option><option value=1>Override On</option><option value=2>Override Off</option></select><td>Directional Lighting'
+        + '<tr><td><input id=directional-blue><td>Directional Lighting Blue'
+        + '<tr><td><input id=directional-green><td>Directional Lighting Green'
+        + '<tr><td><input id=directional-red><td>Directional Lighting Red'
         + '<tr><td><input id=directional-vector><td>Directional Lighting Vector'
         + '<tr><td><select id=fog-state><option value=0>Use Level Properties</option><option value=1>Override On</option><option value=2>Override Off</option></select><td>Fog'
         + '<tr><td><input id=fog-density><td>Fog Density'
