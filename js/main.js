@@ -40,6 +40,7 @@ function repo_escape(){
         webgl_properties['multiplier-jump'] = core_storage_data['multiplier-jump'];
         webgl_properties['multiplier-speed'] = core_storage_data['multiplier-speed'];
 
+        webgl_characters[webgl_character_id]['collide-range'] = core_storage_data['character-collide-range'];
         webgl_characters[webgl_character_id]['collides'] = core_storage_data['character-collides'];
         webgl_characters[webgl_character_id]['speed'] = core_storage_data['character-speed'];
 
@@ -168,6 +169,7 @@ function repo_init(){
       },
       'storage': {
         'beforeunload-warning': true,
+        'character-collide-range': 2.5,
         'character-collides': true,
         'character-speed': 1,
         'directional-state': 0,
@@ -182,16 +184,17 @@ function repo_init(){
         'multiplier-speed': 1,
       },
       'storage-menu': '<table><tr><td><input id=beforeunload-warning type=checkbox><td>beforeunload Warning'
+        + '<tr><td><input id=character-collide-range><td>Character Collide Range'
         + '<tr><td><input id=character-collides type=checkbox><td>Character Collides'
         + '<tr><td><input id=character-speed><td>Character Speed'
         + '<tr><td><select id=directional-state><option value=0>Use Level Properties</option><option value=1>Override On</option><option value=2>Override Off</option></select><td>Directional Lighting'
         + '<tr><td><input id=directional-vector><td>Directional Lighting Vector'
         + '<tr><td><select id=fog-state><option value=0>Use Level Properties</option><option value=1>Override On</option><option value=2>Override Off</option></select><td>Fog'
         + '<tr><td><input id=fog-density><td>Fog Density'
-        + '<tr><td><input id=gravity-state type=checkbox><td>Gravity Override'
         + '<tr><td><input id=gravity-acceleration><td>Gravity Acceleration'
         + '<tr><td><select id=gravity-axis><option value=dx>x</option><option selected value=dy>y</option><option value=dz>z</option></select><td>Gravity Axis'
         + '<tr><td><input id=gravity-max><td>Gravity Max'
+        + '<tr><td><input id=gravity-state type=checkbox><td>Gravity Override'
         + '<tr><td><input id=multiplier-jump><td>Multiplier Jump'
         + '<tr><td><input id=multiplier-speed><td>Multiplier Speed</table>',
       'tabs': {
