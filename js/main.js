@@ -20,6 +20,10 @@ function repo_escape(){
     }else{
         if(core_storage_data['directional-state'] !== 0){
             webgl_properties['directional-state'] = core_storage_data['directional-state'] === 1;
+
+            if(webgl_properties['directional-state']){
+                webgl_properties['directional-vector'] = core_storage_data['directional-vector'];
+            }
         }
         if(core_storage_data['fog-state'] !== 0){
             webgl_properties['fog-state'] = core_storage_data['fog-state'] === 1;
@@ -167,6 +171,7 @@ function repo_init(){
         'character-collides': true,
         'character-speed': 1,
         'directional-state': 0,
+        'directional-vector': '0, 1, 0',
         'fog-density': .0001,
         'fog-state': 0,
         'gravity-acceleration': -.05,
@@ -180,6 +185,7 @@ function repo_init(){
         + '<tr><td><input id=character-collides type=checkbox><td>Character Collides'
         + '<tr><td><input id=character-speed><td>Character Speed'
         + '<tr><td><select id=directional-state><option value=0>Use Level Properties</option><option value=1>Override On</option><option value=2>Override Off</option></select><td>Directional Lighting'
+        + '<tr><td><input id=directional-vector><td>Directional Lighting Vector'
         + '<tr><td><select id=fog-state><option value=0>Use Level Properties</option><option value=1>Override On</option><option value=2>Override Off</option></select><td>Fog'
         + '<tr><td><input id=fog-density><td>Fog Density'
         + '<tr><td><input id=gravity-state type=checkbox><td>Gravity Override'
