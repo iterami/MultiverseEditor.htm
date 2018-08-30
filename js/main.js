@@ -78,10 +78,10 @@ function repo_init(){
                   return;
               }
 
-              webgl_characters[webgl_character_id]['camera-rotate-x'] = 0;
-              webgl_characters[webgl_character_id]['camera-rotate-radians-x'] = 0;
-              webgl_characters[webgl_character_id]['rotate-x'] = 0;
-              webgl_characters[webgl_character_id]['rotate-radians-x'] = 0;
+              character_set_axis(
+                'rotate',
+                'x'
+              );
           },
         },
         'rotate-y': {
@@ -90,10 +90,10 @@ function repo_init(){
                   return;
               }
 
-              webgl_characters[webgl_character_id]['camera-rotate-y'] = 0;
-              webgl_characters[webgl_character_id]['camera-rotate-radians-y'] = 0;
-              webgl_characters[webgl_character_id]['rotate-y'] = 0;
-              webgl_characters[webgl_character_id]['rotate-radians-y'] = 0;
+              character_set_axis(
+                'rotate',
+                'y'
+              );
           },
         },
         'rotate-z': {
@@ -102,10 +102,10 @@ function repo_init(){
                   return;
               }
 
-              webgl_characters[webgl_character_id]['camera-rotate-z'] = 0;
-              webgl_characters[webgl_character_id]['camera-rotate-radians-z'] = 0;
-              webgl_characters[webgl_character_id]['rotate-z'] = 0;
-              webgl_characters[webgl_character_id]['rotate-radians-z'] = 0;
+              character_set_axis(
+                'rotate',
+                'z'
+              );
           },
         },
         'translate-x': {
@@ -114,7 +114,10 @@ function repo_init(){
                   return;
               }
 
-              webgl_characters[webgl_character_id]['translate-x'] = 0;
+              character_set_axis(
+                'translate',
+                'x'
+              );
           },
         },
         'translate-y': {
@@ -123,7 +126,10 @@ function repo_init(){
                   return;
               }
 
-              webgl_characters[webgl_character_id]['translate-y'] = 0;
+              character_set_axis(
+                'translate',
+                'y'
+              );
           },
         },
         'translate-z': {
@@ -132,7 +138,10 @@ function repo_init(){
                   return;
               }
 
-              webgl_characters[webgl_character_id]['translate-z'] = 0;
+              character_set_axis(
+                'translate',
+                'z'
+              );
           },
         },
         'origin': {
