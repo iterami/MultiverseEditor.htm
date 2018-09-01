@@ -227,6 +227,8 @@ function repo_init(){
         },
       },
       'title': 'MultiverseEditor.htm',
+      'ui': '<hr><div id=npc-talk></div>'
+        + '<table id=npc-trade-div style=display:none></table>',
     });
 
     // Populate prebuilt level select if multiverselevels defined.
