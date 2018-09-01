@@ -209,13 +209,9 @@ function repo_init(){
         'multiplier-jump': 1,
         'multiplier-speed': 1,
       },
-      'storage-menu': '<table><tr><td><select id=ambient-state><option value=0>Use Level Properties</option><option value=1>Override On</option><option value=2>Override Off</option></select><br><input id=ambient-blue>blue<br><input id=ambient-green>green<br><input id=ambient-red>red<td>Ambient Lighting'
-        + '<tr><td><input id=beforeunload-warning type=checkbox><td>beforeunload Warning'
-        + '<tr><td><input id=character-collide-range>collide range<br><input id=character-collides type=checkbox>collides<br><input id=character-speed>speed<td>Character/Camera'
-        + '<tr><td><select id=directional-state><option value=0>Use Level Properties</option><option value=1>Override On</option><option value=2>Override Off</option></select><br><input id=directional-blue>blue<br><input id=directional-green>green<br><input id=directional-red>red<br><input id=directional-vector>vector<td>Directional Lighting'
-        + '<tr><td><select id=fog-state><option value=0>Use Level Properties</option><option value=1>Override On</option><option value=2>Override Off</option></select><br><input id=fog-density>density<td>Fog'
-        + '<tr><td><input id=gravity-state type=checkbox>Override<br><input id=gravity-acceleration>acceleration<br><select id=gravity-axis><option value=dx>x</option><option selected value=dy>y</option><option value=dz>z</option></select>axis<br><input id=gravity-max>max<td>Gravity'
-        + '<tr><td><input id=multiplier-jump>jump<br><input id=multiplier-speed>speed<td>Multipliers</table>',
+      'storage-menu': '<table><tr><td>Ambient Lighting<br><select id=ambient-state><option value=0>Use Level Properties</option><option value=1>Override On</option><option value=2>Override Off</option></select><br><input id=ambient-blue>blue<br><input id=ambient-green>green<br><input id=ambient-red>red<td><input id=beforeunload-warning type=checkbox>beforeunload Warning<br>Multipliers<br><input id=multiplier-jump>jump<br><input id=multiplier-speed>speed'
+        + '<tr><td>Directional Lighting<br><select id=directional-state><option value=0>Use Level Properties</option><option value=1>Override On</option><option value=2>Override Off</option></select><br><input id=directional-blue>blue<br><input id=directional-green>green<br><input id=directional-red>red<br><input id=directional-vector>vector<td>Character/Camera<br><input id=character-collide-range>collide range<br><input id=character-collides type=checkbox>collides<br><input id=character-speed>speed'
+        + '<tr><td>Fog<br><select id=fog-state><option value=0>Use Level Properties</option><option value=1>Override On</option><option value=2>Override Off</option></select><br><input id=fog-density>density<td><input id=gravity-state type=checkbox>Gravity Override<br><input id=gravity-acceleration>acceleration<br><select id=gravity-axis><option value=dx>x</option><option selected value=dy>y</option><option value=dz>z</option></select>axis<br><input id=gravity-max>max</table>',
       'tabs': {
         'export': {
           'content': '<input id=update-json type=button value="Update Level JSON"><br><textarea id=exported></textarea>',
