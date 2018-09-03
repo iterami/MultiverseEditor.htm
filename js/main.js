@@ -8,13 +8,16 @@ function repo_escape(){
     if(core_menu_open){
         core_ui_update({
           'ids': {
-            'entity-count': core_entity_info['webgl']['count'],
+            'foreground-count': core_groups['_length']['foreground'],
+            'particles-count': core_groups['_length']['particles'],
             'rotate-x': webgl_characters[webgl_character_id]['camera-rotate-x'],
             'rotate-y': webgl_characters[webgl_character_id]['camera-rotate-y'],
             'rotate-z': webgl_characters[webgl_character_id]['camera-rotate-z'],
+            'skybox-count': core_groups['_length']['skybox'],
             'translate-x': webgl_characters[webgl_character_id]['translate-x'],
             'translate-y': webgl_characters[webgl_character_id]['translate-y'],
             'translate-z': webgl_characters[webgl_character_id]['translate-z'],
+            'webgl-count': core_entity_info['webgl']['count'],
           },
         });
 
@@ -170,8 +173,12 @@ function repo_init(){
       'info': '<input id=origin type=button value="Return to Origin"><input id=spawn type=button value="Return to Spawn"><br>'
         + '<input id=translate-x-set type=button value="x">=<input id=translate-x><input id=rotate-x-set type=button value="x°">=<input id=rotate-x><br>'
         + '<input id=translate-y-set type=button value="y">=<input id=translate-y><input id=rotate-y-set type=button value="y°">=<input id=rotate-y><br>'
-        + '<input id=translate-z-set type=button value="z">=<input id=translate-z><input id=rotate-z-set type=button value="z°">=<input id=rotate-z><br>'
-        + 'Entities: <span id=entity-count></span>',
+        + '<input id=translate-z-set type=button value="z">=<input id=translate-z><input id=rotate-z-set type=button value="z°">=<input id=rotate-z>'
+        + '<table><tr class=header><td>Group<td>Count'
+        + '<tr><td>foreground<td id=foreground-count>'
+        + '<tr><td>particles<td id=particles-count>'
+        + '<tr><td>skybox<td id=skybox-count>'
+        + '<tr><td>webgl<td id=webgl-count></table>',
       'keybinds': {
         32: {},
         67: {},
