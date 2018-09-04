@@ -52,6 +52,7 @@ function repo_escape(){
         webgl_properties['multiplier-jump'] = core_storage_data['multiplier-jump'];
         webgl_properties['multiplier-speed'] = core_storage_data['multiplier-speed'];
 
+        webgl_character_id = document.getElementById('webgl-character-id').value;
         webgl_characters[webgl_character_id]['collide-range'] = core_storage_data['character-collide-range'];
         webgl_characters[webgl_character_id]['collides'] = core_storage_data['character-collides'];
         webgl_characters[webgl_character_id]['speed'] = core_storage_data['character-speed'];
@@ -173,7 +174,8 @@ function repo_init(){
       'info': '<input id=origin type=button value="Return to Origin"><input id=spawn type=button value="Return to Spawn"><br>'
         + '<input id=translate-x-set type=button value="x"><input id=translate-x><input id=rotate-x-set type=button value="x°"><input id=rotate-x><br>'
         + '<input id=translate-y-set type=button value="y"><input id=translate-y><input id=rotate-y-set type=button value="y°"><input id=rotate-y><br>'
-        + '<input id=translate-z-set type=button value="z"><input id=translate-z><input id=rotate-z-set type=button value="z°"><input id=rotate-z>'
+        + '<input id=translate-z-set type=button value="z"><input id=translate-z><input id=rotate-z-set type=button value="z°"><input id=rotate-z><br>'
+        + '<input id=webgl-character-id value=_me>webgl_character_id'
         + '<table><tr class=header><td>Group<td>Count'
         + '<tr><td>foreground<td id=foreground-count>'
         + '<tr><td>particles<td id=particles-count>'
