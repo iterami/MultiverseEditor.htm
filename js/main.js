@@ -8,6 +8,7 @@ function repo_escape(){
     if(core_menu_open){
         core_ui_update({
           'ids': {
+            'character-count': webgl_character_count,
             'foreground-count': core_groups['_length']['foreground'],
             'particles-count': core_groups['_length']['particles'],
             'rotate-x': webgl_characters[webgl_character_id]['camera-rotate-x'],
@@ -218,7 +219,8 @@ function repo_init(){
         + '<tr><td>Fog<br><select id=fog-state><option value=0>Use Level Properties</option><option value=1>Override On</option><option value=2>Override Off</option></select><br><input id=fog-density>density<td><input id=gravity-state type=checkbox>Gravity Override<br><input id=gravity-acceleration>acceleration<br><select id=gravity-axis><option value=dx>x</option><option selected value=dy>y</option><option value=dz>z</option></select>axis<br><input id=gravity-max>max</table>',
       'tabs': {
         'characters': {
-          'content': '<input id=webgl-character-id value=_me>webgl_character_id',
+          'content': '<input id=webgl-character-id value=_me>webgl_character_id<br>'
+            + 'Characters: <span id=character-count></span>',
           'group': 'editor',
           'label': 'Characters',
         },
