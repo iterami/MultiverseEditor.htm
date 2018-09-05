@@ -175,12 +175,7 @@ function repo_init(){
         + '<input id=translate-x-set type=button value="x"><input id=translate-x><input id=rotate-x-set type=button value="x°"><input id=rotate-x><br>'
         + '<input id=translate-y-set type=button value="y"><input id=translate-y><input id=rotate-y-set type=button value="y°"><input id=rotate-y><br>'
         + '<input id=translate-z-set type=button value="z"><input id=translate-z><input id=rotate-z-set type=button value="z°"><input id=rotate-z><br>'
-        + '<input id=webgl-character-id value=_me>webgl_character_id'
-        + '<table><tr class=header><td>Group<td>Count'
-        + '<tr><td>foreground<td id=foreground-count>'
-        + '<tr><td>particles<td id=particles-count>'
-        + '<tr><td>skybox<td id=skybox-count>'
-        + '<tr><td>webgl<td id=webgl-count></table>',
+        + '<span id=editor-tabs></span><div id=editor-tabcontent></div>',
       'keybinds': {
         32: {},
         67: {},
@@ -222,6 +217,20 @@ function repo_init(){
         + '<tr><td>Directional Lighting<br><select id=directional-state><option value=0>Use Level Properties</option><option value=1>Override On</option><option value=2>Override Off</option></select><br><input id=directional-blue>blue<br><input id=directional-green>green<br><input id=directional-red>red<br><input id=directional-vector>vector<td>Character/Camera<br><input id=character-collide-range>collide range<br><input id=character-collides type=checkbox>collides<br><input id=character-speed>speed'
         + '<tr><td>Fog<br><select id=fog-state><option value=0>Use Level Properties</option><option value=1>Override On</option><option value=2>Override Off</option></select><br><input id=fog-density>density<td><input id=gravity-state type=checkbox>Gravity Override<br><input id=gravity-acceleration>acceleration<br><select id=gravity-axis><option value=dx>x</option><option selected value=dy>y</option><option value=dz>z</option></select>axis<br><input id=gravity-max>max</table>',
       'tabs': {
+        'characters': {
+          'content': '<input id=webgl-character-id value=_me>webgl_character_id',
+          'group': 'editor',
+          'label': 'Characters',
+        },
+        'entities': {
+          'content': '<table><tr class=header><td>Group<td>Count'
+            + '<tr><td>foreground<td id=foreground-count>'
+            + '<tr><td>particles<td id=particles-count>'
+            + '<tr><td>skybox<td id=skybox-count>'
+            + '<tr><td>webgl<td id=webgl-count></table>',
+          'group': 'editor',
+          'label': 'Entities',
+        },
         'export': {
           'content': '<input id=update-json type=button value="Update Level JSON"><br><textarea id=exported></textarea>',
           'group': 'core-menu',
