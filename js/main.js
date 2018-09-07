@@ -246,6 +246,7 @@ function repo_init(){
           'label': 'Load Levels',
         },
       },
+      'textures': true,
       'title': 'MultiverseEditor.htm',
       'ui': '<hr><div id=npc-talk></div><div id=npc-trade></div>',
     });
