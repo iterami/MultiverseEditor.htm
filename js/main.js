@@ -186,6 +186,9 @@ function repo_init(){
         'contextmenu': {
           'preventDefault': true,
         },
+        'mousedown': {
+          'todo': webgl_camera_handle,
+        },
         'mousemove': {
           'preventDefault': true,
           'todo': webgl_camera_handle,
