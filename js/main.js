@@ -5,15 +5,20 @@ function repo_escape(){
         return;
     }
 
+    core_ui_update({
+      'ids': {
+        'rotate-x': webgl_characters[webgl_character_id]['camera-rotate-x'],
+        'rotate-y': webgl_characters[webgl_character_id]['camera-rotate-y'],
+        'rotate-z': webgl_characters[webgl_character_id]['camera-rotate-z'],
+      },
+    });
+
     if(core_menu_open){
         core_ui_update({
           'ids': {
             'character-count': webgl_character_count,
             'foreground-count': core_groups['_length']['foreground'],
             'particles-count': core_groups['_length']['particles'],
-            'rotate-x': webgl_characters[webgl_character_id]['camera-rotate-x'],
-            'rotate-y': webgl_characters[webgl_character_id]['camera-rotate-y'],
-            'rotate-z': webgl_characters[webgl_character_id]['camera-rotate-z'],
             'skybox-count': core_groups['_length']['skybox'],
             'translate-x': webgl_characters[webgl_character_id]['translate-x'],
             'translate-y': webgl_characters[webgl_character_id]['translate-y'],
@@ -204,6 +209,8 @@ function repo_init(){
         'character-collide-range-horizontal': 2.5,
         'character-collide-range-vertical': 2.5,
         'character-collides': true,
+        'character-moves': true,
+        'character-rotates': true,
         'character-speed': 1,
         'directional-blue': 1,
         'directional-green': 1,
@@ -222,7 +229,7 @@ function repo_init(){
       'storage-menu': '<table><tr><td>Ambient Lighting<br><select id=ambient-state><option value=0>Use Level Properties</option><option value=1>Override On</option></select><br><input id=ambient-blue>Blue<br><input id=ambient-green>Green<br><input id=ambient-red>Red'
         + '<td>Multipliers<br><input id=multiplier-jump>Jump<br><input id=multiplier-speed>Speed<br><input id=beforeunload-warning type=checkbox>beforeunload Warning'
         + '<tr><td>Directional Lighting<br><select id=directional-state><option value=0>Use Level Properties</option><option value=1>Override On</option><option value=2>Override Off</option></select><br><input id=directional-blue>Blue<br><input id=directional-green>Green<br><input id=directional-red>Red<br><input id=directional-vector>Vector'
-        + '<td>Camera/Character<br><input id=character-speed>Speed<br><input id=character-collides type=checkbox>Collides, Range<br><input id=character-collide-range-horizontal>Horizontal<br><input id=character-collide-range-vertical>Vertical'
+        + '<td>Camera/Character<br><input id=character-speed>Speed<br><input id=character-collides type=checkbox>Collides, Range<br><input id=character-collide-range-horizontal>Horizontal<br><input id=character-collide-range-vertical>Vertical<br><input id=character-moves type=checkbox>Movement<br><input id=character-rotates type=checkbox>Rotation'
         + '<tr><td>Fog<br><select id=fog-state><option value=0>Use Level Properties</option><option value=1>Override On</option><option value=2>Override Off</option></select><br><input id=fog-density>Density'
         + '<td><input id=gravity-state type=checkbox>Gravity Override<br><input id=gravity-acceleration>Acceleration<br><select id=gravity-axis><option value=dx>x</option><option selected value=dy>y</option><option value=dz>z</option></select>Axis<br><input id=gravity-max>Max</table>',
       'tabs': {
@@ -276,4 +283,21 @@ function repo_init(){
 }
 
 function repo_logic(){
+    if(!core_storage_data['character-moves']){
+        webgl_characters[webgl_character_id]['translate-x'] = core_ui_values['translate-x'];
+        webgl_characters[webgl_character_id]['translate-y'] = core_ui_values['translate-y'];
+        webgl_characters[webgl_character_id]['translate-z'] = core_ui_values['translate-z'];
+    }
+    if(!core_storage_data['character-rotates']){
+        webgl_characters[webgl_character_id]['camera-rotate-x'] = core_ui_values['rotate-x'];
+        webgl_characters[webgl_character_id]['camera-rotate-y'] = core_ui_values['rotate-y'];
+        webgl_characters[webgl_character_id]['camera-rotate-z'] = core_ui_values['rotate-z'];
+        webgl_characters[webgl_character_id]['rotate-x'] = core_ui_values['rotate-x'];
+        webgl_characters[webgl_character_id]['rotate-y'] = core_ui_values['rotate-y'];
+        webgl_characters[webgl_character_id]['rotate-z'] = core_ui_values['rotate-z'];
+        webgl_entity_radians({
+          'character': true,
+          'entity': webgl_character_id,
+        });
+    }
 }
