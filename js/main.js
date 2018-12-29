@@ -278,8 +278,12 @@ function repo_init(){
           'label': 'Export Level',
         },
         'load': {
-          'content': '<table><tr><td><input id=level-json type=file><td><input id=level-load type=button value="Load Level From File">'
-            + '<tr><td><select id=level-select></select><td><input id=prebuilt-load type=button value="Load Prebuilt Level"></table>',
+          'content': '<table><tr>'
+              + '<td><input id=level-json type=file>'
+              + '<td><input id=level-load type=button value="Load Level From File">'
+            + '<tr>'
+              + '<td><select id=level-select></select>'
+              + '<td><input id=prebuilt-load type=button value="Load Prebuilt Level"></table>',
           'default': true,
           'group': 'core-menu',
           'label': 'Load Levels',
