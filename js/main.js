@@ -211,7 +211,7 @@ function repo_init(){
         'character-collides': true,
         'character-moves': true,
         'character-rotates': true,
-        'character-speed': 1,
+        'character-speed': 5,
         'directional-blue': 1,
         'directional-green': 1,
         'directional-red': 1,
