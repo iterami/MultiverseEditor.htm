@@ -40,7 +40,11 @@ function repo_escape(){
                 webgl_properties['directional-blue'] = core_storage_data['directional-blue'];
                 webgl_properties['directional-green'] = core_storage_data['directional-green'];
                 webgl_properties['directional-red'] = core_storage_data['directional-red'];
-                webgl_properties['directional-vector'] = core_storage_data['directional-vector'];
+                webgl_properties['directional-vector'] = [
+                  core_storage_data['directional-vector-x'],
+                  core_storage_data['directional-vector-y'],
+                  core_storage_data['directional-vector-z'],
+                ];
             }
         }
         if(core_storage_data['fog-state'] !== 0){
@@ -216,7 +220,9 @@ function repo_init(){
         'directional-green': 1,
         'directional-red': 1,
         'directional-state': 0,
-        'directional-vector': '0, 1, 0',
+        'directional-vector-x': 0,
+        'directional-vector-y': 1,
+        'directional-vector-z': 0,
         'fog-density': .0001,
         'fog-state': 0,
         'gravity-acceleration': -.05,
@@ -240,7 +246,9 @@ function repo_init(){
           + '<input id=directional-blue>Blue<br>'
           + '<input id=directional-green>Green<br>'
           + '<input id=directional-red>Red<br>'
-          + '<input id=directional-vector>Vector'
+          + '<input id=directional-vector-x>Vector X<br>'
+          + '<input id=directional-vector-y>Vector Y<br>'
+          + '<input id=directional-vector-z>Vector Z'
         + '<td>Camera/Character<br>'
           + '<input id=character-speed>Speed<br>'
           + '<input id=character-collides type=checkbox>Collides, Range<br>'
