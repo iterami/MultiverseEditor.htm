@@ -62,7 +62,7 @@ function repo_escape(){
         webgl_properties['multiplier-jump'] = core_storage_data['multiplier-jump'];
         webgl_properties['multiplier-speed'] = core_storage_data['multiplier-speed'];
 
-        webgl_character_id = document.getElementById('webgl-character-id').value;
+        webgl_character_id = core_storage_data['character-id'];
         webgl_characters[webgl_character_id]['collide-range-horizontal'] = core_storage_data['character-collide-range-horizontal'];
         webgl_characters[webgl_character_id]['collide-range-vertical'] = core_storage_data['character-collide-range-vertical'];
         webgl_characters[webgl_character_id]['collides'] = core_storage_data['character-collides'];
@@ -213,6 +213,7 @@ function repo_init(){
         'character-collide-range-horizontal': 2.5,
         'character-collide-range-vertical': 2.5,
         'character-collides': true,
+        'character-id': '_me',
         'character-moves': true,
         'character-rotates': true,
         'character-speed': 5,
@@ -250,6 +251,7 @@ function repo_init(){
           + '<input id=directional-vector-y>Vector Y<br>'
           + '<input id=directional-vector-z>Vector Z'
         + '<td>Camera/Character<br>'
+          + '<input id=character-id>webgl_character_id<br>'
           + '<input id=character-speed>Speed<br>'
           + '<input id=character-collides type=checkbox>Collides, Range<br>'
           + '<input id=character-collide-range-horizontal>Horizontal<br>'
@@ -266,8 +268,7 @@ function repo_init(){
           + '<input id=gravity-max>Max</table>',
       'tabs': {
         'characters': {
-          'content': '<input id=webgl-character-id value=_me>webgl_character_id<br>'
-            + 'Characters: <span id=character-count></span>',
+          'content': 'Characters: <span id=character-count></span>',
           'group': 'editor',
           'label': 'Characters',
         },
