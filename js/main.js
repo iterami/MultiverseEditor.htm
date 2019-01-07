@@ -14,11 +14,17 @@ function repo_escape(){
     });
 
     if(core_menu_open){
+        let properties_html = '';
+        for(let property in webgl_properties){
+            properties_html += '<li>' + property + ' = ' + webgl_properties[property];
+        }
+
         core_ui_update({
           'ids': {
             'character-count': webgl_character_count,
             'foreground-count': core_groups['_length']['foreground'],
             'particles-count': core_groups['_length']['particles'],
+            'properties': properties_html,
             'skybox-count': core_groups['_length']['skybox'],
             'translate-x': webgl_characters[webgl_character_id]['translate-x'],
             'translate-y': webgl_characters[webgl_character_id]['translate-y'],
@@ -296,6 +302,11 @@ function repo_init(){
           'default': true,
           'group': 'core-menu',
           'label': 'Load Levels',
+        },
+        'properties': {
+          'content': '<ul id=properties></ul>',
+          'group': 'editor',
+          'label': 'Properties',
         },
       },
       'textures': true,
