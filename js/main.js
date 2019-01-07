@@ -16,7 +16,7 @@ function repo_escape(){
     if(core_menu_open){
         let properties_html = '';
         for(let property in webgl_properties){
-            properties_html += '<li>' + property + ' = ' + webgl_properties[property];
+            properties_html += '<tr><td>' + property + '<td>' + webgl_properties[property];
         }
 
         core_ui_update({
@@ -304,7 +304,7 @@ function repo_init(){
           'label': 'Load Levels',
         },
         'properties': {
-          'content': '<ul id=properties></ul>',
+          'content': '<table id=properties></table>',
           'group': 'editor',
           'label': 'Properties',
         },
