@@ -35,4 +35,6 @@ function character_set_axis(type, axis){
           'entity': webgl_character_id,
         });
     }
+
+    document.getElementById(type + '-' + axis).value = result;
 }
