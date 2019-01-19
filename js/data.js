@@ -50,6 +50,11 @@ function set_property(property){
         return;
     }
 
+    result = core_type_convert({
+      'template': webgl_properties[property],
+      'value': result,
+    });
+
     webgl_properties[property] = result;
     document.getElementById('property-' + property).innerHTML = result;
 }
