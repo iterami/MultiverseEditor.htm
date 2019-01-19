@@ -16,7 +16,8 @@ function repo_escape(){
     if(core_menu_open){
         let properties_html = '';
         for(let property in webgl_properties){
-            properties_html += '<tr><td>' + property + '<td>' + webgl_properties[property];
+            properties_html += '<tr>'
+              + '<td><input id="button-' + property + '" type=button value=' + property + '><td id="property-' + property + '">' + webgl_properties[property];
         }
 
         core_ui_update({
@@ -32,6 +33,12 @@ function repo_escape(){
             'webgl-count': core_entity_info['webgl']['count'],
           },
         });
+
+        for(let property in webgl_properties){
+            document.getElementById('button-' + property).onclick = function(){
+                set_property(property);
+            }
+        }
 
     }else{
         if(core_storage_data['ambient-state'] !== 0){

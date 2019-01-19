@@ -38,3 +38,18 @@ function character_set_axis(type, axis){
 
     document.getElementById(type + '-' + axis).value = result;
 }
+
+function set_property(property){
+    let result = window.prompt(
+      'Set ' + property + ' to:',
+      ''
+    );
+
+    if(result == null
+      || result.length === 0){
+        return;
+    }
+
+    webgl_properties[property] = result;
+    document.getElementById('property-' + property).innerHTML = result;
+}
