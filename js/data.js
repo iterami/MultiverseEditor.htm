@@ -13,9 +13,10 @@ function ajax_level(level){
 }
 
 function character_set_axis(type, axis){
+    let element = document.getElementById(type + '-' + axis);
     let result = window.prompt(
       'Set ' + type + '-' + axis + ' to:',
-      ''
+      element.value
     );
 
     if(result == null
@@ -36,13 +37,14 @@ function character_set_axis(type, axis){
         });
     }
 
-    document.getElementById(type + '-' + axis).value = result;
+    element.value = result;
 }
 
 function set_property(property){
+    let element = document.getElementById('property-' + property);
     let result = window.prompt(
       'Set ' + property + ' to:',
-      ''
+      element.innerHTML
     );
 
     if(result == null
@@ -56,5 +58,5 @@ function set_property(property){
     });
 
     webgl_properties[property] = result;
-    document.getElementById('property-' + property).innerHTML = result;
+    element.innerHTML = result;
 }
