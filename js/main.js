@@ -5,7 +5,7 @@ function repo_escape(){
         return;
     }
 
-    if(core_menu_open){
+    if(!core_menu_open){
         let properties_html = '';
         for(let property in webgl_properties){
             properties_html += '<tr>'
@@ -14,18 +14,7 @@ function repo_escape(){
 
         core_ui_update({
           'ids': {
-            'character-count': webgl_character_count,
-            'foreground-count': core_groups['_length']['foreground'],
-            'particles-count': core_groups['_length']['particles'],
             'properties': properties_html,
-            'rotate-x': webgl_characters[webgl_character_id]['camera-rotate-x'],
-            'rotate-y': webgl_characters[webgl_character_id]['camera-rotate-y'],
-            'rotate-z': webgl_characters[webgl_character_id]['camera-rotate-z'],
-            'skybox-count': core_groups['_length']['skybox'],
-            'translate-x': webgl_characters[webgl_character_id]['translate-x'],
-            'translate-y': webgl_characters[webgl_character_id]['translate-y'],
-            'translate-z': webgl_characters[webgl_character_id]['translate-z'],
-            'webgl-count': core_entity_info['webgl']['count'],
           },
         });
 
@@ -35,7 +24,6 @@ function repo_escape(){
             }
         }
 
-    }else{
         if(core_storage_data['ambient-state'] !== 0){
             webgl_properties['ambient-blue'] = core_storage_data['ambient-blue'];
             webgl_properties['ambient-green'] = core_storage_data['ambient-green'];
@@ -190,11 +178,6 @@ function repo_init(){
           },
         },
       },
-      'info': '<input id=origin type=button value="Return to Origin"><input id=spawn type=button value="Return to Spawn"><br>'
-        + '<input id=translate-x-set type=button value=x><input id=translate-x><input id=rotate-x-set type=button value=x°><input id=rotate-x><br>'
-        + '<input id=translate-y-set type=button value=y><input id=translate-y><input id=rotate-y-set type=button value=y°><input id=rotate-y><br>'
-        + '<input id=translate-z-set type=button value=z><input id=translate-z><input id=rotate-z-set type=button value=z°><input id=rotate-z><br>'
-        + '<span id=editor-tabs></span><div id=editor-tabcontent></div>',
       'keybinds': {
         32: {},
         67: {},
@@ -313,7 +296,12 @@ function repo_init(){
       },
       'textures': true,
       'title': 'MultiverseEditor.htm',
-      'ui': '<hr><div id=npc-talk></div><div id=npc-trade></div>',
+      'ui': '<input id=origin type=button value="Return to Origin"><input id=spawn type=button value="Return to Spawn"><br>'
+        + '<input id=translate-x-set type=button value=x><input id=translate-x><input id=rotate-x-set type=button value=x°><input id=rotate-x><br>'
+        + '<input id=translate-y-set type=button value=y><input id=translate-y><input id=rotate-y-set type=button value=y°><input id=rotate-y><br>'
+        + '<input id=translate-z-set type=button value=z><input id=translate-z><input id=rotate-z-set type=button value=z°><input id=rotate-z><br>'
+        + '<span id=editor-tabs></span><div id=editor-tabcontent></div><hr>'
+        + '<div id=npc-talk></div><div id=npc-trade></div>',
     });
     webgl_settings_init();
 
@@ -334,6 +322,22 @@ function repo_init(){
 }
 
 function repo_logic(){
+    core_ui_update({
+      'ids': {
+        'character-count': webgl_character_count,
+        'foreground-count': core_groups['_length']['foreground'],
+        'particles-count': core_groups['_length']['particles'],
+        'rotate-x': webgl_characters[webgl_character_id]['camera-rotate-x'],
+        'rotate-y': webgl_characters[webgl_character_id]['camera-rotate-y'],
+        'rotate-z': webgl_characters[webgl_character_id]['camera-rotate-z'],
+        'skybox-count': core_groups['_length']['skybox'],
+        'translate-x': webgl_characters[webgl_character_id]['translate-x'],
+        'translate-y': webgl_characters[webgl_character_id]['translate-y'],
+        'translate-z': webgl_characters[webgl_character_id]['translate-z'],
+        'webgl-count': core_entity_info['webgl']['count'],
+      },
+    });
+
     if(!core_storage_data['character-moves']){
         webgl_characters[webgl_character_id]['translate-x'] = core_ui_values['translate-x'];
         webgl_characters[webgl_character_id]['translate-y'] = core_ui_values['translate-y'];
