@@ -258,20 +258,6 @@ function repo_init(){
           + '<select id=gravity-axis><option value=dx>x</option><option selected value=dy>y</option><option value=dz>z</option></select>Axis<br>'
           + '<input id=gravity-max>Max</table>',
       'tabs': {
-        'characters': {
-          'content': 'Characters: <span id=character-count></span>',
-          'group': 'editor',
-          'label': 'Characters',
-        },
-        'entities': {
-          'content': '<table><tr class=header><td>Group<td>Count'
-            + '<tr><td>foreground<td id=foreground-count>'
-            + '<tr><td>particles<td id=particles-count>'
-            + '<tr><td>skybox<td id=skybox-count>'
-            + '<tr><td>webgl<td id=webgl-count></table>',
-          'group': 'editor',
-          'label': 'Entities',
-        },
         'export': {
           'content': '<input id=update-json type=button value="Update Level JSON"><br><textarea id=exported></textarea>',
           'group': 'core-menu',
@@ -292,6 +278,17 @@ function repo_init(){
           'content': '<table id=properties></table>',
           'group': 'editor',
           'label': 'Properties',
+        },
+        'stats': {
+          'content': '<table><tr><td>Characters<td id=character-count>'
+            + '<tr><td>ID count<td id=id-count>'
+            + '<tr class=header><td>Group<td>Count'
+            + '<tr><td>foreground<td id=foreground-count>'
+            + '<tr><td>particles<td id=particles-count>'
+            + '<tr><td>skybox<td id=skybox-count>'
+            + '<tr><td>webgl<td id=webgl-count></table>',
+          'group': 'editor',
+          'label': 'Stats',
         },
       },
       'textures': true,
@@ -326,6 +323,7 @@ function repo_logic(){
       'ids': {
         'character-count': webgl_character_count,
         'foreground-count': core_groups['_length']['foreground'],
+        'id-count': core_id_count,
         'particles-count': core_groups['_length']['particles'],
         'rotate-x': webgl_characters[webgl_character_id]['camera-rotate-x'],
         'rotate-y': webgl_characters[webgl_character_id]['camera-rotate-y'],
