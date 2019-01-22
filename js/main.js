@@ -5,14 +5,6 @@ function repo_escape(){
         return;
     }
 
-    core_ui_update({
-      'ids': {
-        'rotate-x': webgl_characters[webgl_character_id]['camera-rotate-x'],
-        'rotate-y': webgl_characters[webgl_character_id]['camera-rotate-y'],
-        'rotate-z': webgl_characters[webgl_character_id]['camera-rotate-z'],
-      },
-    });
-
     if(core_menu_open){
         let properties_html = '';
         for(let property in webgl_properties){
@@ -26,6 +18,9 @@ function repo_escape(){
             'foreground-count': core_groups['_length']['foreground'],
             'particles-count': core_groups['_length']['particles'],
             'properties': properties_html,
+            'rotate-x': webgl_characters[webgl_character_id]['camera-rotate-x'],
+            'rotate-y': webgl_characters[webgl_character_id]['camera-rotate-y'],
+            'rotate-z': webgl_characters[webgl_character_id]['camera-rotate-z'],
             'skybox-count': core_groups['_length']['skybox'],
             'translate-x': webgl_characters[webgl_character_id]['translate-x'],
             'translate-y': webgl_characters[webgl_character_id]['translate-y'],
