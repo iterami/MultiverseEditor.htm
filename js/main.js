@@ -315,6 +315,7 @@ function repo_init(){
       'title': 'MultiverseEditor.htm',
       'ui': '<hr><div id=npc-talk></div><div id=npc-trade></div>',
     });
+    webgl_settings_init();
 
     // Populate prebuilt level select if multiverselevels defined.
     if('multiverselevels' in window){
