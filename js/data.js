@@ -6,6 +6,8 @@ function ajax_level(level){
           'character': -1,
           'json': webgl_levelcache['json'],
         });
+
+        return;
     }
 
     core_ajax({
