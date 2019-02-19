@@ -1,9 +1,17 @@
 'use strict';
 
 function ajax_level(level){
+    if(webgl_levelcache['id'] === level){
+        webgl_level_load({
+          'character': -1,
+          'json': webgl_levelcache['json'],
+        });
+    }
+
     core_ajax({
       'todo': function(responseText){
           webgl_level_load({
+            'cache': level,
             'character': -1,
             'json': responseText,
           });
