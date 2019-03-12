@@ -55,6 +55,7 @@ function repo_escape(){
             webgl_properties['gravity-axis'] = core_storage_data['gravity-axis'];
             webgl_properties['gravity-max'] = core_storage_data['gravity-max'];
         }
+        webgl_properties['jump-movement'] = core_storage_data['jump-movement'];
         webgl_properties['multiplier-jump'] = core_storage_data['multiplier-jump'];
         webgl_properties['multiplier-speed'] = core_storage_data['multiplier-speed'];
 
@@ -226,6 +227,7 @@ function repo_init(){
         'gravity-axis': 'dy',
         'gravity-max': -2,
         'gravity-state': false,
+        'jump-movement': 0,
         'multiplier-jump': 1,
         'multiplier-speed': 1,
       },
@@ -236,6 +238,7 @@ function repo_init(){
           + '<input id=ambient-red>Red'
         + '<td>Multipliers<br>'
           + '<input id=multiplier-jump>Jump<br>'
+          + '<input id=jump-movement>Jump Movement<br>'
           + '<input id=multiplier-speed>Speed<br>'
           + '<input id=beforeunload-warning type=checkbox>beforeunload Warning'
         + '<tr><td>Directional Lighting<br>'
