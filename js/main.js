@@ -299,7 +299,6 @@ function repo_init(){
           'label': 'Stats',
         },
       },
-      'textures': true,
       'title': 'MultiverseEditor.htm',
       'ui': '<input id=origin type=button value="Return to Origin"><input id=spawn type=button value="Return to Spawn"><br>'
         + '<input id=translate-x-set type=button value=x><input id=translate-x><input id=rotate-x-set type=button value=x°><input id=rotate-x><br>'
