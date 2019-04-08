@@ -305,7 +305,7 @@ function repo_init(){
         + '<input id=translate-y-set type=button value=y><input id=translate-y><input id=rotate-y-set type=button value=y°><input id=rotate-y><br>'
         + '<input id=translate-z-set type=button value=z><input id=translate-z><input id=rotate-z-set type=button value=z°><input id=rotate-z><br>'
         + '<span id=editor-tabs></span><div id=editor-tabcontent></div><hr>'
-        + '<div id=npc-talk></div><div id=npc-trade></div>',
+        + '<div id=npc></div><div id=npc-talk></div><div id=npc-trade></div>',
     });
     webgl_settings_init();
 
