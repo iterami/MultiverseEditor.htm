@@ -355,9 +355,5 @@ function repo_logic(){
         webgl_characters[webgl_character_id]['rotate-x'] = core_ui_values['rotate-x'];
         webgl_characters[webgl_character_id]['rotate-y'] = core_ui_values['rotate-y'];
         webgl_characters[webgl_character_id]['rotate-z'] = core_ui_values['rotate-z'];
-        webgl_entity_radians({
-          'character': true,
-          'entity': webgl_character_id,
-        });
     }
 }
