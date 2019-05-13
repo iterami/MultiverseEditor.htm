@@ -187,6 +187,11 @@ function repo_init(){
               webgl_characters[webgl_character_id]['collides'] = !webgl_characters[webgl_character_id]['collides'];
           },
         },
+        192: {
+          'todo': function(){
+              webgl_characters[webgl_character_id]['automove'] = !webgl_characters[webgl_character_id]['automove'];
+          },
+        },
       },
       'menu': true,
       'mousebinds': {
