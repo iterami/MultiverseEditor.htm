@@ -22,7 +22,7 @@ function ajax_level(level){
     });
 }
 
-function character_set_axis(type, axis){
+function character_set_axis(type, axis, button){
     let element = document.getElementById(type + '-' + axis);
     let result = window.prompt(
       'Set ' + type + '-' + axis + ' to:',
@@ -42,6 +42,7 @@ function character_set_axis(type, axis){
     }
 
     element.value = result;
+    button.blur();
 }
 
 function set_property(property){
