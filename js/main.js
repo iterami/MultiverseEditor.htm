@@ -340,17 +340,17 @@ function repo_logic(){
     core_ui_update({
       'ids': {
         'character-count': webgl_character_count,
-        'foreground-count': core_groups['_length']['foreground'],
+        'foreground-count': entity_groups['_length']['foreground'],
         'id-count': core_id_count,
-        'particles-count': core_groups['_length']['particles'],
+        'particles-count': entity_groups['_length']['particles'],
         'rotate-x': webgl_characters[webgl_character_id]['camera-rotate-x'],
         'rotate-y': webgl_characters[webgl_character_id]['camera-rotate-y'],
         'rotate-z': webgl_characters[webgl_character_id]['camera-rotate-z'],
-        'skybox-count': core_groups['_length']['skybox'],
+        'skybox-count': entity_groups['_length']['skybox'],
         'translate-x': webgl_characters[webgl_character_id]['translate-x'],
         'translate-y': webgl_characters[webgl_character_id]['translate-y'],
         'translate-z': webgl_characters[webgl_character_id]['translate-z'],
-        'webgl-count': core_entity_info['webgl']['count'],
+        'webgl-count': entity_info['webgl']['count'],
       },
     });
 
