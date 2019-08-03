@@ -341,7 +341,7 @@ function repo_logic(){
       'ids': {
         'character-count': webgl_character_count,
         'foreground-count': entity_groups['_length']['foreground'],
-        'id-count': core_id_count,
+        'id-count': entity_id_count,
         'particles-count': entity_groups['_length']['particles'],
         'rotate-x': webgl_characters[webgl_character_id]['camera-rotate-x'],
         'rotate-y': webgl_characters[webgl_character_id]['camera-rotate-y'],
