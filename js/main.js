@@ -320,7 +320,7 @@ function repo_init(){
     });
     webgl_settings_init();
 
-    // Populate prebuilt level select if multiverselevels defined.
+    // Populate prebuilt level select if multiverselevels is defined.
     if('multiverselevels' in window){
         let level_select = '';
         for(let level in multiverselevels){
