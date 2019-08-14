@@ -29,6 +29,13 @@ function repo_escape(){
             webgl_properties['ambient-green'] = core_storage_data['ambient-green'];
             webgl_properties['ambient-red'] = core_storage_data['ambient-red'];
         }
+        if(core_storage_data['clearcolor-state'] !== 0){
+            webgl_clearcolor_set({
+              'blue': core_storage_data['clearcolor-blue'],
+              'green': core_storage_data['clearcolor-green'],
+              'red': core_storage_data['clearcolor-red'],
+            });
+        }
         if(core_storage_data['directional-state'] !== 0){
             webgl_properties['directional-state'] = core_storage_data['directional-state'] === 1;
 
@@ -225,6 +232,10 @@ function repo_init(){
         'character-moves': true,
         'character-rotates': true,
         'character-speed': 5,
+        'clearcolor-blue': 0,
+        'clearcolor-green': 0,
+        'clearcolor-red': 0,
+        'clearcolor-state': 0,
         'directional-blue': 1,
         'directional-green': 1,
         'directional-red': 1,
@@ -247,11 +258,16 @@ function repo_init(){
           + '<input id=ambient-blue>Blue<br>'
           + '<input id=ambient-green>Green<br>'
           + '<input id=ambient-red>Red'
+        + '<td><input id=beforeunload-warning type=checkbox>beforeunload Warning'
+        + '<tr><td>Clear Color<br>'
+          + '<select id=clearcolor-state><option value=0>Use Level Properties</option><option value=1>Override On</option></select><br>'
+          + '<input id=clearcolor-blue>Blue<br>'
+          + '<input id=clearcolor-green>Green<br>'
+          + '<input id=clearcolor-red>Red'
         + '<td>Multipliers<br>'
           + '<input id=multiplier-jump>Jump<br>'
           + '<input id=jump-movement>Jump Movement<br>'
-          + '<input id=multiplier-speed>Speed<br>'
-          + '<input id=beforeunload-warning type=checkbox>beforeunload Warning'
+          + '<input id=multiplier-speed>Speed'
         + '<tr><td>Directional Lighting<br>'
           + '<select id=directional-state><option value=0>Use Level Properties</option><option value=1>Override On</option><option value=2>Override Off</option></select><br>'
           + '<input id=directional-blue>Blue<br>'
