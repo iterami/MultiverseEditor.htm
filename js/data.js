@@ -64,6 +64,4 @@ function set_property(property){
 
     webgl_properties[property] = result;
     element.innerHTML = result;
-
-    webgl_shader_update();
 }

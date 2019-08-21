@@ -71,8 +71,6 @@ function repo_escape(){
         webgl_characters[webgl_character_id]['collide-range-vertical'] = core_storage_data['character-collide-range-vertical'];
         webgl_characters[webgl_character_id]['collides'] = core_storage_data['character-collides'];
         webgl_characters[webgl_character_id]['speed'] = core_storage_data['character-speed'];
-
-        webgl_shader_update();
     }
 }
 
