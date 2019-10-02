@@ -191,7 +191,6 @@ function repo_init(){
         },
       },
       'keybinds': {
-        32: {},
         67: {},
         86: {
           'todo': function(){
