@@ -191,7 +191,6 @@ function repo_init(){
         },
       },
       'keybinds': {
-        67: {},
         86: {
           'todo': function(){
               webgl_characters[webgl_character_id]['collides'] = !webgl_characters[webgl_character_id]['collides'];
