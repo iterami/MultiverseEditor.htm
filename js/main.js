@@ -327,7 +327,7 @@ function repo_init(){
         + '<input id=translate-x-set type=button value=x><input id=translate-x readonly><input id=rotate-x-set type=button value=x°><input id=rotate-x readonly><br>'
         + '<input id=translate-y-set type=button value=y><input id=translate-y readonly><input id=rotate-y-set type=button value=y°><input id=rotate-y readonly><br>'
         + '<input id=translate-z-set type=button value=z><input id=translate-z readonly><input id=rotate-z-set type=button value=z°><input id=rotate-z readonly><br>'
-        + '<span id=editor-tabs></span><div id=editor-tabcontent></div><hr>'
+        + '<span id=editor-tabs></span><div id=editor-tabcontent></div>'
         + '<div id=npc></div><div id=npc-talk></div><div id=npc-trade></div>',
     });
     webgl_settings_init();
