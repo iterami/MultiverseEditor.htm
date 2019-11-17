@@ -29,7 +29,7 @@ function character_set_axis(type, axis, button){
       element.value
     );
 
-    if(result == null
+    if(result === null
       || result.length === 0){
         return;
     }
@@ -52,7 +52,7 @@ function set_property(property){
       element.innerHTML
     );
 
-    if(result == null
+    if(result === null
       || result.length === 0){
         return;
     }
