@@ -49,7 +49,7 @@ function set_property(property){
     let element = document.getElementById('property-' + property);
     let result = window.prompt(
       'Set ' + property + ' to:',
-      element.innerHTML
+      element.textContent
     );
 
     if(result === null
@@ -63,5 +63,5 @@ function set_property(property){
     });
 
     webgl_properties[property] = result;
-    element.innerHTML = result;
+    element.textContent = result;
 }
