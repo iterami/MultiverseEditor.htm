@@ -7,7 +7,7 @@ function repo_escape(){
 
     if(!core_menu_open){
         let properties_html = '';
-        for(let property in webgl_properties){
+        for(const property in webgl_properties){
             properties_html += '<tr>'
               + '<td><input id="button-' + property + '" type=button value=' + property + '><td id="property-' + property + '">' + webgl_properties[property];
         }
@@ -18,7 +18,7 @@ function repo_escape(){
           },
         });
 
-        for(let property in webgl_properties){
+        for(const property in webgl_properties){
             document.getElementById('button-' + property).onclick = function(){
                 set_property(property);
             }
@@ -335,14 +335,14 @@ function repo_init(){
     // Populate prebuilt level select if multiverselevels is defined.
     if('multiverselevels' in window){
         let level_select = '';
-        for(let level in multiverselevels){
+        for(const level in multiverselevels){
             level_select += '<option value="' + level + '">' + multiverselevels[level] + '</option>';
         }
         document.getElementById('level-select').innerHTML = level_select;
     }
 
     // Handle prebuilt level url args.
-    let level_arg = window.location.search.substring(1);
+    const level_arg = window.location.search.substring(1);
     if(level_arg.length > 0){
         ajax_level(level_arg);
     }
