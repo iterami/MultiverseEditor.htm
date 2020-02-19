@@ -24,7 +24,7 @@ function ajax_level(level){
 
 function character_set_axis(type, axis, button){
     const element = document.getElementById(type + '-' + axis);
-    let result = window.prompt(
+    let result = globalThis.prompt(
       'Set ' + type + '-' + axis + ' to:',
       element.value
     );
@@ -47,7 +47,7 @@ function character_set_axis(type, axis, button){
 
 function set_property(property){
     const element = document.getElementById('property-' + property);
-    let result = window.prompt(
+    let result = globalThis.prompt(
       'Set ' + property + ' to:',
       element.textContent
     );

@@ -333,7 +333,7 @@ function repo_init(){
     webgl_settings_init();
 
     // Populate prebuilt level select if multiverselevels is defined.
-    if('multiverselevels' in window){
+    if('multiverselevels' in globalThis){
         let level_select = '';
         for(const level in multiverselevels){
             level_select += '<option value="' + level + '">' + multiverselevels[level] + '</option>';
@@ -342,7 +342,7 @@ function repo_init(){
     }
 
     // Handle prebuilt level url args.
-    const level_arg = window.location.search.substring(1);
+    const level_arg = globalThis.location.search.substring(1);
     if(level_arg.length > 0){
         ajax_level(level_arg);
     }
