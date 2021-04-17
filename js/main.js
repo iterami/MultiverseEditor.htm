@@ -6,29 +6,26 @@ function repo_escape(){
     }
 
     if(!core_menu_open){
-        let properties_html = '';
-        for(const property in webgl_properties){
-            const property_label = typeof webgl_properties[property] !== 'object'
-              ? '<input id="button-' + property + '" type=button value=' + property + '>'
-              : property;
+        const properties_table = document.getElementById('properties');
+        if(properties_table.innerHTML.length === 0){
+            let properties_html = '';
+            for(const property in webgl_properties){
+                const property_label = typeof webgl_properties[property] !== 'object'
+                  ? '<input id="button-' + property + '" type=button value=' + property + '>'
+                  : property;
 
-            properties_html += '<tr>'
-              + '<td>' + property_label + '<td id="property-' + property + '">' + webgl_properties[property];
-        }
-
-        core_ui_update({
-          'ids': {
-            'properties': properties_html,
-          },
-        });
-
-        for(const property in webgl_properties){
-            if(typeof webgl_properties[property] === 'object'){
-                continue;
+                properties_html += '<tr>'
+                  + '<td>' + property_label + '<td id="property-' + property + '">';
             }
+            properties_table.innerHTML = properties_html;
+            for(const property in webgl_properties){
+                if(typeof webgl_properties[property] === 'object'){
+                    continue;
+                }
 
-            document.getElementById('button-' + property).onclick = function(){
-                set_property(property);
+                document.getElementById('button-' + property).onclick = function(){
+                    set_property(property);
+                }
             }
         }
 
@@ -340,6 +337,7 @@ function repo_init(){
     });
     webgl_settings_init();
 
+
     // Populate prebuilt level select if multiverselevels is defined.
     if('multiverselevels' in globalThis){
         let level_select = '';
@@ -373,6 +371,13 @@ function repo_logic(){
         'webgl-count': entity_info['webgl']['count'],
       },
     });
+    for(const property in webgl_properties){
+        core_ui_update({
+          'ids': {
+            ['property-' + property]: webgl_properties[property],
+          },
+        });
+    }
 
     if(!core_storage_data['character-moves']){
         webgl_characters[webgl_character_id]['translate-x'] = core_ui_values['translate-x'];
