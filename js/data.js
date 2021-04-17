@@ -46,10 +46,9 @@ function character_set_axis(type, axis, button){
 }
 
 function set_property(property){
-    const element = document.getElementById('property-' + property);
     let result = globalThis.prompt(
       'Set ' + property + ' to:',
-      element.textContent
+      webgl_properties[property]
     );
 
     if(result === null
@@ -57,11 +56,8 @@ function set_property(property){
         return;
     }
 
-    result = core_type_convert({
+    webgl_properties[property] = core_type_convert({
       'template': webgl_properties[property],
       'value': result,
     });
-
-    webgl_properties[property] = result;
-    element.textContent = result;
 }
