@@ -15,9 +15,11 @@ function repo_escape(){
                   : property;
 
                 properties_html += '<tr>'
-                  + '<td>' + property_label + '<td id="property-' + property + '">';
+                  + '<td>' + property_label
+                  + '<td id="property-' + property + '">';
             }
             properties_table.innerHTML = properties_html;
+
             for(const property in webgl_properties){
                 if(typeof webgl_properties[property] === 'object'){
                     continue;
@@ -339,7 +341,6 @@ function repo_init(){
         + '<div id=npc></div><div id=npc-talk></div><div id=npc-trade></div>',
     });
     webgl_settings_init();
-
 
     // Populate prebuilt level select if multiverselevels is defined.
     if('multiverselevels' in globalThis){
