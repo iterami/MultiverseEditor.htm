@@ -333,7 +333,7 @@ function repo_init(){
         },
       },
       'title': 'MultiverseEditor.htm',
-      'ui': '<input id=origin type=button value="Return to Origin"><input id=spawn type=button value="Return to Spawn"><br>'
+      'ui': '<input id=origin type=button value=Origin><input id=spawn type=button value=Spawn><br>'
         + '<input id=translate-x-set type=button value=x><input class=left id=translate-x readonly><input id=rotate-x-set type=button value=x°><input class=left id=rotate-x readonly><br>'
         + '<input id=translate-y-set type=button value=y><input class=left id=translate-y readonly><input id=rotate-y-set type=button value=y°><input class=left id=rotate-y readonly><br>'
         + '<input id=translate-z-set type=button value=z><input class=left id=translate-z readonly><input id=rotate-z-set type=button value=z°><input class=left id=rotate-z readonly><br>'
