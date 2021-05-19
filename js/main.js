@@ -334,9 +334,9 @@ function repo_init(){
       },
       'title': 'MultiverseEditor.htm',
       'ui': '<input id=origin type=button value="Return to Origin"><input id=spawn type=button value="Return to Spawn"><br>'
-        + '<input id=translate-x-set type=button value=x><input class=mini id=translate-x readonly><input id=rotate-x-set type=button value=x°><input class=mini id=rotate-x readonly><br>'
-        + '<input id=translate-y-set type=button value=y><input class=mini id=translate-y readonly><input id=rotate-y-set type=button value=y°><input class=mini id=rotate-y readonly><br>'
-        + '<input id=translate-z-set type=button value=z><input class=mini id=translate-z readonly><input id=rotate-z-set type=button value=z°><input class=mini id=rotate-z readonly><br>'
+        + '<input id=translate-x-set type=button value=x><input class=left id=translate-x readonly><input id=rotate-x-set type=button value=x°><input class=left id=rotate-x readonly><br>'
+        + '<input id=translate-y-set type=button value=y><input class=left id=translate-y readonly><input id=rotate-y-set type=button value=y°><input class=left id=rotate-y readonly><br>'
+        + '<input id=translate-z-set type=button value=z><input class=left id=translate-z readonly><input id=rotate-z-set type=button value=z°><input class=left id=rotate-z readonly><br>'
         + '<span id=editor-tabs></span><div id=editor-tabcontent></div>'
         + '<div id=npc></div><div id=npc-talk></div><div id=npc-trade></div>',
     });
