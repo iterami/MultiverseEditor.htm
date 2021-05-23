@@ -69,9 +69,11 @@ function repo_escape(){
             webgl_properties['gravity-axis'] = core_storage_data['gravity-axis'];
             webgl_properties['gravity-max'] = core_storage_data['gravity-max'];
         }
-        webgl_properties['jump-movement'] = core_storage_data['jump-movement'];
-        webgl_properties['multiplier-jump'] = core_storage_data['multiplier-jump'];
-        webgl_properties['multiplier-speed'] = core_storage_data['multiplier-speed'];
+        if(core_storage_data['multiplier-state']){
+            webgl_properties['jump-movement'] = core_storage_data['jump-movement'];
+            webgl_properties['multiplier-jump'] = core_storage_data['multiplier-jump'];
+            webgl_properties['multiplier-speed'] = core_storage_data['multiplier-speed'];
+        }
 
         webgl_character_id = core_storage_data['character-id'];
         webgl_characters[webgl_character_id]['collide-range-horizontal'] = core_storage_data['character-collide-range-horizontal'];
@@ -237,7 +239,7 @@ function repo_init(){
         'character-id': '_me',
         'character-moves': true,
         'character-rotates': true,
-        'character-speed': 5,
+        'character-speed': 1,
         'clearcolor-blue': 0,
         'clearcolor-green': 0,
         'clearcolor-red': 0,
@@ -258,6 +260,7 @@ function repo_init(){
         'jump-movement': 0,
         'multiplier-jump': 1,
         'multiplier-speed': 1,
+        'multiplier-state': 0,
       },
       'storage-menu': '<table><tr><td>Ambient Lighting<br>'
           + '<select id=ambient-state><option value=0>Use Level Properties</option><option value=1>Override On</option></select><br>'
@@ -271,6 +274,7 @@ function repo_init(){
           + '<input class=mini id=clearcolor-green>Green<br>'
           + '<input class=mini id=clearcolor-red>Red'
         + '<td>Multipliers<br>'
+          + '<select id=multiplier-state><option value=0>Use Level Properties</option><option value=1>Override On</option></select><br>'
           + '<input class=mini id=multiplier-jump>Jump<br>'
           + '<input class=mini id=jump-movement>Jump Movement<br>'
           + '<input class=mini id=multiplier-speed>Speed'
