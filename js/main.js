@@ -10,7 +10,11 @@ function repo_escape(){
         if(properties_table.innerHTML.length === 0){
             let properties_html = '';
             for(const property in webgl_properties){
-                const property_label = typeof webgl_properties[property] !== 'object'
+                const property_type = typeof webgl_properties[property];
+                const valid_type = property_type !== 'boolean'
+                  && property_type !== 'object';
+
+                const property_label = valid_type
                   ? '<input id="button-' + property + '" type=button value=' + property + '>'
                   : property;
 
@@ -21,11 +25,12 @@ function repo_escape(){
             properties_table.innerHTML = properties_html;
 
             for(const property in webgl_properties){
-                if(typeof webgl_properties[property] === 'object'){
+                const property_button = document.getElementById('button-' + property);
+                if(!property_button){
                     continue;
                 }
 
-                document.getElementById('button-' + property).onclick = function(){
+                property_button.onclick = function(){
                     set_property(property);
                 }
             }
