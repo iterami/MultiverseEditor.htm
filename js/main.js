@@ -81,12 +81,13 @@ function repo_escape(){
         }
 
         webgl_character_id = core_storage_data['character-id'];
+        webgl_characters[webgl_character_id]['automove'] = core_storage_data['character-automoves'];
         webgl_characters[webgl_character_id]['collide-range-horizontal'] = core_storage_data['character-collide-range-horizontal'];
         webgl_characters[webgl_character_id]['collide-range-vertical'] = core_storage_data['character-collide-range-vertical'];
         webgl_characters[webgl_character_id]['collides'] = core_storage_data['character-collides'];
-        webgl_characters[webgl_character_id]['reticle'] = !core_storage_data['reticle']
+        webgl_characters[webgl_character_id]['reticle'] = !core_storage_data['character-reticle']
           ? false
-          : core_storage_data['reticle-color'];
+          : core_storage_data['character-reticle-color'];
         webgl_characters[webgl_character_id]['speed'] = core_storage_data['character-speed'];
 
     }else{
@@ -252,6 +253,7 @@ function repo_init(){
         'ambient-red': 1,
         'ambient-state': 0,
         'beforeunload-warning': true,
+        'character-automoves': false,
         'character-collide-range-horizontal': 2.5,
         'character-collide-range-vertical': 2.5,
         'character-collides': true,
@@ -280,16 +282,17 @@ function repo_init(){
         'multiplier-jump': 1,
         'multiplier-speed': 1,
         'multiplier-state': 0,
-        'reticle': true,
-        'reticle-color': 'fff',
+        'character-reticle': true,
+        'character-reticle-color': '#ffffff',
       },
       'storage-menu': '<table><tr><td>Camera/Character<br>'
           + '<input class=mini id=character-id>webgl_character_id<br>'
           + '<input class=mini id=character-speed>Speed<br>'
-          + '<input id=reticle type=checkbox>Reticle <input id=reticle-color type=color>Color<br>'
+          + '<input id=character-reticle type=checkbox>Reticle <input id=character-reticle-color type=color>Color<br>'
           + '<input id=character-collides type=checkbox>Collides, Range<br>'
           + '<input class=mini id=character-collide-range-horizontal>Horizontal<br>'
           + '<input class=mini id=character-collide-range-vertical>Vertical<br>'
+          + '<input id=character-automoves type=checkbox>Automove<br>'
           + '<input id=character-moves type=checkbox>Movement<br>'
           + '<input id=character-rotates type=checkbox>Rotation<br>'
           + '<input id=beforeunload-warning type=checkbox>beforeunload Warning'
