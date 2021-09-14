@@ -81,7 +81,9 @@ function repo_escape(){
         }
 
         webgl_character_id = core_storage_data['character-id'];
-        webgl_characters[webgl_character_id]['automove'] = core_storage_data['character-automoves'];
+        if(core_storage_data['character-automoves'] !== 2){
+            webgl_characters[webgl_character_id]['automove'] = Boolean(core_storage_data['character-automoves']);
+        }
         webgl_characters[webgl_character_id]['collide-range-horizontal'] = core_storage_data['character-collide-range-horizontal'];
         webgl_characters[webgl_character_id]['collide-range-vertical'] = core_storage_data['character-collide-range-vertical'];
         webgl_characters[webgl_character_id]['collides'] = core_storage_data['character-collides'];
@@ -253,7 +255,7 @@ function repo_init(){
         'ambient-red': 1,
         'ambient-state': 0,
         'beforeunload-warning': true,
-        'character-automoves': false,
+        'character-automoves': 2,
         'character-collide-range-horizontal': 2.5,
         'character-collide-range-vertical': 2.5,
         'character-collides': true,
@@ -292,7 +294,7 @@ function repo_init(){
           + '<input id=character-collides type=checkbox>Collides, Range<br>'
           + '<input class=mini id=character-collide-range-horizontal>Horizontal<br>'
           + '<input class=mini id=character-collide-range-vertical>Vertical<br>'
-          + '<input id=character-automoves type=checkbox>Automove<br>'
+          + '<select id=character-automoves><option value=1>on</option><option selected value=0>off</option><option value=2>any</option></select>Automove<br>'
           + '<input id=character-moves type=checkbox>Movement<br>'
           + '<input id=character-rotates type=checkbox>Rotation'
         + '<td>Multipliers<br>'
