@@ -84,6 +84,9 @@ function repo_escape(){
         webgl_characters[webgl_character_id]['collide-range-horizontal'] = core_storage_data['character-collide-range-horizontal'];
         webgl_characters[webgl_character_id]['collide-range-vertical'] = core_storage_data['character-collide-range-vertical'];
         webgl_characters[webgl_character_id]['collides'] = core_storage_data['character-collides'];
+        webgl_characters[webgl_character_id]['reticle'] = !core_storage_data['reticle']
+          ? false
+          : core_storage_data['reticle-color'];
         webgl_characters[webgl_character_id]['speed'] = core_storage_data['character-speed'];
 
     }else{
@@ -277,24 +280,34 @@ function repo_init(){
         'multiplier-jump': 1,
         'multiplier-speed': 1,
         'multiplier-state': 0,
+        'reticle': true,
+        'reticle-color': 'fff',
       },
-      'storage-menu': '<table><tr><td>Ambient Lighting<br>'
-          + '<select id=ambient-state><option value=0>Use Level Properties</option><option value=1>Override On</option></select><br>'
-          + '<input class=mini id=ambient-blue>Blue<br>'
-          + '<input class=mini id=ambient-green>Green<br>'
-          + '<input class=mini id=ambient-red>Red'
-        + '<td><input id=beforeunload-warning type=checkbox>beforeunload Warning'
-        + '<tr><td>Clear Color<br>'
-          + '<select id=clearcolor-state><option value=0>Use Level Properties</option><option value=1>Override On</option></select><br>'
-          + '<input class=mini id=clearcolor-blue>Blue<br>'
-          + '<input class=mini id=clearcolor-green>Green<br>'
-          + '<input class=mini id=clearcolor-red>Red'
+      'storage-menu': '<table><tr><td>Camera/Character<br>'
+          + '<input class=mini id=character-id>webgl_character_id<br>'
+          + '<input class=mini id=character-speed>Speed<br>'
+          + '<input id=reticle type=checkbox>Reticle <input id=reticle-color type=color>Color<br>'
+          + '<input id=character-collides type=checkbox>Collides, Range<br>'
+          + '<input class=mini id=character-collide-range-horizontal>Horizontal<br>'
+          + '<input class=mini id=character-collide-range-vertical>Vertical<br>'
+          + '<input id=character-moves type=checkbox>Movement<br>'
+          + '<input id=character-rotates type=checkbox>Rotation<br>'
+          + '<input id=beforeunload-warning type=checkbox>beforeunload Warning'
         + '<td>Multipliers<br>'
           + '<select id=multiplier-state><option value=0>Use Level Properties</option><option value=1>Override On</option></select><br>'
           + '<input class=mini id=multiplier-jump>Jump<br>'
           + '<input class=mini id=jump-movement>Jump Movement<br>'
-          + '<input class=mini id=multiplier-speed>Speed'
-        + '<tr><td>Directional Lighting<br>'
+          + '<input class=mini id=multiplier-speed>Speed<br>'
+          + '<input id=gravity-state type=checkbox>Gravity Override<br>'
+          + '<input class=mini id=gravity-acceleration>Acceleration<br>'
+          + '<select id=gravity-axis><option value=dx>x</option><option selected value=dy>y</option><option value=dz>z</option></select>Axis<br>'
+          + '<input class=mini id=gravity-max>Max'
+        + '<tr><td>Ambient Lighting<br>'
+          + '<select id=ambient-state><option value=0>Use Level Properties</option><option value=1>Override On</option></select><br>'
+          + '<input class=mini id=ambient-blue>Blue<br>'
+          + '<input class=mini id=ambient-green>Green<br>'
+          + '<input class=mini id=ambient-red>Red'
+        + '<td>Directional Lighting<br>'
           + '<select id=directional-state><option value=0>Use Level Properties</option><option value=1>Override On</option><option value=2>Override Off</option></select><br>'
           + '<input class=mini id=directional-blue>Blue<br>'
           + '<input class=mini id=directional-green>Green<br>'
@@ -302,22 +315,14 @@ function repo_init(){
           + '<input class=mini id=directional-vector-x>Vector X<br>'
           + '<input class=mini id=directional-vector-y>Vector Y<br>'
           + '<input class=mini id=directional-vector-z>Vector Z'
-        + '<td>Camera/Character<br>'
-          + '<input class=mini id=character-id>webgl_character_id<br>'
-          + '<input class=mini id=character-speed>Speed<br>'
-          + '<input id=character-collides type=checkbox>Collides, Range<br>'
-          + '<input class=mini id=character-collide-range-horizontal>Horizontal<br>'
-          + '<input class=mini id=character-collide-range-vertical>Vertical<br>'
-          + '<input id=character-moves type=checkbox>Movement<br>'
-          + '<input id=character-rotates type=checkbox>Rotation'
-        + '<tr><td>Fog<br>'
+        + '<tr><td>Clear Color<br>'
+          + '<select id=clearcolor-state><option value=0>Use Level Properties</option><option value=1>Override On</option></select><br>'
+          + '<input class=mini id=clearcolor-blue>Blue<br>'
+          + '<input class=mini id=clearcolor-green>Green<br>'
+          + '<input class=mini id=clearcolor-red>Red'
+        + '<td>Fog<br>'
           + '<select id=fog-state><option value=0>Use Level Properties</option><option value=1>Override On</option><option value=2>Override Off</option></select><br>'
-          + '<input class=mini id=fog-density>Density'
-        + '<td>'
-          + '<input id=gravity-state type=checkbox>Gravity Override<br>'
-          + '<input class=mini id=gravity-acceleration>Acceleration<br>'
-          + '<select id=gravity-axis><option value=dx>x</option><option selected value=dy>y</option><option value=dz>z</option></select>Axis<br>'
-          + '<input class=mini id=gravity-max>Max</table>',
+          + '<input class=mini id=fog-density>Density</table>',
       'tabs': {
         'export': {
           'content': '<input id=update-json type=button value="Update Level JSON"><br><textarea id=exported></textarea>',
