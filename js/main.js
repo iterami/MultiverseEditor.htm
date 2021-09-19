@@ -37,24 +37,33 @@ function repo_escape(){
         }
 
         if(core_storage_data['ambient-state'] !== 0){
-            webgl_properties['ambient-blue'] = core_storage_data['ambient-blue'];
-            webgl_properties['ambient-green'] = core_storage_data['ambient-green'];
-            webgl_properties['ambient-red'] = core_storage_data['ambient-red'];
+            const rgb = core_hex_to_rgb({
+              'hex': core_storage_data['ambient-color'],
+            });
+            webgl_properties['ambient-blue'] = Math.floor(rgb['blue'] / 255);
+            webgl_properties['ambient-green'] = Math.floor(rgb['green'] / 255);
+            webgl_properties['ambient-red'] = Math.floor(rgb['red'] / 255);
         }
         if(core_storage_data['clearcolor-state'] !== 0){
+            const rgb = core_hex_to_rgb({
+              'hex': core_storage_data['clearcolor'],
+            });
             webgl_clearcolor_set({
-              'blue': core_storage_data['clearcolor-blue'],
-              'green': core_storage_data['clearcolor-green'],
-              'red': core_storage_data['clearcolor-red'],
+              'blue': Math.floor(rgb['blue'] / 255),
+              'green': Math.floor(rgb['green'] / 255),
+              'red': Math.floor(rgb['red'] / 255),
             });
         }
         if(core_storage_data['directional-state'] !== 0){
             webgl_properties['directional-state'] = core_storage_data['directional-state'] === 1;
 
             if(webgl_properties['directional-state']){
-                webgl_properties['directional-blue'] = core_storage_data['directional-blue'];
-                webgl_properties['directional-green'] = core_storage_data['directional-green'];
-                webgl_properties['directional-red'] = core_storage_data['directional-red'];
+                const rgb = core_hex_to_rgb({
+                  'hex': core_storage_data['directional-color'],
+                });
+                webgl_properties['directional-blue'] = Math.floor(rgb['blue'] / 255);
+                webgl_properties['directional-green'] = Math.floor(rgb['green'] / 255);
+                webgl_properties['directional-red'] = Math.floor(rgb['red'] / 255);
                 webgl_properties['directional-vector'] = [
                   core_storage_data['directional-vector-x'],
                   core_storage_data['directional-vector-y'],
@@ -250,9 +259,7 @@ function repo_init(){
         },
       },
       'storage': {
-        'ambient-blue': 1,
-        'ambient-green': 1,
-        'ambient-red': 1,
+        'ambient-color': '#ffffff',
         'ambient-state': 0,
         'beforeunload-warning': true,
         'character-automoves': 2,
@@ -263,13 +270,9 @@ function repo_init(){
         'character-moves': true,
         'character-rotates': true,
         'character-speed': 1,
-        'clearcolor-blue': 0,
-        'clearcolor-green': 0,
-        'clearcolor-red': 0,
+        'clearcolor': '#000000',
         'clearcolor-state': 0,
-        'directional-blue': 1,
-        'directional-green': 1,
-        'directional-red': 1,
+        'directional-color': '#ffffff',
         'directional-state': 0,
         'directional-vector-x': 0,
         'directional-vector-y': 1,
@@ -309,22 +312,16 @@ function repo_init(){
           + '<input id=beforeunload-warning type=checkbox>beforeunload Warning'
         + '<tr><td>Ambient Lighting<br>'
           + '<select id=ambient-state><option value=0>Use Level Properties</option><option value=1>Override On</option></select><br>'
-          + '<input class=mini id=ambient-blue>Blue<br>'
-          + '<input class=mini id=ambient-green>Green<br>'
-          + '<input class=mini id=ambient-red>Red'
+          + '<input id=ambient-color type=color>Color'
         + '<td>Directional Lighting<br>'
           + '<select id=directional-state><option value=0>Use Level Properties</option><option value=1>Override On</option><option value=2>Override Off</option></select><br>'
-          + '<input class=mini id=directional-blue>Blue<br>'
-          + '<input class=mini id=directional-green>Green<br>'
-          + '<input class=mini id=directional-red>Red<br>'
+          + '<input id=directional-color type=color>Color<br>'
           + '<input class=mini id=directional-vector-x>Vector X<br>'
           + '<input class=mini id=directional-vector-y>Vector Y<br>'
           + '<input class=mini id=directional-vector-z>Vector Z'
         + '<tr><td>Clear Color<br>'
           + '<select id=clearcolor-state><option value=0>Use Level Properties</option><option value=1>Override On</option></select><br>'
-          + '<input class=mini id=clearcolor-blue>Blue<br>'
-          + '<input class=mini id=clearcolor-green>Green<br>'
-          + '<input class=mini id=clearcolor-red>Red'
+          + '<input id=clearcolor type=color>Color'
         + '<td>Fog<br>'
           + '<select id=fog-state><option value=0>Use Level Properties</option><option value=1>Override On</option><option value=2>Override Off</option></select><br>'
           + '<input class=mini id=fog-density>Density</table>',
