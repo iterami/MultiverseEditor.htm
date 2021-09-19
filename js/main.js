@@ -40,18 +40,18 @@ function repo_escape(){
             const rgb = core_hex_to_rgb({
               'hex': core_storage_data['ambient-color'],
             });
-            webgl_properties['ambient-blue'] = Math.floor(rgb['blue'] / 255);
-            webgl_properties['ambient-green'] = Math.floor(rgb['green'] / 255);
-            webgl_properties['ambient-red'] = Math.floor(rgb['red'] / 255);
+            webgl_properties['ambient-blue'] = rgb['blue'] / 255;
+            webgl_properties['ambient-green'] = rgb['green'] / 255;
+            webgl_properties['ambient-red'] = rgb['red'] / 255;
         }
         if(core_storage_data['clearcolor-state'] !== 0){
             const rgb = core_hex_to_rgb({
               'hex': core_storage_data['clearcolor'],
             });
             webgl_clearcolor_set({
-              'blue': Math.floor(rgb['blue'] / 255),
-              'green': Math.floor(rgb['green'] / 255),
-              'red': Math.floor(rgb['red'] / 255),
+              'blue': rgb['blue'] / 255,
+              'green': rgb['green'] / 255,
+              'red': rgb['red'] / 255,
             });
         }
         if(core_storage_data['directional-state'] !== 0){
@@ -61,9 +61,9 @@ function repo_escape(){
                 const rgb = core_hex_to_rgb({
                   'hex': core_storage_data['directional-color'],
                 });
-                webgl_properties['directional-blue'] = Math.floor(rgb['blue'] / 255);
-                webgl_properties['directional-green'] = Math.floor(rgb['green'] / 255);
-                webgl_properties['directional-red'] = Math.floor(rgb['red'] / 255);
+                webgl_properties['directional-blue'] = rgb['blue'] / 255;
+                webgl_properties['directional-green'] = rgb['green'] / 255;
+                webgl_properties['directional-red'] = rgb['red'] / 255;
                 webgl_properties['directional-vector'] = [
                   core_storage_data['directional-vector-x'],
                   core_storage_data['directional-vector-y'],
