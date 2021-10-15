@@ -314,7 +314,7 @@ function repo_init(){
           + '<select id=gravity-axis><option value=dx>x</option><option selected value=dy>y</option><option value=dz>z</option></select>Axis<br>'
           + '<input class=mini id=gravity-max>Max<br>'
           + '<input id=beforeunload-warning type=checkbox><label for=beforeunload-warning>beforeunload Warning</label><br>'
-          + '<input id=wireframe type=checkbox><label for=wireframe>wireframe</label>'
+          + '<input id=wireframe type=checkbox><label for=wireframe>Wireframe</label>'
         + '<tr><td><input id=ambient-color type=color>Ambient Lighting<br>'
           + '<select id=ambient-state><option value=0>Use Level Properties</option><option value=1>Override On</option></select>'
         + '<td><input id=directional-color type=color>Directional Lighting<br>'
