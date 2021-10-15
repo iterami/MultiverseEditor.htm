@@ -268,6 +268,8 @@ function repo_init(){
         'character-collides': true,
         'character-id': '_me',
         'character-moves': true,
+        'character-reticle': true,
+        'character-reticle-color': '#ffffff',
         'character-rotates': true,
         'character-speed': 1,
         'clearcolor': '#000000',
@@ -287,8 +289,6 @@ function repo_init(){
         'multiplier-jump': 1,
         'multiplier-speed': 1,
         'multiplier-state': 0,
-        'character-reticle': true,
-        'character-reticle-color': '#ffffff',
       },
       'storage-menu': '<table><tr><td>Camera/Character<br>'
           + '<input class=mini id=character-id>webgl_character_id<br>'
