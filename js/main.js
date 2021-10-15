@@ -71,6 +71,9 @@ function repo_escape(){
                 ];
             }
         }
+        webgl_properties['draw-type'] = core_storage_data['wireframe']
+          ? 'LINE_STRIP'
+          : false;
         if(core_storage_data['fog-state'] !== 0){
             webgl_properties['fog-state'] = core_storage_data['fog-state'] === 1;
 
@@ -289,6 +292,7 @@ function repo_init(){
         'multiplier-jump': 1,
         'multiplier-speed': 1,
         'multiplier-state': 0,
+        'wireframe': false,
       },
       'storage-menu': '<table><tr><td>Camera/Character<br>'
           + '<input class=mini id=character-id>webgl_character_id<br>'
@@ -309,7 +313,8 @@ function repo_init(){
           + '<input class=mini id=gravity-acceleration>Acceleration<br>'
           + '<select id=gravity-axis><option value=dx>x</option><option selected value=dy>y</option><option value=dz>z</option></select>Axis<br>'
           + '<input class=mini id=gravity-max>Max<br>'
-          + '<input id=beforeunload-warning type=checkbox>beforeunload Warning'
+          + '<input id=beforeunload-warning type=checkbox>beforeunload Warning<br>'
+          + '<input id=wireframe type=checkbox>wireframe'
         + '<tr><td><input id=ambient-color type=color>Ambient Lighting<br>'
           + '<select id=ambient-state><option value=0>Use Level Properties</option><option value=1>Override On</option></select>'
         + '<td><input id=directional-color type=color>Directional Lighting<br>'
