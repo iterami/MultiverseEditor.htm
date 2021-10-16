@@ -6,35 +6,14 @@ function repo_escape(){
     }
 
     if(!core_menu_open){
-        const properties_table = document.getElementById('properties');
-        if(properties_table.innerHTML.length === 0){
-            let properties_html = '';
-            for(const property in webgl_properties){
-                const property_type = typeof webgl_properties[property];
-                const valid_type = property_type !== 'boolean'
-                  && property_type !== 'object';
-
-                const property_label = valid_type
-                  ? '<input id="button-' + property + '" type=button value=' + property + '>'
-                  : property;
-
-                properties_html += '<tr>'
-                  + '<td>' + property_label
-                  + '<td id="property-' + property + '">';
-            }
-            properties_table.innerHTML = properties_html;
-
-            for(const property in webgl_properties){
-                const property_button = document.getElementById('button-' + property);
-                if(!property_button){
-                    continue;
-                }
-
-                property_button.onclick = function(){
-                    set_property(property);
-                }
-            }
-        }
+        property_table(
+          'character',
+          webgl_characters[webgl_character_id]
+        );
+        property_table(
+          'properties',
+          webgl_properties
+        );
 
         if(core_storage_data['ambient-state'] !== 0){
             const rgb = core_hex_to_rgb({
@@ -328,6 +307,11 @@ function repo_init(){
           + '<select id=fog-state><option value=0>Use Level Properties</option><option value=1>Override On</option><option value=2>Override Off</option></select><br>'
           + '<input class=mini id=fog-density>Density</table>',
       'tabs': {
+        'character': {
+          'content': '<table id=character></table>',
+          'group': 'editor',
+          'label': 'Character',
+        },
         'export': {
           'content': '<input id=update-json type=button value="Update Level JSON"><br><textarea id=exported></textarea>',
           'group': 'core-menu',
@@ -404,10 +388,17 @@ function repo_logic(){
         'webgl-count': entity_info['webgl']['count'],
       },
     });
+    for(const property in webgl_characters[webgl_character_id]){
+        core_ui_update({
+          'ids': {
+            ['character-' + property]: webgl_characters[webgl_character_id][property],
+          },
+        });
+    }
     for(const property in webgl_properties){
         core_ui_update({
           'ids': {
-            ['property-' + property]: webgl_properties[property],
+            ['properties-' + property]: webgl_properties[property],
           },
         });
     }

@@ -45,10 +45,45 @@ function character_set_axis(type, axis, button){
     button.blur();
 }
 
-function set_property(property){
+function property_table(id, properties){
+    const properties_table = document.getElementById(id);
+    if(properties_table.innerHTML.length === 0){
+        let properties_html = '';
+        for(const property in properties){
+            const property_type = typeof properties[property];
+            const valid_type = property_type !== 'boolean'
+              && property_type !== 'object';
+
+            const property_label = valid_type
+              ? '<input id="' + id + '-button-' + property + '" type=button value=' + property + '>'
+              : property;
+
+            properties_html += '<tr>'
+              + '<td>' + property_label
+              + '<td id="' + id + '-' + property + '">';
+        }
+        properties_table.innerHTML = properties_html;
+
+        for(const property in properties){
+            const property_button = document.getElementById(id + '-button-' + property);
+            if(!property_button){
+                continue;
+            }
+
+            property_button.onclick = function(){
+                set_property(
+                  properties,
+                  property
+                );
+            }
+        }
+    }
+}
+
+function set_property(properties, property){
     let result = globalThis.prompt(
       'Set ' + property + ' to:',
-      webgl_properties[property]
+      properties[property]
     );
 
     if(result === null
@@ -56,8 +91,8 @@ function set_property(property){
         return;
     }
 
-    webgl_properties[property] = core_type_convert({
-      'template': webgl_properties[property],
+    properties[property] = core_type_convert({
+      'template': properties[property],
       'value': result,
     });
 }
