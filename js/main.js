@@ -50,9 +50,9 @@ function repo_escape(){
                 ];
             }
         }
-        webgl_properties['draw-type'] = core_storage_data['wireframe']
-          ? 'LINE_STRIP'
-          : false;
+        webgl_properties['draw-type'] = core_storage_data['draw-type'] === 'false'
+          ? false
+          : core_storage_data['draw-type'];
         if(core_storage_data['fog-state'] !== 0){
             webgl_properties['fog-state'] = core_storage_data['fog-state'] === 1;
 
@@ -261,6 +261,7 @@ function repo_init(){
         'directional-vector-x': 0,
         'directional-vector-y': 1,
         'directional-vector-z': 0,
+        'draw-type': 'false',
         'fog-density': .0001,
         'fog-state': 0,
         'gravity-acceleration': -.05,
@@ -271,7 +272,6 @@ function repo_init(){
         'multiplier-jump': 1,
         'multiplier-speed': 1,
         'multiplier-state': 0,
-        'wireframe': false,
       },
       'storage-menu': '<table><tr><td>Camera/Character<br>'
           + '<input class=mini id=character-id>webgl_character_id<br>'
@@ -293,7 +293,7 @@ function repo_init(){
           + '<select id=gravity-axis><option value=dx>x</option><option selected value=dy>y</option><option value=dz>z</option></select>Axis<br>'
           + '<input class=mini id=gravity-max>Max<br>'
           + '<input id=beforeunload-warning type=checkbox><label for=beforeunload-warning>beforeunload Warning</label><br>'
-          + '<input id=wireframe type=checkbox><label for=wireframe>Wireframe</label>'
+          + '<select id=draw-type><option value=false>Use Entity Properties</option><option value=LINES>Lines</option><option value=LINE_LOOP>Line Loop</option><option value=LINE_STRIP>Line Strip</option><option value=POINTS>Points</option><option value=TRIANGLES>Triangles</option><option value=TRIANGLE_FAN>Triangle Fan</option><option value=TRIANGLE_STRIP>Triangle Strip</option></select>Draw Type'
         + '<tr><td><input id=ambient-color type=color>Ambient Lighting<br>'
           + '<select id=ambient-state><option value=0>Use Level Properties</option><option value=1>Override On</option></select>'
         + '<td><input id=directional-color type=color>Directional Lighting<br>'
