@@ -292,20 +292,19 @@ function repo_init(){
           + '<input class=mini id=gravity-acceleration>Acceleration<br>'
           + '<select id=gravity-axis><option value=dx>x</option><option selected value=dy>y</option><option value=dz>z</option></select>Axis<br>'
           + '<input class=mini id=gravity-max>Max<br>'
-          + '<input id=beforeunload-warning type=checkbox><label for=beforeunload-warning>beforeunload Warning</label><br>'
-          + '<select id=draw-type><option value=false>Use Entity Properties</option><option value=LINES>Lines</option><option value=LINE_LOOP>Line Loop</option><option value=LINE_STRIP>Line Strip</option><option value=POINTS>Points</option><option value=TRIANGLES>Triangles</option><option value=TRIANGLE_FAN>Triangle Fan</option><option value=TRIANGLE_STRIP>Triangle Strip</option></select>Draw Type'
+          + '<input id=beforeunload-warning type=checkbox><label for=beforeunload-warning>beforeunload Warning</label>'
         + '<tr><td><input id=ambient-color type=color>Ambient Lighting<br>'
-          + '<select id=ambient-state><option value=0>Use Level Properties</option><option value=1>Override On</option></select>'
-        + '<td><input id=directional-color type=color>Directional Lighting<br>'
+          + '<select id=ambient-state><option value=0>Use Level Properties</option><option value=1>Override On</option></select><br>'
+          + '<input id=directional-color type=color>Directional Lighting<br>'
           + '<select id=directional-state><option value=0>Use Level Properties</option><option value=1>Override On</option><option value=2>Override Off</option></select><br>'
           + '<input class=mini id=directional-vector-x>Vector X<br>'
           + '<input class=mini id=directional-vector-y>Vector Y<br>'
           + '<input class=mini id=directional-vector-z>Vector Z'
-        + '<tr><td><input id=clearcolor type=color>Clear Color<br>'
-          + '<select id=clearcolor-state><option value=0>Use Level Properties</option><option value=1>Override On</option></select>'
-        + '<td>Fog<br>'
-          + '<select id=fog-state><option value=0>Use Level Properties</option><option value=1>Override On</option><option value=2>Override Off</option></select><br>'
-          + '<input class=mini id=fog-density>Density</table>',
+        + '<td><select id=draw-type><option value=false>Use Entity Properties</option><option value=LINES>Lines</option><option value=LINE_LOOP>Line Loop</option><option value=LINE_STRIP>Line Strip</option><option value=POINTS>Points</option><option value=TRIANGLES>Triangles</option><option value=TRIANGLE_FAN>Triangle Fan</option><option value=TRIANGLE_STRIP>Triangle Strip</option></select>Draw Type<br>'
+          + '<input id=clearcolor type=color>Clear Color<br>'
+          + '<select id=clearcolor-state><option value=0>Use Level Properties</option><option value=1>Override On</option></select><br>'
+          + '<input class=mini id=fog-density>Fog<br>'
+          + '<select id=fog-state><option value=0>Use Level Properties</option><option value=1>Override On</option><option value=2>Override Off</option></select></table>',
       'tabs': {
         'character': {
           'content': '<table id=character></table>',
