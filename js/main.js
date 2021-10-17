@@ -7,7 +7,7 @@ function repo_escape(){
 
     if(!core_menu_open){
         property_table(
-          'character',
+          'character-properties',
           webgl_characters[webgl_character_id]
         );
         property_table(
@@ -306,8 +306,8 @@ function repo_init(){
           + '<input class=mini id=fog-density>Fog<br>'
           + '<select id=fog-state><option value=0>Use Level Properties</option><option value=1>Override On</option><option value=2>Override Off</option></select></table>',
       'tabs': {
-        'character': {
-          'content': '<table id=character></table>',
+        'character-properties': {
+          'content': '<table id=character-properties></table>',
           'group': 'editor',
           'label': 'Character',
         },
@@ -390,7 +390,7 @@ function repo_logic(){
     for(const property in webgl_characters[webgl_character_id]){
         core_ui_update({
           'ids': {
-            ['character-' + property]: webgl_characters[webgl_character_id][property],
+            ['character-properties-' + property]: webgl_characters[webgl_character_id][property],
           },
         });
     }
