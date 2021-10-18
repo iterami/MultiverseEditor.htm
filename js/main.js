@@ -70,6 +70,7 @@ function repo_escape(){
             webgl_properties['multiplier-jump'] = core_storage_data['multiplier-jump'];
             webgl_properties['multiplier-speed'] = core_storage_data['multiplier-speed'];
         }
+        webgl_properties['textures'] = core_storage_data['textures'];
 
         webgl_character_id = core_storage_data['character-id'];
         if(core_storage_data['character-automoves'] !== 2){
@@ -272,6 +273,7 @@ function repo_init(){
         'multiplier-jump': 1,
         'multiplier-speed': 1,
         'multiplier-state': 0,
+        'textures': true,
       },
       'storage-menu': '<table><tr><td>Camera/Character<br>'
           + '<input class=mini id=character-id>webgl_character_id<br>'
@@ -301,6 +303,7 @@ function repo_init(){
           + '<input class=mini id=directional-vector-y>Vector Y<br>'
           + '<input class=mini id=directional-vector-z>Vector Z'
         + '<td><select id=draw-type><option value=false>Use Entity Properties</option><option value=LINES>Lines</option><option value=LINE_LOOP>Line Loop</option><option value=LINE_STRIP>Line Strip</option><option value=POINTS>Points</option><option value=TRIANGLES>Triangles</option><option value=TRIANGLE_FAN>Triangle Fan</option><option value=TRIANGLE_STRIP>Triangle Strip</option></select>Draw Type<br>'
+          + '<input id=textures type=checkbox><label for=textures>Textures</label><br>'
           + '<input id=clearcolor type=color>Clear Color<br>'
           + '<select id=clearcolor-state><option value=0>Use Level Properties</option><option value=1>Override On</option></select><br>'
           + '<input class=mini id=fog-density>Fog<br>'
