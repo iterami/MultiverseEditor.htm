@@ -70,6 +70,7 @@ function repo_escape(){
             webgl_properties['multiplier-jump'] = core_storage_data['multiplier-jump'];
             webgl_properties['multiplier-speed'] = core_storage_data['multiplier-speed'];
         }
+        webgl_properties['paused'] = core_storage_data['paused'];
         webgl_properties['textures'] = core_storage_data['textures'];
 
         webgl_character_id = core_storage_data['character-id'];
@@ -277,6 +278,7 @@ function repo_init(){
         'multiplier-jump': 1,
         'multiplier-speed': 1,
         'multiplier-state': 0,
+        'paused': false,
         'textures': true,
       },
       'storage-menu': '<table><tr><td>Camera/Character<br>'
@@ -298,7 +300,7 @@ function repo_init(){
           + '<input class=mini id=gravity-acceleration>Acceleration<br>'
           + '<select id=gravity-axis><option value=dx>x</option><option selected value=dy>y</option><option value=dz>z</option></select>Axis<br>'
           + '<input class=mini id=gravity-max>Max<br>'
-          + '<input id=beforeunload-warning type=checkbox><label for=beforeunload-warning>beforeunload Warning</label>'
+          + '<input id=paused type=checkbox><label for=paused>Paused</label>'
         + '<tr><td><input id=ambient-color type=color>Ambient Lighting<br>'
           + '<select id=ambient-state><option value=0>Use Level Properties</option><option value=1>Override On</option></select><br>'
           + '<input id=directional-color type=color>Directional Lighting<br>'
@@ -311,7 +313,8 @@ function repo_init(){
           + '<input id=clearcolor type=color>Clear Color<br>'
           + '<select id=clearcolor-state><option value=0>Use Level Properties</option><option value=1>Override On</option></select><br>'
           + '<input class=mini id=fog-density>Fog<br>'
-          + '<select id=fog-state><option value=0>Use Level Properties</option><option value=1>Override On</option><option value=2>Override Off</option></select></table>',
+          + '<select id=fog-state><option value=0>Use Level Properties</option><option value=1>Override On</option><option value=2>Override Off</option></select><br>'
+          + '<input id=beforeunload-warning type=checkbox><label for=beforeunload-warning>beforeunload Warning</label></table>',
       'tabs': {
         'character-properties': {
           'content': '<table id=character-properties></table>',
