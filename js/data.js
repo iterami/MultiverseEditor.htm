@@ -51,30 +51,40 @@ function property_table(id, properties){
         let properties_html = '';
         for(const property in properties){
             const property_type = typeof properties[property];
-            const valid_type = property_type !== 'boolean'
-              && property_type !== 'object';
 
-            const property_label = valid_type
-              ? '<input id="' + id + '-button-' + property + '" type=button value=' + property + '>'
-              : property;
+            if(property_type === 'object'){
+                properties_html += '<tr><td>' + property + '<td id="' + id + '-' + property + '">';
 
-            properties_html += '<tr>'
-              + '<td>' + property_label
-              + '<td id="' + id + '-' + property + '">';
+            }else if(property_type === 'boolean'){
+                properties_html += '<tr><td>' + property
+                  + '<td><input id="' + id + '-' + property + '" type=checkbox>';
+
+            }else{
+                properties_html += '<tr><td>'
+                  + '<input id="' + id + '-button-' + property + '" type=button value=' + property + '>'
+                  + '<td id="' + id + '-' + property + '">';
+            }
         }
         properties_table.innerHTML = properties_html;
 
         for(const property in properties){
-            const property_button = document.getElementById(id + '-button-' + property);
-            if(!property_button){
-                continue;
-            }
+            const property_type = typeof properties[property];
 
-            property_button.onclick = function(){
-                set_property(
-                  properties,
-                  property
-                );
+            if(property_type === 'boolean'){
+                const checkbox = document.getElementById(id + '-' + property);
+                checkbox.checked = properties[property];
+                checkbox.onchange = function(){
+                    properties[property] = this.checked;
+                }
+
+            }else if(property_type !== 'object'){
+                const property_button = document.getElementById(id + '-button-' + property);
+                property_button.onclick = function(){
+                    set_property(
+                      properties,
+                      property
+                    );
+                }
             }
         }
     }
