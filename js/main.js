@@ -345,11 +345,12 @@ function repo_init(){
         'stats': {
           'content': '<table><tr><td>Characters<td id=character-count>'
             + '<tr><td>ID count<td id=id-count>'
+            + '<tr><td>webgl Entity Count<td id=webgl-entity-count>'
             + '<tr class=header><td>Group<td>Count'
             + '<tr><td>foreground<td id=foreground-count>'
             + '<tr><td>particles<td id=particles-count>'
             + '<tr><td>skybox<td id=skybox-count>'
-            + '<tr><td>webgl<td id=webgl-count></table>',
+            + '<tr><td>webgl<td id=webgl-group-count></table>',
           'group': 'editor',
           'label': 'Stats',
         },
@@ -415,7 +416,8 @@ function repo_logic(){
         'translate-x': webgl_characters[webgl_character_id]['translate-x'],
         'translate-y': webgl_characters[webgl_character_id]['translate-y'],
         'translate-z': webgl_characters[webgl_character_id]['translate-z'],
-        'webgl-count': entity_info['webgl']['count'],
+        'webgl-entity-count': entity_info['webgl']['count'],
+        'webgl-group-count': entity_groups['_length']['webgl'],
       },
     });
     for(const property in webgl_characters[webgl_character_id]){
