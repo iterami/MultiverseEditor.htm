@@ -50,9 +50,7 @@ function repo_escape(){
                 ];
             }
         }
-        webgl_properties['draw-type'] = core_storage_data['draw-type'] === 'false'
-          ? false
-          : core_storage_data['draw-type'];
+        webgl_properties['draw-type'] = core_storage_data['draw-type'];
         if(core_storage_data['fog-state'] !== 0){
             webgl_properties['fog-state'] = core_storage_data['fog-state'] === 1;
 
@@ -267,7 +265,7 @@ function repo_init(){
         'directional-vector-x': 0,
         'directional-vector-y': 1,
         'directional-vector-z': 0,
-        'draw-type': 'false',
+        'draw-type': '',
         'fog-density': .0001,
         'fog-state': 0,
         'gravity-acceleration': -.05,
@@ -308,7 +306,7 @@ function repo_init(){
           + '<input class=mini id=directional-vector-x>X<br>'
           + '<input class=mini id=directional-vector-y>Y<br>'
           + '<input class=mini id=directional-vector-z>Z'
-        + '<td><select id=draw-type><option value=false>Use Entity Properties</option><option value=LINES>Lines</option><option value=LINE_LOOP>Line Loop</option><option value=LINE_STRIP>Line Strip</option><option value=POINTS>Points</option><option value=TRIANGLES>Triangles</option><option value=TRIANGLE_FAN>Triangle Fan</option><option value=TRIANGLE_STRIP>Triangle Strip</option></select>Draw Type<br>'
+        + '<td><select id=draw-type><option value="">Use Entity Properties</option><option value=LINES>Lines</option><option value=LINE_LOOP>Line Loop</option><option value=LINE_STRIP>Line Strip</option><option value=POINTS>Points</option><option value=TRIANGLES>Triangles</option><option value=TRIANGLE_FAN>Triangle Fan</option><option value=TRIANGLE_STRIP>Triangle Strip</option></select>Draw Type<br>'
           + '<input id=textures type=checkbox><label for=textures>Textures</label><br>'
           + '<input id=clearcolor type=color>Clear Color<br>'
           + '<select id=clearcolor-state><option value=0>Use Level Properties</option><option value=1>Override On</option></select><br>'
