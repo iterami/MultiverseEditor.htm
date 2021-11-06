@@ -47,44 +47,46 @@ function character_set_axis(type, axis, button){
 
 function property_table(id, properties){
     const properties_table = document.getElementById(id);
-    if(properties_table.innerHTML.length === 0){
-        let properties_html = '';
-        for(const property in properties){
-            const property_type = typeof properties[property];
+    if(properties_table.innerHTML.length > 0){
+        return;
+    }
 
-            if(property_type === 'object'){
-                properties_html += '<tr><td>' + property + '<td id="' + id + '-' + property + '">';
+    let properties_html = '';
+    for(const property in properties){
+        const property_type = typeof properties[property];
 
-            }else if(property_type === 'boolean'){
-                properties_html += '<tr><td>' + property
-                  + '<td><input id="' + id + '-' + property + '" type=checkbox>';
+        if(property_type === 'object'){
+            properties_html += '<tr><td>' + property + '<td id="' + id + '-' + property + '">';
 
-            }else{
-                properties_html += '<tr><td>'
-                  + '<input id="' + id + '-button-' + property + '" type=button value=' + property + '>'
-                  + '<td id="' + id + '-' + property + '">';
-            }
+        }else if(property_type === 'boolean'){
+            properties_html += '<tr><td>' + property
+              + '<td><input id="' + id + '-' + property + '" type=checkbox>';
+
+        }else{
+            properties_html += '<tr><td>'
+              + '<input id="' + id + '-button-' + property + '" type=button value=' + property + '>'
+              + '<td id="' + id + '-' + property + '">';
         }
-        properties_table.innerHTML = properties_html;
+    }
+    properties_table.innerHTML = properties_html;
 
-        for(const property in properties){
-            const property_type = typeof properties[property];
+    for(const property in properties){
+        const property_type = typeof properties[property];
 
-            if(property_type === 'boolean'){
-                const checkbox = document.getElementById(id + '-' + property);
-                checkbox.checked = properties[property];
-                checkbox.onchange = function(){
-                    properties[property] = this.checked;
-                }
+        if(property_type === 'boolean'){
+            const checkbox = document.getElementById(id + '-' + property);
+            checkbox.checked = properties[property];
+            checkbox.onchange = function(){
+                properties[property] = this.checked;
+            }
 
-            }else if(property_type !== 'object'){
-                const property_button = document.getElementById(id + '-button-' + property);
-                property_button.onclick = function(){
-                    set_property(
-                      properties,
-                      property
-                    );
-                }
+        }else if(property_type !== 'object'){
+            const property_button = document.getElementById(id + '-button-' + property);
+            property_button.onclick = function(){
+                set_property(
+                  properties,
+                  property
+                );
             }
         }
     }
