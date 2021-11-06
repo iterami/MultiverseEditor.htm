@@ -47,7 +47,7 @@ function character_set_axis(type, axis, button){
 
 function property_table(id, properties){
     const properties_table = document.getElementById(id);
-    if(properties_table.innerHTML.length > 0){
+    if(properties_table.innerHTML.length){
         return;
     }
 
