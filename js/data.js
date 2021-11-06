@@ -96,8 +96,7 @@ function set_property(properties, property){
       properties[property]
     );
 
-    if(result === null
-      || result.length === 0){
+    if(result === null){
         return;
     }
 
