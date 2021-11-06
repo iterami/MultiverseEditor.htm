@@ -120,8 +120,7 @@ function repo_init(){
 
               character_set_axis(
                 'rotate',
-                'x',
-                this
+                'x'
               );
           },
         },
@@ -133,8 +132,7 @@ function repo_init(){
 
               character_set_axis(
                 'rotate',
-                'y',
-                this
+                'y'
               );
           },
         },
@@ -146,8 +144,7 @@ function repo_init(){
 
               character_set_axis(
                 'rotate',
-                'z',
-                this
+                'z'
               );
           },
         },
@@ -159,8 +156,7 @@ function repo_init(){
 
               character_set_axis(
                 'translate',
-                'x',
-                this
+                'x'
               );
           },
         },
@@ -172,8 +168,7 @@ function repo_init(){
 
               character_set_axis(
                 'translate',
-                'y',
-                this
+                'y'
               );
           },
         },
@@ -185,8 +180,7 @@ function repo_init(){
 
               character_set_axis(
                 'translate',
-                'z',
-                this
+                'z'
               );
           },
         },
