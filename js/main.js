@@ -115,6 +115,11 @@ function repo_init(){
         'prefab-generate': {
           'onclick': function(){
               core_call({
+                'args': {
+                  'translate-x': Number(document.getElementById('prefab-translate-x').value),
+                  'translate-y': Number(document.getElementById('prefab-translate-y').value),
+                  'translate-z': Number(document.getElementById('prefab-translate-z').value),
+                },
                 'todo': document.getElementById('prefabs').value,
               });
           },
@@ -353,22 +358,30 @@ function repo_init(){
           'group': 'editor',
           'label': 'Stats',
         },
+        'prefabs': {
+          'content': '<select id=prefabs>'
+              + '<option value=prefabs_webgl_cuboid>cuboid</option>'
+              + '<option value=prefabs_webgl_cuboid_tree>cuboid_tree</option>'
+              + '<option value=prefabs_webgl_ellipsoid>ellipsoid</option>'
+              + '<option value=prefabs_webgl_humanoid>humanoid</option>'
+              + '<option value=prefabs_webgl_lines_shrub>lines_shrub</option>'
+              + '<option value=prefabs_webgl_lines_tree>lines_tree</option>'
+              + '<option disabled value=prefabs_webgl_tiles>tiles</option>'
+              + '<option  value=prefabs_webgl_tree_2d>tree_2d</option>'
+            + '</select><input id=prefab-generate type=button value="Generate Prefab">'
+            + '<table><tr><td>translate-x<td><input id=prefab-translate-x value=0>'
+              + '<tr><td>translate-y<td><input id=prefab-translate-y value=0>'
+              + '<tr><td>translate-z<td><input id=prefab-translate-z value=0>'
+            + '</table>',
+          'group': 'editor',
+          'label': 'Prefabs',
+        },
       },
       'title': 'MultiverseEditor.htm',
       'ui': '<input id=origin type=button value=Origin><input id=spawn type=button value=Spawn><br>'
         + '<input id=translate-x-set type=button value=x><input class=left id=translate-x readonly><input id=rotate-x-set type=button value=x°><input class="left mini" id=rotate-x readonly><br>'
         + '<input id=translate-y-set type=button value=y><input class=left id=translate-y readonly><input id=rotate-y-set type=button value=y°><input class="left mini" id=rotate-y readonly><br>'
         + '<input id=translate-z-set type=button value=z><input class=left id=translate-z readonly><input id=rotate-z-set type=button value=z°><input class="left mini" id=rotate-z readonly><br>'
-        + '<select id=prefabs>'
-          + '<option value=prefabs_webgl_cuboid>cuboid</option>'
-          + '<option value=prefabs_webgl_cuboid_tree>cuboid_tree</option>'
-          + '<option value=prefabs_webgl_ellipsoid>ellipsoid</option>'
-          + '<option value=prefabs_webgl_humanoid>humanoid</option>'
-          + '<option value=prefabs_webgl_lines_shrub>lines_shrub</option>'
-          + '<option value=prefabs_webgl_lines_tree>lines_tree</option>'
-          + '<option disabled value=prefabs_webgl_tiles>tiles</option>'
-          + '<option value=prefabs_webgl_tree_2d>tree_2d</option>'
-        + '</select><input id=prefab-generate type=button value="Generate Prefab"><br>'
         + '<span id=editor-tabs></span><div id=editor-tabcontent></div>',
     });
     webgl_settings_init();
