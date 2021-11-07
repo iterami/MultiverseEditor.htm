@@ -114,8 +114,17 @@ function repo_init(){
         },
         'prefab-generate': {
           'onclick': function(){
+              const character_value = document.getElementById('prefab-character').value;
+              const prefix_value = document.getElementById('prefab-prefix').value;
+
               core_call({
                 'args': {
+                  'character': character_value.length
+                    ? character_value
+                    : webgl_character_id,
+                  'prefix': prefix_value.length
+                    ? prefix_value
+                    : entity_id_count,
                   'translate-x': Number(document.getElementById('prefab-translate-x').value),
                   'translate-y': Number(document.getElementById('prefab-translate-y').value),
                   'translate-z': Number(document.getElementById('prefab-translate-z').value),
@@ -369,9 +378,11 @@ function repo_init(){
               + '<option disabled value=prefabs_webgl_tiles>tiles</option>'
               + '<option  value=prefabs_webgl_tree_2d>tree_2d</option>'
             + '</select><input id=prefab-generate type=button value="Generate Prefab">'
-            + '<table><tr><td>translate-x<td><input id=prefab-translate-x value=0>'
-              + '<tr><td>translate-y<td><input id=prefab-translate-y value=0>'
-              + '<tr><td>translate-z<td><input id=prefab-translate-z value=0>'
+            + '<table><tr><td>character<td><input id=prefab-character>'
+              + '<tr><td>prefix<td><input id=prefab-prefix>'
+              + '<tr><td>translate-x<td><input class=mini id=prefab-translate-x value=0>'
+              + '<tr><td>translate-y<td><input class=mini id=prefab-translate-y value=0>'
+              + '<tr><td>translate-z<td><input class=mini id=prefab-translate-z value=0>'
             + '</table>',
           'group': 'editor',
           'label': 'Prefabs',
