@@ -101,18 +101,20 @@ function repo_init(){
       'events': {
         'entity-generate': {
           'onclick': function(){
+              const properties = core_args({
+                'args': JSON.parse(document.getElementById('generate-properties').value),
+                'defaults': {
+                  'vertices': [],
+                },
+              });
+
               if(!webgl_characters[webgl_character_id]){
                   return;
               }
 
               webgl_entity_create({
                 'entities': [
-                  {
-                    'translate-x': Number(document.getElementById('generate-translate-x').value),
-                    'translate-y': Number(document.getElementById('generate-translate-y').value),
-                    'translate-z': Number(document.getElementById('generate-translate-z').value),
-                    'vertices': [],
-                  },
+                  properties,
                 ],
               });
           },
@@ -132,20 +134,20 @@ function repo_init(){
         },
         'prefab-generate': {
           'onclick': function(){
-              const character_value = document.getElementById('generate-character').value || webgl_character_id;
-              if(!webgl_characters[character_value]){
+              const properties = core_args({
+                'args': JSON.parse(document.getElementById('generate-properties').value),
+                'defaults': {
+                  'character': webgl_character_id,
+                  'prefix': entity_id_count,
+                },
+              });
+
+              if(!webgl_characters[properties['character']]){
                   return;
               }
-              const prefix_value = document.getElementById('generate-prefix').value || entity_id_count;
 
               core_call({
-                'args': {
-                  'character': character_value,
-                  'prefix': prefix_value,
-                  'translate-x': Number(document.getElementById('generate-translate-x').value),
-                  'translate-y': Number(document.getElementById('generate-translate-y').value),
-                  'translate-z': Number(document.getElementById('generate-translate-z').value),
-                },
+                'args': properties,
                 'todo': document.getElementById('prefabs').value,
               });
           },
@@ -394,13 +396,8 @@ function repo_init(){
               + '<option value=prefabs_webgl_lines_tree>lines_tree</option>'
               + '<option disabled value=prefabs_webgl_tiles>tiles</option>'
               + '<option  value=prefabs_webgl_tree_2d>tree_2d</option>'
-            + '</select><input id=prefab-generate type=button value="Generate Prefab">'
-            + '<table><tr><td>character<td><input id=generate-character>'
-              + '<tr><td>prefix<td><input id=generate-prefix>'
-              + '<tr><td>translate-x<td><input class=mini id=generate-translate-x value=0>'
-              + '<tr><td>translate-y<td><input class=mini id=generate-translate-y value=0>'
-              + '<tr><td>translate-z<td><input class=mini id=generate-translate-z value=0>'
-            + '</table>',
+            + '</select><input id=prefab-generate type=button value="Generate Prefab"><br>'
+            + '<textarea id=generate-properties>{\n}</textarea>',
           'group': 'editor',
           'label': 'Generate',
         },
