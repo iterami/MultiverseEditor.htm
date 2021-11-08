@@ -114,17 +114,16 @@ function repo_init(){
         },
         'prefab-generate': {
           'onclick': function(){
-              const character_value = document.getElementById('prefab-character').value;
-              const prefix_value = document.getElementById('prefab-prefix').value;
+              const character_value = document.getElementById('prefab-character').value || webgl_character_id;
+              if(!webgl_characters[character_value]){
+                  return;
+              }
+              const prefix_value = document.getElementById('prefab-prefix').value || entity_id_count;
 
               core_call({
                 'args': {
-                  'character': character_value.length
-                    ? character_value
-                    : webgl_character_id,
-                  'prefix': prefix_value.length
-                    ? prefix_value
-                    : entity_id_count,
+                  'character': character_value,
+                  'prefix': prefix_value,
                   'translate-x': Number(document.getElementById('prefab-translate-x').value),
                   'translate-y': Number(document.getElementById('prefab-translate-y').value),
                   'translate-z': Number(document.getElementById('prefab-translate-z').value),
