@@ -108,6 +108,9 @@ function repo_init(){
               webgl_entity_create({
                 'entities': [
                   {
+                    'translate-x': Number(document.getElementById('generate-translate-x').value),
+                    'translate-y': Number(document.getElementById('generate-translate-y').value),
+                    'translate-z': Number(document.getElementById('generate-translate-z').value),
                     'vertices': [],
                   },
                 ],
@@ -129,19 +132,19 @@ function repo_init(){
         },
         'prefab-generate': {
           'onclick': function(){
-              const character_value = document.getElementById('prefab-character').value || webgl_character_id;
+              const character_value = document.getElementById('generate-character').value || webgl_character_id;
               if(!webgl_characters[character_value]){
                   return;
               }
-              const prefix_value = document.getElementById('prefab-prefix').value || entity_id_count;
+              const prefix_value = document.getElementById('generate-prefix').value || entity_id_count;
 
               core_call({
                 'args': {
                   'character': character_value,
                   'prefix': prefix_value,
-                  'translate-x': Number(document.getElementById('prefab-translate-x').value),
-                  'translate-y': Number(document.getElementById('prefab-translate-y').value),
-                  'translate-z': Number(document.getElementById('prefab-translate-z').value),
+                  'translate-x': Number(document.getElementById('generate-translate-x').value),
+                  'translate-y': Number(document.getElementById('generate-translate-y').value),
+                  'translate-z': Number(document.getElementById('generate-translate-z').value),
                 },
                 'todo': document.getElementById('prefabs').value,
               });
@@ -381,13 +384,8 @@ function repo_init(){
           'group': 'editor',
           'label': 'Stats',
         },
-        'entities': {
-          'content': '<input id=entity-generate type=button value="Generate Entity">',
-          'group': 'editor',
-          'label': 'Entities',
-        },
-        'prefabs': {
-          'content': '<select id=prefabs>'
+        'generate': {
+          'content': '<input id=entity-generate type=button value="Generate Entity"><br><select id=prefabs>'
               + '<option value=prefabs_webgl_cuboid>cuboid</option>'
               + '<option value=prefabs_webgl_cuboid_tree>cuboid_tree</option>'
               + '<option value=prefabs_webgl_ellipsoid>ellipsoid</option>'
@@ -397,14 +395,14 @@ function repo_init(){
               + '<option disabled value=prefabs_webgl_tiles>tiles</option>'
               + '<option  value=prefabs_webgl_tree_2d>tree_2d</option>'
             + '</select><input id=prefab-generate type=button value="Generate Prefab">'
-            + '<table><tr><td>character<td><input id=prefab-character>'
-              + '<tr><td>prefix<td><input id=prefab-prefix>'
-              + '<tr><td>translate-x<td><input class=mini id=prefab-translate-x value=0>'
-              + '<tr><td>translate-y<td><input class=mini id=prefab-translate-y value=0>'
-              + '<tr><td>translate-z<td><input class=mini id=prefab-translate-z value=0>'
+            + '<table><tr><td>character<td><input id=generate-character>'
+              + '<tr><td>prefix<td><input id=generate-prefix>'
+              + '<tr><td>translate-x<td><input class=mini id=generate-translate-x value=0>'
+              + '<tr><td>translate-y<td><input class=mini id=generate-translate-y value=0>'
+              + '<tr><td>translate-z<td><input class=mini id=generate-translate-z value=0>'
             + '</table>',
           'group': 'editor',
-          'label': 'Prefabs',
+          'label': 'Generate',
         },
       },
       'title': 'MultiverseEditor.htm',
