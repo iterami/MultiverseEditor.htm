@@ -99,6 +99,21 @@ function repo_init(){
         },
       },
       'events': {
+        'entity-generate': {
+          'onclick': function(){
+              if(!webgl_characters[webgl_character_id]){
+                  return;
+              }
+
+              webgl_entity_create({
+                'entities': [
+                  {
+                    'vertices': [],
+                  },
+                ],
+              });
+          },
+        },
         'level-load': {
           'onclick': function(){
               webgl_level_load({
@@ -365,6 +380,11 @@ function repo_init(){
             + '<tr><td>webgl<td id=webgl-group-count></table>',
           'group': 'editor',
           'label': 'Stats',
+        },
+        'entities': {
+          'content': '<input id=entity-generate type=button value="Generate Entity">',
+          'group': 'editor',
+          'label': 'Entities',
         },
         'prefabs': {
           'content': '<select id=prefabs>'
