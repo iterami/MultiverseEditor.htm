@@ -409,7 +409,7 @@ function repo_init(){
         + '<input id=translate-z-set type=button value=z><input class=left id=translate-z readonly><input id=rotate-z-set type=button value=z°><input class="left mini" id=rotate-z readonly><br>'
         + '<span id=editor-tabs></span><div id=editor-tabcontent></div>',
     });
-    webgl_settings_init();
+    webgl_storage_init();
 
     if('multiverselevels' in globalThis){
         let level_select = '';
