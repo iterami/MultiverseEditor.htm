@@ -361,7 +361,7 @@ function repo_init(){
         'load': {
           'content': '<table><tr>'
               + '<td><input id=level-json type=file>'
-              + '<td><input id=level-load type=button value="Load Level From File">'
+              + '<td><input id=level-load type=button value="Load Level from File">'
             + '<tr>'
               + '<td><select id=level-select></select>'
               + '<td><input id=prebuilt-load type=button value="Load Prebuilt Level"></table>',
@@ -397,7 +397,7 @@ function repo_init(){
               + '<option value=prefabs_webgl_lines_tree>prefabs_webgl_lines_tree</option>'
               + '<option disabled value=prefabs_webgl_tiles>prefabs_webgl_tiles</option>'
               + '<option  value=prefabs_webgl_tree_2d>prefabs_webgl_tree_2d</option>'
-            + '</select><input id=prefab-generate type=button value="Generate Prefab"><br>'
+            + '</select><input id=prefab-generate type=button value=Generate><br>'
             + '<textarea id=generate-properties>{\n}</textarea>',
           'group': 'editor',
           'label': 'Generate',
