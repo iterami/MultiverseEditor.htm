@@ -50,7 +50,7 @@ function repo_escape(){
                 ];
             }
         }
-        webgl_properties['draw-type'] = core_storage_data['draw-type'];
+        webgl_properties['draw-mode'] = core_storage_data['draw-mode'];
         if(core_storage_data['fog-state'] !== 0){
             webgl_properties['fog-state'] = core_storage_data['fog-state'] === 1;
 
@@ -299,7 +299,7 @@ function repo_init(){
         'directional-vector-x': 0,
         'directional-vector-y': 1,
         'directional-vector-z': 0,
-        'draw-type': '',
+        'draw-mode': '',
         'fog-density': .0001,
         'fog-state': 0,
         'gravity-acceleration': -.05,
@@ -340,7 +340,7 @@ function repo_init(){
           + '<input class=mini id=directional-vector-x step=any type=number>X<br>'
           + '<input class=mini id=directional-vector-y step=any type=number>Y<br>'
           + '<input class=mini id=directional-vector-z step=any type=number>Z'
-        + '<td><select id=draw-type><option value="">Use Entity Properties</option><option value=LINES>Lines</option><option value=LINE_LOOP>Line Loop</option><option value=LINE_STRIP>Line Strip</option><option value=POINTS>Points</option><option value=TRIANGLES>Triangles</option><option value=TRIANGLE_FAN>Triangle Fan</option><option value=TRIANGLE_STRIP>Triangle Strip</option></select>Draw Type<br>'
+        + '<td><select id=draw-mode><option value="">Use Entity Properties</option><option value=LINES>Lines</option><option value=LINE_LOOP>Line Loop</option><option value=LINE_STRIP>Line Strip</option><option value=POINTS>Points</option><option value=TRIANGLES>Triangles</option><option value=TRIANGLE_FAN>Triangle Fan</option><option value=TRIANGLE_STRIP>Triangle Strip</option></select>Draw Mode<br>'
           + '<input id=textures type=checkbox><label for=textures>Textures</label><br>'
           + '<input id=clearcolor type=color>Clear Color<br>'
           + '<select id=clearcolor-state><option value=0>Use Level Properties</option><option value=1>Override On</option></select><br>'
@@ -388,14 +388,15 @@ function repo_init(){
         },
         'generate': {
           'content': '<input id=entity-generate type=button value="Generate Entity"><br><select id=prefabs>'
-              + '<option value=prefabs_webgl_cuboid>cuboid</option>'
-              + '<option value=prefabs_webgl_cuboid_tree>cuboid_tree</option>'
-              + '<option value=prefabs_webgl_ellipsoid>ellipsoid</option>'
-              + '<option value=prefabs_webgl_humanoid>humanoid</option>'
-              + '<option value=prefabs_webgl_lines_shrub>lines_shrub</option>'
-              + '<option value=prefabs_webgl_lines_tree>lines_tree</option>'
-              + '<option disabled value=prefabs_webgl_tiles>tiles</option>'
-              + '<option  value=prefabs_webgl_tree_2d>tree_2d</option>'
+              + '<option value=webgl_primitive_cuboid>webgl_primitive_cuboid</option>'
+              + '<option value=webgl_primitive_ellipsoid>webgl_primitive_ellipsoid</option>'
+              + '<option value=webgl_primitive_frustum>webgl_primitive_frustum</option>'
+              + '<option value=prefabs_webgl_cuboid_tree>prefabs_webgl_cuboid_tree</option>'
+              + '<option value=prefabs_webgl_humanoid>prefabs_webgl_humanoid</option>'
+              + '<option value=prefabs_webgl_lines_shrub>prefabs_webgl_lines_shrub</option>'
+              + '<option value=prefabs_webgl_lines_tree>prefabs_webgl_lines_tree</option>'
+              + '<option disabled value=prefabs_webgl_tiles>prefabs_webgl_tiles</option>'
+              + '<option  value=prefabs_webgl_tree_2d>prefabs_webgl_tree_2d</option>'
             + '</select><input id=prefab-generate type=button value="Generate Prefab"><br>'
             + '<textarea id=generate-properties>{\n}</textarea>',
           'group': 'editor',
