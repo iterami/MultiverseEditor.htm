@@ -46,9 +46,6 @@ function character_set_axis(type, axis){
 
 function property_table(id, properties){
     const properties_table = document.getElementById(id);
-    if(properties_table.innerHTML.length){
-        return;
-    }
 
     let properties_html = '';
     for(const property in properties){
