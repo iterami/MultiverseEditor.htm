@@ -50,28 +50,27 @@ function character_set_axis(type, axis){
 
 function property_table(id, properties){
     const properties_table = document.getElementById(id);
-    if(properties_table.innerHTML.length){
-        return;
-    }
 
-    let properties_html = '';
-    for(const property in properties){
-        const property_type = typeof properties[property];
+    if(!properties_table.innerHTML.length){
+        let properties_html = '';
+        for(const property in properties){
+            const property_type = typeof properties[property];
 
-        if(property_type === 'object'){
-            properties_html += '<tr><td>' + property + '<td id="' + id + '-' + property + '">';
+            if(property_type === 'object'){
+                properties_html += '<tr><td>' + property + '<td id="' + id + '-' + property + '">';
 
-        }else if(property_type === 'boolean'){
-            properties_html += '<tr><td>' + property
-              + '<td><input id="' + id + '-' + property + '" type=checkbox>';
+            }else if(property_type === 'boolean'){
+                properties_html += '<tr><td>' + property
+                  + '<td><input id="' + id + '-' + property + '" type=checkbox>';
 
-        }else{
-            properties_html += '<tr><td>'
-              + '<input id="' + id + '-button-' + property + '" type=button value=' + property + '>'
-              + '<td id="' + id + '-' + property + '">';
+            }else{
+                properties_html += '<tr><td>'
+                  + '<input id="' + id + '-button-' + property + '" type=button value=' + property + '>'
+                  + '<td id="' + id + '-' + property + '">';
+            }
         }
+        properties_table.innerHTML = properties_html;
     }
-    properties_table.innerHTML = properties_html;
 
     for(const property in properties){
         const property_type = typeof properties[property];
