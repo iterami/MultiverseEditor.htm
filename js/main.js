@@ -121,6 +121,9 @@ function repo_init(){
         },
         'level-load': {
           'onclick': function(){
+              core_tab_reset_group({
+                'id': 'editor',
+              });
               webgl_level_load({
                 'character': -1,
                 'json': document.getElementById('level-json').files[0] || false,

@@ -1,6 +1,10 @@
 'use strict';
 
 function ajax_level(level){
+    core_tab_reset_group({
+      'id': 'editor',
+    });
+
     if(webgl_levelcache['id'] === level){
         webgl_level_load({
           'character': -1,
