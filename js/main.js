@@ -83,6 +83,8 @@ function repo_escape(){
           : core_storage_data['character-reticle-color'];
         webgl_characters[webgl_character_id]['speed'] = core_storage_data['character-speed'];
 
+        webgl_uniform_update();
+
     }else{
         document.getElementById('tabcontent-properties').style.display = 'none';
     }
