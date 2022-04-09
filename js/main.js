@@ -6,15 +6,6 @@ function repo_escape(){
     }
 
     if(!core_menu_open){
-        property_table(
-          'character-properties',
-          webgl_characters[webgl_character_id]
-        );
-        property_table(
-          'properties',
-          webgl_properties
-        );
-
         if(core_storage_data['ambient-state'] !== 0){
             const rgb = core_hex_to_rgb({
               'hex': core_storage_data['ambient-color'],
@@ -428,6 +419,32 @@ function repo_init(){
     const level_arg = globalThis.location.search.substring(1);
     if(level_arg.length){
         ajax_level(level_arg);
+    }
+}
+
+function repo_level_load(){
+    property_table(
+      'character-properties',
+      webgl_characters[webgl_character_id]
+    );
+    property_table(
+      'properties',
+      webgl_properties
+    );
+
+    for(const property in webgl_characters[webgl_character_id]){
+        core_ui_update({
+          'ids': {
+            ['character-properties-' + property + '-default']: webgl_characters[webgl_character_id][property],
+          },
+        });
+    }
+    for(const property in webgl_properties){
+        core_ui_update({
+          'ids': {
+            ['properties-' + property + '-default']: webgl_properties[property],
+          },
+        });
     }
 }
 

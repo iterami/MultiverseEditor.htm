@@ -69,7 +69,7 @@ function property_table(id, properties){
                   + '<td id="' + id + '-' + property + '">';
             }
 
-            properties_html += '<td>' + properties[property];
+            properties_html += '<td id="' + id + '-' + property + '-default">';
         }
         properties_table.innerHTML = properties_html;
     }
