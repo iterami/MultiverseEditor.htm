@@ -52,7 +52,7 @@ function property_table(id, properties){
     const properties_table = document.getElementById(id);
 
     if(!properties_table.innerHTML.length){
-        let properties_html = '';
+        let properties_html = '<tr class=header><td>Property<td>Current Value<td>Default Value';
         for(const property in properties){
             const property_type = typeof properties[property];
 
@@ -68,6 +68,8 @@ function property_table(id, properties){
                   + '<input id="' + id + '-button-' + property + '" type=button value=' + property + '>'
                   + '<td id="' + id + '-' + property + '">';
             }
+
+            properties_html += '<td>' + properties[property];
         }
         properties_table.innerHTML = properties_html;
     }
