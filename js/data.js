@@ -80,6 +80,7 @@ function property_table(id, properties){
             checkbox.checked = properties[property];
             checkbox.onchange = function(){
                 properties[property] = this.checked;
+                webgl_uniform_update();
             }
 
         }else if(property_type !== 'object'){
@@ -89,6 +90,7 @@ function property_table(id, properties){
                   properties,
                   property
                 );
+                webgl_uniform_update();
             }
         }
     }
