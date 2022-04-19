@@ -306,7 +306,7 @@ function repo_init(){
         'multiplier-jump': 1,
         'multiplier-speed': 1,
         'multiplier-state': 0,
-        'paused': false,
+        'paused': true,
         'textures': true,
       },
       'storage-menu': '<table><tr><td>Camera/Character<br>'
