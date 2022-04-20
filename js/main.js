@@ -366,6 +366,12 @@ function repo_init(){
           'group': 'editor',
           'label': 'Characters',
         },
+        'entity-properties': {
+          'content': '<select id=entity-select></select>'
+              + '<table id=entity-properties></table>',
+          'group': 'editor',
+          'label': 'Entities',
+        },
         'export': {
           'content': '<input id=update-json type=button value="Update Level JSON"><br><textarea id=exported></textarea>',
           'group': 'core-menu',
@@ -425,22 +431,34 @@ function repo_init(){
 }
 
 function repo_level_load(){
+    property_table(
+      'properties',
+      webgl_properties,
+      'webgl'
+    );
+
     let character_options = '';
     for(const character in webgl_characters){
         character_options += '<option value="' + character + '">' + character + '</option>';
     }
     const characters_select = document.getElementById('characters-select');
     characters_select.innerHTML = character_options;
-
     property_table(
       'character-properties',
       webgl_characters[characters_select.value],
-      true
+      'character'
     );
+
+    let entity_options = '';
+    for(const entity in entity_entities){
+        entity_options += '<option value="' + entity + '">' + entity + '</option>';
+    }
+    const entity_select = document.getElementById('entity-select');
+    entity_select.innerHTML = entity_options;
     property_table(
-      'properties',
-      webgl_properties,
-      false
+      'entity-properties',
+      entity_entities[entity_select.value],
+      'entity'
     );
 }
 
@@ -486,6 +504,13 @@ function repo_logic(){
       },
     });
 
+    for(const property in webgl_properties){
+        core_ui_update({
+          'ids': {
+            ['properties-' + property]: webgl_properties[property],
+          },
+        });
+    }
     const selected_character = document.getElementById('characters-select').value;
     for(const property in webgl_characters[selected_character]){
         core_ui_update({
@@ -494,10 +519,11 @@ function repo_logic(){
           },
         });
     }
-    for(const property in webgl_properties){
+    const selected_entity = document.getElementById('entity-select').value;
+    for(const property in entity_entities[selected_entity]){
         core_ui_update({
           'ids': {
-            ['properties-' + property]: webgl_properties[property],
+            ['entity-properties-' + property]: entity_entities[selected_entity][property],
           },
         });
     }

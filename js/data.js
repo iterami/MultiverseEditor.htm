@@ -48,7 +48,7 @@ function character_set_axis(type, axis){
     element.value = result;
 }
 
-function property_table(id, properties, character){
+function property_table(id, properties, type){
     const properties_table = document.getElementById(id);
 
     if(!properties_table.innerHTML.length){
@@ -78,9 +78,15 @@ function property_table(id, properties, character){
         if(property_type === 'boolean'){
             const checkbox = document.getElementById(id + '-' + property);
             checkbox.checked = properties[property];
-            if(character){
+            if(type === 'character'){
                 checkbox.onchange = function(){
                     webgl_characters[document.getElementById('characters-select').value][property] = this.checked;
+                    webgl_uniform_update();
+                }
+
+            }else if(type === 'entity'){
+                checkbox.onchange = function(){
+                    entity_entities[document.getElementById('entity-select').value][property] = this.checked;
                     webgl_uniform_update();
                 }
 
@@ -93,13 +99,24 @@ function property_table(id, properties, character){
 
         }else if(property_type !== 'object'){
             const property_button = document.getElementById(id + '-button-' + property);
-            if(character){
+            if(type === 'character'){
                 property_button.onclick = function(){
                     const selected_character = document.getElementById('characters-select').value;
                     set_property(
                       webgl_characters[selected_character],
                       property,
                       selected_character
+                    );
+                    webgl_uniform_update();
+                }
+
+            }else if(type === 'entity'){
+                property_button.onclick = function(){
+                    const selected_entity = document.getElementById('entity-select').value;
+                    set_property(
+                      entity_entities[selected_entity],
+                      property,
+                      selected_entity
                     );
                     webgl_uniform_update();
                 }
