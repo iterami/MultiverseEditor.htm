@@ -144,7 +144,7 @@ function repo_init(){
 
               core_call({
                 'args': properties,
-                'todo': document.getElementById('prefabs').value,
+                'todo': document.getElementById('prefabs-select').value,
               });
           },
         },
@@ -345,12 +345,13 @@ function repo_init(){
           + '<input id=beforeunload-warning type=checkbox><label for=beforeunload-warning>beforeunload Warning</label></table>',
       'tabs': {
         'character-properties': {
-          'content': '<table id=character-properties></table>',
+          'content': '<select id=characters-select></select>'
+              + '<table id=character-properties></table>',
           'group': 'editor',
           'label': 'Characters',
         },
         'entities': {
-          'content': '<input id=entity-generate type=button value="Generate Entity"><br><select id=prefabs>'
+          'content': '<input id=entity-generate type=button value="Generate Entity"><br><select id=prefabs-select>'
               + '<option value=webgl_primitive_cuboid>webgl_primitive_cuboid</option>'
               + '<option value=webgl_primitive_ellipsoid>webgl_primitive_ellipsoid</option>'
               + '<option value=webgl_primitive_frustum>webgl_primitive_frustum</option>'
@@ -424,29 +425,23 @@ function repo_init(){
 }
 
 function repo_level_load(){
+    let character_options = '';
+    for(const character in webgl_characters){
+        character_options += '<option value="' + character + '">' + character + '</option>';
+    }
+    const characters_select = document.getElementById('characters-select');
+    characters_select.innerHTML = character_options;
+
     property_table(
       'character-properties',
-      webgl_characters[webgl_character_id]
+      webgl_characters[characters_select.value],
+      true
     );
     property_table(
       'properties',
-      webgl_properties
+      webgl_properties,
+      false
     );
-
-    for(const property in webgl_characters[webgl_character_id]){
-        core_ui_update({
-          'ids': {
-            ['character-properties-' + property + '-default']: webgl_characters[webgl_character_id][property],
-          },
-        });
-    }
-    for(const property in webgl_properties){
-        core_ui_update({
-          'ids': {
-            ['properties-' + property + '-default']: webgl_properties[property],
-          },
-        });
-    }
 }
 
 function repo_logic(){
@@ -490,10 +485,12 @@ function repo_logic(){
         'webgl-group-count': entity_groups['_length']['webgl'],
       },
     });
-    for(const property in webgl_characters[webgl_character_id]){
+
+    const selected_character = document.getElementById('characters-select').value;
+    for(const property in webgl_characters[selected_character]){
         core_ui_update({
           'ids': {
-            ['character-properties-' + property]: webgl_characters[webgl_character_id][property],
+            ['character-properties-' + property]: webgl_characters[selected_character][property],
           },
         });
     }

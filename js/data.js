@@ -48,11 +48,11 @@ function character_set_axis(type, axis){
     element.value = result;
 }
 
-function property_table(id, properties){
+function property_table(id, properties, character){
     const properties_table = document.getElementById(id);
 
     if(!properties_table.innerHTML.length){
-        let properties_html = '<tr class=header><td>Property<td>Current Value<td>Default Value';
+        let properties_html = '<tr class=header><td>Property<td>Current Value';
         for(const property in properties){
             const property_type = typeof properties[property];
 
@@ -68,8 +68,6 @@ function property_table(id, properties){
                   + '<input id="' + id + '-button-' + property + '" type=button value=' + property + '>'
                   + '<td id="' + id + '-' + property + '">';
             }
-
-            properties_html += '<td id="' + id + '-' + property + '-default">';
         }
         properties_table.innerHTML = properties_html;
     }
@@ -80,27 +78,49 @@ function property_table(id, properties){
         if(property_type === 'boolean'){
             const checkbox = document.getElementById(id + '-' + property);
             checkbox.checked = properties[property];
-            checkbox.onchange = function(){
-                properties[property] = this.checked;
-                webgl_uniform_update();
+            if(character){
+                checkbox.onchange = function(){
+                    webgl_characters[document.getElementById('characters-select').value][property] = this.checked;
+                    webgl_uniform_update();
+                }
+
+            }else{
+                checkbox.onchange = function(){
+                    webgl_properties[property] = this.checked;
+                    webgl_uniform_update();
+                }
             }
 
         }else if(property_type !== 'object'){
             const property_button = document.getElementById(id + '-button-' + property);
-            property_button.onclick = function(){
-                set_property(
-                  properties,
-                  property
-                );
-                webgl_uniform_update();
+            if(character){
+                property_button.onclick = function(){
+                    const selected_character = document.getElementById('characters-select').value;
+                    set_property(
+                      webgl_characters[selected_character],
+                      property,
+                      selected_character
+                    );
+                    webgl_uniform_update();
+                }
+
+            }else{
+                property_button.onclick = function(){
+                    set_property(
+                      webgl_properties,
+                      property,
+                      'webgl_properties'
+                    );
+                    webgl_uniform_update();
+                }
             }
         }
     }
 }
 
-function set_property(properties, property){
+function set_property(properties, property, label){
     let result = globalThis.prompt(
-      'Set ' + property + ' to:',
+      'Set ' + label + ' ' + property + ' to:',
       properties[property]
     );
 
