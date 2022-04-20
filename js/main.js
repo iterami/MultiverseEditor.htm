@@ -347,7 +347,23 @@ function repo_init(){
         'character-properties': {
           'content': '<table id=character-properties></table>',
           'group': 'editor',
-          'label': 'Character',
+          'label': 'Characters',
+        },
+        'entities': {
+          'content': '<input id=entity-generate type=button value="Generate Entity"><br><select id=prefabs>'
+              + '<option value=webgl_primitive_cuboid>webgl_primitive_cuboid</option>'
+              + '<option value=webgl_primitive_ellipsoid>webgl_primitive_ellipsoid</option>'
+              + '<option value=webgl_primitive_frustum>webgl_primitive_frustum</option>'
+              + '<option value=prefabs_webgl_cuboid_tree>prefabs_webgl_cuboid_tree</option>'
+              + '<option value=prefabs_webgl_humanoid>prefabs_webgl_humanoid</option>'
+              + '<option value=prefabs_webgl_lines_shrub>prefabs_webgl_lines_shrub</option>'
+              + '<option value=prefabs_webgl_lines_tree>prefabs_webgl_lines_tree</option>'
+              + '<option disabled value=prefabs_webgl_tiles>prefabs_webgl_tiles</option>'
+              + '<option  value=prefabs_webgl_tree_2d>prefabs_webgl_tree_2d</option>'
+            + '</select><input id=prefab-generate type=button value=Generate><br>'
+            + '<textarea id=generate-properties>{\n}</textarea>',
+          'group': 'editor',
+          'label': 'Entities',
         },
         'export': {
           'content': '<input id=update-json type=button value="Update Level JSON"><br><textarea id=exported></textarea>',
@@ -381,22 +397,6 @@ function repo_init(){
             + '<tr><td>webgl<td id=webgl-group-count></table>',
           'group': 'editor',
           'label': 'Stats',
-        },
-        'generate': {
-          'content': '<input id=entity-generate type=button value="Generate Entity"><br><select id=prefabs>'
-              + '<option value=webgl_primitive_cuboid>webgl_primitive_cuboid</option>'
-              + '<option value=webgl_primitive_ellipsoid>webgl_primitive_ellipsoid</option>'
-              + '<option value=webgl_primitive_frustum>webgl_primitive_frustum</option>'
-              + '<option value=prefabs_webgl_cuboid_tree>prefabs_webgl_cuboid_tree</option>'
-              + '<option value=prefabs_webgl_humanoid>prefabs_webgl_humanoid</option>'
-              + '<option value=prefabs_webgl_lines_shrub>prefabs_webgl_lines_shrub</option>'
-              + '<option value=prefabs_webgl_lines_tree>prefabs_webgl_lines_tree</option>'
-              + '<option disabled value=prefabs_webgl_tiles>prefabs_webgl_tiles</option>'
-              + '<option  value=prefabs_webgl_tree_2d>prefabs_webgl_tree_2d</option>'
-            + '</select><input id=prefab-generate type=button value=Generate><br>'
-            + '<textarea id=generate-properties>{\n}</textarea>',
-          'group': 'editor',
-          'label': 'Generate',
         },
       },
       'title': 'MultiverseEditor.htm',
