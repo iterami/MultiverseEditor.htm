@@ -389,7 +389,8 @@ function repo_init(){
         'stats': {
           'content': '<table><tr><td>Characters<td id=character-count>'
             + '<tr><td>ID count<td id=id-count>'
-            + '<tr><td>webgl Entity Count<td id=webgl-entity-count>'
+            + '<tr><td>Paths<td id=path-count>'
+            + '<tr><td>webgl Entities<td id=webgl-entity-count>'
             + '<tr class=header><td>Group<td>Count'
             + '<tr><td>foreground<td id=foreground-count>'
             + '<tr><td>particles<td id=particles-count>'
@@ -477,6 +478,7 @@ function repo_logic(){
         'foreground-count': entity_groups['_length']['foreground'],
         'id-count': entity_id_count,
         'particles-count': entity_groups['_length']['particles'],
+        'path-count': Object.keys(webgl_paths).length,
         'rotate-x': webgl_characters[webgl_character_id]['camera-rotate-x'],
         'rotate-y': webgl_characters[webgl_character_id]['camera-rotate-y'],
         'rotate-z': webgl_characters[webgl_character_id]['camera-rotate-z'],
