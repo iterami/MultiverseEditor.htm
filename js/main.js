@@ -344,14 +344,8 @@ function repo_init(){
           + '<select id=fog-state><option value=0>Use Level Properties</option><option value=1>Override On</option><option value=2>Override Off</option></select><br>'
           + '<input id=beforeunload-warning type=checkbox><label for=beforeunload-warning>beforeunload Warning</label></table>',
       'tabs': {
-        'character-properties': {
-          'content': '<select id=characters-select></select>'
-              + '<table id=character-properties></table>',
-          'group': 'editor',
-          'label': 'Characters',
-        },
-        'entities': {
-          'content': '<input id=entity-generate type=button value="Generate Entity"><br><select id=prefabs-select>'
+        'add': {
+          'content': '<input id=entity-generate type=button value="Generate Entity"><select id=prefabs-select>'
               + '<option value=webgl_primitive_cuboid>webgl_primitive_cuboid</option>'
               + '<option value=webgl_primitive_ellipsoid>webgl_primitive_ellipsoid</option>'
               + '<option value=webgl_primitive_frustum>webgl_primitive_frustum</option>'
@@ -361,10 +355,16 @@ function repo_init(){
               + '<option value=prefabs_webgl_lines_tree>prefabs_webgl_lines_tree</option>'
               + '<option disabled value=prefabs_webgl_tiles>prefabs_webgl_tiles</option>'
               + '<option  value=prefabs_webgl_tree_2d>prefabs_webgl_tree_2d</option>'
-            + '</select><input id=prefab-generate type=button value=Generate><br>'
+            + '</select><input id=prefab-generate type=button value="Generate Prefab"><br>'
             + '<textarea id=generate-properties>{\n}</textarea>',
           'group': 'editor',
-          'label': 'Entities',
+          'label': 'Add',
+        },
+        'character-properties': {
+          'content': '<select id=characters-select></select>'
+              + '<table id=character-properties></table>',
+          'group': 'editor',
+          'label': 'Characters',
         },
         'export': {
           'content': '<input id=update-json type=button value="Update Level JSON"><br><textarea id=exported></textarea>',
