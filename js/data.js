@@ -57,7 +57,7 @@ function property_table(id, properties, type){
             const property_type = typeof properties[property];
 
             if(property_type === 'object'){
-                properties_html += '<tr><td>' + property + '<td id="' + id + '-' + property + '">';
+                properties_html += '<tr><td>' + property + '<td><input id="' + id + '-' + property + '" readonly>';
 
             }else if(property_type === 'boolean'){
                 properties_html += '<tr><td>' + property
