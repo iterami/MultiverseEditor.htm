@@ -62,16 +62,18 @@ function repo_escape(){
         webgl_properties['paused'] = core_storage_data['paused'];
         webgl_properties['textures'] = core_storage_data['textures'];
 
-        if(core_storage_data['character-automoves'] !== 2){
-            webgl_characters[webgl_character_id]['automove'] = Boolean(core_storage_data['character-automoves']);
+        if(core_storage_data['character-state']){
+            if(core_storage_data['character-automoves'] !== 2){
+                webgl_characters[webgl_character_id]['automove'] = Boolean(core_storage_data['character-automoves']);
+            }
+            webgl_characters[webgl_character_id]['collide-range-horizontal'] = core_storage_data['character-collide-range-horizontal'];
+            webgl_characters[webgl_character_id]['collide-range-vertical'] = core_storage_data['character-collide-range-vertical'];
+            webgl_characters[webgl_character_id]['collides'] = core_storage_data['character-collides'];
+            webgl_characters[webgl_character_id]['reticle'] = !core_storage_data['character-reticle']
+              ? false
+              : core_storage_data['character-reticle-color'];
+            webgl_characters[webgl_character_id]['speed'] = core_storage_data['character-speed'];
         }
-        webgl_characters[webgl_character_id]['collide-range-horizontal'] = core_storage_data['character-collide-range-horizontal'];
-        webgl_characters[webgl_character_id]['collide-range-vertical'] = core_storage_data['character-collide-range-vertical'];
-        webgl_characters[webgl_character_id]['collides'] = core_storage_data['character-collides'];
-        webgl_characters[webgl_character_id]['reticle'] = !core_storage_data['character-reticle']
-          ? false
-          : core_storage_data['character-reticle-color'];
-        webgl_characters[webgl_character_id]['speed'] = core_storage_data['character-speed'];
 
         webgl_uniform_update();
 
@@ -275,9 +277,6 @@ function repo_init(){
               });
           },
         },
-        'mousewheel': {
-          'todo': webgl_camera_zoom,
-        },
       },
       'storage': {
         'ambient-color': '#ffffff',
@@ -296,6 +295,7 @@ function repo_init(){
         'character-rotates-y': true,
         'character-rotates-z': true,
         'character-speed': 1,
+        'character-state': 0,
         'clearcolor': '#000000',
         'clearcolor-state': 0,
         'directional-color': '#ffffff',
@@ -317,7 +317,7 @@ function repo_init(){
         'paused': true,
         'textures': true,
       },
-      'storage-menu': '<table><tr><td>Camera/Character<br>'
+      'storage-menu': '<table><tr><td>Camera/Character<br><select id=character-state><option value=0>Use Level Properties</option><option value=1>Override On</option></select><br>'
           + '<input id=character-reticle type=checkbox><label for=character-reticle>Reticle</label> <input id=character-reticle-color type=color>Color<br>'
           + '<input class=mini id=character-speed step=any type=number>Speed<br>'
           + '<input id=character-collides type=checkbox><label for=character-collides>Collides</label>, Range<br>'
