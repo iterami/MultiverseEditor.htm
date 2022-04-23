@@ -93,7 +93,9 @@ function repo_init(){
       'events': {
         'characters-control': {
           'onclick': function(){
-              webgl_character_id = document.getElementById('characters-select').value;
+              webgl_character_set({
+                'id': document.getElementById('characters-select').value,
+              });
           },
         },
         'entity-generate': {
