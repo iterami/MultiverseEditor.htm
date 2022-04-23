@@ -62,7 +62,6 @@ function repo_escape(){
         webgl_properties['paused'] = core_storage_data['paused'];
         webgl_properties['textures'] = core_storage_data['textures'];
 
-        webgl_character_id = core_storage_data['character-id'];
         if(core_storage_data['character-automoves'] !== 2){
             webgl_characters[webgl_character_id]['automove'] = Boolean(core_storage_data['character-automoves']);
         }
@@ -92,6 +91,11 @@ function repo_init(){
         },
       },
       'events': {
+        'characters-control': {
+          'onclick': function(){
+              webgl_character_id = document.getElementById('characters-select').value;
+          },
+        },
         'entity-generate': {
           'onclick': function(){
               const properties = core_args({
@@ -278,7 +282,6 @@ function repo_init(){
         'character-collide-range-horizontal': 2.5,
         'character-collide-range-vertical': 2.5,
         'character-collides': true,
-        'character-id': '_me',
         'character-moves-x': true,
         'character-moves-y': true,
         'character-moves-z': true,
@@ -310,7 +313,6 @@ function repo_init(){
         'textures': true,
       },
       'storage-menu': '<table><tr><td>Camera/Character<br>'
-          + '<input class=mini id=character-id>webgl_character_id<br>'
           + '<input id=character-reticle type=checkbox><label for=character-reticle>Reticle</label> <input id=character-reticle-color type=color>Color<br>'
           + '<input class=mini id=character-speed step=any type=number>Speed<br>'
           + '<input id=character-collides type=checkbox><label for=character-collides>Collides</label>, Range<br>'
@@ -361,7 +363,7 @@ function repo_init(){
           'label': 'Add',
         },
         'character-properties': {
-          'content': '<select id=characters-select></select>'
+          'content': '<select id=characters-select></select><input id=characters-control type=button value=Control>'
               + '<table id=character-properties></table>',
           'group': 'editor',
           'label': 'Characters',
