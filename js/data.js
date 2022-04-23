@@ -52,7 +52,7 @@ function property_table(id, properties, type){
     const properties_table = document.getElementById(id);
 
     if(!properties_table.innerHTML.length){
-        let properties_html = '<tr class=header><td>Property<td>Current Value';
+        let properties_html = '<tr class=header><td>Property<td>Value';
         for(const property in properties){
             const property_type = typeof properties[property];
 
