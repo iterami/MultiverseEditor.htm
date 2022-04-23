@@ -275,6 +275,9 @@ function repo_init(){
               });
           },
         },
+        'mousewheel': {
+          'todo': webgl_camera_zoom,
+        },
       },
       'storage': {
         'ambient-color': '#ffffff',
