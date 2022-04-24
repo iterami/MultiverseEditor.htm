@@ -95,28 +95,51 @@ function repo_init(){
       'events': {
         'characters-control': {
           'onclick': function(){
+              const character = document.getElementById('characters-select').value;
+              if(character.length === 0){
+                  return;
+              }
               webgl_character_set({
-                'id': document.getElementById('characters-select').value,
+                'id': character,
               });
+          },
+        },
+        'characters-remove': {
+          'onclick': function(){
+              const character = document.getElementById('characters-select').value;
+              if(character.length === 0){
+                  return;
+              }
+              delete webgl_characters[character];
           },
         },
         'entity-generate': {
           'onclick': function(){
+              if(!webgl_characters[webgl_character_id]){
+                  return;
+              }
+
               const properties = core_args({
                 'args': JSON.parse(document.getElementById('generate-properties').value),
                 'defaults': {
                   'vertices': [],
                 },
               });
-
-              if(!webgl_characters[webgl_character_id]){
-                  return;
-              }
-
               webgl_entity_create({
                 'entities': [
                   properties,
                 ],
+              });
+          },
+        },
+        'entity-remove': {
+          'onclick': function(){
+              const entity = document.getElementById('entity-select').value;
+              if(entity.length === 0){
+                  return;
+              }
+              entity_remove({
+                'entities': [entity],
               });
           },
         },
@@ -371,13 +394,13 @@ function repo_init(){
           'label': 'Add',
         },
         'character-properties': {
-          'content': '<select id=characters-select></select><input id=characters-control type=button value=Control>'
+          'content': '<select id=characters-select></select><input id=characters-control type=button value=Control><input id=characters-remove type=button value=Remove>'
               + '<table id=character-properties></table>',
           'group': 'editor',
           'label': 'Characters',
         },
         'entity-properties': {
-          'content': '<select id=entity-select></select>'
+          'content': '<select id=entity-select></select><input id=entity-remove type=button value=Remove>'
               + '<table id=entity-properties></table>',
           'group': 'editor',
           'label': 'Entities',
