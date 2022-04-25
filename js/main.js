@@ -93,9 +93,9 @@ function repo_init(){
         },
       },
       'events': {
-        'characters-control': {
+        'character-control': {
           'onclick': function(){
-              const character = document.getElementById('characters-select').value;
+              const character = document.getElementById('character-select').value;
               if(character.length === 0){
                   return;
               }
@@ -104,9 +104,9 @@ function repo_init(){
               });
           },
         },
-        'characters-delete': {
+        'character-delete': {
           'onclick': function(){
-              const character = document.getElementById('characters-select').value;
+              const character = document.getElementById('character-select').value;
               if(character.length === 0){
                   return;
               }
@@ -400,7 +400,7 @@ function repo_init(){
           'label': 'Add',
         },
         'character-properties': {
-          'content': '<select id=characters-select></select><input id=characters-control type=button value=Control><input id=characters-delete type=button value=Delete>'
+          'content': '<select id=character-select></select><input id=character-control type=button value=Control><input id=character-delete type=button value=Delete>'
               + '<table id=character-properties></table>',
           'group': 'editor',
           'label': 'Characters',
@@ -475,30 +475,6 @@ function repo_level_load(){
       webgl_properties,
       'webgl'
     );
-
-    let character_options = '';
-    for(const character in webgl_characters){
-        character_options += '<option value="' + character + '">' + character + '</option>';
-    }
-    const characters_select = document.getElementById('characters-select');
-    characters_select.innerHTML = character_options;
-    property_table(
-      'character-properties',
-      webgl_characters[characters_select.value],
-      'character'
-    );
-
-    let entity_options = '';
-    for(const entity in entity_entities){
-        entity_options += '<option value="' + entity + '">' + entity + '</option>';
-    }
-    const entity_select = document.getElementById('entity-select');
-    entity_select.innerHTML = entity_options;
-    property_table(
-      'entity-properties',
-      entity_entities[entity_select.value],
-      'entity'
-    );
 }
 
 function repo_logic(){
@@ -522,6 +498,19 @@ function repo_logic(){
     if(!core_storage_data['character-rotates-z']){
         webgl_characters[webgl_character_id]['camera-rotate-z'] = core_ui_values['rotate-z'];
         webgl_characters[webgl_character_id]['rotate-z'] = core_ui_values['rotate-z'];
+    }
+
+    if(webgl_character_count !== Number(document.getElementById('character-count').textContent)){
+        update_select_options(
+          'character',
+          webgl_characters
+        );
+    }
+    if(entity_info['webgl']['count'] !== Number(document.getElementById('webgl-entity-count').textContent)){
+        update_select_options(
+          'entity',
+          entity_entities
+        );
     }
 
     core_ui_update({
@@ -550,7 +539,7 @@ function repo_logic(){
           },
         });
     }
-    const selected_character = document.getElementById('characters-select').value;
+    const selected_character = document.getElementById('character-select').value;
     for(const property in webgl_characters[selected_character]){
         core_ui_update({
           'ids': {

@@ -80,7 +80,7 @@ function property_table(id, properties, type){
             checkbox.checked = properties[property];
             if(type === 'character'){
                 checkbox.onchange = function(){
-                    webgl_characters[document.getElementById('characters-select').value][property] = this.checked;
+                    webgl_characters[document.getElementById('character-select').value][property] = this.checked;
                     webgl_uniform_update();
                 }
 
@@ -101,7 +101,7 @@ function property_table(id, properties, type){
             const property_button = document.getElementById(id + '-button-' + property);
             if(type === 'character'){
                 property_button.onclick = function(){
-                    const selected_character = document.getElementById('characters-select').value;
+                    const selected_character = document.getElementById('character-select').value;
                     set_property(
                       webgl_characters[selected_character],
                       property,
@@ -149,4 +149,29 @@ function set_property(properties, property, label){
       'template': properties[property],
       'value': result,
     });
+}
+
+function update_select_options(id, source){
+    const select = document.getElementById(id + '-select');
+    let selected_option = select.value;
+    let option_available = false;
+
+    let options = '';
+    for(const option in source){
+        options += '<option value="' + option + '">' + option + '</option>';
+
+        if(selected_option === option){
+            option_available = true;
+        }
+    }
+    select.innerHTML = options;
+    if(option_available){
+        select.value = selected_option;
+    }
+
+    property_table(
+      id + '-properties',
+      source[select.value],
+      id
+    );
 }
