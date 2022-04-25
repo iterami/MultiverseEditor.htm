@@ -506,7 +506,7 @@ function repo_logic(){
           webgl_characters
         );
     }
-    if(entity_info['webgl']['count'] !== Number(document.getElementById('webgl-entity-count').textContent)){
+    if(entity_id_count !== Number(document.getElementById('id-count').textContent)){
         update_select_options(
           'entity',
           entity_entities
