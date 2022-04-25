@@ -156,15 +156,18 @@ function update_select_options(id, source){
     let selected_option = select.value;
     let option_available = false;
 
-    let options = '';
+    let options = [];
     for(const option in source){
-        options += '<option value="' + option + '">' + option + '</option>';
+        options.push('<option value="' + option + '">' + option + '</option>');
 
         if(selected_option === option){
             option_available = true;
         }
     }
-    select.innerHTML = options;
+    options = core_sort_strings({
+      'array': options,
+    });
+    select.innerHTML = options.join('');
     if(option_available){
         select.value = selected_option;
     }
