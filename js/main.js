@@ -160,6 +160,18 @@ function repo_init(){
               });
           },
         },
+        'path-delete': {
+          'onclick': function(){
+              const path = document.getElementById('path-select').value;
+              if(path.length === 0){
+                  return;
+              }
+              if(!confirm('Delete path "' + path + '"?')){
+                  return;
+              }
+              delete webgl_paths[path];
+          },
+        },
         'prebuilt-load': {
           'onclick': function(){
               ajax_level(document.getElementById('level-select').value);
@@ -427,6 +439,12 @@ function repo_init(){
           'group': 'core-menu',
           'label': 'Load Levels',
         },
+        'paths': {
+          'content': '<select id=path-select></select><input id=path-delete type=button value=Delete>'
+              + '<table id=path-properties></table>',
+          'group': 'editor',
+          'label': 'Paths',
+        },
         'properties': {
           'content': '<table id=properties></table>',
           'group': 'editor',
@@ -512,6 +530,12 @@ function repo_logic(){
           entity_entities
         );
     }
+    if(Object.keys(webgl_paths).length !== Number(document.getElementById('path-count').textContent)){
+        update_select_options(
+          'path',
+          webgl_paths
+        );
+    }
 
     core_ui_update({
       'ids': {
@@ -552,6 +576,14 @@ function repo_logic(){
         core_ui_update({
           'ids': {
             ['entity-properties-' + property]: entity_entities[selected_entity][property],
+          },
+        });
+    }
+    const selected_path = document.getElementById('path-select').value;
+    for(const property in webgl_paths[selected_path]){
+        core_ui_update({
+          'ids': {
+            ['path-properties-' + property]: webgl_paths[selected_path][property],
           },
         });
     }

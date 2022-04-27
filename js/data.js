@@ -90,6 +90,12 @@ function property_table(id, properties, type){
                     webgl_uniform_update();
                 }
 
+            }else if(type === 'path'){
+                checkbox.onchange = function(){
+                    webgl_paths[document.getElementById('path-select').value][property] = this.checked;
+                    webgl_uniform_update();
+                }
+
             }else{
                 checkbox.onchange = function(){
                     webgl_properties[property] = this.checked;
@@ -117,6 +123,17 @@ function property_table(id, properties, type){
                       entity_entities[selected_entity],
                       property,
                       selected_entity
+                    );
+                    webgl_uniform_update();
+                }
+
+            }else if(type === 'path'){
+                property_button.onclick = function(){
+                    const selected_path = document.getElementById('path-select').value;
+                    set_property(
+                      webgl_paths[selected_path],
+                      property,
+                      selected_path
                     );
                     webgl_uniform_update();
                 }
