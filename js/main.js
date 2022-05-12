@@ -93,6 +93,18 @@ function repo_init(){
         },
       },
       'events': {
+        'camera-zoom-set': {
+          'onclick': function(){
+              if(!webgl_characters[webgl_character_id]){
+                  return;
+              }
+
+              character_set_axis(
+                'camera',
+                'zoom'
+              );
+          },
+        },
         'character-control': {
           'onclick': function(){
               const character = document.getElementById('character-select').value;
@@ -340,6 +352,7 @@ function repo_init(){
         'character-rotates-z': true,
         'character-speed': 1,
         'character-state': 0,
+        'character-zooms': true,
         'clearcolor': '#000000',
         'clearcolor-state': 0,
         'directional-color': '#ffffff',
@@ -369,7 +382,8 @@ function repo_init(){
           + '<input class=mini id=character-collide-range-vertical step=any type=number>Vertical<br>'
           + '<select id=character-automoves><option value=1>on</option><option selected value=0>off</option><option value=2>any</option></select>Automove<br>'
           + 'Movement<input id=character-moves-x type=checkbox><label for=character-moves-x>X</label><input id=character-moves-y type=checkbox><label for=character-moves-y>Y</label><input id=character-moves-z type=checkbox><label for=character-moves-z>Z</label><br>'
-          + 'Rotation<input id=character-rotates-x type=checkbox><label for=character-rotates-x>X</label><input id=character-rotates-y type=checkbox><label for=character-rotates-y>Y</label><input id=character-rotates-z type=checkbox><label for=character-rotates-z>Z</label>'
+          + 'Rotation<input id=character-rotates-x type=checkbox><label for=character-rotates-x>X</label><input id=character-rotates-y type=checkbox><label for=character-rotates-y>Y</label><input id=character-rotates-z type=checkbox><label for=character-rotates-z>Z</label><br>'
+          + 'Zoom<input id=character-zooms type=checkbox>'
         + '<td>Multipliers<br>'
           + '<select id=multiplier-state><option value=0>Use Level Properties</option><option value=1>Override On</option></select><br>'
           + '<input class=mini id=multiplier-jump step=any type=number>Jump<br>'
@@ -465,7 +479,7 @@ function repo_init(){
         },
       },
       'title': 'MultiverseEditor.htm',
-      'ui': '<input id=origin type=button value=Origin><input id=spawn type=button value=Spawn><br>'
+      'ui': '<input id=origin type=button value=Origin><input id=spawn type=button value=Spawn><input id=camera-zoom-set type=button value=Zoom><input class=left id=camera-zoom readonly><br>'
         + '<input id=translate-x-set type=button value=x><input class=left id=translate-x readonly><input id=rotate-x-set type=button value=x°><input class="left mini" id=rotate-x readonly><br>'
         + '<input id=translate-y-set type=button value=y><input class=left id=translate-y readonly><input id=rotate-y-set type=button value=y°><input class="left mini" id=rotate-y readonly><br>'
         + '<input id=translate-z-set type=button value=z><input class=left id=translate-z readonly><input id=rotate-z-set type=button value=z°><input class="left mini" id=rotate-z readonly><br>'
@@ -497,25 +511,28 @@ function repo_level_load(){
 
 function repo_logic(){
     if(!core_storage_data['character-moves-x']){
-        webgl_characters[webgl_character_id]['translate-x'] = core_ui_values['translate-x'];
+        webgl_characters[webgl_character_id]['translate-x'] = core_ui_values['translate-x'] || 0;
     }
     if(!core_storage_data['character-moves-y']){
-        webgl_characters[webgl_character_id]['translate-y'] = core_ui_values['translate-y'];
+        webgl_characters[webgl_character_id]['translate-y'] = core_ui_values['translate-y'] || 0;
     }
     if(!core_storage_data['character-moves-z']){
-        webgl_characters[webgl_character_id]['translate-z'] = core_ui_values['translate-z'];
+        webgl_characters[webgl_character_id]['translate-z'] = core_ui_values['translate-z'] || 0;
     }
     if(!core_storage_data['character-rotates-x']){
-        webgl_characters[webgl_character_id]['camera-rotate-x'] = core_ui_values['rotate-x'];
-        webgl_characters[webgl_character_id]['rotate-x'] = core_ui_values['rotate-x'];
+        webgl_characters[webgl_character_id]['camera-rotate-x'] = core_ui_values['rotate-x'] || 0;
+        webgl_characters[webgl_character_id]['rotate-x'] = core_ui_values['rotate-x'] || 0;
     }
     if(!core_storage_data['character-rotates-y']){
-        webgl_characters[webgl_character_id]['camera-rotate-y'] = core_ui_values['rotate-y'];
-        webgl_characters[webgl_character_id]['rotate-y'] = core_ui_values['rotate-y'];
+        webgl_characters[webgl_character_id]['camera-rotate-y'] = core_ui_values['rotate-y'] || 0;
+        webgl_characters[webgl_character_id]['rotate-y'] = core_ui_values['rotate-y'] || 0;
     }
     if(!core_storage_data['character-rotates-z']){
-        webgl_characters[webgl_character_id]['camera-rotate-z'] = core_ui_values['rotate-z'];
-        webgl_characters[webgl_character_id]['rotate-z'] = core_ui_values['rotate-z'];
+        webgl_characters[webgl_character_id]['camera-rotate-z'] = core_ui_values['rotate-z'] || 0;
+        webgl_characters[webgl_character_id]['rotate-z'] = core_ui_values['rotate-z'] || 0;
+    }
+    if(!core_storage_data['character-zooms']){
+        webgl_characters[webgl_character_id]['camera-zoom'] = core_ui_values['camera-zoom'] || 0;
     }
 
     if(webgl_character_count !== Number(document.getElementById('character-count').textContent)){
@@ -539,6 +556,7 @@ function repo_logic(){
 
     core_ui_update({
       'ids': {
+        'camera-zoom': webgl_characters[webgl_character_id]['camera-zoom'],
         'character-count': webgl_character_count,
         'foreground-count': entity_groups['_length']['foreground'],
         'id-count': entity_id_count,
