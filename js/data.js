@@ -45,7 +45,11 @@ function character_set_axis(type, axis){
         webgl_characters[webgl_character_id]['camera-rotate-' + axis] = result;
     }
 
-    element.value = result;
+    core_ui_update({
+      'ids': {
+        [type + '-' + axis]: result,
+      },
+    });
 }
 
 function property_table(id, properties, type){
