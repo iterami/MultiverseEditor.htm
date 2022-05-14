@@ -342,11 +342,13 @@ function repo_init(){
         'character-collide-range-horizontal': 2.5,
         'character-collide-range-vertical': 2.5,
         'character-collides': true,
+        'character-moves': true,
         'character-moves-x': true,
         'character-moves-y': true,
         'character-moves-z': true,
         'character-reticle': true,
         'character-reticle-color': '#ffffff',
+        'character-rotates': true,
         'character-rotates-x': true,
         'character-rotates-y': true,
         'character-rotates-z': true,
@@ -381,9 +383,9 @@ function repo_init(){
           + '<input class=mini id=character-collide-range-horizontal step=any type=number>Horizontal<br>'
           + '<input class=mini id=character-collide-range-vertical step=any type=number>Vertical<br>'
           + '<select id=character-automoves><option value=1>on</option><option selected value=0>off</option><option value=2>any</option></select>Automove<br>'
-          + 'Movement<input id=character-moves-x type=checkbox><label for=character-moves-x>X</label><input id=character-moves-y type=checkbox><label for=character-moves-y>Y</label><input id=character-moves-z type=checkbox><label for=character-moves-z>Z</label><br>'
-          + 'Rotation<input id=character-rotates-x type=checkbox><label for=character-rotates-x>X</label><input id=character-rotates-y type=checkbox><label for=character-rotates-y>Y</label><input id=character-rotates-z type=checkbox><label for=character-rotates-z>Z</label><br>'
-          + 'Zoom<input id=character-zooms type=checkbox>'
+          + '<input id=character-moves type=checkbox><label for=character-moves>Movement</label><input id=character-moves-x type=checkbox><label for=character-moves-x>X</label><input id=character-moves-y type=checkbox><label for=character-moves-y>Y</label><input id=character-moves-z type=checkbox><label for=character-moves-z>Z</label><br>'
+          + '<input id=character-rotates type=checkbox><label for=character-rotates>Rotation</label><input id=character-rotates-x type=checkbox><label for=character-rotates-x>X</label><input id=character-rotates-y type=checkbox><label for=character-rotates-y>Y</label><input id=character-rotates-z type=checkbox><label for=character-rotates-z>Z</label><br>'
+          + '<input id=character-zooms type=checkbox><label for=character-zooms>Zoom</label>'
         + '<td>Multipliers<br>'
           + '<select id=multiplier-state><option value=0>Use Level Properties</option><option value=1>Override On</option></select><br>'
           + '<input class=mini id=multiplier-jump step=any type=number>Jump<br>'
@@ -510,24 +512,24 @@ function repo_level_load(){
 }
 
 function repo_logic(){
-    if(!core_storage_data['character-moves-x']){
+    if(!core_storage_data['character-moves'] || !core_storage_data['character-moves-x']){
         webgl_characters[webgl_character_id]['translate-x'] = core_ui_values['translate-x'] || 0;
     }
-    if(!core_storage_data['character-moves-y']){
+    if(!core_storage_data['character-moves'] || !core_storage_data['character-moves-y']){
         webgl_characters[webgl_character_id]['translate-y'] = core_ui_values['translate-y'] || 0;
     }
-    if(!core_storage_data['character-moves-z']){
+    if(!core_storage_data['character-moves'] || !core_storage_data['character-moves-z']){
         webgl_characters[webgl_character_id]['translate-z'] = core_ui_values['translate-z'] || 0;
     }
-    if(!core_storage_data['character-rotates-x']){
+    if(!core_storage_data['character-rotates'] || !core_storage_data['character-rotates-x']){
         webgl_characters[webgl_character_id]['camera-rotate-x'] = core_ui_values['rotate-x'] || 0;
         webgl_characters[webgl_character_id]['rotate-x'] = core_ui_values['rotate-x'] || 0;
     }
-    if(!core_storage_data['character-rotates-y']){
+    if(!core_storage_data['character-rotates'] || !core_storage_data['character-rotates-y']){
         webgl_characters[webgl_character_id]['camera-rotate-y'] = core_ui_values['rotate-y'] || 0;
         webgl_characters[webgl_character_id]['rotate-y'] = core_ui_values['rotate-y'] || 0;
     }
-    if(!core_storage_data['character-rotates-z']){
+    if(!core_storage_data['character-rotates'] || !core_storage_data['character-rotates-z']){
         webgl_characters[webgl_character_id]['camera-rotate-z'] = core_ui_values['rotate-z'] || 0;
         webgl_characters[webgl_character_id]['rotate-z'] = core_ui_values['rotate-z'] || 0;
     }
