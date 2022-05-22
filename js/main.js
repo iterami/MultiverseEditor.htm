@@ -122,7 +122,7 @@ function repo_init(){
               if(character.length === 0){
                   return;
               }
-              if(!confirm('Delete character "' + character + '"?')){
+              if(!globalThis.confirm('Delete character "' + character + '"?')){
                   return;
               }
               delete webgl_characters[character];
@@ -134,7 +134,7 @@ function repo_init(){
               if(entity.length === 0){
                   return;
               }
-              if(!confirm('Delete entity "' + entity + '"?')){
+              if(!globalThis.confirm('Delete entity "' + entity + '"?')){
                   return;
               }
               entity_remove({
@@ -174,7 +174,7 @@ function repo_init(){
         },
         'origin': {
           'onclick': function(){
-              if(!confirm('Return to origin? (0,0,0)')){
+              if(!globalThis.confirm('Return to origin? (0,0,0)')){
                   return;
               }
 
@@ -187,7 +187,7 @@ function repo_init(){
               if(path.length === 0){
                   return;
               }
-              if(!confirm('Delete path "' + path + '"?')){
+              if(!globalThis.confirm('Delete path "' + path + '"?')){
                   return;
               }
               delete webgl_paths[path];
@@ -256,7 +256,7 @@ function repo_init(){
         },
         'spawn': {
           'onclick': function(){
-              if(!confirm('Return to spawn? ('
+              if(!globalThis.confirm('Return to spawn? ('
                     + webgl_properties['spawn-translate-x'] + ','
                     + webgl_properties['spawn-translate-y'] + ','
                     + webgl_properties['spawn-translate-z'] + ')')){
