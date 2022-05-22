@@ -172,6 +172,15 @@ function repo_init(){
               });
           },
         },
+        'origin': {
+          'onclick': function(){
+              if(!confirm('Return to origin? (0,0,0)')){
+                  return;
+              }
+
+              webgl_character_origin();
+          },
+        },
         'path-delete': {
           'onclick': function(){
               const path = document.getElementById('path-select').value;
@@ -245,6 +254,18 @@ function repo_init(){
               );
           },
         },
+        'spawn': {
+          'onclick': function(){
+              if(!confirm('Return to spawn? ('
+                    + webgl_properties['spawn-translate-x'] + ','
+                    + webgl_properties['spawn-translate-y'] + ','
+                    + webgl_properties['spawn-translate-z'] + ')')){
+                  return;
+              }
+
+              webgl_character_spawn();
+          },
+        },
         'translate-x-set': {
           'onclick': function(){
               if(!webgl_characters[webgl_character_id]){
@@ -280,12 +301,6 @@ function repo_init(){
                 'z'
               );
           },
-        },
-        'origin': {
-          'onclick': webgl_character_origin,
-        },
-        'spawn': {
-          'onclick': webgl_character_spawn,
         },
         'update-json': {
           'onclick': function(){
