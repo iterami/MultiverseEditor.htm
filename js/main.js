@@ -1,11 +1,8 @@
 'use strict';
 
 function repo_escape(){
-    if(webgl_character_level() < -1){
-        return;
-    }
-
-    if(!core_menu_open){
+    if(!core_menu_open
+      && webgl_character_level() > -2){
         if(core_storage_data['ambient-state'] !== 0){
             const rgb = core_hex_to_rgb({
               'hex': core_storage_data['ambient-color'],
