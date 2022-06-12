@@ -126,6 +126,17 @@ function repo_init(){
               delete webgl_characters[character];
           },
         },
+        'character-goto': {
+          'onclick': function(){
+              const character = document.getElementById('character-select').value;
+              if(character.length === 0){
+                  return;
+              }
+              webgl_characters[webgl_character_id]['translate-x'] = webgl_characters[character]['translate-x'];
+              webgl_characters[webgl_character_id]['translate-y'] = webgl_characters[character]['translate-y'];
+              webgl_characters[webgl_character_id]['translate-z'] = webgl_characters[character]['translate-z'];
+          },
+        },
         'entity-delete': {
           'onclick': function(){
               const entity = document.getElementById('entity-select').value;
@@ -157,6 +168,18 @@ function repo_init(){
                   properties,
                 ],
               });
+          },
+        },
+        'entity-goto': {
+          'onclick': function(){
+              const entity = document.getElementById('entity-select').value;
+              if(entity.length === 0){
+                  return;
+              }
+              const character = entity_entities[entity]['attach-to'];
+              webgl_characters[webgl_character_id]['translate-x'] = webgl_characters[character]['translate-x'] + entity_entities[entity]['attach-offset-x'];
+              webgl_characters[webgl_character_id]['translate-y'] = webgl_characters[character]['translate-y'] + entity_entities[entity]['attach-offset-y'];
+              webgl_characters[webgl_character_id]['translate-z'] = webgl_characters[character]['translate-z'] + entity_entities[entity]['attach-offset-z'];
           },
         },
         'level-load': {
@@ -441,13 +464,13 @@ function repo_init(){
           'label': 'Add',
         },
         'character-properties': {
-          'content': '<select id=character-select></select><input id=character-control type=button value=Control><input id=character-delete type=button value=Delete>'
+          'content': '<select id=character-select></select><input id=character-control type=button value=Control><input id=character-delete type=button value=Delete><input id=character-goto type=button value="Go To">'
               + '<table id=character-properties></table>',
           'group': 'editor',
           'label': 'Characters',
         },
         'entity-properties': {
-          'content': '<select id=entity-select></select><input id=entity-delete type=button value=Delete>'
+          'content': '<select id=entity-select></select><input id=entity-delete type=button value=Delete><input id=entity-goto type=button value="Go To">'
               + '<table id=entity-properties></table>',
           'group': 'editor',
           'label': 'Entities',
