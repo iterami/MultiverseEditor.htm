@@ -137,6 +137,9 @@ function repo_init(){
               webgl_characters[webgl_character_id]['translate-z'] = webgl_characters[character]['translate-z'];
           },
         },
+        'character-select': {
+          'onchange': update_selected_character,
+        },
         'entity-delete': {
           'onclick': function(){
               const entity = document.getElementById('entity-select').value;
@@ -182,6 +185,9 @@ function repo_init(){
               webgl_characters[webgl_character_id]['translate-z'] = webgl_characters[character]['translate-z'] + entity_entities[entity]['attach-offset-z'];
           },
         },
+        'entity-select': {
+          'onchange': update_selected_entity,
+        },
         'level-load': {
           'onclick': function(){
               core_tab_reset_group({
@@ -213,6 +219,9 @@ function repo_init(){
               }
               delete webgl_paths[path];
           },
+        },
+        'path-select': {
+          'onchange': update_selected_path,
         },
         'prebuilt-load': {
           'onclick': function(){
@@ -619,28 +628,7 @@ function repo_logic(){
           },
         });
     }
-    const selected_character = document.getElementById('character-select').value;
-    for(const property in webgl_characters[selected_character]){
-        core_ui_update({
-          'ids': {
-            ['character-properties-' + property]: webgl_characters[selected_character][property],
-          },
-        });
-    }
-    const selected_entity = document.getElementById('entity-select').value;
-    for(const property in entity_entities[selected_entity]){
-        core_ui_update({
-          'ids': {
-            ['entity-properties-' + property]: entity_entities[selected_entity][property],
-          },
-        });
-    }
-    const selected_path = document.getElementById('path-select').value;
-    for(const property in webgl_paths[selected_path]){
-        core_ui_update({
-          'ids': {
-            ['path-properties-' + property]: webgl_paths[selected_path][property],
-          },
-        });
-    }
+    update_selected_character();
+    update_selected_entity();
+    update_selected_path();
 }
