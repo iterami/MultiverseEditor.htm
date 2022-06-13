@@ -201,7 +201,8 @@ function repo_init(){
         },
         'origin': {
           'onclick': function(){
-              if(!globalThis.confirm('Return to origin? (0,0,0)')){
+              if(!webgl_characters[webgl_character_id]
+               || !globalThis.confirm('Return to origin? (0,0,0)')){
                   return;
               }
 
@@ -286,7 +287,8 @@ function repo_init(){
         },
         'spawn': {
           'onclick': function(){
-              if(!globalThis.confirm('Return to spawn? ('
+              if(!webgl_characters[webgl_character_id]
+               || !globalThis.confirm('Return to spawn? ('
                     + webgl_properties['spawn-translate-x'] + ','
                     + webgl_properties['spawn-translate-y'] + ','
                     + webgl_properties['spawn-translate-z'] + ')')){
