@@ -185,6 +185,15 @@ function repo_init(){
               webgl_characters[webgl_character_id]['translate-z'] = webgl_characters[character]['translate-z'] + entity_entities[entity]['attach-offset-z'];
           },
         },
+        'entity-remake': {
+          'onclick': function(){
+              const entity = document.getElementById('entity-select').value;
+              if(entity.length === 0){
+                  return;
+              }
+              webgl_entity_todo(entity);
+          },
+        },
         'entity-select': {
           'onchange': update_selected_entity,
         },
@@ -481,7 +490,7 @@ function repo_init(){
           'label': 'Characters',
         },
         'entity-properties': {
-          'content': '<select id=entity-select></select><input id=entity-delete type=button value=Delete><input id=entity-goto type=button value="Go To">'
+          'content': '<select id=entity-select></select><input id=entity-delete type=button value=Delete><input id=entity-goto type=button value="Go To"><input id=entity-remake type=button value=Remake>'
               + '<table id=entity-properties></table>',
           'group': 'editor',
           'label': 'Entities',
