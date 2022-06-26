@@ -83,6 +83,10 @@ function property_table(id, properties, type){
 
         }else if(property_type !== 'object'){
             const property_button = document.getElementById(id + '-button-' + property);
+            if(!property_button){
+                continue;
+            }
+
             if(type === 'character'){
                 property_button.onclick = function(){
                     const selected_character = document.getElementById('character-select').value;
