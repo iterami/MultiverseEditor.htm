@@ -233,11 +233,6 @@ function repo_init(){
         'path-select': {
           'onchange': update_selected_path,
         },
-        'prebuilt-load': {
-          'onclick': function(){
-              ajax_level(document.getElementById('level-select').value);
-          },
-        },
         'prefab-generate': {
           'onclick': function(){
               const properties = core_args({
@@ -503,10 +498,7 @@ function repo_init(){
         'load': {
           'content': '<table><tr>'
               + '<td><input id=level-json type=file>'
-              + '<td><input id=level-load type=button value="Load Level from File">'
-            + '<tr>'
-              + '<td><select id=level-select></select>'
-              + '<td><input id=prebuilt-load type=button value="Load Prebuilt Level"></table>',
+              + '<td><input id=level-load type=button value="Load Level from File">',
           'default': true,
           'group': 'core-menu',
           'label': 'Load Levels',
@@ -544,19 +536,6 @@ function repo_init(){
         + '<span id=editor-tabs></span><div id=editor-tabcontent></div>',
     });
     webgl_storage_init();
-
-    if('multiverselevels' in globalThis){
-        let level_select = '';
-        for(const level in multiverselevels){
-            level_select += '<option value="' + level + '">' + multiverselevels[level] + '</option>';
-        }
-        document.getElementById('level-select').innerHTML = level_select;
-    }
-
-    const level_arg = globalThis.location.search.substring(1);
-    if(level_arg.length){
-        ajax_level(level_arg);
-    }
 }
 
 function repo_level_load(){

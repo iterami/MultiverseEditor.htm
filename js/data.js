@@ -1,31 +1,5 @@
 'use strict';
 
-function ajax_level(level){
-    core_tab_reset_group({
-      'id': 'editor',
-    });
-
-    if(webgl_levelcache['id'] === level){
-        webgl_level_load({
-          'character': -1,
-          'json': webgl_levelcache['json'],
-        });
-
-        return;
-    }
-
-    core_ajax({
-      'todo': function(responseText){
-          webgl_level_load({
-            'cache': level,
-            'character': -1,
-            'json': responseText,
-          });
-      },
-      'url': '../MultiverseLevels.htm/json/' + level + '.json',
-    });
-}
-
 function character_set_axis(type, axis){
     const element = document.getElementById(type + '-' + axis);
     let result = globalThis.prompt(
