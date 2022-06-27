@@ -55,7 +55,11 @@ function property_table(id, properties, type){
 
         if(property_type === 'boolean'){
             const checkbox = document.getElementById(id + '-' + property);
+            if(!checkbox){
+                continue;
+            }
             checkbox.checked = properties[property];
+
             if(type === 'character'){
                 checkbox.onchange = function(){
                     webgl_characters[document.getElementById('character-select').value][property] = this.checked;
