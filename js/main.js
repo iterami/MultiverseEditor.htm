@@ -427,7 +427,7 @@ function repo_init(){
         'paused': true,
         'textures': true,
       },
-      'storage-menu': '<table><tr><td>Camera/Character<br><select id=character-state><option value=0>Use Level Properties</option><option value=1>Override On</option></select><br>'
+      'storage-menu': '<table><tr><td>Camera/Character<select id=character-state><option value=0>Use Level Properties</option><option value=1>Override On</option></select><br>'
           + '<input id=character-reticle type=checkbox><label for=character-reticle>Reticle</label> <input id=character-reticle-color type=color>Color<br>'
           + '<input class=mini id=character-speed step=any type=number>Speed<br>'
           + '<input id=character-collides type=checkbox><label for=character-collides>Collides</label>, Range<br>'
@@ -437,30 +437,29 @@ function repo_init(){
           + '<input id=character-moves type=checkbox><label for=character-moves>Movement</label><input id=character-moves-x type=checkbox><label for=character-moves-x>X</label><input id=character-moves-y type=checkbox><label for=character-moves-y>Y</label><input id=character-moves-z type=checkbox><label for=character-moves-z>Z</label><br>'
           + '<input id=character-rotates type=checkbox><label for=character-rotates>Rotation</label><input id=character-rotates-x type=checkbox><label for=character-rotates-x>X</label><input id=character-rotates-y type=checkbox><label for=character-rotates-y>Y</label><input id=character-rotates-z type=checkbox><label for=character-rotates-z>Z</label><br>'
           + '<input id=character-zooms type=checkbox><label for=character-zooms>Zoom</label>'
-        + '<td>Multipliers<br>'
-          + '<select id=multiplier-state><option value=0>Use Level Properties</option><option value=1>Override On</option></select><br>'
+        + '<td><input id=beforeunload-warning type=checkbox><label for=beforeunload-warning>beforeunload Warning</label><br>'
+          + '<input id=paused type=checkbox><label for=paused>Paused</label><br>'
+          + 'Multipliers<select id=multiplier-state><option value=0>Use Level Properties</option><option value=1>Override On</option></select><br>'
           + '<input class=mini id=multiplier-jump step=any type=number>Jump<br>'
           + '<input class=mini id=jump-movement step=any type=number>Jump Movement<br>'
           + '<input class=mini id=multiplier-speed step=any type=number>Speed<br>'
           + '<input id=gravity-state type=checkbox><label for=gravity-state>Gravity Override</label><br>'
           + '<input class=mini id=gravity-acceleration step=any type=number>Acceleration<br>'
           + '<select id=gravity-axis><option value=dx>x</option><option selected value=dy>y</option><option value=dz>z</option></select>Axis<br>'
-          + '<input class=mini id=gravity-max step=any type=number>Max<br>'
-          + '<input id=paused type=checkbox><label for=paused>Paused</label>'
-        + '<tr><td><input id=ambient-color type=color>Ambient Lighting<br>'
-          + '<select id=ambient-state><option value=0>Use Level Properties</option><option value=1>Override On</option></select><br>'
-          + '<input id=directional-color type=color>Directional Lighting<br>'
-          + '<select id=directional-state><option value=0>Use Level Properties</option><option value=1>Override On</option><option value=2>Override Off</option></select><br>'
+          + '<input class=mini id=gravity-max step=any type=number>Max'
+        + '<tr><td>Ambient Lighting<select id=ambient-state><option value=0>Use Level Properties</option><option value=1>Override On</option></select><br>'
+          + '<input id=ambient-color type=color><br>'
+          + 'Directional Lighting<select id=directional-state><option value=0>Use Level Properties</option><option value=1>Override On</option><option value=2>Override Off</option></select><br>'
+          + '<input id=directional-color type=color><br>'
           + '<input class=mini id=directional-vector-x step=any type=number>X<br>'
           + '<input class=mini id=directional-vector-y step=any type=number>Y<br>'
           + '<input class=mini id=directional-vector-z step=any type=number>Z'
-        + '<td><select id=draw-mode><option value="">Use Entity Properties</option><option value=LINES>Lines</option><option value=LINE_LOOP>Line Loop</option><option value=LINE_STRIP>Line Strip</option><option value=POINTS>Points</option><option value=TRIANGLES>Triangles</option><option value=TRIANGLE_FAN>Triangle Fan</option><option value=TRIANGLE_STRIP>Triangle Strip</option></select>Draw Mode<br>'
+        + '<td>Draw Mode<select id=draw-mode><option value="">Use Entity Properties</option><option value=LINES>Lines</option><option value=LINE_LOOP>Line Loop</option><option value=LINE_STRIP>Line Strip</option><option value=POINTS>Points</option><option value=TRIANGLES>Triangles</option><option value=TRIANGLE_FAN>Triangle Fan</option><option value=TRIANGLE_STRIP>Triangle Strip</option></select><br>'
           + '<input id=textures type=checkbox><label for=textures>Textures</label><br>'
-          + '<input id=clearcolor type=color>Clear Color<br>'
-          + '<select id=clearcolor-state><option value=0>Use Level Properties</option><option value=1>Override On</option></select><br>'
-          + '<input class=mini id=fog-density step=any type=number>Fog<br>'
-          + '<select id=fog-state><option value=0>Use Level Properties</option><option value=1>Override On</option><option value=2>Override Off</option></select><br>'
-          + '<input id=beforeunload-warning type=checkbox><label for=beforeunload-warning>beforeunload Warning</label></table>',
+          + 'Clear Color<select id=clearcolor-state><option value=0>Use Level Properties</option><option value=1>Override On</option></select><br>'
+          + '<input id=clearcolor type=color><br>'
+          + 'Fog<select id=fog-state><option value=0>Use Level Properties</option><option value=1>Override On</option><option value=2>Override Off</option></select><br>'
+          + '<input class=mini id=fog-density step=any type=number>Density</table>',
       'tabs': {
         'add': {
           'content': '<input id=entity-generate type=button value="Generate Entity"><select id=prefabs-select>'
@@ -547,29 +546,31 @@ function repo_level_load(){
 }
 
 function repo_logic(){
-    if(!core_storage_data['character-moves'] || !core_storage_data['character-moves-x']){
-        webgl_characters[webgl_character_id]['translate-x'] = core_ui_values['translate-x'] || 0;
-    }
-    if(!core_storage_data['character-moves'] || !core_storage_data['character-moves-y']){
-        webgl_characters[webgl_character_id]['translate-y'] = core_ui_values['translate-y'] || 0;
-    }
-    if(!core_storage_data['character-moves'] || !core_storage_data['character-moves-z']){
-        webgl_characters[webgl_character_id]['translate-z'] = core_ui_values['translate-z'] || 0;
-    }
-    if(!core_storage_data['character-rotates'] || !core_storage_data['character-rotates-x']){
-        webgl_characters[webgl_character_id]['camera-rotate-x'] = core_ui_values['rotate-x'] || 0;
-        webgl_characters[webgl_character_id]['rotate-x'] = core_ui_values['rotate-x'] || 0;
-    }
-    if(!core_storage_data['character-rotates'] || !core_storage_data['character-rotates-y']){
-        webgl_characters[webgl_character_id]['camera-rotate-y'] = core_ui_values['rotate-y'] || 0;
-        webgl_characters[webgl_character_id]['rotate-y'] = core_ui_values['rotate-y'] || 0;
-    }
-    if(!core_storage_data['character-rotates'] || !core_storage_data['character-rotates-z']){
-        webgl_characters[webgl_character_id]['camera-rotate-z'] = core_ui_values['rotate-z'] || 0;
-        webgl_characters[webgl_character_id]['rotate-z'] = core_ui_values['rotate-z'] || 0;
-    }
-    if(!core_storage_data['character-zooms']){
-        webgl_characters[webgl_character_id]['camera-zoom'] = core_ui_values['camera-zoom'] || 0;
+    if(core_storage_data['character-state']){
+        if(!core_storage_data['character-moves'] || !core_storage_data['character-moves-x']){
+            webgl_characters[webgl_character_id]['translate-x'] = core_ui_values['translate-x'] || 0;
+        }
+        if(!core_storage_data['character-moves'] || !core_storage_data['character-moves-y']){
+            webgl_characters[webgl_character_id]['translate-y'] = core_ui_values['translate-y'] || 0;
+        }
+        if(!core_storage_data['character-moves'] || !core_storage_data['character-moves-z']){
+            webgl_characters[webgl_character_id]['translate-z'] = core_ui_values['translate-z'] || 0;
+        }
+        if(!core_storage_data['character-rotates'] || !core_storage_data['character-rotates-x']){
+            webgl_characters[webgl_character_id]['camera-rotate-x'] = core_ui_values['rotate-x'] || 0;
+            webgl_characters[webgl_character_id]['rotate-x'] = core_ui_values['rotate-x'] || 0;
+        }
+        if(!core_storage_data['character-rotates'] || !core_storage_data['character-rotates-y']){
+            webgl_characters[webgl_character_id]['camera-rotate-y'] = core_ui_values['rotate-y'] || 0;
+            webgl_characters[webgl_character_id]['rotate-y'] = core_ui_values['rotate-y'] || 0;
+        }
+        if(!core_storage_data['character-rotates'] || !core_storage_data['character-rotates-z']){
+            webgl_characters[webgl_character_id]['camera-rotate-z'] = core_ui_values['rotate-z'] || 0;
+            webgl_characters[webgl_character_id]['rotate-z'] = core_ui_values['rotate-z'] || 0;
+        }
+        if(!core_storage_data['character-zooms']){
+            webgl_characters[webgl_character_id]['camera-zoom'] = core_ui_values['camera-zoom'] || 0;
+        }
     }
 
     if(webgl_character_count !== Number(document.getElementById('character-count').textContent)){
