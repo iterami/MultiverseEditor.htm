@@ -468,6 +468,7 @@ function repo_init(){
               + '<option value=webgl_primitive_frustum>webgl_primitive_frustum</option>'
               + '<option value=prefabs_webgl_cuboid_tree>prefabs_webgl_cuboid_tree</option>'
               + '<option value=prefabs_webgl_humanoid>prefabs_webgl_humanoid</option>'
+              + '<option value=prefabs_webgl_lines_path>prefabs_webgl_lines_path</option>'
               + '<option value=prefabs_webgl_lines_shrub>prefabs_webgl_lines_shrub</option>'
               + '<option value=prefabs_webgl_lines_tree>prefabs_webgl_lines_tree</option>'
               + '<option disabled value=prefabs_webgl_tiles>prefabs_webgl_tiles</option>'
