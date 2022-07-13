@@ -202,10 +202,12 @@ function repo_init(){
               core_tab_reset_group({
                 'id': 'editor',
               });
+              const level_file = document.getElementById('level-json').files[0];
               webgl_level_load({
                 'character': -1,
-                'json': document.getElementById('level-json').files[0] || false,
+                'json': level_file || false,
               });
+              document.title = (level_file !== void 0 ? level_file.name + ' - ' : '') + core_repo_title;
           },
         },
         'origin': {
