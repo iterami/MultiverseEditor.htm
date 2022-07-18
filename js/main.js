@@ -576,19 +576,19 @@ function repo_logic(){
         }
     }
 
-    if(webgl_character_count !== Number(document.getElementById('character-count').textContent)){
+    if(webgl_character_count !== core_ui_values['character-count']){
         update_select_options(
           'character',
           webgl_characters
         );
     }
-    if(entity_id_count !== Number(document.getElementById('id-count').textContent)){
+    if(entity_id_count !== core_ui_values['id-count']){
         update_select_options(
           'entity',
           entity_entities
         );
     }
-    if(Object.keys(webgl_paths).length !== Number(document.getElementById('path-count').textContent)){
+    if(Object.keys(webgl_paths).length !== core_ui_values['path-count']){
         update_select_options(
           'path',
           webgl_paths
