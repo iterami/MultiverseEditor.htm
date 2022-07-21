@@ -197,17 +197,29 @@ function repo_init(){
         'entity-select': {
           'onchange': update_selected_entity,
         },
-        'level-load': {
+        'level-load-file': {
           'onclick': function(){
               core_tab_reset_group({
                 'id': 'editor',
               });
-              const level_file = document.getElementById('level-json').files[0];
+              const level_file = document.getElementById('level-file').files[0];
               webgl_level_load({
                 'character': -1,
                 'json': level_file || false,
               });
               document.title = (level_file !== void 0 ? level_file.name + ' - ' : '') + core_repo_title;
+          },
+        },
+        'level-load-textarea': {
+          'onclick': function(){
+              core_tab_reset_group({
+                'id': 'editor',
+              });
+              webgl_level_load({
+                'character': -1,
+                'json': JSON.parse(document.getElementById('level-textarea').value),
+              });
+              document.title = core_repo_title;
           },
         },
         'origin': {
@@ -498,9 +510,8 @@ function repo_init(){
           'label': 'Export Level',
         },
         'load': {
-          'content': '<table><tr>'
-              + '<td><input id=level-json type=file>'
-              + '<td><input id=level-load type=button value="Load Level from File"></table>',
+          'content': '<input id=level-file type=file><input id=level-load-file type=button value="Load Level from File"><br>'
+            + '<input id=level-load-textarea type=button value="Load Level from Textarea"><br><textarea id=level-textarea></textarea>',
           'default': true,
           'group': 'core-menu',
           'label': 'Load Levels',
