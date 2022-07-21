@@ -500,7 +500,7 @@ function repo_init(){
         'load': {
           'content': '<table><tr>'
               + '<td><input id=level-json type=file>'
-              + '<td><input id=level-load type=button value="Load Level from File">',
+              + '<td><input id=level-load type=button value="Load Level from File"></table>',
           'default': true,
           'group': 'core-menu',
           'label': 'Load Levels',
