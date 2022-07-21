@@ -511,7 +511,7 @@ function repo_init(){
         },
         'load': {
           'content': '<input id=level-file type=file><input id=level-load-file type=button value="Load Level from File"><br>'
-            + '<input id=level-load-textarea type=button value="Load Level from Textarea"><br><textarea id=level-textarea></textarea>',
+            + '<input id=level-load-textarea type=button value="Load Level from Textarea"><br><textarea id=level-textarea>{}</textarea>',
           'default': true,
           'group': 'core-menu',
           'label': 'Load Levels',
