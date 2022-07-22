@@ -202,12 +202,17 @@ function repo_init(){
               core_tab_reset_group({
                 'id': 'editor',
               });
-              const level_file = document.getElementById('level-file').files[0];
-              webgl_level_load({
-                'character': -1,
-                'json': level_file || false,
+              core_file({
+                'file': document.getElementById('level-file').files[0],
+                'todo': function(event){
+                    webgl_level_load({
+                      'character': -1,
+                      'json': JSON.parse(event.target.result),
+                    });
+                    document.title = webgl_properties['title'] || core_repo_title;
+                },
+                'type': 'readAsText',
               });
-              document.title = (level_file !== void 0 ? level_file.name + ' - ' : '') + core_repo_title;
           },
         },
         'level-load-textarea': {
@@ -215,11 +220,12 @@ function repo_init(){
               core_tab_reset_group({
                 'id': 'editor',
               });
+              const level_json = JSON.parse(document.getElementById('level-textarea').value);
               webgl_level_load({
                 'character': -1,
-                'json': JSON.parse(document.getElementById('level-textarea').value),
+                'json': level_json,
               });
-              document.title = core_repo_title;
+              document.title = level_json['title'] || core_repo_title;
           },
         },
         'origin': {
