@@ -185,9 +185,17 @@ function update_select_options(id, source){
 function update_selected_character(){
     const selected_character = document.getElementById('character-select').value;
     for(const property in webgl_characters[selected_character]){
+        const property_value = webgl_characters[selected_character][property];
+
+        if(typeof property_value !== 'boolean'
+          && typeof property_value !== 'number'
+          && typeof property_value !== 'string'){
+            continue;
+        }
+
         core_ui_update({
           'ids': {
-            ['character-properties-' + property]: webgl_characters[selected_character][property],
+            ['character-properties-' + property]: property_value,
           },
         });
     }
@@ -196,9 +204,17 @@ function update_selected_character(){
 function update_selected_entity(){
     const selected_entity = document.getElementById('entity-select').value;
     for(const property in entity_entities[selected_entity]){
+        const property_value = entity_entities[selected_entity][property];
+
+        if(typeof property_value !== 'boolean'
+          && typeof property_value !== 'number'
+          && typeof property_value !== 'string'){
+            continue;
+        }
+
         core_ui_update({
           'ids': {
-            ['entity-properties-' + property]: entity_entities[selected_entity][property],
+            ['entity-properties-' + property]: property_value,
           },
         });
     }
@@ -207,6 +223,14 @@ function update_selected_entity(){
 function update_selected_path(){
     const selected_path = document.getElementById('path-select').value;
     for(const property in webgl_paths[selected_path]){
+        const property_value = webgl_paths[selected_path][property];
+
+        if(typeof property_value !== 'boolean'
+          && typeof property_value !== 'number'
+          && typeof property_value !== 'string'){
+            continue;
+        }
+
         core_ui_update({
           'ids': {
             ['path-properties-' + property]: webgl_paths[selected_path][property],

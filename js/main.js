@@ -633,6 +633,12 @@ function repo_logic(){
     });
 
     for(const property in webgl_properties){
+        if(typeof webgl_properties[property] !== 'boolean'
+          && typeof webgl_properties[property] !== 'number'
+          && typeof webgl_properties[property] !== 'string'){
+            continue;
+        }
+
         core_ui_update({
           'ids': {
             ['properties-' + property]: webgl_properties[property],
