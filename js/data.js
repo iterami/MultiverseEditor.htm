@@ -233,7 +233,7 @@ function update_selected_path(){
 
         core_ui_update({
           'ids': {
-            ['path-properties-' + property]: webgl_paths[selected_path][property],
+            ['path-properties-' + property]: property_value,
           },
         });
     }
