@@ -202,8 +202,12 @@ function repo_init(){
               core_tab_reset_group({
                 'id': 'editor',
               });
+              const files = document.getElementById('level-file').files;
+              if(files.length === 0){
+                  return;
+              }
               core_file({
-                'file': document.getElementById('level-file').files[0],
+                'file': files[0],
                 'todo': function(event){
                     webgl_level_load({
                       'character': -1,
