@@ -51,11 +51,6 @@ function repo_escape(){
             webgl_properties['gravity-axis'] = core_storage_data['gravity-axis'];
             webgl_properties['gravity-max'] = core_storage_data['gravity-max'];
         }
-        if(core_storage_data['multiplier-state']){
-            webgl_properties['jump-movement'] = core_storage_data['jump-movement'];
-            webgl_properties['multiplier-jump'] = core_storage_data['multiplier-jump'];
-            webgl_properties['multiplier-speed'] = core_storage_data['multiplier-speed'];
-        }
         webgl_properties['paused'] = core_storage_data['paused'];
         webgl_properties['textures'] = core_storage_data['textures'];
 
@@ -448,10 +443,6 @@ function repo_init(){
         'gravity-axis': 'dy',
         'gravity-max': -2,
         'gravity-state': false,
-        'jump-movement': 0,
-        'multiplier-jump': 1,
-        'multiplier-speed': 1,
-        'multiplier-state': 0,
         'paused': true,
         'textures': true,
       },
@@ -467,10 +458,6 @@ function repo_init(){
           + '<input id=character-zooms type=checkbox><label for=character-zooms>Zoom</label>'
         + '<td><input id=beforeunload-warning type=checkbox><label for=beforeunload-warning>beforeunload Warning</label><br>'
           + '<input id=paused type=checkbox><label for=paused>Paused</label><br>'
-          + 'Multipliers<select id=multiplier-state><option value=0>Use Level Properties</option><option value=1>Override On</option></select><br>'
-          + '<input class=mini id=multiplier-jump step=any type=number>Jump<br>'
-          + '<input class=mini id=jump-movement step=any type=number>Jump Movement<br>'
-          + '<input class=mini id=multiplier-speed step=any type=number>Speed<br>'
           + '<input id=gravity-state type=checkbox><label for=gravity-state>Gravity Override</label><br>'
           + '<input class=mini id=gravity-acceleration step=any type=number>Acceleration<br>'
           + '<select id=gravity-axis><option value=dx>x</option><option selected value=dy>y</option><option value=dz>z</option></select>Axis<br>'
