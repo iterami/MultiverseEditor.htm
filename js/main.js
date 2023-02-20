@@ -363,9 +363,7 @@ function repo_init(){
         },
         'update-json': {
           'onclick': function(){
-              document.getElementById('exported').value = webgl_json_export({
-                'character': false,
-              });
+              document.getElementById('exported').value = webgl_level_export();
           },
         },
       },
