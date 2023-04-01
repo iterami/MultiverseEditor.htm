@@ -208,7 +208,9 @@ function repo_init(){
                         'character': -1,
                         'json': JSON.parse(event.target.result),
                       })){
-                        document.title = webgl_properties['title'] || core_repo_title;
+                        document.title = webgl_properties['title']
+                          ? webgl_properties['title'] + ' - ' + core_repo_title
+                          : core_repo_title;
 
                     }else{
                         element.value = null;
@@ -228,7 +230,9 @@ function repo_init(){
                 'character': -1,
                 'json': level_json,
               });
-              document.title = level_json['title'] || core_repo_title;
+              document.title = level_json['title']
+                ? level_json['title'] + ' - ' + core_repo_title
+                : core_repo_title;
           },
         },
         'origin': {
