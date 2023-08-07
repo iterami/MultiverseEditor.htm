@@ -683,7 +683,7 @@ function repo_init(){
         },
       },
       'title': 'MultiverseEditor.htm',
-      'ui': '<input id=origin type=button value=Origin><input id=spawn type=button value=Spawn><input id=camera-zoom-set type=button value=Zoom><input class=left id=camera-zoom readonly type=text><br>'
+      'ui': '<input id=origin type=button value=Origin><input id=spawn type=button value=Spawn><input id=camera-zoom-set type=button value=Zoom><input class="left mini" id=camera-zoom readonly type=text><br>'
         + '<input id=translate-x-set type=button value=x><input class=left id=translate-x readonly type=text><input id=rotate-x-set type=button value=x°><input class="left mini" id=rotate-x readonly type=text><br>'
         + '<input id=translate-y-set type=button value=y><input class=left id=translate-y readonly type=text><input id=rotate-y-set type=button value=y°><input class="left mini" id=rotate-y readonly type=text><br>'
         + '<input id=translate-z-set type=button value=z><input class=left id=translate-z readonly type=text><input id=rotate-z-set type=button value=z°><input class="left mini" id=rotate-z readonly type=text><br>'
@@ -755,9 +755,15 @@ function repo_logic(){
         'id-count': entity_id_count,
         'particles-count': entity_groups['_length']['particles'],
         'path-count': Object.keys(webgl_paths).length,
-        'rotate-x': webgl_characters[webgl_character_id]['camera-rotate-x'],
-        'rotate-y': webgl_characters[webgl_character_id]['camera-rotate-y'],
-        'rotate-z': webgl_characters[webgl_character_id]['camera-rotate-z'],
+        'rotate-x': core_round({
+          'number': webgl_characters[webgl_character_id]['camera-rotate-x'],
+        }),
+        'rotate-y': core_round({
+          'number': webgl_characters[webgl_character_id]['camera-rotate-y'],
+        }),
+        'rotate-z': core_round({
+          'number': webgl_characters[webgl_character_id]['camera-rotate-z'],
+        }),
         'skybox-count': entity_groups['_length']['skybox'],
         'translate-x': webgl_characters[webgl_character_id]['translate-x'],
         'translate-y': webgl_characters[webgl_character_id]['translate-y'],
