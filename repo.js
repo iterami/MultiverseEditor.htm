@@ -847,10 +847,11 @@ function update_select_options(id, source){
     );
 }
 
-function update_selected_character(){
-    const selected_character = document.getElementById('character-select').value;
-    for(const property in webgl_characters[selected_character]){
-        const property_value = webgl_characters[selected_character][property];
+function update_selected(type, source){
+    const select_element = document.getElementById(type + '-select');
+    const selected = select_element.value;
+    for(const property in source[selected]){
+        const property_value = source[selected][property];
 
         if(typeof property_value !== 'boolean'
           && typeof property_value !== 'number'
@@ -860,46 +861,29 @@ function update_selected_character(){
 
         core_ui_update({
           'ids': {
-            ['character-properties-' + property]: property_value,
+            [type + '-properties-' + property]: property_value,
           },
         });
     }
+}
+
+function update_selected_character(){
+    update_selected(
+      'character',
+      webgl_characters
+    );
 }
 
 function update_selected_entity(){
-    const selected_entity = document.getElementById('entity-select').value;
-    for(const property in entity_entities[selected_entity]){
-        const property_value = entity_entities[selected_entity][property];
-
-        if(typeof property_value !== 'boolean'
-          && typeof property_value !== 'number'
-          && typeof property_value !== 'string'){
-            continue;
-        }
-
-        core_ui_update({
-          'ids': {
-            ['entity-properties-' + property]: property_value,
-          },
-        });
-    }
+    update_selected(
+      'entity',
+      entity_entities
+    );
 }
 
 function update_selected_path(){
-    const selected_path = document.getElementById('path-select').value;
-    for(const property in webgl_paths[selected_path]){
-        const property_value = webgl_paths[selected_path][property];
-
-        if(typeof property_value !== 'boolean'
-          && typeof property_value !== 'number'
-          && typeof property_value !== 'string'){
-            continue;
-        }
-
-        core_ui_update({
-          'ids': {
-            ['path-properties-' + property]: property_value,
-          },
-        });
-    }
+    update_selected(
+      'path',
+      webgl_paths
+    );
 }
