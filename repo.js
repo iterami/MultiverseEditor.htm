@@ -26,6 +26,24 @@ function character_set_axis(type, axis){
     });
 }
 
+function delete_selected_option(type, todo){
+    const select_element = document.getElementById(type + '-select');
+    const select_value = select_element.value;
+    if(select_value.length === 0
+      || !globalThis.confirm('Delete ' + type + ' "' + select_value + '"?')){
+        return;
+    }
+    todo(select_value);
+    for(const id in select_element.options){
+        const option = select_element.options[id];
+        if(select_value === option.value){
+            select_element.removeChild(option);
+            break;
+        }
+    }
+    globalThis['update_selected_' + type]();
+}
+
 function property_table(id, properties, type){
     const properties_table = document.getElementById(id);
 
@@ -249,14 +267,12 @@ function repo_init(){
         },
         'character-delete': {
           'onclick': function(){
-              const character = document.getElementById('character-select').value;
-              if(character.length === 0){
-                  return;
-              }
-              if(!globalThis.confirm('Delete character "' + character + '"?')){
-                  return;
-              }
-              delete webgl_characters[character];
+              delete_selected_option(
+                'character',
+                function(character){
+                    delete webgl_characters[character];
+                }
+              );
           },
         },
         'character-goto': {
@@ -275,16 +291,14 @@ function repo_init(){
         },
         'entity-delete': {
           'onclick': function(){
-              const entity = document.getElementById('entity-select').value;
-              if(entity.length === 0){
-                  return;
-              }
-              if(!globalThis.confirm('Delete entity "' + entity + '"?')){
-                  return;
-              }
-              entity_remove({
-                'entities': [entity],
-              });
+              delete_selected_option(
+                'entity',
+                function(entity){
+                    entity_remove({
+                      'entities': [entity],
+                    });
+                }
+              );
           },
         },
         'entity-generate': {
@@ -385,14 +399,12 @@ function repo_init(){
         },
         'path-delete': {
           'onclick': function(){
-              const path = document.getElementById('path-select').value;
-              if(path.length === 0){
-                  return;
-              }
-              if(!globalThis.confirm('Delete path "' + path + '"?')){
-                  return;
-              }
-              delete webgl_paths[path];
+              delete_selected_option(
+                'path',
+                function(path){
+                    delete webgl_paths[path];
+                }
+              );
           },
         },
         'path-select': {
