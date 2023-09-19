@@ -693,7 +693,6 @@ function repo_init(){
         + '<input id=translate-z-set type=button value=z><input class=left id=translate-z readonly type=text><input id=rotate-z-set type=button value=z°><input class="left mini" id=rotate-z readonly type=text><br>'
         + '<span id=editor-tabs></span><div id=editor-tabcontent></div>',
     });
-    webgl_storage_init();
 }
 
 function repo_level_load(){
