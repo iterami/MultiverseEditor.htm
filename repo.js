@@ -204,7 +204,6 @@ function repo_escape(){
         }
         if(core_storage_data['gravity-state']){
             webgl_properties['gravity-acceleration'] = core_storage_data['gravity-acceleration'];
-            webgl_properties['gravity-axis'] = core_storage_data['gravity-axis'];
             webgl_properties['gravity-max'] = core_storage_data['gravity-max'];
         }
         webgl_properties['paused'] = core_storage_data['paused'];
@@ -580,7 +579,6 @@ function repo_init(){
         'fog-density': .0001,
         'fog-state': 0,
         'gravity-acceleration': -.05,
-        'gravity-axis': 'dy',
         'gravity-max': -2,
         'gravity-state': false,
         'paused': true,
@@ -600,7 +598,6 @@ function repo_init(){
           + '<input id=paused type=checkbox><label for=paused>Paused</label><br>'
           + '<input id=gravity-state type=checkbox><label for=gravity-state>Gravity Override</label><br>'
           + '<input class=mini id=gravity-acceleration step=any type=number>Acceleration<br>'
-          + '<select id=gravity-axis><option value=dx>x</option><option selected value=dy>y</option><option value=dz>z</option></select>Axis<br>'
           + '<input class=mini id=gravity-max step=any type=number>Max'
         + '<tr><td>Ambient Lighting<select id=ambient-state><option value=0>Use Level Properties</option><option value=1>Override On</option></select><br>'
           + '<input id=ambient-color type=color><br>'
