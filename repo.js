@@ -194,7 +194,6 @@ function repo_escape(){
                 ];
             }
         }
-        webgl_properties['draw-mode'] = core_storage_data['draw-mode'];
         if(core_storage_data['fog-state'] !== 0){
             webgl_properties['fog-state'] = core_storage_data['fog-state'] === 1;
 
@@ -207,7 +206,6 @@ function repo_escape(){
             webgl_properties['gravity-max'] = core_storage_data['gravity-max'];
         }
         webgl_properties['paused'] = core_storage_data['paused'];
-        webgl_properties['textures'] = core_storage_data['textures'];
 
         if(core_storage_data['character-state']){
             if(core_storage_data['character-automoves'] !== 2){
@@ -429,6 +427,21 @@ function repo_init(){
               });
           },
         },
+        'remove-textures': {
+          'onclick': function(){
+              if(!webgl_characters[webgl_character_id]
+               || !globalThis.confirm('Remove all textures?')){
+                  return;
+              }
+
+              for(const entity in entity_entities){
+                  entity_entities[entity]['texture-id'] = 'default.png';
+                  webgl_entity_todo(entity);
+              }
+
+              webgl_draw();
+          },
+        },
         'rotate-x-set': {
           'onclick': function(){
               if(!webgl_characters[webgl_character_id]){
@@ -463,6 +476,26 @@ function repo_init(){
                 'rotate',
                 'z'
               );
+          },
+        },
+        'set-draw-mode': {
+          'onclick': function(){
+              if(!webgl_characters[webgl_character_id]){
+                  return;
+              }
+
+              const draw_mode = document.getElementById('draw-mode').value;
+
+              if(!globalThis.confirm('Set "draw-mode" to "' + draw_mode +  '"?')){
+                  return;
+              }
+
+              for(const entity in entity_entities){
+                  entity_entities[entity]['draw-mode'] = draw_mode;
+                  webgl_entity_todo(entity);
+              }
+
+              webgl_draw();
           },
         },
         'spawn': {
@@ -575,14 +608,12 @@ function repo_init(){
         'directional-vector-x': 0,
         'directional-vector-y': 1,
         'directional-vector-z': 0,
-        'draw-mode': '',
         'fog-density': .0001,
         'fog-state': 0,
         'gravity-acceleration': -.05,
         'gravity-max': -2,
         'gravity-state': false,
         'paused': true,
-        'textures': true,
       },
       'storage-menu': '<table><tr><td>Camera/Character<select id=character-state><option value=0>Use Level Properties</option><option value=1>Override On</option></select><br>'
           + '<input id=character-reticle type=checkbox><label for=character-reticle>Reticle</label> <input id=character-reticle-color type=color>Color<br>'
@@ -606,8 +637,8 @@ function repo_init(){
           + '<input class=mini id=directional-vector-x step=any type=number>X<br>'
           + '<input class=mini id=directional-vector-y step=any type=number>Y<br>'
           + '<input class=mini id=directional-vector-z step=any type=number>Z'
-        + '<td>Draw Mode<select id=draw-mode><option value="">Use Entity Properties</option><option value=LINES>Lines</option><option value=LINE_LOOP>Line Loop</option><option value=LINE_STRIP>Line Strip</option><option value=POINTS>Points</option><option value=TRIANGLES>Triangles</option><option value=TRIANGLE_FAN>Triangle Fan</option><option value=TRIANGLE_STRIP>Triangle Strip</option></select><br>'
-          + '<input id=textures type=checkbox><label for=textures>Textures</label><br>'
+        + '<td><select id=draw-mode><option value=LINES>Lines</option><option value=LINE_LOOP>Line Loop</option><option value=LINE_STRIP>Line Strip</option><option value=POINTS>Points</option><option value=TRIANGLES>Triangles</option><option value=TRIANGLE_FAN>Triangle Fan</option><option value=TRIANGLE_STRIP>Triangle Strip</option></select><input id=set-draw-mode type=button value="Set Draw Mode"><br>'
+          + '<input id=remove-textures type=button value="Remove Textures"><br>'
           + 'Clear Color<select id=clearcolor-state><option value=0>Use Level Properties</option><option value=1>Override On</option></select><br>'
           + '<input id=clearcolor type=color><br>'
           + 'Fog<select id=fog-state><option value=0>Use Level Properties</option><option value=1>Override On</option><option value=2>Override Off</option></select><br>'
