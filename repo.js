@@ -478,6 +478,9 @@ function repo_init(){
               );
           },
         },
+        'screenshot': {
+          'onclick': webgl_screenshot,
+        },
         'set-draw-mode': {
           'onclick': function(){
               if(!webgl_characters[webgl_character_id]){
@@ -553,6 +556,7 @@ function repo_init(){
           },
         },
       },
+      'info': '<input id=screenshot type=button value=Screenshot>',
       'keybinds': {
         86: {
           'todo': function(){
