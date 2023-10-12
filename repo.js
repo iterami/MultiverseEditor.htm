@@ -232,7 +232,7 @@ function repo_init(){
     core_repo_init({
       'beforeunload': {
         'todo': function(){
-            if(webgl_character_level() > -2
+            if(!core_menu_lock
               && core_storage_data['beforeunload-warning']){
                 return 'Exit?';
             }
@@ -241,7 +241,7 @@ function repo_init(){
       'events': {
         'camera-zoom-set': {
           'onclick': function(){
-              if(!webgl_characters[webgl_character_id]){
+              if(core_menu_lock){
                   return;
               }
 
@@ -300,7 +300,7 @@ function repo_init(){
         },
         'entity-generate': {
           'onclick': function(){
-              if(!webgl_characters[webgl_character_id]){
+              if(core_menu_lock){
                   return;
               }
 
@@ -350,6 +350,7 @@ function repo_init(){
               if(element.files.length === 0){
                   return;
               }
+              core_menu_lock = false;
               core_file({
                 'file': element.files[0],
                 'todo': function(event){
@@ -375,6 +376,7 @@ function repo_init(){
                 'id': 'editor',
               });
               const level_json = JSON.parse(document.getElementById('level-textarea').value);
+              core_menu_lock = false;
               webgl_level_load({
                 'character': -1,
                 'json': level_json,
@@ -386,7 +388,7 @@ function repo_init(){
         },
         'origin': {
           'onclick': function(){
-              if(!webgl_characters[webgl_character_id]
+              if(core_menu_lock
                || !globalThis.confirm('Return to origin? (0,0,0)')){
                   return;
               }
@@ -409,6 +411,10 @@ function repo_init(){
         },
         'prefab-generate': {
           'onclick': function(){
+              if(core_menu_lock){
+                  return;
+              }
+
               const properties = core_args({
                 'args': JSON.parse(document.getElementById('generate-properties').value),
                 'defaults': {
@@ -416,10 +422,6 @@ function repo_init(){
                   'prefix': entity_id_count,
                 },
               });
-
-              if(!webgl_characters[properties['character']]){
-                  return;
-              }
 
               core_call({
                 'args': properties,
@@ -429,7 +431,7 @@ function repo_init(){
         },
         'remove-textures': {
           'onclick': function(){
-              if(!webgl_characters[webgl_character_id]
+              if(core_menu_lock
                || !globalThis.confirm('Remove all textures?')){
                   return;
               }
@@ -444,7 +446,7 @@ function repo_init(){
         },
         'rotate-x-set': {
           'onclick': function(){
-              if(!webgl_characters[webgl_character_id]){
+              if(core_menu_lock){
                   return;
               }
 
@@ -456,7 +458,7 @@ function repo_init(){
         },
         'rotate-y-set': {
           'onclick': function(){
-              if(!webgl_characters[webgl_character_id]){
+              if(core_menu_lock){
                   return;
               }
 
@@ -468,7 +470,7 @@ function repo_init(){
         },
         'rotate-z-set': {
           'onclick': function(){
-              if(!webgl_characters[webgl_character_id]){
+              if(core_menu_lock){
                   return;
               }
 
@@ -483,7 +485,7 @@ function repo_init(){
         },
         'set-draw-mode': {
           'onclick': function(){
-              if(!webgl_characters[webgl_character_id]){
+              if(core_menu_lock){
                   return;
               }
 
@@ -503,7 +505,7 @@ function repo_init(){
         },
         'spawn': {
           'onclick': function(){
-              if(!webgl_characters[webgl_character_id]
+              if(core_menu_lock
                || !globalThis.confirm('Return to spawn? ('
                     + webgl_properties['spawn-translate-x'] + ','
                     + webgl_properties['spawn-translate-y'] + ','
@@ -516,7 +518,7 @@ function repo_init(){
         },
         'translate-x-set': {
           'onclick': function(){
-              if(!webgl_characters[webgl_character_id]){
+              if(core_menu_lock){
                   return;
               }
 
@@ -528,7 +530,7 @@ function repo_init(){
         },
         'translate-y-set': {
           'onclick': function(){
-              if(!webgl_characters[webgl_character_id]){
+              if(core_menu_lock){
                   return;
               }
 
@@ -540,7 +542,7 @@ function repo_init(){
         },
         'translate-z-set': {
           'onclick': function(){
-              if(!webgl_characters[webgl_character_id]){
+              if(core_menu_lock){
                   return;
               }
 
@@ -570,6 +572,7 @@ function repo_init(){
         },
       },
       'menu': true,
+      'menu-lock': true,
       'mousebinds': {
         'contextmenu': {
           'preventDefault': true,
