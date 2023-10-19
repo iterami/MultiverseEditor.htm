@@ -558,7 +558,6 @@ function repo_init(){
           },
         },
       },
-      'info': '<input id=screenshot type=button value=Screenshot>',
       'keybinds': {
         86: {
           'todo': function(){
@@ -718,7 +717,7 @@ function repo_init(){
         },
       },
       'title': 'MultiverseEditor.htm',
-      'ui': '<input id=origin type=button value=Origin><input id=spawn type=button value=Spawn><input id=camera-zoom-set type=button value=Zoom><input class="left mini" id=camera-zoom readonly type=text><br>'
+      'ui': '<input id=origin type=button value=Origin><input id=spawn type=button value=Spawn><input id=camera-zoom-set type=button value=Zoom><input class="left mini" id=camera-zoom readonly type=text><input id=screenshot type=button value=Screenshot><br>'
         + '<input id=translate-x-set type=button value=x><input class=left id=translate-x readonly type=text><input id=rotate-x-set type=button value=x°><input class="left mini" id=rotate-x readonly type=text><br>'
         + '<input id=translate-y-set type=button value=y><input class=left id=translate-y readonly type=text><input id=rotate-y-set type=button value=y°><input class="left mini" id=rotate-y readonly type=text><br>'
         + '<input id=translate-z-set type=button value=z><input class=left id=translate-z readonly type=text><input id=rotate-z-set type=button value=z°><input class="left mini" id=rotate-z readonly type=text><br>'
