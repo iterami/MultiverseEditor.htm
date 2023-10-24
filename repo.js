@@ -559,12 +559,12 @@ function repo_init(){
         },
       },
       'keybinds': {
-        86: {
+        'KeyV': {
           'todo': function(){
               webgl_characters[webgl_character_id]['collides'] = !webgl_characters[webgl_character_id]['collides'];
           },
         },
-        192: {
+        'Backquote': {
           'todo': function(){
               webgl_characters[webgl_character_id]['automove'] = !webgl_characters[webgl_character_id]['automove'];
           },
