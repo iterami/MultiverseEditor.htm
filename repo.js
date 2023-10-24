@@ -559,14 +559,14 @@ function repo_init(){
         },
       },
       'keybinds': {
-        'KeyV': {
-          'todo': function(){
-              webgl_characters[webgl_character_id]['collides'] = !webgl_characters[webgl_character_id]['collides'];
-          },
-        },
         'Backquote': {
           'todo': function(){
               webgl_characters[webgl_character_id]['automove'] = !webgl_characters[webgl_character_id]['automove'];
+          },
+        },
+        'KeyV': {
+          'todo': function(){
+              webgl_characters[webgl_character_id]['collides'] = !webgl_characters[webgl_character_id]['collides'];
           },
         },
       },
