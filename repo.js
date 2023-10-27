@@ -211,6 +211,7 @@ function repo_escape(){
             if(core_storage_data['character-automoves'] !== 2){
                 webgl_characters[webgl_character_id]['automove'] = Boolean(core_storage_data['character-automoves']);
             }
+            webgl_characters[webgl_character_id]['camera-lock'] = core_storage_data['character-lock'];
             webgl_characters[webgl_character_id]['collide-range-horizontal'] = core_storage_data['character-collide-range-horizontal'];
             webgl_characters[webgl_character_id]['collide-range-vertical'] = core_storage_data['character-collide-range-vertical'];
             webgl_characters[webgl_character_id]['collides'] = core_storage_data['character-collides'];
@@ -594,6 +595,7 @@ function repo_init(){
         'character-collide-range-horizontal': 2.5,
         'character-collide-range-vertical': 2.5,
         'character-collides': true,
+        'character-lock': true,
         'character-moves': true,
         'character-moves-x': true,
         'character-moves-y': true,
@@ -628,9 +630,9 @@ function repo_init(){
           + '<input class=mini id=character-collide-range-horizontal step=any type=number>Horizontal<br>'
           + '<input class=mini id=character-collide-range-vertical step=any type=number>Vertical<br>'
           + '<select id=character-automoves><option value=1>on</option><option selected value=0>off</option><option value=2>any</option></select>Automove<br>'
+          + '<input id=character-lock type=checkbox><label for=character-lock>Lock</label><input id=character-zooms type=checkbox><label for=character-zooms>Zoom</label><br>'
           + '<input id=character-moves type=checkbox><label for=character-moves>Movement</label><input id=character-moves-x type=checkbox><label for=character-moves-x>X</label><input id=character-moves-y type=checkbox><label for=character-moves-y>Y</label><input id=character-moves-z type=checkbox><label for=character-moves-z>Z</label><br>'
-          + '<input id=character-rotates type=checkbox><label for=character-rotates>Rotation</label><input id=character-rotates-x type=checkbox><label for=character-rotates-x>X</label><input id=character-rotates-y type=checkbox><label for=character-rotates-y>Y</label><input id=character-rotates-z type=checkbox><label for=character-rotates-z>Z</label><br>'
-          + '<input id=character-zooms type=checkbox><label for=character-zooms>Zoom</label>'
+          + '<input id=character-rotates type=checkbox><label for=character-rotates>Rotation</label><input id=character-rotates-x type=checkbox><label for=character-rotates-x>X</label><input id=character-rotates-y type=checkbox><label for=character-rotates-y>Y</label><input id=character-rotates-z type=checkbox><label for=character-rotates-z>Z</label>'
         + '<td><input id=beforeunload-warning type=checkbox><label for=beforeunload-warning>beforeunload Warning</label><br>'
           + '<input id=paused type=checkbox><label for=paused>Paused</label><br>'
           + '<input id=gravity-state type=checkbox><label for=gravity-state>Gravity Override</label><br>'
