@@ -623,13 +623,13 @@ function repo_init(){
         'gravity-state': false,
         'paused': true,
       },
-      'storage-menu': '<table><tr><td>Camera/Character<select id=character-state><option value=0>Use Level Properties</option><option value=1>Override On</option></select><br>'
+      'storage-menu': '<table><tr><td>Camera/Character<select id=character-state><option value=0>Use Level Properties<option value=1>Override On</select><br>'
           + '<input id=character-reticle type=checkbox><label for=character-reticle>Reticle</label> <input id=character-reticle-color type=color>Color<br>'
           + '<input class=mini id=character-speed step=any type=number>Speed<br>'
           + '<input id=character-collides type=checkbox><label for=character-collides>Collides</label>, Range<br>'
           + '<input class=mini id=character-collide-range-horizontal step=any type=number>Horizontal<br>'
           + '<input class=mini id=character-collide-range-vertical step=any type=number>Vertical<br>'
-          + '<select id=character-automoves><option value=1>on</option><option selected value=0>off</option><option value=2>any</option></select>Automove<br>'
+          + '<select id=character-automoves><option value=1>on<option selected value=0>off<option value=2>any</select>Automove<br>'
           + '<input id=character-lock type=checkbox><label for=character-lock>Lock</label><input id=character-zooms type=checkbox><label for=character-zooms>Zoom</label><br>'
           + '<input id=character-moves type=checkbox><label for=character-moves>Movement</label><input id=character-moves-x type=checkbox><label for=character-moves-x>X</label><input id=character-moves-y type=checkbox><label for=character-moves-y>Y</label><input id=character-moves-z type=checkbox><label for=character-moves-z>Z</label><br>'
           + '<input id=character-rotates type=checkbox><label for=character-rotates>Rotation</label><input id=character-rotates-x type=checkbox><label for=character-rotates-x>X</label><input id=character-rotates-y type=checkbox><label for=character-rotates-y>Y</label><input id=character-rotates-z type=checkbox><label for=character-rotates-z>Z</label>'
@@ -638,32 +638,32 @@ function repo_init(){
           + '<input id=gravity-state type=checkbox><label for=gravity-state>Gravity Override</label><br>'
           + '<input class=mini id=gravity-acceleration step=any type=number>Acceleration<br>'
           + '<input class=mini id=gravity-max step=any type=number>Max'
-        + '<tr><td>Ambient Lighting<select id=ambient-state><option value=0>Use Level Properties</option><option value=1>Override On</option></select><br>'
+        + '<tr><td>Ambient Lighting<select id=ambient-state><option value=0>Use Level Properties<option value=1>Override On</select><br>'
           + '<input id=ambient-color type=color><br>'
-          + 'Directional Lighting<select id=directional-state><option value=0>Use Level Properties</option><option value=1>Override On</option><option value=2>Override Off</option></select><br>'
+          + 'Directional Lighting<select id=directional-state><option value=0>Use Level Properties<option value=1>Override On<option value=2>Override Off</select><br>'
           + '<input id=directional-color type=color><br>'
           + '<input class=mini id=directional-vector-x step=any type=number>X<br>'
           + '<input class=mini id=directional-vector-y step=any type=number>Y<br>'
           + '<input class=mini id=directional-vector-z step=any type=number>Z'
-        + '<td><select id=draw-mode><option value=LINES>Lines</option><option value=LINE_LOOP>Line Loop</option><option value=LINE_STRIP>Line Strip</option><option value=POINTS>Points</option><option value=TRIANGLES>Triangles</option><option value=TRIANGLE_FAN>Triangle Fan</option><option value=TRIANGLE_STRIP>Triangle Strip</option></select><input id=set-draw-mode type=button value="Set Draw Mode"><br>'
+        + '<td><select id=draw-mode><option value=LINES>Lines<option value=LINE_LOOP>Line Loop<option value=LINE_STRIP>Line Strip<option value=POINTS>Points<option value=TRIANGLES>Triangles<option value=TRIANGLE_FAN>Triangle Fan<option value=TRIANGLE_STRIP>Triangle Strip</select><input id=set-draw-mode type=button value="Set Draw Mode"><br>'
           + '<input id=remove-textures type=button value="Remove Textures"><br>'
-          + 'Clear Color<select id=clearcolor-state><option value=0>Use Level Properties</option><option value=1>Override On</option></select><br>'
+          + 'Clear Color<select id=clearcolor-state><option value=0>Use Level Properties<option value=1>Override On</select><br>'
           + '<input id=clearcolor type=color><br>'
-          + 'Fog<select id=fog-state><option value=0>Use Level Properties</option><option value=1>Override On</option><option value=2>Override Off</option></select><br>'
+          + 'Fog<select id=fog-state><option value=0>Use Level Properties<option value=1>Override On<option value=2>Override Off</select><br>'
           + '<input class=mini id=fog-density step=any type=number>Density</table>',
       'tabs': {
         'add': {
           'content': '<input id=entity-generate type=button value="Generate Entity"><select id=prefabs-select>'
-              + '<option value=webgl_primitive_cuboid>webgl_primitive_cuboid</option>'
-              + '<option value=webgl_primitive_ellipsoid>webgl_primitive_ellipsoid</option>'
-              + '<option value=webgl_primitive_frustum>webgl_primitive_frustum</option>'
-              + '<option value=prefabs_webgl_cuboid_tree>prefabs_webgl_cuboid_tree</option>'
-              + '<option value=prefabs_webgl_humanoid>prefabs_webgl_humanoid</option>'
-              + '<option value=prefabs_webgl_lines_path>prefabs_webgl_lines_path</option>'
-              + '<option value=prefabs_webgl_lines_shrub>prefabs_webgl_lines_shrub</option>'
-              + '<option value=prefabs_webgl_lines_tree>prefabs_webgl_lines_tree</option>'
-              + '<option disabled value=prefabs_webgl_tiles>prefabs_webgl_tiles</option>'
-              + '<option  value=prefabs_webgl_tree_2d>prefabs_webgl_tree_2d</option>'
+              + '<option value=webgl_primitive_cuboid>webgl_primitive_cuboid'
+              + '<option value=webgl_primitive_ellipsoid>webgl_primitive_ellipsoid'
+              + '<option value=webgl_primitive_frustum>webgl_primitive_frustum'
+              + '<option value=prefabs_webgl_cuboid_tree>prefabs_webgl_cuboid_tree'
+              + '<option value=prefabs_webgl_humanoid>prefabs_webgl_humanoid'
+              + '<option value=prefabs_webgl_lines_path>prefabs_webgl_lines_path'
+              + '<option value=prefabs_webgl_lines_shrub>prefabs_webgl_lines_shrub'
+              + '<option value=prefabs_webgl_lines_tree>prefabs_webgl_lines_tree'
+              + '<option disabled value=prefabs_webgl_tiles>prefabs_webgl_tiles'
+              + '<option  value=prefabs_webgl_tree_2d>prefabs_webgl_tree_2d'
             + '</select><input id=prefab-generate type=button value="Generate Prefab"><br>'
             + '<textarea id=generate-properties>{\n}</textarea>',
           'group': 'editor',
@@ -849,7 +849,7 @@ function update_select_options(id, source){
 
     let options = [];
     for(const option in source){
-        options.push('<option value="' + option + '">' + option + '</option>');
+        options.push('<option value="' + option + '">' + option);
 
         if(selected_option === option){
             option_available = true;
