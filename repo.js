@@ -733,6 +733,10 @@ function repo_level_load(){
       webgl_properties,
       'webgl'
     );
+    const webgl_animated_textures = document.getElementById('webgl-animated-textures');
+    if(webgl_animated_textures){
+        webgl_animated_textures.classList.remove('hidden');
+    }
 }
 
 function repo_logic(){
