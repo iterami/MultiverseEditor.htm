@@ -208,6 +208,7 @@ function repo_escape(){
         webgl_properties['paused'] = core_storage_data['paused'];
 
         if(core_storage_data['character-state']){
+            webgl_properties['camera-zoom-max'] = core_storage_data['character-zoom-max'];
             if(core_storage_data['character-automoves'] !== 2){
                 webgl_characters[webgl_character_id]['automove'] = Boolean(core_storage_data['character-automoves']);
             }
@@ -608,7 +609,8 @@ function repo_init(){
         'character-rotates-z': true,
         'character-speed': 1,
         'character-state': 0,
-        'character-zooms': true,
+        'character-zoom': true,
+        'character-zoom-max': 50,
         'clearcolor': '#000000',
         'clearcolor-state': 0,
         'directional-color': '#ffffff',
@@ -630,9 +632,10 @@ function repo_init(){
           + '<input class=mini id=character-collide-range-horizontal step=any type=number>Horizontal<br>'
           + '<input class=mini id=character-collide-range-vertical step=any type=number>Vertical<br>'
           + '<select id=character-automoves><option value=1>on<option selected value=0>off<option value=2>any</select>Automove<br>'
-          + '<input id=character-lock type=checkbox><label for=character-lock>Lock</label><input id=character-zooms type=checkbox><label for=character-zooms>Zoom</label><br>'
+          + '<input id=character-lock type=checkbox><label for=character-lock>Camera Lock</label><br>'
           + '<input id=character-moves type=checkbox><label for=character-moves>Movement</label><input id=character-moves-x type=checkbox><label for=character-moves-x>X</label><input id=character-moves-y type=checkbox><label for=character-moves-y>Y</label><input id=character-moves-z type=checkbox><label for=character-moves-z>Z</label><br>'
-          + '<input id=character-rotates type=checkbox><label for=character-rotates>Rotation</label><input id=character-rotates-x type=checkbox><label for=character-rotates-x>X</label><input id=character-rotates-y type=checkbox><label for=character-rotates-y>Y</label><input id=character-rotates-z type=checkbox><label for=character-rotates-z>Z</label>'
+          + '<input id=character-rotates type=checkbox><label for=character-rotates>Rotation</label><input id=character-rotates-x type=checkbox><label for=character-rotates-x>X</label><input id=character-rotates-y type=checkbox><label for=character-rotates-y>Y</label><input id=character-rotates-z type=checkbox><label for=character-rotates-z>Z</label><br>'
+          + '<input id=character-zoom type=checkbox><label for=character-zoom>Zoom</label><input class=mini id=character-zoom-max step=any type=number>Max'
         + '<td><input id=beforeunload-warning type=checkbox><label for=beforeunload-warning>beforeunload Warning</label><br>'
           + '<input id=paused type=checkbox><label for=paused>Paused</label><br>'
           + '<input id=gravity-state type=checkbox><label for=gravity-state>Gravity Override</label><br>'
@@ -719,7 +722,7 @@ function repo_init(){
         },
       },
       'title': 'MultiverseEditor.htm',
-      'ui': '<input id=origin type=button value=Origin><input id=spawn type=button value=Spawn><input id=camera-zoom-set type=button value=Zoom><input class="left mini" id=camera-zoom readonly type=text><input id=screenshot type=button value=Screenshot><br>'
+      'ui': '<input id=origin type=button value=Origin><input id=spawn type=button value=Spawn><input id=camera-zoom-set type=button value=Zoom><input class="left mini" id=camera-zoom readonly type=text>/<span id=camera-zoom-max></span><input id=screenshot type=button value=Screenshot><br>'
         + '<input id=translate-x-set type=button value=x><input class=left id=translate-x readonly type=text><input id=rotate-x-set type=button value=x°><input class="left mini" id=rotate-x readonly type=text><br>'
         + '<input id=translate-y-set type=button value=y><input class=left id=translate-y readonly type=text><input id=rotate-y-set type=button value=y°><input class="left mini" id=rotate-y readonly type=text><br>'
         + '<input id=translate-z-set type=button value=z><input class=left id=translate-z readonly type=text><input id=rotate-z-set type=button value=z°><input class="left mini" id=rotate-z readonly type=text><br>'
@@ -762,7 +765,7 @@ function repo_logic(){
             webgl_characters[webgl_character_id]['camera-rotate-z'] = core_ui_values['rotate-z'] || 0;
             webgl_characters[webgl_character_id]['rotate-z'] = core_ui_values['rotate-z'] || 0;
         }
-        if(!core_storage_data['character-zooms']){
+        if(!core_storage_data['character-zoom']){
             webgl_characters[webgl_character_id]['camera-zoom'] = core_ui_values['camera-zoom'] || 0;
         }
     }
@@ -789,6 +792,7 @@ function repo_logic(){
     core_ui_update({
       'ids': {
         'camera-zoom': webgl_characters[webgl_character_id]['camera-zoom'],
+        'camera-zoom-max': webgl_properties['camera-zoom-max'],
         'character-count': webgl_character_count,
         'foreground-count': entity_groups['_length']['foreground'],
         'id-count': entity_id_count,
