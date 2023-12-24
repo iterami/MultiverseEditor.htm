@@ -213,8 +213,8 @@ function repo_escape(){
                 webgl_characters[webgl_character_id]['automove'] = Boolean(core_storage_data['character-automoves']);
             }
             webgl_characters[webgl_character_id]['camera-lock'] = core_storage_data['character-lock'];
-            webgl_characters[webgl_character_id]['collide-range-horizontal'] = core_storage_data['character-collide-range-horizontal'];
-            webgl_characters[webgl_character_id]['collide-range-vertical'] = core_storage_data['character-collide-range-vertical'];
+            webgl_characters[webgl_character_id]['collide-range-xz'] = core_storage_data['character-collide-range-xz'];
+            webgl_characters[webgl_character_id]['collide-range-y'] = core_storage_data['character-collide-range-y'];
             webgl_characters[webgl_character_id]['collides'] = core_storage_data['character-collides'];
             webgl_characters[webgl_character_id]['reticle'] = !core_storage_data['character-reticle']
               ? false
@@ -593,8 +593,8 @@ function repo_init(){
         'ambient-state': 0,
         'beforeunload-warning': true,
         'character-automoves': 2,
-        'character-collide-range-horizontal': 2.5,
-        'character-collide-range-vertical': 2.5,
+        'character-collide-range-xz': 2.5,
+        'character-collide-range-y': 2.5,
         'character-collides': true,
         'character-lock': true,
         'character-moves': true,
@@ -628,12 +628,9 @@ function repo_init(){
       'storage-menu': '<table><tr><td>Camera/Character<select id=character-state><option value=0>Use Level Properties<option value=1>Override On</select><br>'
           + '<input id=character-reticle type=checkbox><label for=character-reticle>Reticle</label> <input id=character-reticle-color type=color>Color<br>'
           + '<input class=mini id=character-speed step=any type=number>Speed<br>'
-          + '<input id=character-collides type=checkbox><label for=character-collides>Collides</label>, Range<br>'
-          + '<input class=mini id=character-collide-range-horizontal step=any type=number>Horizontal<br>'
-          + '<input class=mini id=character-collide-range-vertical step=any type=number>Vertical<br>'
-          + '<select id=character-automoves><option value=1>on<option selected value=0>off<option value=2>any</select>Automove<br>'
+          + '<input id=character-collides type=checkbox><label for=character-collides>Collides</label> <input class=mini id=character-collide-range-xz step=any type=number>XZ <input class=mini id=character-collide-range-y step=any type=number>Y<br>'
           + '<input id=character-lock type=checkbox><label for=character-lock>Camera Lock</label><br>'
-          + '<input id=character-moves type=checkbox><label for=character-moves>Movement</label><input id=character-moves-x type=checkbox><label for=character-moves-x>X</label><input id=character-moves-y type=checkbox><label for=character-moves-y>Y</label><input id=character-moves-z type=checkbox><label for=character-moves-z>Z</label><br>'
+          + '<input id=character-moves type=checkbox><label for=character-moves>Movement</label><input id=character-moves-x type=checkbox><label for=character-moves-x>X</label><input id=character-moves-y type=checkbox><label for=character-moves-y>Y</label><input id=character-moves-z type=checkbox><label for=character-moves-z>Z</label> <select id=character-automoves><option value=1>on<option selected value=0>off<option value=2>any</select>Automove<br>'
           + '<input id=character-rotates type=checkbox><label for=character-rotates>Rotation</label><input id=character-rotates-x type=checkbox><label for=character-rotates-x>X</label><input id=character-rotates-y type=checkbox><label for=character-rotates-y>Y</label><input id=character-rotates-z type=checkbox><label for=character-rotates-z>Z</label><br>'
           + '<input id=character-zoom type=checkbox><label for=character-zoom>Zoom</label><input class=mini id=character-zoom-max step=any type=number>Max'
         + '<td><input id=beforeunload-warning type=checkbox><label for=beforeunload-warning>beforeunload Warning</label><br>'
@@ -644,10 +641,7 @@ function repo_init(){
         + '<tr><td>Ambient Lighting<select id=ambient-state><option value=0>Use Level Properties<option value=1>Override On</select><br>'
           + '<input id=ambient-color type=color><br>'
           + 'Directional Lighting<select id=directional-state><option value=0>Use Level Properties<option value=1>Override On<option value=2>Override Off</select><br>'
-          + '<input id=directional-color type=color><br>'
-          + '<input class=mini id=directional-vector-x step=any type=number>X<br>'
-          + '<input class=mini id=directional-vector-y step=any type=number>Y<br>'
-          + '<input class=mini id=directional-vector-z step=any type=number>Z'
+          + '<input id=directional-color type=color><input class=mini id=directional-vector-x step=any type=number>X <input class=mini id=directional-vector-y step=any type=number>Y <input class=mini id=directional-vector-z step=any type=number>Z'
         + '<td><select id=draw-mode><option value=LINES>Lines<option value=LINE_LOOP>Line Loop<option value=LINE_STRIP>Line Strip<option value=POINTS>Points<option value=TRIANGLES>Triangles<option value=TRIANGLE_FAN>Triangle Fan<option value=TRIANGLE_STRIP>Triangle Strip</select><input id=set-draw-mode type=button value="Set Draw Mode"><br>'
           + '<input id=remove-textures type=button value="Remove Textures"><br>'
           + 'Clear Color<select id=clearcolor-state><option value=0>Use Level Properties<option value=1>Override On</select><br>'
