@@ -337,7 +337,7 @@ function repo_init(){
               if(entity.length === 0){
                   return;
               }
-              webgl_entity_todo(entity);
+              webgl_entity_init(entity);
           },
         },
         'entity-select': {
@@ -440,7 +440,10 @@ function repo_init(){
 
               for(const entity in entity_entities){
                   entity_entities[entity]['texture-id'] = 'default.png';
-                  webgl_entity_todo(entity);
+                  webgl_texture_init({
+                    'animated': false,
+                    'id': entity_entities[entity]['texture-id'],
+                  });
               }
 
               webgl_draw();
@@ -499,7 +502,6 @@ function repo_init(){
 
               for(const entity in entity_entities){
                   entity_entities[entity]['draw-mode'] = draw_mode;
-                  webgl_entity_todo(entity);
               }
 
               webgl_draw();
