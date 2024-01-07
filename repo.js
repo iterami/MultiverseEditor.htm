@@ -438,12 +438,12 @@ function repo_init(){
                   return;
               }
 
+              webgl_texture_init({
+                'id': 'default.png',
+              });
+
               for(const entity in entity_entities){
                   entity_entities[entity]['texture-id'] = 'default.png';
-                  webgl_texture_init({
-                    'animated': false,
-                    'id': entity_entities[entity]['texture-id'],
-                  });
               }
 
               webgl_draw();
