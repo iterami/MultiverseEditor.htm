@@ -337,9 +337,7 @@ function repo_init(){
         },
         'level-load-file': {
           'onclick': function(){
-              core_tab_reset_group({
-                'id': 'editor',
-              });
+              core_tab_reset_group('editor');
               const element = document.getElementById('level-file');
               if(element.files.length === 0){
                   return;
@@ -366,9 +364,7 @@ function repo_init(){
         },
         'level-load-textarea': {
           'onclick': function(){
-              core_tab_reset_group({
-                'id': 'editor',
-              });
+              core_tab_reset_group('editor');
               const level_json = JSON.parse(document.getElementById('level-textarea').value);
               core_menu_lock = false;
               webgl_level_load({
