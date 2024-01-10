@@ -160,17 +160,13 @@ function repo_escape(){
     if(!core_menu_open
       && webgl_character_level() > -2){
         if(core_storage_data['ambient-state'] !== 0){
-            const rgb = core_hex_to_rgb({
-              'hex': core_storage_data['ambient-color'],
-            });
+            const rgb = core_hex_to_rgb(core_storage_data['ambient-color']);
             webgl_properties['ambient-blue'] = rgb['blue'] / 255;
             webgl_properties['ambient-green'] = rgb['green'] / 255;
             webgl_properties['ambient-red'] = rgb['red'] / 255;
         }
         if(core_storage_data['clearcolor-state'] !== 0){
-            const rgb = core_hex_to_rgb({
-              'hex': core_storage_data['clearcolor'],
-            });
+            const rgb = core_hex_to_rgb(core_storage_data['clearcolor']);
             webgl_clearcolor_set({
               'blue': rgb['blue'] / 255,
               'green': rgb['green'] / 255,
@@ -181,9 +177,7 @@ function repo_escape(){
             webgl_properties['directional-state'] = core_storage_data['directional-state'] === 1;
 
             if(webgl_properties['directional-state']){
-                const rgb = core_hex_to_rgb({
-                  'hex': core_storage_data['directional-color'],
-                });
+                const rgb = core_hex_to_rgb(core_storage_data['directional-color']);
                 webgl_properties['directional-blue'] = rgb['blue'] / 255;
                 webgl_properties['directional-green'] = rgb['green'] / 255;
                 webgl_properties['directional-red'] = rgb['red'] / 255;
@@ -259,9 +253,7 @@ function repo_init(){
               if(character.length === 0){
                   return;
               }
-              webgl_character_set({
-                'id': character,
-              });
+              webgl_character_set(character);
           },
         },
         'character-delete': {
