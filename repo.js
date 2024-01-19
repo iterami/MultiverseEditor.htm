@@ -50,7 +50,7 @@ function property_table(id, properties, type){
     if(!properties_table.innerHTML.length){
         let properties_html = '<tr class=header><td>Property<td>Value';
         for(const property in properties){
-            const property_type = typeof properties[property];
+            const property_type = core_type(properties[property]);
 
             if(property_type === 'object'){
                 properties_html += '<tr><td>' + property + '<td><input id="' + id + '-' + property + '" readonly type=text>';
@@ -69,7 +69,7 @@ function property_table(id, properties, type){
     }
 
     for(const property in properties){
-        const property_type = typeof properties[property];
+        const property_type = core_type(properties[property]);
 
         if(property_type === 'boolean'){
             const checkbox = document.getElementById(id + '-' + property);
@@ -804,9 +804,11 @@ function repo_logic(){
     });
 
     for(const property in webgl_properties){
-        if(typeof webgl_properties[property] !== 'boolean'
-          && typeof webgl_properties[property] !== 'number'
-          && typeof webgl_properties[property] !== 'string'){
+        const property_type = core_type(webgl_properties[property]);
+
+        if(property_type !== 'boolean'
+          && property_type !== 'number'
+          && property_type !== 'string'){
             continue;
         }
 
@@ -869,17 +871,17 @@ function update_selected(type, source){
     const select_element = document.getElementById(type + '-select');
     const selected = select_element.value;
     for(const property in source[selected]){
-        const property_value = source[selected][property];
+        const property_type = core_type(source[selected][property]);
 
-        if(typeof property_value !== 'boolean'
-          && typeof property_value !== 'number'
-          && typeof property_value !== 'string'){
+        if(property_type !== 'boolean'
+          && property_type !== 'number'
+          && property_type !== 'string'){
             continue;
         }
 
         core_ui_update({
           'ids': {
-            [type + '-properties-' + property]: property_value,
+            [type + '-properties-' + property]: source[selected][property],
           },
         });
     }
