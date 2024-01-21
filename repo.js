@@ -61,7 +61,7 @@ function property_table(id, properties, type){
 
             }else{
                 properties_html += '<tr><td>'
-                  + '<input id="' + id + '-button-' + property + '" type=button value=' + property + '>'
+                  + '<button id="' + id + '-button-' + property + '" type=button>' + property + '</button>'
                   + '<td id="' + id + '-' + property + '">';
             }
         }
@@ -632,15 +632,15 @@ function repo_init(){
           + '<input id=ambient-color type=color><br>'
           + 'Directional Lighting<select id=directional-state><option value=0>Use Level Properties<option value=1>Override On<option value=2>Override Off</select><br>'
           + '<input id=directional-color type=color><input class=mini id=directional-vector-x step=any type=number>X <input class=mini id=directional-vector-y step=any type=number>Y <input class=mini id=directional-vector-z step=any type=number>Z'
-        + '<td><select id=draw-mode><option value=LINES>Lines<option value=LINE_LOOP>Line Loop<option value=LINE_STRIP>Line Strip<option value=POINTS>Points<option value=TRIANGLES>Triangles<option value=TRIANGLE_FAN>Triangle Fan<option value=TRIANGLE_STRIP>Triangle Strip</select><input id=set-draw-mode type=button value="Set Draw Mode"><br>'
-          + '<input id=remove-textures type=button value="Remove Textures"><br>'
+        + '<td><select id=draw-mode><option value=LINES>Lines<option value=LINE_LOOP>Line Loop<option value=LINE_STRIP>Line Strip<option value=POINTS>Points<option value=TRIANGLES>Triangles<option value=TRIANGLE_FAN>Triangle Fan<option value=TRIANGLE_STRIP>Triangle Strip</select><button id=set-draw-mode type=button>Set Draw Mode</button><br>'
+          + '<button id=remove-textures type=button>Remove Textures</button><br>'
           + 'Clear Color<select id=clearcolor-state><option value=0>Use Level Properties<option value=1>Override On</select><br>'
           + '<input id=clearcolor type=color><br>'
           + 'Fog<select id=fog-state><option value=0>Use Level Properties<option value=1>Override On<option value=2>Override Off</select><br>'
           + '<input class=mini id=fog-density step=any type=number>Density</table>',
       'tabs': {
         'add': {
-          'content': '<input id=entity-generate type=button value="Generate Entity"><select id=prefabs-select>'
+          'content': '<button id=entity-generate type=button>Generate Entity</button><select id=prefabs-select>'
               + '<option value=webgl_primitive_cuboid>webgl_primitive_cuboid'
               + '<option value=webgl_primitive_ellipsoid>webgl_primitive_ellipsoid'
               + '<option value=webgl_primitive_frustum>webgl_primitive_frustum'
@@ -654,37 +654,37 @@ function repo_init(){
               + '<option value=prefabs_webgl_lines_tree>prefabs_webgl_lines_tree'
               + '<option disabled value=prefabs_webgl_tiles>prefabs_webgl_tiles'
               + '<option value=prefabs_webgl_tree_2d>prefabs_webgl_tree_2d'
-            + '</select><input id=prefab-generate type=button value="Generate Prefab"><br>'
+            + '</select><button id=prefab-generate type=button>Generate Prefab</button><br>'
             + '<textarea id=generate-properties>{\n}</textarea>',
           'group': 'editor',
           'label': 'Add',
         },
         'character-properties': {
-          'content': '<select id=character-select></select><input id=character-control type=button value=Control><input id=character-delete type=button value=Delete><input id=character-goto type=button value="Go To">'
+          'content': '<select id=character-select></select><button id=character-control type=button>Control</button><button id=character-delete type=button>Delete</button><button id=character-goto type=button>Go To</button>'
               + '<table id=character-properties></table>',
           'group': 'editor',
           'label': 'Characters',
         },
         'entity-properties': {
-          'content': '<select id=entity-select></select><input id=entity-delete type=button value=Delete><input id=entity-goto type=button value="Go To"><input id=entity-remake type=button value=Remake>'
+          'content': '<select id=entity-select></select><button id=entity-delete type=button>Delete</button><button id=entity-goto type=button>Go To</button><button id=entity-remake type=button>Remake</button>'
               + '<table id=entity-properties></table>',
           'group': 'editor',
           'label': 'Entities',
         },
         'export': {
-          'content': '<input id=update-json type=button value="Update Level JSON"><br><textarea id=exported></textarea>',
+          'content': '<button id=update-json type=button>Update Level JSON</button><br><textarea id=exported></textarea>',
           'group': 'core-menu',
           'label': 'Export Level',
         },
         'load': {
-          'content': '<input id=level-file type=file><input id=level-load-file type=button value="Load Level from File"><br>'
-            + '<input id=level-load-textarea type=button value="Load Level from Textarea"><br><textarea id=level-textarea>{}</textarea>',
+          'content': '<input id=level-file type=file><button id=level-load-file type=button>Load Level from File</button><br>'
+            + '<button id=level-load-textarea type=button>Load Level from Textarea</button><br><textarea id=level-textarea>{}</textarea>',
           'default': true,
           'group': 'core-menu',
           'label': 'Load Levels',
         },
         'paths': {
-          'content': '<select id=path-select></select><input id=path-delete type=button value=Delete>'
+          'content': '<select id=path-select></select><button id=path-delete type=button>Delete</button>'
               + '<table id=path-properties></table>',
           'group': 'editor',
           'label': 'Paths',
@@ -709,10 +709,10 @@ function repo_init(){
         },
       },
       'title': 'MultiverseEditor.htm',
-      'ui': '<input id=origin type=button value=Origin><input id=spawn type=button value=Spawn><input id=camera-zoom-set type=button value=Zoom><input class="left mini" id=camera-zoom readonly type=text>/<span id=camera-zoom-max></span><input id=screenshot type=button value=Screenshot><br>'
-        + '<input id=translate-x-set type=button value=x><input class=left id=translate-x readonly type=text><input id=rotate-x-set type=button value=x°><input class="left mini" id=rotate-x readonly type=text><br>'
-        + '<input id=translate-y-set type=button value=y><input class=left id=translate-y readonly type=text><input id=rotate-y-set type=button value=y°><input class="left mini" id=rotate-y readonly type=text><br>'
-        + '<input id=translate-z-set type=button value=z><input class=left id=translate-z readonly type=text><input id=rotate-z-set type=button value=z°><input class="left mini" id=rotate-z readonly type=text><br>'
+      'ui': '<button id=origin type=button>Origin</button><button id=spawn type=button>Spawn</button><button id=camera-zoom-set type=button>Zoom</button><input class="left mini" id=camera-zoom readonly type=text>/<span id=camera-zoom-max></span><button id=screenshot type=button>Screenshot</button><br>'
+        + '<button id=translate-x-set type=button>x</button><input class=left id=translate-x readonly type=text><button id=rotate-x-set type=button>x°</button><input class="left mini" id=rotate-x readonly type=text><br>'
+        + '<button id=translate-y-set type=button>y</button><input class=left id=translate-y readonly type=text><button id=rotate-y-set type=button>y°</button><input class="left mini" id=rotate-y readonly type=text><br>'
+        + '<button id=translate-z-set type=button>z</button><input class=left id=translate-z readonly type=text><button id=rotate-z-set type=button>z°</button><input class="left mini" id=rotate-z readonly type=text><br>'
         + '<span id=editor-tabs></span><div id=editor-tabcontent></div>',
     });
 }
