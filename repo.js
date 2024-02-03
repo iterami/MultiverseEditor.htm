@@ -282,7 +282,8 @@ function repo_init(){
         },
         'context-toggle': {
           'onclick': function(){
-              if(core_menu_lock){
+              if(webgl === 0
+                && context === 0){
                   return;
               }
 
