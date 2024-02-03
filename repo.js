@@ -280,24 +280,20 @@ function repo_init(){
         'character-select': {
           'onchange': update_selected_character,
         },
-        'context-lose': {
+        'context-toggle': {
           'onclick': function(){
               if(core_menu_lock){
                   return;
               }
 
-              context = webgl.getExtension("WEBGL_lose_context");
-              context.loseContext();
-          },
-        },
-        'context-restore': {
-          'onclick': function(){
-              if(core_menu_lock
-                || context === 0){
-                  return;
-              }
+              if(context === 0){
+                  context = webgl.getExtension("WEBGL_lose_context");
+                  context.loseContext();
 
-              context.restoreContext();
+              }else{
+                  context.restoreContext();
+                  context = 0;
+              }
           },
         },
         'entity-delete': {
@@ -732,8 +728,8 @@ function repo_init(){
       },
       'title': 'MultiverseEditor.htm',
       'ui': '<button id=origin type=button>Origin</button><button id=spawn type=button>Spawn</button><button id=camera-zoom-set type=button>Zoom</button><input class="left mini" id=camera-zoom readonly type=text>/<span id=camera-zoom-max></span><button id=screenshot type=button>Screenshot</button><br>'
-        + '<button id=translate-x-set type=button>x</button><input class=left id=translate-x readonly type=text><button id=rotate-x-set type=button>x°</button><input class="left mini" id=rotate-x readonly type=text><button id=context-lose type=button>Lose Context</button><br>'
-        + '<button id=translate-y-set type=button>y</button><input class=left id=translate-y readonly type=text><button id=rotate-y-set type=button>y°</button><input class="left mini" id=rotate-y readonly type=text><button id=context-restore type=button>Restore Context</button><br>'
+        + '<button id=translate-x-set type=button>x</button><input class=left id=translate-x readonly type=text><button id=rotate-x-set type=button>x°</button><input class="left mini" id=rotate-x readonly type=text><button id=context-toggle type=button>Context</button><br>'
+        + '<button id=translate-y-set type=button>y</button><input class=left id=translate-y readonly type=text><button id=rotate-y-set type=button>y°</button><input class="left mini" id=rotate-y readonly type=text><br>'
         + '<button id=translate-z-set type=button>z</button><input class=left id=translate-z readonly type=text><button id=rotate-z-set type=button>z°</button><input class="left mini" id=rotate-z readonly type=text><br>'
         + '<span id=editor-tabs></span><div id=editor-tabcontent></div>',
     });
