@@ -159,6 +159,10 @@ function property_table(id, properties, type){
 function repo_escape(){
     if(!core_menu_open
       && webgl_character_level() > -2){
+        if(!webgl_context_valid){
+            return;
+        }
+
         if(core_storage_data['ambient-state'] !== 0){
             const rgb = core_hex_to_rgb(core_storage_data['ambient-color']);
             webgl_properties['ambient-blue'] = rgb['blue'] / 255;
