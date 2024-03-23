@@ -224,7 +224,7 @@ function repo_escape(){
 
     }else{
         document.getElementById('tabcontent-properties').style.display = 'none';
-        document.getElementById('repo-ui').style.display = 'block';
+        core_elements['repo-ui'].style.display = 'block';
     }
 }
 
