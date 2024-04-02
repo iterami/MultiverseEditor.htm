@@ -48,7 +48,7 @@ function property_table(id, properties, type){
     const properties_table = document.getElementById(id);
 
     if(!properties_table.innerHTML.length){
-        let properties_html = '<tr class=header><td>Property<td>Value';
+        let properties_html = '';
         for(const property in properties){
             const property_type = core_type(properties[property]);
 
@@ -691,13 +691,13 @@ function repo_init(){
         },
         'character-properties': {
           'content': '<select id=character-select></select><button id=character-control type=button>Control</button><button id=character-delete type=button>Delete</button><button id=character-goto type=button>Go To</button>'
-              + '<table id=character-properties></table>',
+              + '<table><thead><tr class=header><td>Property<td>Value<tbody id=character-properties></table>',
           'group': 'editor',
           'label': 'Characters',
         },
         'entity-properties': {
           'content': '<select id=entity-select></select><button id=entity-delete type=button>Delete</button><button id=entity-goto type=button>Go To</button><button id=entity-remake type=button>Remake</button>'
-              + '<table id=entity-properties></table>',
+              + '<table><thead><tr class=header><td>Property<td>Value<tbody id=entity-properties></table>',
           'group': 'editor',
           'label': 'Entities',
         },
@@ -715,12 +715,12 @@ function repo_init(){
         },
         'paths': {
           'content': '<select id=path-select></select><button id=path-delete type=button>Delete</button>'
-              + '<table id=path-properties></table>',
+              + '<table><thead><tr class=header><td>Property<td>Value<tbody id=path-properties></table>',
           'group': 'editor',
           'label': 'Paths',
         },
         'properties': {
-          'content': '<table id=properties></table>',
+          'content': '<table><thead><tr class=header><td>Property<td>Value<tbody id=properties></table>',
           'group': 'editor',
           'label': 'Properties',
         },
