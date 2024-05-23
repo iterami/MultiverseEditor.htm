@@ -434,10 +434,7 @@ function repo_init(){
                 },
               });
 
-              core_call({
-                'args': properties,
-                'todo': document.getElementById('prefabs-select').value,
-              });
+              globalThis[document.getElementById('prefabs-select').value]?.(properties);
           },
         },
         'remove-textures': {
