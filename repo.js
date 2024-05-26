@@ -871,7 +871,7 @@ function update_select_options(id, source){
     let selected_option = select.value;
     let option_available = false;
 
-    let options = [];
+    const options = [];
     for(const option in source){
         options.push('<option value="' + option + '">' + option);
 
@@ -879,8 +879,9 @@ function update_select_options(id, source){
             option_available = true;
         }
     }
-    options = core_sort_strings({
+    core_sort_strings({
       'array': options,
+      'clone': false,
     });
     select.innerHTML = options.join('');
     if(option_available){
