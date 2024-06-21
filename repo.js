@@ -68,6 +68,10 @@ function property_table(id, properties, type){
         properties_table.innerHTML = properties_html;
     }
 
+    const character_select = core_elements['character-select'].value;
+    const entity_select = core_elements['entity-select'].value;
+    const path_select = core_elements['path-select'].value;
+
     for(const property in properties){
         const property_type = core_type(properties[property]);
 
@@ -80,19 +84,19 @@ function property_table(id, properties, type){
 
             if(type === 'character'){
                 checkbox.onchange = function(){
-                    webgl_characters[document.getElementById('character-select').value][property] = this.checked;
+                    webgl_characters[character_select][property] = this.checked;
                     webgl_uniform_update();
                 }
 
             }else if(type === 'entity'){
                 checkbox.onchange = function(){
-                    entity_entities[document.getElementById('entity-select').value][property] = this.checked;
+                    entity_entities[entity_select][property] = this.checked;
                     webgl_uniform_update();
                 }
 
             }else if(type === 'path'){
                 checkbox.onchange = function(){
-                    webgl_paths[document.getElementById('path-select').value][property] = this.checked;
+                    webgl_paths[path_select][property] = this.checked;
                     webgl_uniform_update();
                 }
 
@@ -111,33 +115,30 @@ function property_table(id, properties, type){
 
             if(type === 'character'){
                 property_button.onclick = function(){
-                    const selected_character = document.getElementById('character-select').value;
                     set_property(
-                      webgl_characters[selected_character],
+                      webgl_characters[character_select],
                       property,
-                      selected_character
+                      character_select
                     );
                     webgl_uniform_update();
                 }
 
             }else if(type === 'entity'){
                 property_button.onclick = function(){
-                    const selected_entity = document.getElementById('entity-select').value;
                     set_property(
-                      entity_entities[selected_entity],
+                      entity_entities[entity_select],
                       property,
-                      selected_entity
+                      entity_select
                     );
                     webgl_uniform_update();
                 }
 
             }else if(type === 'path'){
                 property_button.onclick = function(){
-                    const selected_path = document.getElementById('path-select').value;
                     set_property(
-                      webgl_paths[selected_path],
+                      webgl_paths[path_select],
                       property,
-                      selected_path
+                      path_select
                     );
                     webgl_uniform_update();
                 }
@@ -223,7 +224,7 @@ function repo_escape(){
         webgl_uniform_update();
 
     }else{
-        document.getElementById('tabcontent-properties').style.display = 'none';
+        core_elements['tabcontent-properties'].style.display = 'none';
         core_elements['repo-ui'].style.display = 'block';
     }
 }
@@ -253,7 +254,7 @@ function repo_init(){
         },
         'character-control': {
           'onclick': function(){
-              const character = document.getElementById('character-select').value;
+              const character = core_elements['character-select'].value;
               if(character.length === 0){
                   return;
               }
@@ -272,7 +273,7 @@ function repo_init(){
         },
         'character-goto': {
           'onclick': function(){
-              const character = document.getElementById('character-select').value;
+              const character = core_elements['character-select'].value;
               if(character.length === 0){
                   return;
               }
@@ -334,7 +335,7 @@ function repo_init(){
         },
         'entity-goto': {
           'onclick': function(){
-              const entity = document.getElementById('entity-select').value;
+              const entity = core_elements['entity-select'].value;
               if(entity.length === 0){
                   return;
               }
@@ -346,7 +347,7 @@ function repo_init(){
         },
         'entity-remake': {
           'onclick': function(){
-              const entity = document.getElementById('entity-select').value;
+              const entity = core_elements['entity-select'].value;
               if(entity.length === 0){
                   return;
               }
@@ -741,6 +742,12 @@ function repo_init(){
         + '<button id=translate-y-set type=button>y</button><input class=left id=translate-y readonly type=text><button id=rotate-y-set type=button>y°</button><input class="left mini" id=rotate-y readonly type=text><br>'
         + '<button id=translate-z-set type=button>z</button><input class=left id=translate-z readonly type=text><button id=rotate-z-set type=button>z°</button><input class="left mini" id=rotate-z readonly type=text><br>'
         + '<span id=editor-tabs></span><div id=editor-tabcontent></div>',
+      'ui-elements': [
+        'character-select',
+        'entity-select',
+        'path-select',
+        'tabcontent-properties',
+      ],
     });
 }
 
