@@ -654,8 +654,8 @@ function repo_init(){
         + '<td><input id=beforeunload-warning type=checkbox><label for=beforeunload-warning>beforeunload Warning</label><br>'
           + '<input id=paused type=checkbox><label for=paused>Paused</label><br>'
           + '<input id=gravity-state type=checkbox><label for=gravity-state>Gravity Override</label><br>'
-          + '<input class=mini id=gravity-acceleration step=any type=number>Acceleration<br>'
-          + '<input class=mini id=gravity-max step=any type=number>Max'
+          + '<input id=gravity-acceleration step=any type=number>Acceleration<br>'
+          + '<input id=gravity-max step=any type=number>Max'
         + '<tr><td>Ambient Lighting<select id=ambient-state><option value=0>Use Level Properties<option value=1>Override On</select><br>'
           + '<input id=ambient-color type=color><br>'
           + 'Directional Lighting<select id=directional-state><option value=0>Use Level Properties<option value=1>Override On<option value=2>Override Off</select><br>'
@@ -665,7 +665,7 @@ function repo_init(){
           + 'Clear Color<select id=clearcolor-state><option value=0>Use Level Properties<option value=1>Override On</select><br>'
           + '<input id=clearcolor type=color><br>'
           + 'Fog<select id=fog-state><option value=0>Use Level Properties<option value=1>Override On<option value=2>Override Off</select><br>'
-          + '<input class=mini id=fog-density step=any type=number>Density</table>',
+          + '<input id=fog-density step=any type=number>Density</table>',
       'tabs': {
         'add': {
           'content': '<button id=entity-generate type=button>Generate Entity</button><select id=prefabs-select>'
