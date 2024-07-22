@@ -630,6 +630,7 @@ function repo_init(){
         'character-state': 0,
         'character-zoom': true,
         'character-zoom-max': 50,
+        'character-zoom-min': 0,
         'clearcolor': '#000000',
         'clearcolor-state': 0,
         'directional-color': '#ffffff',
@@ -651,7 +652,7 @@ function repo_init(){
           + '<input id=character-lock type=checkbox><label for=character-lock>Camera Lock</label><br>'
           + '<input id=character-moves type=checkbox><label for=character-moves>Movement</label><input id=character-moves-x type=checkbox><label for=character-moves-x>X</label><input id=character-moves-y type=checkbox><label for=character-moves-y>Y</label><input id=character-moves-z type=checkbox><label for=character-moves-z>Z</label> <select id=character-automoves><option value=1>on<option selected value=0>off<option value=2>any</select>Automove<br>'
           + '<input id=character-rotates type=checkbox><label for=character-rotates>Rotation</label><input id=character-rotates-x type=checkbox><label for=character-rotates-x>X</label><input id=character-rotates-y type=checkbox><label for=character-rotates-y>Y</label><input id=character-rotates-z type=checkbox><label for=character-rotates-z>Z</label><br>'
-          + '<input id=character-zoom type=checkbox><label for=character-zoom>Zoom</label><input class=mini id=character-zoom-max step=any type=number>Max'
+          + '<input id=character-zoom type=checkbox><label for=character-zoom>Zoom</label><input class=mini id=character-zoom-min step=any type=number>-<input class=mini id=character-zoom-max step=any type=number>'
         + '<td><input id=beforeunload-warning type=checkbox><label for=beforeunload-warning>beforeunload Warning</label><br>'
           + '<input id=paused type=checkbox><label for=paused>Paused</label><br>'
           + '<input id=gravity-state type=checkbox><label for=gravity-state>Gravity Override</label><br>'
