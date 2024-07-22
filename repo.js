@@ -208,6 +208,7 @@ function repo_escape(){
 
         if(core_storage_data['character-state']){
             webgl_properties['camera-zoom-max'] = core_storage_data['character-zoom-max'];
+            webgl_properties['camera-zoom-min'] = core_storage_data['character-zoom-min'];
             if(core_storage_data['character-automoves'] !== 2){
                 webgl_characters[webgl_character_id]['automove'] = Boolean(core_storage_data['character-automoves']);
             }
@@ -737,7 +738,7 @@ function repo_init(){
         },
       },
       'title': 'MultiverseEditor.htm',
-      'ui': '<button id=origin type=button>Origin</button><button id=spawn type=button>Spawn</button><button id=camera-zoom-set type=button>Zoom</button><input class="left mini" id=camera-zoom readonly type=text>/<span id=camera-zoom-max></span><button id=screenshot type=button>Screenshot</button><br>'
+      'ui': '<button id=origin type=button>Origin</button><button id=spawn type=button>Spawn</button><button id=camera-zoom-set type=button>Zoom</button> <span id=camera-zoom-min></span><input class=mini id=camera-zoom readonly type=text><span id=camera-zoom-max></span> <button id=screenshot type=button>Screenshot</button><br>'
         + '<button id=translate-x-set type=button>x</button><input class=left id=translate-x readonly type=text><button id=rotate-x-set type=button>x°</button><input class="left mini" id=rotate-x readonly type=text><button id=context-toggle type=button>Context</button><br>'
         + '<button id=translate-y-set type=button>y</button><input class=left id=translate-y readonly type=text><button id=rotate-y-set type=button>y°</button><input class="left mini" id=rotate-y readonly type=text><br>'
         + '<button id=translate-z-set type=button>z</button><input class=left id=translate-z readonly type=text><button id=rotate-z-set type=button>z°</button><input class="left mini" id=rotate-z readonly type=text><br>'
@@ -814,6 +815,7 @@ function repo_logic(){
       'ids': {
         'camera-zoom': webgl_characters[webgl_character_id]['camera-zoom'],
         'camera-zoom-max': webgl_properties['camera-zoom-max'],
+        'camera-zoom-min': webgl_properties['camera-zoom-min'],
         'character-count': webgl_character_count,
         'foreground-count': entity_groups['_length']['foreground'],
         'id-count': entity_id_count,
