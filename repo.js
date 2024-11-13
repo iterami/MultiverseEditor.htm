@@ -728,12 +728,11 @@ function repo_init(){
           'content': '<table><tr><td>Characters<td id=character-count>'
             + '<tr><td>ID count<td id=id-count>'
             + '<tr><td>Paths<td id=path-count>'
-            + '<tr><td>webgl Entities<td id=webgl-entity-count>'
             + '<tr class=header><td>Group<td>Count'
-            + '<tr><td>foreground<td id=foreground-count>'
+            + '<tr><td>opaque<td id=opaque-count>'
             + '<tr><td>particles<td id=particles-count>'
             + '<tr><td>skybox<td id=skybox-count>'
-            + '<tr><td>webgl<td id=webgl-group-count></table>',
+            + '<tr><td>transparent<td id=transparent-count></table>',
           'group': 'editor',
           'label': 'Stats',
         },
@@ -818,7 +817,7 @@ function repo_logic(){
         'camera-zoom-max': webgl_properties['camera-zoom-max'],
         'camera-zoom-min': webgl_properties['camera-zoom-min'],
         'character-count': webgl_character_count,
-        'foreground-count': entity_groups['_length']['foreground'],
+        'opaque-count': entity_groups['_length']['opaque'],
         'id-count': entity_id_count,
         'particles-count': entity_groups['_length']['particles'],
         'path-count': Object.keys(webgl_paths).length,
@@ -835,8 +834,7 @@ function repo_logic(){
         'translate-x': webgl_characters[webgl_character_id]['translate-x'],
         'translate-y': webgl_characters[webgl_character_id]['translate-y'],
         'translate-z': webgl_characters[webgl_character_id]['translate-z'],
-        'webgl-entity-count': entity_info['webgl']['count'],
-        'webgl-group-count': entity_groups['_length']['webgl'],
+        'transparent-count': entity_groups['_length']['transparent'],
       },
     });
 
