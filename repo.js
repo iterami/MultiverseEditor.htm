@@ -451,7 +451,7 @@ function repo_init(){
               });
 
               for(const entity in entity_entities){
-                  entity_entities[entity]['texture-id'] = 'default.png';
+                  entity_entities[entity]['texture'] = 'default.png';
               }
 
               webgl_draw();
