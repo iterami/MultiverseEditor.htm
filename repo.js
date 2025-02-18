@@ -234,10 +234,7 @@ function repo_init(){
     core_repo_init({
       'beforeunload': {
         'todo': function(){
-            if(!core_menu_lock
-              && core_storage_data['beforeunload-warning']){
-                return 'Exit?';
-            }
+            return 'Exit?';
         },
       },
       'events': {
@@ -608,7 +605,6 @@ function repo_init(){
       'storage': {
         'ambient-color': '#ffffff',
         'ambient-state': 0,
-        'beforeunload-warning': true,
         'character-automoves': 2,
         'character-collide-range-xz': 2.5,
         'character-collide-range-y': 2.5,
@@ -651,8 +647,7 @@ function repo_init(){
           + '<input id=character-moves type=checkbox><label for=character-moves>Movement</label><input id=character-moves-x type=checkbox><label for=character-moves-x>X</label><input id=character-moves-y type=checkbox><label for=character-moves-y>Y</label><input id=character-moves-z type=checkbox><label for=character-moves-z>Z</label> <select id=character-automoves><option value=1>on<option selected value=0>off<option value=2>any</select>Automove<br>'
           + '<input id=character-rotates type=checkbox><label for=character-rotates>Rotation</label><input id=character-rotates-x type=checkbox><label for=character-rotates-x>X</label><input id=character-rotates-y type=checkbox><label for=character-rotates-y>Y</label><input id=character-rotates-z type=checkbox><label for=character-rotates-z>Z</label><br>'
           + '<input id=character-zoom type=checkbox><label for=character-zoom>Zoom</label><input class=mini id=character-zoom-min step=any type=number>-<input class=mini id=character-zoom-max step=any type=number>'
-        + '<td><input id=beforeunload-warning type=checkbox><label for=beforeunload-warning>beforeunload Warning</label><br>'
-          + '<input id=paused type=checkbox><label for=paused>Paused</label><br>'
+        + '<td><input id=paused type=checkbox><label for=paused>Paused</label><br>'
           + '<input id=gravity-state type=checkbox><label for=gravity-state>Gravity Override</label><br>'
           + '<input id=gravity-acceleration step=any type=number>Acceleration<br>'
           + '<input id=gravity-max step=any type=number>Max'
