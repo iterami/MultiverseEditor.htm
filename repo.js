@@ -504,15 +504,20 @@ function repo_init(){
         },
         'spawn': {
           'onclick': function(){
-              if(core_menu_lock
-               || !globalThis.confirm('Return to spawn? ('
-                    + webgl_properties['spawn-translate-x'] + ','
-                    + webgl_properties['spawn-translate-y'] + ','
-                    + webgl_properties['spawn-translate-z'] + ')')){
+              if(core_menu_lock){
                   return;
               }
 
-              webgl_character_spawn();
+              const character = globalThis.prompt(
+                'Return character to spawn?',
+                webgl_character_id
+              );
+
+              if(character === null){
+                  return;
+              }
+
+              webgl_character_spawn(character);
           },
         },
         'translate-x-set': {
@@ -844,7 +849,7 @@ function repo_logic(){
 }
 
 function set_property(properties, property, label){
-    let result = globalThis.prompt(
+    const result = globalThis.prompt(
       'Set ' + label + ' ' + property + ' to:',
       properties[property]
     );
