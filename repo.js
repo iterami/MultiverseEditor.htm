@@ -386,7 +386,7 @@ function repo_init(){
           'onclick': function(){
               core_tab_reset_group('editor');
               core_menu_lock = false;
-              const text = document.getElementById('level-textarea').value.trim();
+              const text = document.getElementById('level-textarea').value.trim() || '{}';
               const level_json = JSON.parse(text[0] === "'"
                 ? text.slice(1, -1)
                 : text);
@@ -696,7 +696,7 @@ function repo_init(){
         },
         'load': {
           'content': '<input id=level-file type=file><button id=level-load-file type=button>Load Level from File</button><br>'
-            + '<button id=level-load-textarea type=button>Load Level from Textarea</button><br><textarea id=level-textarea>{}</textarea>',
+            + '<button id=level-load-textarea type=button>Load Level from Textarea</button><br><textarea id=level-textarea></textarea>',
           'default': true,
           'group': 'core-menu',
           'label': 'Load Levels',
