@@ -52,7 +52,8 @@ function property_table(id, properties, type){
         for(const property in properties){
             const property_type = core_type(properties[property]);
 
-            if(property_type === 'object'){
+            if(property_type === 'array'
+              || property_type === 'object'){
                 properties_html += '<tr><td>' + property + '<td><input id="' + id + '-' + property + '" readonly type=text>';
 
             }else if(property_type === 'boolean'){
@@ -107,7 +108,8 @@ function property_table(id, properties, type){
                 }
             }
 
-        }else if(property_type !== 'object'){
+        }else if(property_type !== 'array'
+          && property_type !== 'object'){
             const property_button = document.getElementById(id + '-button-' + property);
             if(!property_button){
                 continue;
@@ -158,21 +160,24 @@ function property_table(id, properties, type){
 }
 
 function repo_escape(){
+    if(webgl === 0){
+        return;
+    }
+
     if(!core_menu_open
       && webgl_character_level() > -2){
-        if(!webgl_context_valid){
-            return;
-        }
 
         if(core_storage_data['ambient-state'] !== 0){
             const rgb = core_hex_to_rgb(core_storage_data['ambient-color']);
-            webgl_properties['ambient-blue'] = rgb['blue'] / 255;
-            webgl_properties['ambient-green'] = rgb['green'] / 255;
-            webgl_properties['ambient-red'] = rgb['red'] / 255;
+            webgl_properties['ambient-color'] = [
+              rgb['red'] / 255,
+              rgb['green'] / 255,
+              rgb['blue'] / 255,
+            ];
         }
         if(core_storage_data['clearcolor-state'] !== 0){
             const rgb = core_hex_to_rgb(core_storage_data['clearcolor']);
-            webgl_clearcolor_set({
+            webgl_color_set({
               'blue': rgb['blue'] / 255,
               'green': rgb['green'] / 255,
               'red': rgb['red'] / 255,
@@ -183,9 +188,11 @@ function repo_escape(){
 
             if(webgl_properties['directional-state']){
                 const rgb = core_hex_to_rgb(core_storage_data['directional-color']);
-                webgl_properties['directional-blue'] = rgb['blue'] / 255;
-                webgl_properties['directional-green'] = rgb['green'] / 255;
-                webgl_properties['directional-red'] = rgb['red'] / 255;
+                webgl_properties['directional-color'] = [
+                  rgb['red'] / 255,
+                  rgb['green'] / 255,
+                  rgb['blue'] / 255,
+                ];
                 webgl_properties['directional-vector'] = [
                   core_storage_data['directional-vector-x'],
                   core_storage_data['directional-vector-y'],
