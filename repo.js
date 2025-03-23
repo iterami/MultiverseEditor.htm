@@ -419,6 +419,19 @@ function repo_init(){
         'path-select': {
           'onchange': update_selected_path,
         },
+        'picking-toggle': {
+          'onclick': function(){
+              if(webgl === 0){
+                  return;
+              }
+
+              picking = !picking;
+              webgl.uniform1i(
+                webgl_shader_uniforms['picking'],
+                picking
+              );
+          },
+        },
         'prefab-generate': {
           'onclick': function(){
               if(core_menu_lock){
@@ -574,6 +587,7 @@ function repo_init(){
       },
       'globals': {
         'context': 0,
+        'picking': false,
       },
       'keybinds': {
         'Backquote': {
@@ -735,7 +749,7 @@ function repo_init(){
       'title': 'MultiverseEditor.htm',
       'ui': '<button id=spawn type=button>Spawn</button><button id=camera-zoom-set type=button>Zoom</button> <span id=camera-zoom-min></span><input class=mini id=camera-zoom readonly type=text><span id=camera-zoom-max></span> <button id=screenshot type=button>Screenshot</button><br>'
         + '<button id=translate-x-set type=button>x</button><input class=left id=translate-x readonly type=text><button id=rotate-x-set type=button>x°</button><input class="left mini" id=rotate-x readonly type=text><button id=context-toggle type=button>Context</button><br>'
-        + '<button id=translate-y-set type=button>y</button><input class=left id=translate-y readonly type=text><button id=rotate-y-set type=button>y°</button><input class="left mini" id=rotate-y readonly type=text><br>'
+        + '<button id=translate-y-set type=button>y</button><input class=left id=translate-y readonly type=text><button id=rotate-y-set type=button>y°</button><input class="left mini" id=rotate-y readonly type=text><button id=picking-toggle type=button>Picking</button><br>'
         + '<button id=translate-z-set type=button>z</button><input class=left id=translate-z readonly type=text><button id=rotate-z-set type=button>z°</button><input class="left mini" id=rotate-z readonly type=text><br>'
         + '<span id=editor-tabs></span><div id=editor-tabcontent></div>',
       'ui-elements': [
