@@ -284,9 +284,9 @@ function repo_init(){
               if(character.length === 0){
                   return;
               }
-              webgl_characters[webgl_character_id]['translate-x'] = webgl_characters[character]['translate-x'];
-              webgl_characters[webgl_character_id]['translate-y'] = webgl_characters[character]['translate-y'];
-              webgl_characters[webgl_character_id]['translate-z'] = webgl_characters[character]['translate-z'];
+              webgl_characters[webgl_character_id]['position-x'] = webgl_characters[character]['position-x'];
+              webgl_characters[webgl_character_id]['position-y'] = webgl_characters[character]['position-y'];
+              webgl_characters[webgl_character_id]['position-z'] = webgl_characters[character]['position-z'];
           },
         },
         'character-select': {
@@ -347,9 +347,9 @@ function repo_init(){
                   return;
               }
               const character = entity_entities[entity]['attach-to'];
-              webgl_characters[webgl_character_id]['translate-x'] = webgl_characters[character]['translate-x'] + entity_entities[entity]['attach-x'];
-              webgl_characters[webgl_character_id]['translate-y'] = webgl_characters[character]['translate-y'] + entity_entities[entity]['attach-y'];
-              webgl_characters[webgl_character_id]['translate-z'] = webgl_characters[character]['translate-z'] + entity_entities[entity]['attach-z'];
+              webgl_characters[webgl_character_id]['position-x'] = webgl_characters[character]['position-x'] + entity_entities[entity]['attach-x'];
+              webgl_characters[webgl_character_id]['position-y'] = webgl_characters[character]['position-y'] + entity_entities[entity]['attach-y'];
+              webgl_characters[webgl_character_id]['position-z'] = webgl_characters[character]['position-z'] + entity_entities[entity]['attach-z'];
           },
         },
         'entity-remake': {
@@ -429,6 +429,42 @@ function repo_init(){
               webgl.uniform1i(
                 webgl_shader_uniforms['picking'],
                 picking
+              );
+          },
+        },
+        'position-x-set': {
+          'onclick': function(){
+              if(core_menu_lock){
+                  return;
+              }
+
+              character_set_axis(
+                'position',
+                'x'
+              );
+          },
+        },
+        'position-y-set': {
+          'onclick': function(){
+              if(core_menu_lock){
+                  return;
+              }
+
+              character_set_axis(
+                'position',
+                'y'
+              );
+          },
+        },
+        'position-z-set': {
+          'onclick': function(){
+              if(core_menu_lock){
+                  return;
+              }
+
+              character_set_axis(
+                'position',
+                'z'
               );
           },
         },
@@ -541,42 +577,6 @@ function repo_init(){
               }
 
               webgl_character_spawn(character);
-          },
-        },
-        'translate-x-set': {
-          'onclick': function(){
-              if(core_menu_lock){
-                  return;
-              }
-
-              character_set_axis(
-                'translate',
-                'x'
-              );
-          },
-        },
-        'translate-y-set': {
-          'onclick': function(){
-              if(core_menu_lock){
-                  return;
-              }
-
-              character_set_axis(
-                'translate',
-                'y'
-              );
-          },
-        },
-        'translate-z-set': {
-          'onclick': function(){
-              if(core_menu_lock){
-                  return;
-              }
-
-              character_set_axis(
-                'translate',
-                'z'
-              );
           },
         },
         'update-json': {
@@ -748,9 +748,9 @@ function repo_init(){
       },
       'title': 'MultiverseEditor.htm',
       'ui': '<button id=spawn type=button>Spawn</button><button id=camera-zoom-set type=button>Zoom</button> <span id=camera-zoom-min></span><input class=mini id=camera-zoom readonly type=text><span id=camera-zoom-max></span> <button id=screenshot type=button>Screenshot</button><br>'
-        + '<button id=translate-x-set type=button>x</button><input class=left id=translate-x readonly type=text><button id=rotate-x-set type=button>x°</button><input class="left mini" id=rotate-x readonly type=text><button id=context-toggle type=button>Context</button><br>'
-        + '<button id=translate-y-set type=button>y</button><input class=left id=translate-y readonly type=text><button id=rotate-y-set type=button>y°</button><input class="left mini" id=rotate-y readonly type=text><button id=picking-toggle type=button>Picking</button><br>'
-        + '<button id=translate-z-set type=button>z</button><input class=left id=translate-z readonly type=text><button id=rotate-z-set type=button>z°</button><input class="left mini" id=rotate-z readonly type=text><br>'
+        + '<button id=position-x-set type=button>x</button><input class=left id=position-x readonly type=text><button id=rotate-x-set type=button>x°</button><input class="left mini" id=rotate-x readonly type=text><button id=context-toggle type=button>Context</button><br>'
+        + '<button id=position-y-set type=button>y</button><input class=left id=position-y readonly type=text><button id=rotate-y-set type=button>y°</button><input class="left mini" id=rotate-y readonly type=text><button id=picking-toggle type=button>Picking</button><br>'
+        + '<button id=position-z-set type=button>z</button><input class=left id=position-z readonly type=text><button id=rotate-z-set type=button>z°</button><input class="left mini" id=rotate-z readonly type=text><br>'
         + '<span id=editor-tabs></span><div id=editor-tabcontent></div>',
       'ui-elements': [
         'character-select',
@@ -776,13 +776,13 @@ function repo_level_load(){
 function repo_logic(){
     if(core_storage_data['character-state']){
         if(!core_storage_data['character-moves'] || !core_storage_data['character-moves-x']){
-            webgl_characters[webgl_character_id]['translate-x'] = core_ui_values['translate-x'] || 0;
+            webgl_characters[webgl_character_id]['position-x'] = core_ui_values['position-x'] || 0;
         }
         if(!core_storage_data['character-moves'] || !core_storage_data['character-moves-y']){
-            webgl_characters[webgl_character_id]['translate-y'] = core_ui_values['translate-y'] || 0;
+            webgl_characters[webgl_character_id]['position-y'] = core_ui_values['position-y'] || 0;
         }
         if(!core_storage_data['character-moves'] || !core_storage_data['character-moves-z']){
-            webgl_characters[webgl_character_id]['translate-z'] = core_ui_values['translate-z'] || 0;
+            webgl_characters[webgl_character_id]['position-z'] = core_ui_values['position-z'] || 0;
         }
         if(!core_storage_data['character-rotates'] || !core_storage_data['character-rotates-x']){
             webgl_characters[webgl_character_id]['camera-rotate-x'] = core_ui_values['rotate-x'] || 0;
@@ -826,10 +826,13 @@ function repo_logic(){
         'camera-zoom-max': webgl_properties['camera-zoom-max'],
         'camera-zoom-min': webgl_properties['camera-zoom-min'],
         'character-count': webgl_character_count,
-        'opaque-count': entity_groups['_length']['opaque'],
         'id-count': entity_id_count,
+        'opaque-count': entity_groups['_length']['opaque'],
         'particles-count': entity_groups['_length']['particles'],
         'path-count': Object.keys(webgl_paths).length,
+        'position-x': webgl_characters[webgl_character_id]['position-x'],
+        'position-y': webgl_characters[webgl_character_id]['position-y'],
+        'position-z': webgl_characters[webgl_character_id]['position-z'],
         'rotate-x': core_round({
           'number': webgl_characters[webgl_character_id]['camera-rotate-x'],
         }),
@@ -840,9 +843,6 @@ function repo_logic(){
           'number': webgl_characters[webgl_character_id]['camera-rotate-z'],
         }),
         'skybox-count': entity_groups['_length']['skybox'],
-        'translate-x': webgl_characters[webgl_character_id]['translate-x'],
-        'translate-y': webgl_characters[webgl_character_id]['translate-y'],
-        'translate-z': webgl_characters[webgl_character_id]['translate-z'],
         'transparent-count': entity_groups['_length']['transparent'],
       },
     });
