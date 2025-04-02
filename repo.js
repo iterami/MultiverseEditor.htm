@@ -200,12 +200,8 @@ function repo_escape(){
                 ];
             }
         }
-        if(core_storage_data['fog-state'] !== 0){
-            webgl_properties['fog-state'] = core_storage_data['fog-state'] === 1;
-
-            if(webgl_properties['fog-state']){
-                webgl_properties['fog-density'] = core_storage_data['fog-density'];
-            }
+        if(core_storage_data['fog'] >= 0){
+            webgl_properties['fog'] = core_storage_data['fog'];
         }
         if(core_storage_data['gravity-state']){
             webgl_properties['gravity-acceleration'] = core_storage_data['gravity-acceleration'];
@@ -648,8 +644,7 @@ function repo_init(){
         'directional-vector-x': 0,
         'directional-vector-y': 1,
         'directional-vector-z': 0,
-        'fog-density': .0001,
-        'fog-state': 0,
+        'fog': -1,
         'gravity-acceleration': -.05,
         'gravity-max': -2,
         'gravity-state': false,
@@ -675,8 +670,7 @@ function repo_init(){
           + '<button id=remove-textures type=button>Remove Textures</button><br>'
           + 'Clear Color<select id=clearcolor-state><option value=0>Use Level Properties<option value=1>Override On</select><br>'
           + '<input id=clearcolor type=color><br>'
-          + 'Fog<select id=fog-state><option value=0>Use Level Properties<option value=1>Override On<option value=2>Override Off</select><br>'
-          + '<input id=fog-density step=any type=number>Density</table>',
+          + '<input id=fog step=any type=number>Fog Range</table>',
       'tabs': {
         'add': {
           'content': '<button id=entity-generate type=button>Generate Entity</button><select id=prefabs-select>'
