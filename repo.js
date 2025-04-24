@@ -52,18 +52,20 @@ function property_table(id, properties, type){
         for(const property in properties){
             const property_type = core_type(properties[property]);
 
-            if(property_type === 'array'
-              || property_type === 'object'){
-                properties_html += '<tr><td>' + property + '<td><input id="' + id + '-' + property + '" readonly type=text>';
-
-            }else if(property_type === 'boolean'){
+            if(property_type === 'boolean'){
                 properties_html += '<tr><td>' + property
                   + '<td><input id="' + id + '-' + property + '" type=checkbox>';
 
             }else{
-                properties_html += '<tr><td>'
-                  + '<button id="' + id + '-button-' + property + '" type=button>' + property + '</button>'
-                  + '<td id="' + id + '-' + property + '">';
+                properties_html += '<tr><td><button id="' + id + '-button-' + property + '" type=button>' + property + '</button>';
+
+                if(property_type === 'array'
+                  || property_type === 'object'){
+                    properties_html += '<td><input id="' + id + '-' + property + '" readonly type=text>';
+
+                }else{
+                    properties_html += '<td id="' + id + '-' + property + '">';
+                }
             }
         }
         properties_table.innerHTML = properties_html;
@@ -108,21 +110,21 @@ function property_table(id, properties, type){
                 }
             }
 
-        }else if(property_type !== 'array'
-          && property_type !== 'object'){
+        }else{
             const property_button = document.getElementById(id + '-button-' + property);
             if(!property_button){
                 continue;
             }
 
+            const complex = property_type === 'array' || property_type === 'object';
             if(type === 'character'){
                 property_button.onclick = function(){
                     set_property(
                       webgl_characters[character_select],
                       property,
-                      character_select
+                      character_select,
+                      complex
                     );
-                    webgl_uniform_update();
                 }
 
             }else if(type === 'entity'){
@@ -130,9 +132,9 @@ function property_table(id, properties, type){
                     set_property(
                       entity_entities[entity_select],
                       property,
-                      entity_select
+                      entity_select,
+                      complex
                     );
-                    webgl_uniform_update();
                 }
 
             }else if(type === 'path'){
@@ -140,9 +142,9 @@ function property_table(id, properties, type){
                     set_property(
                       webgl_paths[path_select],
                       property,
-                      path_select
+                      path_select,
+                      complex
                     );
-                    webgl_uniform_update();
                 }
 
             }else{
@@ -150,14 +152,11 @@ function property_table(id, properties, type){
                     set_property(
                       webgl_properties,
                       property,
-                      'webgl_properties'
+                      'webgl_properties',
+                      complex
                     );
-                    webgl_uniform_update();
                 }
             }
-
-        }else{
-            document.getElementById(id + '-' + property).value = JSON.stringify(properties[property]);
         }
     }
 }
@@ -864,9 +863,15 @@ function repo_logic(){
     for(const property in webgl_properties){
         const property_type = core_type(webgl_properties[property]);
 
-        if(property_type !== 'boolean'
-          && property_type !== 'number'
-          && property_type !== 'string'){
+        if(property_type === 'array'
+          || property_type === 'object'){
+
+            core_ui_update({
+              'ids': {
+                ['properties-' + property]: JSON.stringify(webgl_properties[property]),
+              },
+              'todo': 'value',
+            });
             continue;
         }
 
@@ -953,10 +958,11 @@ function shader_set(){
     core_escape();
 }
 
-function set_property(properties, property, label){
+function set_property(properties, property, label, complex){
+    const value = JSON.stringify(properties[property]);
     const result = globalThis.prompt(
       'Set ' + label + ' ' + property + ' to:',
-      properties[property]
+      value
     );
 
     if(result === null){
@@ -965,8 +971,12 @@ function set_property(properties, property, label){
 
     properties[property] = core_type_convert({
       'template': properties[property],
-      'value': result,
+      'value': complex
+        ? JSON.parse(result)
+        : result,
     });
+
+    webgl_uniform_update();
 }
 
 function update_select_options(id, source){
@@ -1004,9 +1014,15 @@ function update_selected(type, source){
     for(const property in source[selected]){
         const property_type = core_type(source[selected][property]);
 
-        if(property_type !== 'boolean'
-          && property_type !== 'number'
-          && property_type !== 'string'){
+        if(property_type === 'array'
+          || property_type === 'object'){
+
+            core_ui_update({
+              'ids': {
+                [type + '-properties-' + property]: JSON.stringify(source[selected][property]),
+              },
+              'todo': 'value',
+            });
             continue;
         }
 
