@@ -559,6 +559,9 @@ function repo_init(){
               webgl_draw();
           },
         },
+        'shader-set': {
+          'onclick': shader_set,
+        },
         'spawn': {
           'onclick': function(){
               if(core_menu_lock){
@@ -653,6 +656,8 @@ function repo_init(){
         'gravity-max': -2,
         'gravity-state': false,
         'paused': true,
+        'shader-fragment': '',
+        'shader-vertex': '',
       },
       'storage-menu': '<table><tr><td>Camera/Character<select id=character-state><option value=0>Use Level Properties<option value=1>Override On</select><br>'
           + '<input id=character-reticle type=checkbox><label for=character-reticle>Reticle</label> <input id=character-reticle-color type=color>Color<br>'
@@ -731,6 +736,13 @@ function repo_init(){
           'content': '<table><thead><tr class=header><td>Property<td>Value<tbody id=properties></table>',
           'group': 'editor',
           'label': 'Properties',
+        },
+        'shaders': {
+          'content': 'Fragment<br><textarea id=shader-fragment></textarea><br>'
+            + 'Vertex<br><textarea id=shader-vertex></textarea></table><br>'
+            + '<button id=shader-set>Set Shaders</button>',
+          'group': 'core-menu',
+          'label': 'Shaders',
         },
         'stats': {
           'content': '<table><tr><td>Characters<td id=character-count>'
@@ -864,6 +876,77 @@ function repo_logic(){
     update_selected_character();
     update_selected_entity();
     update_selected_path();
+}
+
+function shader_set(){
+    if(webgl === 0){
+        return;
+    }
+
+    const fragment = webgl.createShader(webgl.FRAGMENT_SHADER);
+    webgl.shaderSource(
+      fragment,
+      core_storage_data['shader-fragment'],
+    );
+    webgl.compileShader(fragment);
+    const vertex = webgl.createShader(webgl.VERTEX_SHADER);
+    webgl.shaderSource(
+      vertex,
+      core_storage_data['shader-vertex'],
+    );
+    webgl.compileShader(vertex);
+
+    const program = webgl.createProgram();
+    webgl.attachShader(
+      program,
+      fragment
+    );
+    webgl.attachShader(
+      program,
+      vertex
+    );
+    webgl.linkProgram(program);
+    webgl.useProgram(program);
+
+    const attributes = [
+      'pickColor',
+      'texturePosition',
+      'vertexColor',
+      'vertexNormal',
+      'vertexPosition',
+    ];
+    for(const attribute in attributes){
+        webgl_shader_attributes[attributes[attribute]] = webgl.getAttribLocation(
+          program,
+          attributes[attribute]
+        );
+        webgl.enableVertexAttribArray(webgl_shader_attributes[attributes[attribute]]);
+    }
+    const uniforms = {
+      'alpha': 'alpha',
+      'ambient-color': 'ambientColor',
+      'cameraMatrix': 'cameraMatrix',
+      'clear-color': 'clearColor',
+      'directional': 'directional',
+      'directional-color': 'directionalColor',
+      'directional-vector': 'directionalVector',
+      'fog-end': 'fogEnd',
+      'fog-start': 'fogStart',
+      'light-color': 'lightColor',
+      'light-position': 'lightPosition',
+      'light-range': 'lightRange',
+      'perspectiveMatrix': 'perspectiveMatrix',
+      'picking': 'picking',
+      'point-size': 'pointSize',
+    };
+    for(const uniform in uniforms){
+        webgl_shader_uniforms[uniform] = webgl.getUniformLocation(
+          program,
+          uniforms[uniform]
+        );
+    }
+
+    core_escape();
 }
 
 function set_property(properties, property, label){
