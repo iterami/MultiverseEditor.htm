@@ -736,7 +736,7 @@ function repo_init(){
           'label': 'Shaders',
         },
         'stats': {
-          'content': '<table><tr><td>Characters<td id=character-count>'
+          'content': '<table class=right><tr><td>Characters<td id=character-count>'
             + '<tr><td>ID count<td id=id-count>'
             + '<tr><td>Paths<td id=path-count>'
             + '<tr class=header><td>Group<td>Count'
@@ -830,7 +830,7 @@ function repo_logic(){
         'character-count': webgl_character_count,
         'id-count': entity_id_count,
         'opaque-count': entity_groups['_length']['opaque'],
-        'particles-count': entity_groups['_length']['particles'],
+        'particles-count': entity_groups['_length']['particles'] || 0,
         'path-count': Object.keys(webgl_paths).length,
         'position-x': webgl_characters[webgl_character_id]['position-x'],
         'position-y': webgl_characters[webgl_character_id]['position-y'],
