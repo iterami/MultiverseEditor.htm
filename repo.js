@@ -50,22 +50,11 @@ function property_table(id, properties, type){
     if(!properties_table.innerHTML.length){
         let properties_html = '';
         for(const property in properties){
-            const property_type = core_type(properties[property]);
-
-            if(property_type === 'boolean'){
-                properties_html += '<tr><td>' + property
-                  + '<td><input id="' + id + '-' + property + '" type=checkbox>';
+            if(core_type(properties[property]) === 'boolean'){
+                properties_html += '<tr><td>' + property + '<td><input id="' + id + '-' + property + '" type=checkbox>';
 
             }else{
-                properties_html += '<tr><td><button id="' + id + '-button-' + property + '" type=button>' + property + '</button>';
-
-                if(property_type === 'array'
-                  || property_type === 'object'){
-                    properties_html += '<td><input id="' + id + '-' + property + '" readonly type=text>';
-
-                }else{
-                    properties_html += '<td id="' + id + '-' + property + '">';
-                }
+                properties_html += '<tr><td><button id="' + id + '-button-' + property + '" type=button>' + property + '</button><td><input id="' + id + '-' + property + '" readonly type=text>';
             }
         }
         properties_table.innerHTML = properties_html;
@@ -706,13 +695,13 @@ function repo_init(){
         },
         'character-properties': {
           'content': '<select id=character-select></select><button id=character-control type=button>Control</button><button id=character-delete type=button>Delete</button><button id=character-goto type=button>Go To</button>'
-              + '<table><thead><tr class=header><td>Property<td>Value<tbody id=character-properties></table>',
+              + '<table class=center><thead><tr class=header><td>Property<td>Value<tbody id=character-properties></table>',
           'group': 'editor',
           'label': 'Characters',
         },
         'entity-properties': {
           'content': '<select id=entity-select></select><button id=entity-delete type=button>Delete</button><button id=entity-goto type=button>Go To</button><button id=entity-remake type=button>Remake</button>'
-              + '<table><thead><tr class=header><td>Property<td>Value<tbody id=entity-properties></table>',
+              + '<table class=center><thead><tr class=header><td>Property<td>Value<tbody id=entity-properties></table>',
           'group': 'editor',
           'label': 'Entities',
         },
@@ -730,18 +719,18 @@ function repo_init(){
         },
         'paths': {
           'content': '<select id=path-select></select><button id=path-delete type=button>Delete</button>'
-              + '<table><thead><tr class=header><td>Property<td>Value<tbody id=path-properties></table>',
+              + '<table class=center><thead><tr class=header><td>Property<td>Value<tbody id=path-properties></table>',
           'group': 'editor',
           'label': 'Paths',
         },
         'properties': {
-          'content': '<table><thead><tr class=header><td>Property<td>Value<tbody id=properties></table>',
+          'content': '<table class=center><thead><tr class=header><td>Property<td>Value<tbody id=properties></table>',
           'group': 'editor',
           'label': 'Properties',
         },
         'shaders': {
           'content': 'Fragment<br><textarea id=shader-fragment></textarea><br>'
-            + 'Vertex<br><textarea id=shader-vertex></textarea></table><br>'
+            + 'Vertex<br><textarea id=shader-vertex></textarea><br>'
             + '<button id=shader-set>Set Shaders</button>',
           'group': 'core-menu',
           'label': 'Shaders',
@@ -861,24 +850,11 @@ function repo_logic(){
     });
 
     for(const property in webgl_properties){
-        const property_type = core_type(webgl_properties[property]);
-
-        if(property_type === 'array'
-          || property_type === 'object'){
-
-            core_ui_update({
-              'ids': {
-                ['properties-' + property]: JSON.stringify(webgl_properties[property]),
-              },
-              'todo': 'value',
-            });
-            continue;
-        }
-
         core_ui_update({
           'ids': {
-            ['properties-' + property]: webgl_properties[property],
+            ['properties-' + property]: JSON.stringify(webgl_properties[property]),
           },
+          'todo': 'value',
         });
     }
     update_selected_character();
@@ -1012,24 +988,11 @@ function update_selected(type, source){
     const select_element = document.getElementById(type + '-select');
     const selected = select_element.value;
     for(const property in source[selected]){
-        const property_type = core_type(source[selected][property]);
-
-        if(property_type === 'array'
-          || property_type === 'object'){
-
-            core_ui_update({
-              'ids': {
-                [type + '-properties-' + property]: JSON.stringify(source[selected][property]),
-              },
-              'todo': 'value',
-            });
-            continue;
-        }
-
         core_ui_update({
           'ids': {
-            [type + '-properties-' + property]: source[selected][property],
+            [type + '-properties-' + property]: JSON.stringify(source[selected][property]),
           },
+          'todo': 'value',
         });
     }
 }
