@@ -155,6 +155,9 @@ function property_table(id, properties, type){
                     webgl_uniform_update();
                 }
             }
+
+        }else{
+            document.getElementById(id + '-' + property).value = JSON.stringify(properties[property]);
         }
     }
 }
