@@ -946,6 +946,7 @@ function shader_set(){
         );
     }
 
+    webgl_resize();
     core_escape();
 }
 
