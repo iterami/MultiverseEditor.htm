@@ -650,6 +650,7 @@ function repo_init(){
         'shader-fragment': '',
         'shader-vertex': '',
       },
+      'storage-controls': true,
       'storage-menu': '<table><tr><td>Camera/Character<select id=character-state><option value=0>Use Level Properties<option value=1>Override On</select><br>'
           + '<input id=character-reticle type=checkbox><label for=character-reticle>Reticle</label> <input id=character-reticle-color type=color>Color<br>'
           + '<input id=character-lock type=checkbox><label for=character-lock>Camera Lock</label><br>'
