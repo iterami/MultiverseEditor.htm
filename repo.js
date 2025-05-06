@@ -217,6 +217,19 @@ function repo_escape(){
               : core_storage_data['character-reticle-color'];
             webgl_characters[webgl_character_id]['speed'] = core_storage_data['character-speed'];
         }
+        if(core_storage_data['perspective-state']){
+            const perspective = core_storage_data['perspective'].split(',');
+            for(const i in perspective){
+                if(perspective[i] !== 'x'){
+                    math_matrices['perspective'][i] = perspective[i];
+                }
+            }
+            webgl.uniformMatrix4fv(
+              webgl_shader_uniforms['perspective'],
+              false,
+              math_matrices['perspective']
+            );
+        }
 
         webgl_uniform_update();
 
@@ -647,6 +660,8 @@ function repo_init(){
         'gravity-max': -2,
         'gravity-state': false,
         'paused': true,
+        'perspective': 'x,x,x,x,x,1,x,x,x,x,-1,-1,x,x,-2,x',
+        'perspective-state': 0,
         'shader-fragment': '',
         'shader-vertex': '',
       },
@@ -672,7 +687,9 @@ function repo_init(){
           + '<button id=remove-textures type=button>Remove Textures</button><br>'
           + 'Clear Color<select id=clearcolor-state><option value=0>Use Level Properties<option value=1>Override On</select><br>'
           + '<input id=clearcolor type=color><br>'
-          + 'Fog Start<input class=mini id=fog-start step=any type=number>End<input class=mini id=fog-end step=any type=number></table>',
+          + 'Fog Start<input class=mini id=fog-start step=any type=number>End<input class=mini id=fog-end step=any type=number>'
+        + '<tr><td>Perspective Matrix<select id=perspective-state><option value=0>Use Level Properties<option value=1>Override On</select><br>'
+          + '<input id=perspective><td></table>',
       'tabs': {
         'add': {
           'content': '<button id=entity-generate type=button>Generate Entity</button><select id=prefabs-select>'
