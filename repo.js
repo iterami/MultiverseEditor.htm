@@ -884,6 +884,11 @@ function shader_set(){
         return;
     }
 
+    core_storage_save([
+      'shader-fragment',
+      'shader-vertex',
+    ]);
+
     const fragment = webgl.createShader(webgl.FRAGMENT_SHADER);
     webgl.shaderSource(
       fragment,
