@@ -888,69 +888,10 @@ function shader_set(){
       'shader-fragment',
       'shader-vertex',
     ]);
-
-    const fragment = webgl.createShader(webgl.FRAGMENT_SHADER);
-    webgl.shaderSource(
-      fragment,
-      core_storage_data['shader-fragment'],
-    );
-    webgl.compileShader(fragment);
-    const vertex = webgl.createShader(webgl.VERTEX_SHADER);
-    webgl.shaderSource(
-      vertex,
-      core_storage_data['shader-vertex'],
-    );
-    webgl.compileShader(vertex);
-
-    const program = webgl.createProgram();
-    webgl.attachShader(
-      program,
-      fragment
-    );
-    webgl.attachShader(
-      program,
-      vertex
-    );
-    webgl.linkProgram(program);
-    webgl.useProgram(program);
-
-    const attributes = [
-      'pickColor',
-      'texturePosition',
-      'vertexColor',
-      'vertexNormal',
-      'vertexPosition',
-    ];
-    for(const attribute in attributes){
-        webgl_shader_attributes[attributes[attribute]] = webgl.getAttribLocation(
-          program,
-          attributes[attribute]
-        );
-        webgl.enableVertexAttribArray(webgl_shader_attributes[attributes[attribute]]);
-    }
-    const uniforms = {
-      'alpha': 'alpha',
-      'ambient-color': 'ambientColor',
-      'cameraMatrix': 'cameraMatrix',
-      'clear-color': 'clearColor',
-      'directional': 'directional',
-      'directional-color': 'directionalColor',
-      'directional-vector': 'directionalVector',
-      'fog-end': 'fogEnd',
-      'fog-start': 'fogStart',
-      'light-color': 'lightColor',
-      'light-position': 'lightPosition',
-      'light-range': 'lightRange',
-      'perspectiveMatrix': 'perspectiveMatrix',
-      'picking': 'picking',
-      'point-size': 'pointSize',
-    };
-    for(const uniform in uniforms){
-        webgl_shader_uniforms[uniform] = webgl.getUniformLocation(
-          program,
-          uniforms[uniform]
-        );
-    }
+    webgl_shader({
+      'fragment': core_storage_data['shader-fragment'],
+      'vertex': core_storage_data['shader-vertex'],
+    });
 
     webgl_resize();
     core_escape();
