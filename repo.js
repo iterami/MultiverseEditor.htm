@@ -888,10 +888,21 @@ function shader_set(){
       'shader-fragment',
       'shader-vertex',
     ]);
+
+    for(const attribute in webgl_shader_attributes){
+        webgl.disableVertexAttribArray(webgl_shader_attributes[attribute]);
+    }
+    core_object_reset(webgl_shader_attributes);
+    core_object_reset(webgl_shader_uniforms);
+
     webgl_shader({
       'fragment': core_storage_data['shader-fragment'],
       'vertex': core_storage_data['shader-vertex'],
     });
+
+    for(const entity in entity_entities){
+        webgl_entity_init(entity_entities[entity]);
+    }
 
     webgl_resize();
     core_escape();
