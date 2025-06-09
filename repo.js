@@ -225,7 +225,7 @@ function repo_escape(){
                 }
             }
             webgl.uniformMatrix4fv(
-              webgl_shader_uniforms['perspective'],
+              webgl_shaders['default']['uniforms']['perspective'],
               false,
               math_matrices['perspective']
             );
@@ -421,19 +421,6 @@ function repo_init(){
         'path-select': {
           'onchange': update_selected_path,
         },
-        'picking-toggle': {
-          'onclick': function(){
-              if(webgl === 0){
-                  return;
-              }
-
-              picking = !picking;
-              webgl.uniform1i(
-                webgl_shader_uniforms['picking'],
-                picking
-              );
-          },
-        },
         'position-x-set': {
           'onclick': function(){
               if(core_menu_lock){
@@ -592,7 +579,6 @@ function repo_init(){
       },
       'globals': {
         'context': 0,
-        'picking': false,
       },
       'keybinds': {
         'Backquote': {
@@ -768,7 +754,7 @@ function repo_init(){
       'title': 'MultiverseEditor.htm',
       'ui': '<button id=spawn type=button>Spawn</button><button id=camera-zoom-set type=button>Zoom</button> <span id=camera-zoom-min></span><input class=mini id=camera-zoom readonly type=text><span id=camera-zoom-max></span> <button id=screenshot type=button>Screenshot</button><br>'
         + '<button id=position-x-set type=button>x</button><input class=left id=position-x readonly type=text><button id=rotate-x-set type=button>x°</button><input class="left mini" id=rotate-x readonly type=text><button id=context-toggle type=button>Context</button><br>'
-        + '<button id=position-y-set type=button>y</button><input class=left id=position-y readonly type=text><button id=rotate-y-set type=button>y°</button><input class="left mini" id=rotate-y readonly type=text><button id=picking-toggle type=button>Picking</button><br>'
+        + '<button id=position-y-set type=button>y</button><input class=left id=position-y readonly type=text><button id=rotate-y-set type=button>y°</button><input class="left mini" id=rotate-y readonly type=text><br>'
         + '<button id=position-z-set type=button>z</button><input class=left id=position-z readonly type=text><button id=rotate-z-set type=button>z°</button><input class="left mini" id=rotate-z readonly type=text><br>'
         + '<span id=editor-tabs></span><div id=editor-tabcontent></div>',
       'ui-elements': [
@@ -889,13 +875,31 @@ function shader_set(){
       'shader-vertex',
     ]);
 
-    for(const attribute in webgl_shader_attributes){
-        webgl.disableVertexAttribArray(webgl_shader_attributes[attribute]);
-    }
-    core_object_reset(webgl_shader_attributes);
-    core_object_reset(webgl_shader_uniforms);
-
     webgl_shader({
+      'id': 'default',
+      'attributes': [
+        'vertexPosition',
+        'vertexColor',
+        'vertexNormal',
+        'texturePosition',
+      ],
+      'uniforms': {
+        'alpha': 'alpha',
+        'ambient-color': 'ambientColor',
+        'camera': 'camera',
+        'clear-color': 'clearColor',
+        'directional': 'directional',
+        'directional-color': 'directionalColor',
+        'directional-vector': 'directionalVector',
+        'fog-end': 'fogEnd',
+        'fog-start': 'fogStart',
+        'light-color': 'lightColor',
+        'light-count': 'lightCount',
+        'light-position': 'lightPosition',
+        'light-range': 'lightRange',
+        'perspective': 'perspective',
+        'point-size': 'pointSize',
+      },
       'fragment': core_storage_data['shader-fragment'],
       'vertex': core_storage_data['shader-vertex'],
     });
