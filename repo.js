@@ -877,12 +877,7 @@ function shader_set(){
 
     webgl_shader({
       'id': 'default',
-      'attributes': [
-        'vertexPosition',
-        'vertexColor',
-        'vertexNormal',
-        'texturePosition',
-      ],
+      'attributes': Object.keys(webgl_shaders['default']['attributes']),
       'uniforms': {
         'alpha': 'alpha',
         'ambient-color': 'ambientColor',
@@ -903,6 +898,7 @@ function shader_set(){
       'fragment': core_storage_data['shader-fragment'],
       'vertex': core_storage_data['shader-vertex'],
     });
+    webgl_shader_use('default');
 
     for(const entity in entity_entities){
         webgl_entity_init(entity_entities[entity]);
