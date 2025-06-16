@@ -235,7 +235,7 @@ function repo_escape(){
 
     }else{
         core_elements['tabcontent-properties'].style.display = 'none';
-        core_elements['repo-ui'].style.display = 'block';
+        core_elements.repo_ui.style.display = 'block';
     }
 }
 
