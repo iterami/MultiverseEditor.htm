@@ -234,7 +234,7 @@ function repo_escape(){
         webgl_uniform_update();
 
     }else{
-        core_elements['tabcontent-properties'].style.display = 'none';
+        core_elements.tabcontent_properties.style.display = 'none';
         core_elements.repo_ui.style.display = 'block';
     }
 }
@@ -710,14 +710,14 @@ function repo_init(){
         },
         'export': {
           'content': '<button id=update-json type=button>Update Level JSON</button><br><textarea id=exported></textarea>',
-          'group': 'core-menu',
+          'group': 'core_menu',
           'label': 'Export Level',
         },
         'load': {
           'content': '<input id=level-file type=file><button id=level-load-file type=button>Load Level from File</button><br>'
             + '<button id=level-load-textarea type=button>Load Level from Textarea</button><br><textarea id=level-textarea></textarea>',
           'default': true,
-          'group': 'core-menu',
+          'group': 'core_menu',
           'label': 'Load Levels',
         },
         'paths': {
@@ -735,7 +735,7 @@ function repo_init(){
           'content': 'Fragment<br><textarea id=shader-fragment></textarea><br>'
             + 'Vertex<br><textarea id=shader-vertex></textarea><br>'
             + '<button id=shader-set>Set Shaders</button>',
-          'group': 'core-menu',
+          'group': 'core_menu',
           'label': 'Shaders',
         },
         'stats': {
@@ -756,12 +756,12 @@ function repo_init(){
         + '<button id=position-x-set type=button>x</button><input class=left id=position-x readonly type=text><button id=rotate-x-set type=button>x°</button><input class="left mini" id=rotate-x readonly type=text><button id=context-toggle type=button>Context</button><br>'
         + '<button id=position-y-set type=button>y</button><input class=left id=position-y readonly type=text><button id=rotate-y-set type=button>y°</button><input class="left mini" id=rotate-y readonly type=text><br>'
         + '<button id=position-z-set type=button>z</button><input class=left id=position-z readonly type=text><button id=rotate-z-set type=button>z°</button><input class="left mini" id=rotate-z readonly type=text><br>'
-        + '<span id=editor-tabs></span><div id=editor-tabcontent></div>',
+        + '<span id=editor_tabs></span><div id=editor_tabcontent></div>',
       'ui-elements': [
         'character-select',
         'entity-select',
         'path-select',
-        'tabcontent-properties',
+        'tabcontent_properties',
       ],
     });
 }
