@@ -696,13 +696,13 @@ function repo_init(){
           'group': 'editor',
           'label': 'Add',
         },
-        'character_properties': {
+        'characters': {
           'content': '<select id=character_select></select><button id=character_control type=button>Control</button><button id=character_delete type=button>Delete</button><button id=character_goto type=button>Go To</button>'
               + '<table class=center><thead><tr class=header><td>Property<td>Value<tbody id=character_properties></table>',
           'group': 'editor',
           'label': 'Characters',
         },
-        'entity_properties': {
+        'entities': {
           'content': '<select id=entity_select></select><button id=entity_delete type=button>Delete</button><button id=entity_goto type=button>Go To</button><button id=entity_remake type=button>Remake</button>'
               + '<table class=center><thead><tr class=header><td>Property<td>Value<tbody id=entity_properties></table>',
           'group': 'editor',
