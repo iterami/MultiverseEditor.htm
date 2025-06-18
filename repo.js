@@ -1,9 +1,9 @@
 'use strict';
 
 function character_set_axis(type, axis){
-    const element = document.getElementById(type + '-' + axis);
+    const element = document.getElementById(type + '_' + axis);
     let result = globalThis.prompt(
-      'Set ' + type + '-' + axis + ' to:',
+      'Set ' + type + '_' + axis + ' to:',
       element.value
     );
 
@@ -21,13 +21,13 @@ function character_set_axis(type, axis){
 
     core_ui_update({
       'ids': {
-        [type + '-' + axis]: result,
+        [type + '_' + axis]: result,
       },
     });
 }
 
 function delete_selected_option(type, todo){
-    const select_element = document.getElementById(type + '-select');
+    const select_element = document.getElementById(type + '_select');
     const select_value = select_element.value;
     if(select_value.length === 0
       || !globalThis.confirm('Delete ' + type + ' "' + select_value + '"?')){
@@ -51,24 +51,24 @@ function property_table(id, properties, type){
         let properties_html = '';
         for(const property in properties){
             if(core_type(properties[property]) === 'boolean'){
-                properties_html += '<tr><td>' + property + '<td><input id="' + id + '-' + property + '" type=checkbox>';
+                properties_html += '<tr><td>' + property + '<td><input id="' + id + '_' + property + '" type=checkbox>';
 
             }else{
-                properties_html += '<tr><td><button id="' + id + '-button-' + property + '" type=button>' + property + '</button><td><input id="' + id + '-' + property + '" readonly type=text>';
+                properties_html += '<tr><td><button id="' + id + '_button_' + property + '" type=button>' + property + '</button><td><input id="' + id + '_' + property + '" readonly type=text>';
             }
         }
         properties_table.innerHTML = properties_html;
     }
 
-    const character_select = core_elements['character-select'].value;
-    const entity_select = core_elements['entity-select'].value;
-    const path_select = core_elements['path-select'].value;
+    const character_select = core_elements.character_select.value;
+    const entity_select = core_elements.entity_select.value;
+    const path_select = core_elements.path_select.value;
 
     for(const property in properties){
         const property_type = core_type(properties[property]);
 
         if(property_type === 'boolean'){
-            const checkbox = document.getElementById(id + '-' + property);
+            const checkbox = document.getElementById(id + '_' + property);
             if(!checkbox){
                 continue;
             }
@@ -100,7 +100,7 @@ function property_table(id, properties, type){
             }
 
         }else{
-            const property_button = document.getElementById(id + '-button-' + property);
+            const property_button = document.getElementById(id + '_button_' + property);
             if(!property_button){
                 continue;
             }
@@ -158,76 +158,76 @@ function repo_escape(){
     if(!core_menu_open
       && webgl_character_level() > -2){
 
-        if(core_storage_data['ambient-state'] !== 0){
-            const rgb = core_hex_to_rgb(core_storage_data['ambient-color']);
+        if(core_storage_data.ambient_state !== 0){
+            const rgb = core_hex_to_rgb(core_storage_data.ambient_color);
             webgl_properties['ambient-color'] = [
-              rgb['red'] / 255,
-              rgb['green'] / 255,
-              rgb['blue'] / 255,
+              rgb.red / 255,
+              rgb.green / 255,
+              rgb.blue / 255,
             ];
         }
-        if(core_storage_data['clearcolor-state'] !== 0){
-            const rgb = core_hex_to_rgb(core_storage_data['clearcolor']);
+        if(core_storage_data.clearcolor_state !== 0){
+            const rgb = core_hex_to_rgb(core_storage_data.clearcolor);
             webgl_color_set({
-              'blue': rgb['blue'] / 255,
-              'green': rgb['green'] / 255,
-              'red': rgb['red'] / 255,
+              'blue': rgb.blue / 255,
+              'green': rgb.green / 255,
+              'red': rgb.red / 255,
             });
         }
-        if(core_storage_data['directional-state'] !== 0){
-            webgl_properties['directional-state'] = core_storage_data['directional-state'] === 1;
+        if(core_storage_data.directional_state !== 0){
+            webgl_properties['directional-state'] = core_storage_data.directional_state === 1;
 
             if(webgl_properties['directional-state']){
-                const rgb = core_hex_to_rgb(core_storage_data['directional-color']);
+                const rgb = core_hex_to_rgb(core_storage_data.directional_color);
                 webgl_properties['directional-color'] = [
-                  rgb['red'] / 255,
-                  rgb['green'] / 255,
-                  rgb['blue'] / 255,
+                  rgb.red / 255,
+                  rgb.green / 255,
+                  rgb.blue / 255,
                 ];
                 webgl_properties['directional-vector'] = [
-                  core_storage_data['directional-vector-x'],
-                  core_storage_data['directional-vector-y'],
-                  core_storage_data['directional-vector-z'],
+                  core_storage_data.directional_vector_x,
+                  core_storage_data.directional_vector_y,
+                  core_storage_data.directional_vector_z,
                 ];
             }
         }
-        if(core_storage_data['fog-end'] >= 0){
-            webgl_properties['fog-end'] = core_storage_data['fog-end'];
-            webgl_properties['fog-start'] = core_storage_data['fog-start'];
+        if(core_storage_data.fog_end >= 0){
+            webgl_properties['fog-end'] = core_storage_data.fog_end;
+            webgl_properties['fog-start'] = core_storage_data.fog_start;
         }
-        if(core_storage_data['gravity-state']){
-            webgl_properties['gravity-acceleration'] = core_storage_data['gravity-acceleration'];
-            webgl_properties['gravity-max'] = core_storage_data['gravity-max'];
+        if(core_storage_data.gravity_state){
+            webgl_properties['gravity-acceleration'] = core_storage_data.gravity_acceleration;
+            webgl_properties['gravity-max'] = core_storage_data.gravity_max;
         }
-        webgl_properties['paused'] = core_storage_data['paused'];
+        webgl_properties.paused = core_storage_data.paused;
 
-        if(core_storage_data['character-state']){
-            webgl_properties['camera-zoom-max'] = core_storage_data['character-zoom-max'];
-            webgl_properties['camera-zoom-min'] = core_storage_data['character-zoom-min'];
-            if(core_storage_data['character-automoves'] !== 2){
-                webgl_characters[webgl_character_id]['automove'] = Boolean(core_storage_data['character-automoves']);
+        if(core_storage_data.character_state){
+            webgl_properties['camera-zoom-max'] = core_storage_data.character_zoom_max;
+            webgl_properties['camera-zoom-min'] = core_storage_data.character_zoom_min;
+            if(core_storage_data.character_automoves !== 2){
+                webgl_characters[webgl_character_id].automove = Boolean(core_storage_data.character_automoves);
             }
-            webgl_characters[webgl_character_id]['camera-lock'] = core_storage_data['character-lock'];
-            webgl_characters[webgl_character_id]['collide-bottom'] = core_storage_data['character-collide-bottom'];
-            webgl_characters[webgl_character_id]['collide-top'] = core_storage_data['character-collide-top'];
-            webgl_characters[webgl_character_id]['collide-xz'] = core_storage_data['character-collide-xz'];
-            webgl_characters[webgl_character_id]['collides'] = core_storage_data['character-collides'];
-            webgl_characters[webgl_character_id]['reticle'] = !core_storage_data['character-reticle']
+            webgl_characters[webgl_character_id]['camera-lock'] = core_storage_data.character_lock;
+            webgl_characters[webgl_character_id]['collide-bottom'] = core_storage_data.character_collide_bottom;
+            webgl_characters[webgl_character_id]['collide-top'] = core_storage_data.character_collide_top;
+            webgl_characters[webgl_character_id]['collide-xz'] = core_storage_data.character_collide_xz;
+            webgl_characters[webgl_character_id].collides = core_storage_data.character_collides;
+            webgl_characters[webgl_character_id].reticle = !core_storage_data.character_reticle
               ? false
-              : core_storage_data['character-reticle-color'];
-            webgl_characters[webgl_character_id]['speed'] = core_storage_data['character-speed'];
+              : core_storage_data.character_reticle_color;
+            webgl_characters[webgl_character_id].speed = core_storage_data.character_speed;
         }
-        if(core_storage_data['perspective-state']){
-            const perspective = core_storage_data['perspective'].split(',');
+        if(core_storage_data.perspective_state){
+            const perspective = core_storage_data.perspective.split(',');
             for(const i in perspective){
                 if(perspective[i] !== 'x'){
-                    math_matrices['perspective'][i] = perspective[i];
+                    math_matrices.perspective[i] = perspective[i];
                 }
             }
             webgl.uniformMatrix4fv(
-              webgl_shaders['default']['uniforms']['perspective'],
+              webgl_shaders.default.uniforms.perspective,
               false,
-              math_matrices['perspective']
+              math_matrices.perspective
             );
         }
 
@@ -249,7 +249,7 @@ function repo_init(){
         },
       },
       'events': {
-        'camera-zoom-set': {
+        'camera_zoom_set': {
           'onclick': function(){
               if(core_menu_lock){
                   return;
@@ -261,16 +261,16 @@ function repo_init(){
               );
           },
         },
-        'character-control': {
+        'character_control': {
           'onclick': function(){
-              const character = core_elements['character-select'].value;
+              const character = core_elements.character_select.value;
               if(character.length === 0){
                   return;
               }
               webgl_character_set(character);
           },
         },
-        'character-delete': {
+        'character_delete': {
           'onclick': function(){
               delete_selected_option(
                 'character',
@@ -280,9 +280,9 @@ function repo_init(){
               );
           },
         },
-        'character-goto': {
+        'character_goto': {
           'onclick': function(){
-              const character = core_elements['character-select'].value;
+              const character = core_elements.character_select.value;
               if(character.length === 0){
                   return;
               }
@@ -291,10 +291,10 @@ function repo_init(){
               webgl_characters[webgl_character_id]['position-z'] = webgl_characters[character]['position-z'];
           },
         },
-        'character-select': {
+        'character_select': {
           'onchange': update_selected_character,
         },
-        'context-toggle': {
+        'context_toggle': {
           'onclick': function(){
               if(webgl === 0
                 && context === 0){
@@ -311,7 +311,7 @@ function repo_init(){
               }
           },
         },
-        'entity-delete': {
+        'entity_delete': {
           'onclick': function(){
               delete_selected_option(
                 'entity',
@@ -323,14 +323,14 @@ function repo_init(){
               );
           },
         },
-        'entity-generate': {
+        'entity_generate': {
           'onclick': function(){
               if(core_menu_lock){
                   return;
               }
 
               const properties = core_args({
-                'args': JSON.parse(document.getElementById('generate-properties').value),
+                'args': JSON.parse(document.getElementById('generate_properties').value),
                 'defaults': {
                   'vertices': [],
                 },
@@ -342,9 +342,9 @@ function repo_init(){
               });
           },
         },
-        'entity-goto': {
+        'entity_goto': {
           'onclick': function(){
-              const entity = core_elements['entity-select'].value;
+              const entity = core_elements.entity_select.value;
               if(entity.length === 0){
                   return;
               }
@@ -354,22 +354,22 @@ function repo_init(){
               webgl_characters[webgl_character_id]['position-z'] = webgl_characters[character]['position-z'] + entity_entities[entity]['attach-z'];
           },
         },
-        'entity-remake': {
+        'entity_remake': {
           'onclick': function(){
-              const entity = core_elements['entity-select'].value;
+              const entity = core_elements.entity_select.value;
               if(entity.length === 0){
                   return;
               }
               webgl_entity_init(entity);
           },
         },
-        'entity-select': {
+        'entity_select': {
           'onchange': update_selected_entity,
         },
-        'level-load-file': {
+        'level_load_file': {
           'onclick': function(){
               core_tab_reset_group('editor');
-              const element = document.getElementById('level-file');
+              const element = document.getElementById('level_file');
               if(element.files.length === 0){
                   return;
               }
@@ -381,7 +381,7 @@ function repo_init(){
                         'character': -1,
                         'json': JSON.parse(event.target.result),
                       })){
-                        document.title = (webgl_properties['title'] || element.files[0].name) +  ' - ' + core_repo_title;
+                        document.title = (webgl_properties.title || element.files[0].name) +  ' - ' + core_repo_title;
 
                     }else{
                         element.value = null;
@@ -391,11 +391,11 @@ function repo_init(){
               });
           },
         },
-        'level-load-textarea': {
+        'level_load_textarea': {
           'onclick': function(){
               core_tab_reset_group('editor');
               core_menu_lock = false;
-              const text = document.getElementById('level-textarea').value.trim() || '{}';
+              const text = document.getElementById('level_textarea').value.trim() || '{}';
               const level_json = JSON.parse(text[0] === "'"
                 ? text.slice(1, -1)
                 : text);
@@ -403,12 +403,12 @@ function repo_init(){
                 'character': -1,
                 'json': level_json,
               });
-              document.title = level_json['title']
-                ? level_json['title'] + ' - ' + core_repo_title
+              document.title = level_json.title
+                ? level_json.title + ' - ' + core_repo_title
                 : core_repo_title;
           },
         },
-        'path-delete': {
+        'path_delete': {
           'onclick': function(){
               delete_selected_option(
                 'path',
@@ -418,10 +418,10 @@ function repo_init(){
               );
           },
         },
-        'path-select': {
+        'path_select': {
           'onchange': update_selected_path,
         },
-        'position-x-set': {
+        'position_x_set': {
           'onclick': function(){
               if(core_menu_lock){
                   return;
@@ -433,7 +433,7 @@ function repo_init(){
               );
           },
         },
-        'position-y-set': {
+        'position_y_set': {
           'onclick': function(){
               if(core_menu_lock){
                   return;
@@ -445,7 +445,7 @@ function repo_init(){
               );
           },
         },
-        'position-z-set': {
+        'position_z_set': {
           'onclick': function(){
               if(core_menu_lock){
                   return;
@@ -457,24 +457,24 @@ function repo_init(){
               );
           },
         },
-        'prefab-generate': {
+        'prefab_generate': {
           'onclick': function(){
               if(core_menu_lock){
                   return;
               }
 
               const properties = core_args({
-                'args': JSON.parse(document.getElementById('generate-properties').value),
+                'args': JSON.parse(document.getElementById('generate_properties').value),
                 'defaults': {
                   'character': webgl_character_id,
                   'prefix': entity_id_count,
                 },
               });
 
-              globalThis[document.getElementById('prefabs-select').value]?.(properties);
+              globalThis[document.getElementById('prefabs_select').value]?.(properties);
           },
         },
-        'remove-textures': {
+        'remove_textures': {
           'onclick': function(){
               if(core_menu_lock
                || !globalThis.confirm('Remove all textures?')){
@@ -486,13 +486,13 @@ function repo_init(){
               });
 
               for(const entity in entity_entities){
-                  entity_entities[entity]['texture'] = 'default.png';
+                  entity_entities[entity].texture = 'default.png';
               }
 
               webgl_draw();
           },
         },
-        'rotate-x-set': {
+        'rotate_x_set': {
           'onclick': function(){
               if(core_menu_lock){
                   return;
@@ -504,7 +504,7 @@ function repo_init(){
               );
           },
         },
-        'rotate-y-set': {
+        'rotate_y_set': {
           'onclick': function(){
               if(core_menu_lock){
                   return;
@@ -516,7 +516,7 @@ function repo_init(){
               );
           },
         },
-        'rotate-z-set': {
+        'rotate_z_set': {
           'onclick': function(){
               if(core_menu_lock){
                   return;
@@ -531,15 +531,15 @@ function repo_init(){
         'screenshot': {
           'onclick': webgl_screenshot,
         },
-        'set-draw-mode': {
+        'set_draw_mode': {
           'onclick': function(){
               if(core_menu_lock){
                   return;
               }
 
-              const draw_mode = document.getElementById('draw-mode').value;
+              const draw_mode = document.getElementById('draw_mode').value;
 
-              if(!globalThis.confirm('Set "draw-mode" to "' + draw_mode +  '"?')){
+              if(!globalThis.confirm('Set draw mode to "' + draw_mode +  '"?')){
                   return;
               }
 
@@ -550,7 +550,7 @@ function repo_init(){
               webgl_draw();
           },
         },
-        'shader-set': {
+        'shader_set': {
           'onclick': shader_set,
         },
         'spawn': {
@@ -571,7 +571,7 @@ function repo_init(){
               webgl_character_spawn(character);
           },
         },
-        'update-json': {
+        'update_json': {
           'onclick': function(){
               document.getElementById('exported').value = webgl_level_export();
           },
@@ -583,12 +583,12 @@ function repo_init(){
       'keybinds': {
         'Backquote': {
           'todo': function(){
-              webgl_characters[webgl_character_id]['automove'] = !webgl_characters[webgl_character_id]['automove'];
+              webgl_characters[webgl_character_id].automove = !webgl_characters[webgl_character_id].automove;
           },
         },
         'KeyV': {
           'todo': function(){
-              webgl_characters[webgl_character_id]['collides'] = !webgl_characters[webgl_character_id]['collides'];
+              webgl_characters[webgl_character_id].collides = !webgl_characters[webgl_character_id].collides;
           },
         },
       },
@@ -610,74 +610,74 @@ function repo_init(){
         },
       },
       'storage': {
-        'ambient-color': '#ffffff',
-        'ambient-state': 0,
-        'character-automoves': 2,
-        'character-collide-bottom': 2.5,
-        'character-collide-top': 2.5,
-        'character-collide-xz': 2.5,
-        'character-collides': true,
-        'character-lock': true,
-        'character-moves': true,
-        'character-moves-x': true,
-        'character-moves-y': true,
-        'character-moves-z': true,
-        'character-reticle': true,
-        'character-reticle-color': '#ffffff',
-        'character-rotates': true,
-        'character-rotates-x': true,
-        'character-rotates-y': true,
-        'character-rotates-z': true,
-        'character-speed': 1,
-        'character-state': 0,
-        'character-zoom': true,
-        'character-zoom-max': 50,
-        'character-zoom-min': 0,
+        'ambient_color': '#ffffff',
+        'ambient_state': 0,
+        'character_automoves': 2,
+        'character_collide_bottom': 2.5,
+        'character_collide_top': 2.5,
+        'character_collide_xz': 2.5,
+        'character_collides': true,
+        'character_lock': true,
+        'character_moves': true,
+        'character_moves_x': true,
+        'character_moves_y': true,
+        'character_moves_z': true,
+        'character_reticle': true,
+        'character_reticle_color': '#ffffff',
+        'character_rotates': true,
+        'character_rotates_x': true,
+        'character_rotates_y': true,
+        'character_rotates_z': true,
+        'character_speed': 1,
+        'character_state': 0,
+        'character_zoom': true,
+        'character_zoom_max': 50,
+        'character_zoom_min': 0,
         'clearcolor': '#000000',
-        'clearcolor-state': 0,
-        'directional-color': '#ffffff',
-        'directional-state': 0,
-        'directional-vector-x': 0,
-        'directional-vector-y': 1,
-        'directional-vector-z': 0,
-        'fog-end': -1,
-        'fog-start': -1,
-        'gravity-acceleration': -.05,
-        'gravity-max': -2,
-        'gravity-state': false,
+        'clearcolor_state': 0,
+        'directional_color': '#ffffff',
+        'directional_state': 0,
+        'directional_vector_x': 0,
+        'directional_vector_y': 1,
+        'directional_vector_z': 0,
+        'fog_end': -1,
+        'fog_start': -1,
+        'gravity_acceleration': -.05,
+        'gravity_max': -2,
+        'gravity_state': false,
         'paused': true,
         'perspective': 'x,x,x,x,x,1,x,x,x,x,-1,-1,x,x,-2,x',
-        'perspective-state': 0,
-        'shader-fragment': '',
-        'shader-vertex': '',
+        'perspective_state': 0,
+        'shader_fragment': '',
+        'shader_vertex': '',
       },
       'storage-controls': true,
-      'storage-menu': '<table><tr><td>Camera/Character<select id=character-state><option value=0>Use Level Properties<option value=1>Override On</select><br>'
-          + '<input id=character-reticle type=checkbox><label for=character-reticle>Reticle</label> <input id=character-reticle-color type=color>Color<br>'
-          + '<input id=character-lock type=checkbox><label for=character-lock>Camera Lock</label><br>'
-          + '<input id=character-moves type=checkbox><label for=character-moves>Movement</label><input id=character-moves-x type=checkbox><label for=character-moves-x>X</label><input id=character-moves-y type=checkbox><label for=character-moves-y>Y</label><input id=character-moves-z type=checkbox><label for=character-moves-z>Z</label> <select id=character-automoves><option value=1>on<option selected value=0>off<option value=2>any</select>Automove<br>'
-          + '<input id=character-rotates type=checkbox><label for=character-rotates>Rotation</label><input id=character-rotates-x type=checkbox><label for=character-rotates-x>X</label><input id=character-rotates-y type=checkbox><label for=character-rotates-y>Y</label><input id=character-rotates-z type=checkbox><label for=character-rotates-z>Z</label><br>'
-          + '<input id=character-zoom type=checkbox><label for=character-zoom>Zoom</label><input class=mini id=character-zoom-min step=any type=number>-<input class=mini id=character-zoom-max step=any type=number>'
+      'storage-menu': '<table><tr><td>Camera/Character<select id=character_state><option value=0>Use Level Properties<option value=1>Override On</select><br>'
+          + '<input id=character_reticle type=checkbox><label for=character_reticle>Reticle</label> <input id=character_reticle_color type=color>Color<br>'
+          + '<input id=character_lock type=checkbox><label for=character_lock>Camera Lock</label><br>'
+          + '<input id=character_moves type=checkbox><label for=character_moves>Movement</label><input id=character_moves_x type=checkbox><label for=character_moves_x>X</label><input id=character_moves_y type=checkbox><label for=character_moves_y>Y</label><input id=character_moves_z type=checkbox><label for=character_moves_z>Z</label> <select id=character_automoves><option value=1>on<option selected value=0>off<option value=2>any</select>Automove<br>'
+          + '<input id=character_rotates type=checkbox><label for=character_rotates>Rotation</label><input id=character_rotates_x type=checkbox><label for=character_rotates_x>X</label><input id=character_rotates_y type=checkbox><label for=character_rotates_y>Y</label><input id=character_rotates_z type=checkbox><label for=character_rotates_z>Z</label><br>'
+          + '<input id=character_zoom type=checkbox><label for=character_zoom>Zoom</label><input class=mini id=character_zoom_min step=any type=number>-<input class=mini id=character_zoom_max step=any type=number>'
         + '<td><input id=paused type=checkbox><label for=paused>Paused</label><br>'
-          + '<input id=gravity-state type=checkbox><label for=gravity-state>Gravity Override</label><br>'
-          + '<input class=mini id=gravity-acceleration step=any type=number>Acceleration<input class=mini id=gravity-max step=any type=number>Max<br>'
-          + '<input class=mini id=character-speed step=any type=number>Speed<br>'
-          + '<input id=character-collides type=checkbox><label for=character-collides>Collides</label><input class=mini id=character-collide-xz step=any type=number>XZ<br>'
-          + 'Y<input class=mini id=character-collide-bottom step=any type=number>Bottom<input class=mini id=character-collide-top step=any type=number>Top'
-        + '<tr><td>Ambient Light<select id=ambient-state><option value=0>Use Level Properties<option value=1>Override On</select><br>'
-          + '<input id=ambient-color type=color><br>'
-          + 'Directional Light<select id=directional-state><option value=0>Use Level Properties<option value=1>Override On<option value=2>Override Off</select><br>'
-          + '<input id=directional-color type=color><input class=mini id=directional-vector-x step=any type=number>X <input class=mini id=directional-vector-y step=any type=number>Y <input class=mini id=directional-vector-z step=any type=number>Z'
-        + '<td><select id=draw-mode><option value=LINES>Lines<option value=LINE_LOOP>Line Loop<option value=LINE_STRIP>Line Strip<option value=POINTS>Points<option value=TRIANGLES>Triangles<option value=TRIANGLE_FAN>Triangle Fan<option value=TRIANGLE_STRIP>Triangle Strip</select><button id=set-draw-mode type=button>Set Draw Mode</button><br>'
-          + '<button id=remove-textures type=button>Remove Textures</button><br>'
-          + 'Clear Color<select id=clearcolor-state><option value=0>Use Level Properties<option value=1>Override On</select><br>'
+          + '<input id=gravity_state type=checkbox><label for=gravity_state>Gravity Override</label><br>'
+          + '<input class=mini id=gravity_acceleration step=any type=number>Acceleration<input class=mini id=gravity_max step=any type=number>Max<br>'
+          + '<input class=mini id=character_speed step=any type=number>Speed<br>'
+          + '<input id=character_collides type=checkbox><label for=character_collides>Collides</label><input class=mini id=character_collide_xz step=any type=number>XZ<br>'
+          + 'Y<input class=mini id=character_collide_bottom step=any type=number>Bottom<input class=mini id=character_collide_top step=any type=number>Top'
+        + '<tr><td>Ambient Light<select id=ambient_state><option value=0>Use Level Properties<option value=1>Override On</select><br>'
+          + '<input id=ambient_color type=color><br>'
+          + 'Directional Light<select id=directional_state><option value=0>Use Level Properties<option value=1>Override On<option value=2>Override Off</select><br>'
+          + '<input id=directional_color type=color><input class=mini id=directional_vector_x step=any type=number>X <input class=mini id=directional_vector_y step=any type=number>Y <input class=mini id=directional_vector_z step=any type=number>Z'
+        + '<td><select id=draw_mode><option value=LINES>Lines<option value=LINE_LOOP>Line Loop<option value=LINE_STRIP>Line Strip<option value=POINTS>Points<option value=TRIANGLES>Triangles<option value=TRIANGLE_FAN>Triangle Fan<option value=TRIANGLE_STRIP>Triangle Strip</select><button id=set_draw_mode type=button>Set Draw Mode</button><br>'
+          + '<button id=remove_textures type=button>Remove Textures</button><br>'
+          + 'Clear Color<select id=clearcolor_state><option value=0>Use Level Properties<option value=1>Override On</select><br>'
           + '<input id=clearcolor type=color><br>'
-          + 'Fog<input class=mini id=fog-start step=any type=number>Start<input class=mini id=fog-end step=any type=number>End'
-        + '<tr><td>Perspective Matrix<select id=perspective-state><option value=0>Use Level Properties<option value=1>Override On</select><br>'
+          + 'Fog<input class=mini id=fog_start step=any type=number>Start<input class=mini id=fog_end step=any type=number>End'
+        + '<tr><td>Perspective Matrix<select id=perspective_state><option value=0>Use Level Properties<option value=1>Override On</select><br>'
           + '<input id=perspective><td></table>',
       'tabs': {
         'add': {
-          'content': '<button id=entity-generate type=button>Generate Entity</button><select id=prefabs-select>'
+          'content': '<button id=entity_generate type=button>Generate Entity</button><select id=prefabs_select>'
               + '<option value=webgl_primitive_cuboid>webgl_primitive_cuboid'
               + '<option value=webgl_primitive_ellipsoid>webgl_primitive_ellipsoid'
               + '<option value=webgl_primitive_frustum>webgl_primitive_frustum'
@@ -691,38 +691,38 @@ function repo_init(){
               + '<option value=prefabs_webgl_lines_shrub>prefabs_webgl_lines_shrub'
               + '<option value=prefabs_webgl_lines_tree>prefabs_webgl_lines_tree'
               + '<option value=prefabs_webgl_tree_2d>prefabs_webgl_tree_2d'
-            + '</select><button id=prefab-generate type=button>Generate Prefab</button><br>'
-            + '<textarea id=generate-properties>{\n}</textarea>',
+            + '</select><button id=prefab_generate type=button>Generate Prefab</button><br>'
+            + '<textarea id=generate_properties>{\n}</textarea>',
           'group': 'editor',
           'label': 'Add',
         },
-        'character-properties': {
-          'content': '<select id=character-select></select><button id=character-control type=button>Control</button><button id=character-delete type=button>Delete</button><button id=character-goto type=button>Go To</button>'
-              + '<table class=center><thead><tr class=header><td>Property<td>Value<tbody id=character-properties></table>',
+        'character_properties': {
+          'content': '<select id=character_select></select><button id=character_control type=button>Control</button><button id=character_delete type=button>Delete</button><button id=character_goto type=button>Go To</button>'
+              + '<table class=center><thead><tr class=header><td>Property<td>Value<tbody id=character_properties></table>',
           'group': 'editor',
           'label': 'Characters',
         },
-        'entity-properties': {
-          'content': '<select id=entity-select></select><button id=entity-delete type=button>Delete</button><button id=entity-goto type=button>Go To</button><button id=entity-remake type=button>Remake</button>'
-              + '<table class=center><thead><tr class=header><td>Property<td>Value<tbody id=entity-properties></table>',
+        'entity_properties': {
+          'content': '<select id=entity_select></select><button id=entity_delete type=button>Delete</button><button id=entity_goto type=button>Go To</button><button id=entity_remake type=button>Remake</button>'
+              + '<table class=center><thead><tr class=header><td>Property<td>Value<tbody id=entity_properties></table>',
           'group': 'editor',
           'label': 'Entities',
         },
         'export': {
-          'content': '<button id=update-json type=button>Update Level JSON</button><br><textarea id=exported></textarea>',
+          'content': '<button id=update_json type=button>Update Level JSON</button><br><textarea id=exported></textarea>',
           'group': 'core_menu',
           'label': 'Export Level',
         },
         'load': {
-          'content': '<input id=level-file type=file><button id=level-load-file type=button>Load Level from File</button><br>'
-            + '<button id=level-load-textarea type=button>Load Level from Textarea</button><br><textarea id=level-textarea></textarea>',
+          'content': '<input id=level_file type=file><button id=level_load_file type=button>Load Level from File</button><br>'
+            + '<button id=level_load_textarea type=button>Load Level from Textarea</button><br><textarea id=level_textarea></textarea>',
           'default': true,
           'group': 'core_menu',
           'label': 'Load Levels',
         },
         'paths': {
-          'content': '<select id=path-select></select><button id=path-delete type=button>Delete</button>'
-              + '<table class=center><thead><tr class=header><td>Property<td>Value<tbody id=path-properties></table>',
+          'content': '<select id=path_select></select><button id=path_delete type=button>Delete</button>'
+              + '<table class=center><thead><tr class=header><td>Property<td>Value<tbody id=path_properties></table>',
           'group': 'editor',
           'label': 'Paths',
         },
@@ -732,35 +732,35 @@ function repo_init(){
           'label': 'Properties',
         },
         'shaders': {
-          'content': 'Fragment<br><textarea id=shader-fragment></textarea><br>'
-            + 'Vertex<br><textarea id=shader-vertex></textarea><br>'
-            + '<button id=shader-set>Set Shaders</button>',
+          'content': 'Fragment<br><textarea id=shader_fragment></textarea><br>'
+            + 'Vertex<br><textarea id=shader_vertex></textarea><br>'
+            + '<button id=shader_set>Set Shaders</button>',
           'group': 'core_menu',
           'label': 'Shaders',
         },
         'stats': {
-          'content': '<table class=right><tr><td>Characters<td id=character-count>'
-            + '<tr><td>ID count<td id=id-count>'
-            + '<tr><td>Paths<td id=path-count>'
+          'content': '<table class=right><tr><td>Characters<td id=character_count>'
+            + '<tr><td>ID count<td id=id_count>'
+            + '<tr><td>Paths<td id=path_count>'
             + '<tr class=header><td>Group<td>Count'
-            + '<tr><td>opaque<td id=opaque-count>'
-            + '<tr><td>particles<td id=particles-count>'
-            + '<tr><td>skybox<td id=skybox-count>'
-            + '<tr><td>transparent<td id=transparent-count></table>',
+            + '<tr><td>opaque<td id=opaque_count>'
+            + '<tr><td>particles<td id=particles_count>'
+            + '<tr><td>skybox<td id=skybox_count>'
+            + '<tr><td>transparent<td id=transparent_count></table>',
           'group': 'editor',
           'label': 'Stats',
         },
       },
       'title': 'MultiverseEditor.htm',
-      'ui': '<button id=spawn type=button>Spawn</button><button id=camera-zoom-set type=button>Zoom</button> <span id=camera-zoom-min></span><input class=mini id=camera-zoom readonly type=text><span id=camera-zoom-max></span> <button id=screenshot type=button>Screenshot</button><br>'
-        + '<button id=position-x-set type=button>x</button><input class=left id=position-x readonly type=text><button id=rotate-x-set type=button>x°</button><input class="left mini" id=rotate-x readonly type=text><button id=context-toggle type=button>Context</button><br>'
-        + '<button id=position-y-set type=button>y</button><input class=left id=position-y readonly type=text><button id=rotate-y-set type=button>y°</button><input class="left mini" id=rotate-y readonly type=text><br>'
-        + '<button id=position-z-set type=button>z</button><input class=left id=position-z readonly type=text><button id=rotate-z-set type=button>z°</button><input class="left mini" id=rotate-z readonly type=text><br>'
+      'ui': '<button id=spawn type=button>Spawn</button><button id=camera_zoom_set type=button>Zoom</button> <span id=camera_zoom_min></span><input class=mini id=camera_zoom readonly type=text><span id=camera_zoom_max></span> <button id=screenshot type=button>Screenshot</button><br>'
+        + '<button id=position_x_set type=button>x</button><input class=left id=position_x readonly type=text><button id=rotate_x_set type=button>x°</button><input class="left mini" id=rotate_x readonly type=text><button id=context_toggle type=button>Context</button><br>'
+        + '<button id=position_y_set type=button>y</button><input class=left id=position_y readonly type=text><button id=rotate_y_set type=button>y°</button><input class="left mini" id=rotate_y readonly type=text><br>'
+        + '<button id=position_z_set type=button>z</button><input class=left id=position_z readonly type=text><button id=rotate_z_set type=button>z°</button><input class="left mini" id=rotate_z readonly type=text><br>'
         + '<span id=editor_tabs></span><div id=editor_tabcontent></div>',
       'ui-elements': [
-        'character-select',
-        'entity-select',
-        'path-select',
+        'character_select',
+        'entity_select',
+        'path_select',
         'tabcontent_properties',
       ],
     });
@@ -772,53 +772,53 @@ function repo_level_load(){
       webgl_properties,
       'webgl'
     );
-    const webgl_animated_textures = document.getElementById('webgl-animated-textures');
+    const webgl_animated_textures = document.getElementById('webgl_animated_textures');
     if(webgl_animated_textures){
         webgl_animated_textures.classList.remove('hidden');
     }
 }
 
 function repo_logic(){
-    if(core_storage_data['character-state']){
-        if(!core_storage_data['character-moves'] || !core_storage_data['character-moves-x']){
-            webgl_characters[webgl_character_id]['position-x'] = core_ui_values['position-x'] || 0;
+    if(core_storage_data.character_state){
+        if(!core_storage_data.character_moves || !core_storage_data.character_moves_x){
+            webgl_characters[webgl_character_id]['position-x'] = core_ui_values.position_x || 0;
         }
-        if(!core_storage_data['character-moves'] || !core_storage_data['character-moves-y']){
-            webgl_characters[webgl_character_id]['position-y'] = core_ui_values['position-y'] || 0;
+        if(!core_storage_data.character_moves || !core_storage_data.character_moves_y){
+            webgl_characters[webgl_character_id]['position-y'] = core_ui_values.position_y || 0;
         }
-        if(!core_storage_data['character-moves'] || !core_storage_data['character-moves-z']){
-            webgl_characters[webgl_character_id]['position-z'] = core_ui_values['position-z'] || 0;
+        if(!core_storage_data.character_moves || !core_storage_data.character_moves_z){
+            webgl_characters[webgl_character_id]['position-z'] = core_ui_values.position_z || 0;
         }
-        if(!core_storage_data['character-rotates'] || !core_storage_data['character-rotates-x']){
-            webgl_characters[webgl_character_id]['camera-rotate-x'] = core_ui_values['rotate-x'] || 0;
-            webgl_characters[webgl_character_id]['rotate-x'] = core_ui_values['rotate-x'] || 0;
+        if(!core_storage_data.character_rotates || !core_storage_data.character_rotates_x){
+            webgl_characters[webgl_character_id]['camera-rotate-x'] = core_ui_values.rotate_x || 0;
+            webgl_characters[webgl_character_id]['rotate-x'] = core_ui_values.rotate_x || 0;
         }
-        if(!core_storage_data['character-rotates'] || !core_storage_data['character-rotates-y']){
-            webgl_characters[webgl_character_id]['camera-rotate-y'] = core_ui_values['rotate-y'] || 0;
-            webgl_characters[webgl_character_id]['rotate-y'] = core_ui_values['rotate-y'] || 0;
+        if(!core_storage_data.character_rotates || !core_storage_data.character_rotates_y){
+            webgl_characters[webgl_character_id]['camera-rotate-y'] = core_ui_values.rotate_y || 0;
+            webgl_characters[webgl_character_id]['rotate-y'] = core_ui_values.rotate_y || 0;
         }
-        if(!core_storage_data['character-rotates'] || !core_storage_data['character-rotates-z']){
-            webgl_characters[webgl_character_id]['camera-rotate-z'] = core_ui_values['rotate-z'] || 0;
-            webgl_characters[webgl_character_id]['rotate-z'] = core_ui_values['rotate-z'] || 0;
+        if(!core_storage_data.character_rotates || !core_storage_data.character_rotates_z){
+            webgl_characters[webgl_character_id]['camera-rotate-z'] = core_ui_values.rotate_z || 0;
+            webgl_characters[webgl_character_id]['rotate-z'] = core_ui_values.rotate_z || 0;
         }
-        if(!core_storage_data['character-zoom']){
-            webgl_characters[webgl_character_id]['camera-zoom'] = core_ui_values['camera-zoom'] || 0;
+        if(!core_storage_data.character_zoom){
+            webgl_characters[webgl_character_id]['camera-zoom'] = core_ui_values.camera_zoom || 0;
         }
     }
 
-    if(webgl_character_count !== core_ui_values['character-count']){
+    if(webgl_character_count !== core_ui_values.character_count){
         update_select_options(
           'character',
           webgl_characters
         );
     }
-    if(entity_id_count !== core_ui_values['id-count']){
+    if(entity_id_count !== core_ui_values.id_count){
         update_select_options(
           'entity',
           entity_entities
         );
     }
-    if(Object.keys(webgl_paths).length !== core_ui_values['path-count']){
+    if(Object.keys(webgl_paths).length !== core_ui_values.path_count){
         update_select_options(
           'path',
           webgl_paths
@@ -827,35 +827,35 @@ function repo_logic(){
 
     core_ui_update({
       'ids': {
-        'camera-zoom': webgl_characters[webgl_character_id]['camera-zoom'],
-        'camera-zoom-max': webgl_properties['camera-zoom-max'],
-        'camera-zoom-min': webgl_properties['camera-zoom-min'],
-        'character-count': webgl_character_count,
-        'id-count': entity_id_count,
-        'opaque-count': entity_groups['_length']['opaque'],
-        'particles-count': entity_groups['_length']['particles'] || 0,
-        'path-count': Object.keys(webgl_paths).length,
-        'position-x': webgl_characters[webgl_character_id]['position-x'],
-        'position-y': webgl_characters[webgl_character_id]['position-y'],
-        'position-z': webgl_characters[webgl_character_id]['position-z'],
-        'rotate-x': core_round({
+        'camera_zoom': webgl_characters[webgl_character_id]['camera-zoom'],
+        'camera_zoom_max': webgl_properties['camera-zoom-max'],
+        'camera_zoom_min': webgl_properties['camera-zoom-min'],
+        'character_count': webgl_character_count,
+        'id_count': entity_id_count,
+        'opaque_count': entity_groups._length.opaque,
+        'particles_count': entity_groups._length.particles || 0,
+        'path_count': Object.keys(webgl_paths).length,
+        'position_x': webgl_characters[webgl_character_id]['position-x'],
+        'position_y': webgl_characters[webgl_character_id]['position-y'],
+        'position_z': webgl_characters[webgl_character_id]['position-z'],
+        'rotate_x': core_round({
           'number': webgl_characters[webgl_character_id]['camera-rotate-x'],
         }),
-        'rotate-y': core_round({
+        'rotate_y': core_round({
           'number': webgl_characters[webgl_character_id]['camera-rotate-y'],
         }),
-        'rotate-z': core_round({
+        'rotate_z': core_round({
           'number': webgl_characters[webgl_character_id]['camera-rotate-z'],
         }),
-        'skybox-count': entity_groups['_length']['skybox'],
-        'transparent-count': entity_groups['_length']['transparent'],
+        'skybox_count': entity_groups._length.skybox,
+        'transparent_count': entity_groups._length.transparent,
       },
     });
 
     for(const property in webgl_properties){
         core_ui_update({
           'ids': {
-            ['properties-' + property]: JSON.stringify(webgl_properties[property]),
+            ['properties_' + property]: JSON.stringify(webgl_properties[property]),
           },
           'todo': 'value',
         });
@@ -871,13 +871,13 @@ function shader_set(){
     }
 
     core_storage_save([
-      'shader-fragment',
-      'shader-vertex',
+      'shader_fragment',
+      'shader_vertex',
     ]);
 
     webgl_shader({
       'id': 'default',
-      'attributes': Object.keys(webgl_shaders['default']['attributes']),
+      'attributes': Object.keys(webgl_shaders.default.attributes),
       'uniforms': {
         'alpha': 'alpha',
         'ambient-color': 'ambientColor',
@@ -895,8 +895,8 @@ function shader_set(){
         'perspective': 'perspective',
         'point-size': 'pointSize',
       },
-      'fragment': core_storage_data['shader-fragment'],
-      'vertex': core_storage_data['shader-vertex'],
+      'fragment': core_storage_data.shader_fragment,
+      'vertex': core_storage_data.shader_vertex,
     });
     webgl_shader_use('default');
 
@@ -930,7 +930,7 @@ function set_property(properties, property, label, complex){
 }
 
 function update_select_options(id, source){
-    const select = document.getElementById(id + '-select');
+    const select = document.getElementById(id + '_select');
     let selected_option = select.value;
     let option_available = false;
 
@@ -952,19 +952,19 @@ function update_select_options(id, source){
     }
 
     property_table(
-      id + '-properties',
+      id + '_properties',
       source[select.value],
       id
     );
 }
 
 function update_selected(type, source){
-    const select_element = document.getElementById(type + '-select');
+    const select_element = document.getElementById(type + '_select');
     const selected = select_element.value;
     for(const property in source[selected]){
         core_ui_update({
           'ids': {
-            [type + '-properties-' + property]: JSON.stringify(source[selected][property]),
+            [type + '_properties_' + property]: JSON.stringify(source[selected][property]),
           },
           'todo': 'value',
         });
