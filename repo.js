@@ -757,7 +757,7 @@ function repo_init(){
         + '<button id=position_y_set type=button>y</button><input class=left id=position_y readonly type=text><button id=rotate_y_set type=button>y°</button><input class="left mini" id=rotate_y readonly type=text><br>'
         + '<button id=position_z_set type=button>z</button><input class=left id=position_z readonly type=text><button id=rotate_z_set type=button>z°</button><input class="left mini" id=rotate_z readonly type=text><br>'
         + '<span id=editor_tabs></span><div id=editor_tabcontent></div>',
-      'ui-elements': [
+      'ui_elements': [
         'character_select',
         'entity_select',
         'path_select',
