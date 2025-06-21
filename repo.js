@@ -652,7 +652,7 @@ function repo_init(){
         'shader_vertex': '',
       },
       'storage_controls': true,
-      'storage-menu': '<table><tr><td>Camera/Character<select id=character_state><option value=0>Use Level Properties<option value=1>Override On</select><br>'
+      'storage_menu': '<table><tr><td>Camera/Character<select id=character_state><option value=0>Use Level Properties<option value=1>Override On</select><br>'
           + '<input id=character_reticle type=checkbox><label for=character_reticle>Reticle</label> <input id=character_reticle_color type=color>Color<br>'
           + '<input id=character_lock type=checkbox><label for=character_lock>Camera Lock</label><br>'
           + '<input id=character_moves type=checkbox><label for=character_moves>Movement</label><input id=character_moves_x type=checkbox><label for=character_moves_x>X</label><input id=character_moves_y type=checkbox><label for=character_moves_y>Y</label><input id=character_moves_z type=checkbox><label for=character_moves_z>Z</label> <select id=character_automoves><option value=1>on<option selected value=0>off<option value=2>any</select>Automove<br>'
