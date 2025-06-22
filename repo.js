@@ -603,7 +603,24 @@ function repo_init(){
           },
         },
         'pointerup': {
-          'todo': webgl_pick_entity,
+          'todo': function(){
+              webgl_pick_entity();
+
+              let color = '';
+              if(webgl !== 0
+                && core_storage_data.picking_color){
+                  webgl_draw();
+                  color = String(webgl_pick_color({
+                    'x': core_pointer.x,
+                    'y': core_pointer.y,
+                  }));
+              }
+              core_ui_update({
+                'ids': {
+                  'picking_color_display': color,
+                },
+              });
+          },
         },
         'wheel': {
           'todo': webgl_controls_wheel,
@@ -648,6 +665,7 @@ function repo_init(){
         'paused': true,
         'perspective': 'x,x,x,x,x,1,x,x,x,x,-1,-1,x,x,-2,x',
         'perspective_state': 0,
+        'picking_color': true,
         'shader_fragment': '',
         'shader_vertex': '',
       },
@@ -674,7 +692,8 @@ function repo_init(){
           + '<input id=clearcolor type=color><br>'
           + 'Fog<input class=mini id=fog_start step=any type=number>Start<input class=mini id=fog_end step=any type=number>End'
         + '<tr><td>Perspective Matrix<select id=perspective_state><option value=0>Use Level Properties<option value=1>Override On</select><br>'
-          + '<input id=perspective><td></table>',
+          + '<input id=perspective>'
+        + '<td>Picking Color Display<input id=picking_color type=checkbox></table>',
       'tabs': {
         'add': {
           'content': '<button id=entity_generate type=button>Generate Entity</button><select id=prefabs_select>'
@@ -754,7 +773,7 @@ function repo_init(){
       'title': 'MultiverseEditor.htm',
       'ui': '<button id=spawn type=button>Spawn</button><button id=camera_zoom_set type=button>Zoom</button> <span id=camera_zoom_min></span><input class=mini id=camera_zoom readonly type=text><span id=camera_zoom_max></span> <button id=screenshot type=button>Screenshot</button><br>'
         + '<button id=position_x_set type=button>x</button><input class=left id=position_x readonly type=text><button id=rotate_x_set type=button>x°</button><input class="left mini" id=rotate_x readonly type=text><button id=context_toggle type=button>Context</button><br>'
-        + '<button id=position_y_set type=button>y</button><input class=left id=position_y readonly type=text><button id=rotate_y_set type=button>y°</button><input class="left mini" id=rotate_y readonly type=text><br>'
+        + '<button id=position_y_set type=button>y</button><input class=left id=position_y readonly type=text><button id=rotate_y_set type=button>y°</button><input class="left mini" id=rotate_y readonly type=text><span id=picking_color_display></span><br>'
         + '<button id=position_z_set type=button>z</button><input class=left id=position_z readonly type=text><button id=rotate_z_set type=button>z°</button><input class="left mini" id=rotate_z readonly type=text><br>'
         + '<span id=editor_tabs></span><div id=editor_tabcontent></div>',
       'ui_elements': [
