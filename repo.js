@@ -745,8 +745,8 @@ function repo_init(){
           'label': 'Properties',
         },
         'shaders': {
-          'content': 'Fragment<br><textarea id=shader_fragment></textarea><br>'
-            + 'Vertex<br><textarea id=shader_vertex></textarea><br>'
+          'content': '<textarea id=shader_fragment></textarea>Fragment<br>'
+            + '<textarea id=shader_vertex></textarea>Vertex<br>'
             + '<button id=shader_set>Set Shaders</button>',
           'group': 'core_menu',
           'label': 'Shaders',
