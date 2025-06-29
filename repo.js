@@ -212,9 +212,6 @@ function repo_escape(){
             webgl_characters[webgl_character_id].collide_top = core_storage_data.character_collide_top;
             webgl_characters[webgl_character_id].collide_xz = core_storage_data.character_collide_xz;
             webgl_characters[webgl_character_id].collides = core_storage_data.character_collides;
-            webgl_characters[webgl_character_id].reticle = !core_storage_data.character_reticle
-              ? false
-              : core_storage_data.character_reticle_color;
             webgl_characters[webgl_character_id].speed = core_storage_data.character_speed;
         }
         if(core_storage_data.perspective_state){
@@ -639,8 +636,6 @@ function repo_init(){
         'character_moves_x': true,
         'character_moves_y': true,
         'character_moves_z': true,
-        'character_reticle': true,
-        'character_reticle_color': '#ffffff',
         'character_rotates': true,
         'character_rotates_x': true,
         'character_rotates_y': true,
@@ -671,7 +666,6 @@ function repo_init(){
       },
       'storage_controls': true,
       'storage_menu': '<table><tr><td>Camera/Character<select id=character_state><option value=0>Use Level Properties<option value=1>Override On</select><br>'
-          + '<input id=character_reticle type=checkbox><label for=character_reticle>Reticle</label> <input id=character_reticle_color type=color>Color<br>'
           + '<input id=character_lock type=checkbox><label for=character_lock>Camera Lock</label><br>'
           + '<input id=character_moves type=checkbox><label for=character_moves>Movement</label><input id=character_moves_x type=checkbox><label for=character_moves_x>X</label><input id=character_moves_y type=checkbox><label for=character_moves_y>Y</label><input id=character_moves_z type=checkbox><label for=character_moves_z>Z</label> <select id=character_automoves><option value=1>on<option selected value=0>off<option value=2>any</select>Automove<br>'
           + '<input id=character_rotates type=checkbox><label for=character_rotates>Rotation</label><input id=character_rotates_x type=checkbox><label for=character_rotates_x>X</label><input id=character_rotates_y type=checkbox><label for=character_rotates_y>Y</label><input id=character_rotates_z type=checkbox><label for=character_rotates_z>Z</label><br>'
