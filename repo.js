@@ -279,13 +279,15 @@ function repo_init(){
         },
         'character_goto': {
           'onclick': function(){
-              const character = core_elements.character_select.value;
-              if(character.length === 0){
+              const target = core_elements.character_select.value;
+              if(target.length === 0){
                   return;
               }
-              webgl_characters[webgl_character_id].position_x = webgl_characters[character].position_x;
-              webgl_characters[webgl_character_id].position_y = webgl_characters[character].position_y;
-              webgl_characters[webgl_character_id].position_z = webgl_characters[character].position_z;
+              const character = webgl_characters[webgl_character_id];
+              const position = webgl_get_position(webgl_characters[target]);
+              character.position_x = position.x;
+              character.position_y = position.y;
+              character.position_z = position.z;
           },
         },
         'character_select': {
@@ -341,14 +343,15 @@ function repo_init(){
         },
         'entity_goto': {
           'onclick': function(){
-              const entity = core_elements.entity_select.value;
-              if(entity.length === 0){
+              const target = core_elements.entity_select.value;
+              if(target.length === 0){
                   return;
               }
-              const character = entity_entities[entity].attach_to;
-              webgl_characters[webgl_character_id].position_x = webgl_characters[character].position_x + entity_entities[entity].attach_x;
-              webgl_characters[webgl_character_id].position_y = webgl_characters[character].position_y + entity_entities[entity].attach_y;
-              webgl_characters[webgl_character_id].position_z = webgl_characters[character].position_z + entity_entities[entity].attach_z;
+              const character = webgl_characters[webgl_character_id];
+              const position = webgl_get_position(entity_entities[target]);
+              character.position_x = position.x;
+              character.position_y = position.y;
+              character.position_z = position.z;
           },
         },
         'entity_remake': {
