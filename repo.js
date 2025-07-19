@@ -605,8 +605,8 @@ function repo_init(){
               webgl_pick_entity();
 
               let color = '';
-              if(webgl !== 0
-                && core_storage_data.picking_color){
+              if(core_storage_data.picking_color
+                && webgl !== 0){
                   webgl_draw();
                   color = String(webgl_pick_color({
                     'x': core_pointer.x,
