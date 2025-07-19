@@ -481,9 +481,7 @@ function repo_init(){
                   return;
               }
 
-              webgl_texture_init({
-                'id': 'default.png',
-              });
+              webgl_texture_init('default.png');
 
               for(const entity in entity_entities){
                   entity_entities[entity].texture = 'default.png';
