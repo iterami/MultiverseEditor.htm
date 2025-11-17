@@ -241,6 +241,7 @@ function repo_init(){
       'beforeunload': {
         'todo': function(event){
             if(webgl !== 0){
+                core_escape(true);
                 event.preventDefault();
             }
         },
