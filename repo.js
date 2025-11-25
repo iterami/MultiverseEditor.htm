@@ -44,6 +44,91 @@ function delete_selected_option(type, todo){
     globalThis['update_selected_' + type]();
 }
 
+function level_export(){
+    if(webgl_character_level() < -1){
+        return;
+    }
+
+    const json = {
+      ...webgl_properties,
+      'characters': {},
+    };
+    const groups = ['skybox'];
+    for(const id in entity_groups){
+        if(['_length', 'opaque', 'skybox', 'transparent'].includes(id)
+          || id.startsWith('webgl_')){
+            continue;
+        }
+
+        if(!json.groups){
+            json.groups = [];
+        }
+
+        json.groups.push(id);
+        groups.push(id);
+    }
+    for(const id in webgl_particles){
+        if(!json.particles){
+            json.particles = {};
+        }
+
+        json.particles[id] = webgl_particles[id];
+    }
+    for(const id in webgl_paths){
+        if(!json.paths){
+            json.paths = {};
+        }
+
+        json.paths[id] = webgl_paths[id];
+    }
+    for(const id in webgl_characters){
+        json.characters[id] = {
+          ...webgl_characters[id],
+          'entities': [],
+        };
+    }
+    for(const id in entity_entities){
+        const entity_json = {
+          ...entity_entities[id],
+        };
+        delete entity_json.normals;
+        delete entity_json.vao;
+        delete entity_json.vertices_length;
+        for(const property in entity_json){
+            if(entity_json[property] === entity_info.opaque.default[property]){
+                delete entity_json[property];
+            }
+        }
+
+        for(const group in groups){
+            if(entity_groups[groups[group]][id] !== true){
+                continue;
+            }
+
+            if(!entity_json.groups){
+                entity_json.groups = [];
+            }
+
+            entity_json.groups.push(groups[group]);
+        }
+
+        json.characters[entity_json.attach_to].entities.push(entity_json);
+    }
+    for(const id in webgl_textures){
+        if(id === 'default.png'){
+            continue;
+        }
+
+        if(!json.textures){
+            json.textures = {};
+        }
+
+        json.textures[id] = webgl_uris[id];
+    }
+
+    return JSON.stringify(json);
+}
+
 function property_table(id, properties, type){
     const properties_table = document.getElementById(id);
 
@@ -572,7 +657,7 @@ function repo_init(){
         },
         'update_json': {
           'onclick': function(){
-              document.getElementById('exported').value = webgl_level_export();
+              document.getElementById('exported').value = level_export();
           },
         },
       },
