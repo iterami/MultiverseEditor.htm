@@ -303,13 +303,13 @@ function repo_escape(){
             const perspective = core_storage_data.perspective.split(',');
             for(const i in perspective){
                 if(perspective[i] !== 'x'){
-                    math_matrices.perspective[i] = perspective[i];
+                    webgl_matrices.perspective[i] = perspective[i];
                 }
             }
             webgl.uniformMatrix4fv(
               webgl_shaders.default.uniforms.perspective,
               false,
-              math_matrices.perspective
+              webgl_matrices.perspective
             );
         }
 
