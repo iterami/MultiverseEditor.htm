@@ -854,7 +854,7 @@ function repo_init(){
         + '<button id=position_x_set type=button>x</button><input class=left id=position_x readonly type=text><button id=rotate_x_set type=button>x°</button><input class="left mini" id=rotate_x readonly type=text><button id=context_toggle type=button>Context</button><br>'
         + '<button id=position_y_set type=button>y</button><input class=left id=position_y readonly type=text><button id=rotate_y_set type=button>y°</button><input class="left mini" id=rotate_y readonly type=text><span id=picking_color_display></span><br>'
         + '<button id=position_z_set type=button>z</button><input class=left id=position_z readonly type=text><button id=rotate_z_set type=button>z°</button><input class="left mini" id=rotate_z readonly type=text><br>'
-        + '<span id=editor_tabs></span><div id=editor_tabcontent></div>',
+        + '<span id=tabs_editor></span><div id=tabcontents_editor></div>',
       'ui_elements': [
         'character_select',
         'entity_select',
