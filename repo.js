@@ -454,7 +454,6 @@ function repo_init(){
         },
         'level_load_file': {
           'onclick': function(){
-              core_tab_reset_group('editor');
               const element = document.getElementById('level_file');
               if(element.files.length === 0){
                   return;
@@ -479,7 +478,6 @@ function repo_init(){
         },
         'level_load_textarea': {
           'onclick': function(){
-              core_tab_reset_group('editor');
               core_menu_lock = false;
               const text = document.getElementById('level_textarea').value.trim() || '{}';
               const level_json = JSON.parse(text[0] === "'"
