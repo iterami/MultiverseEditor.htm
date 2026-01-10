@@ -664,12 +664,12 @@ function repo_init(){
       },
       'keybinds': {
         'Backquote': {
-          'todo': function(){
+          'down': function(){
               webgl_characters[webgl_character_id].automove = !webgl_characters[webgl_character_id].automove;
           },
         },
         'KeyV': {
-          'todo': function(){
+          'down': function(){
               webgl_characters[webgl_character_id].collides = !webgl_characters[webgl_character_id].collides;
           },
         },
