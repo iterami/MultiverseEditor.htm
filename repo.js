@@ -966,10 +966,13 @@ function shader_set(){
         return;
     }
 
-    core_storage_save([
-      'shader_fragment',
-      'shader_vertex',
-    ]);
+    core_storage_save({
+      'keys': [
+        'shader_fragment',
+        'shader_vertex',
+      ],
+      'rebind': false,
+    });
 
     webgl_shader({
       'id': 'default',
