@@ -661,6 +661,7 @@ function repo_init(){
       },
       'globals': {
         'context': 0,
+        'fps_logic': 0,
       },
       'keybinds': {
         'Backquote': {
@@ -851,7 +852,7 @@ function repo_init(){
       'ui': '<button id=spawn type=button>Spawn</button><button id=camera_zoom_set type=button>Zoom</button> <span id=camera_zoom_min></span><input class=mini id=camera_zoom readonly type=text><span id=camera_zoom_max></span> <button id=screenshot type=button>Screenshot</button><br>'
         + '<button id=position_x_set type=button>x</button><input class=left id=position_x readonly type=text><button id=rotate_x_set type=button>x°</button><input class="left mini" id=rotate_x readonly type=text><button id=context_toggle type=button>Context</button><br>'
         + '<button id=position_y_set type=button>y</button><input class=left id=position_y readonly type=text><button id=rotate_y_set type=button>y°</button><input class="left mini" id=rotate_y readonly type=text><span id=picking_color_display></span><br>'
-        + '<button id=position_z_set type=button>z</button><input class=left id=position_z readonly type=text><button id=rotate_z_set type=button>z°</button><input class="left mini" id=rotate_z readonly type=text><br>'
+        + '<button id=position_z_set type=button>z</button><input class=left id=position_z readonly type=text><button id=rotate_z_set type=button>z°</button><input class="left mini" id=rotate_z readonly type=text>Logic FPS: <span id=fps_logic></span><br>'
         + '<span id=tabs_editor></span><div id=tabcontents_editor></div>',
       'ui_elements': [
         'character_select',
@@ -921,12 +922,21 @@ function repo_logic(){
         );
     }
 
+    for(const property in webgl_properties){
+        core_ui_update({
+          'ids': {
+            ['properties_' + property]: JSON.stringify(webgl_properties[property]),
+          },
+          'todo': 'value',
+        });
+    }
     core_ui_update({
       'ids': {
         'camera_zoom': webgl_characters[webgl_character_id].camera_zoom,
         'camera_zoom_max': webgl_properties.camera_zoom_max,
         'camera_zoom_min': webgl_properties.camera_zoom_min,
         'character_count': webgl_character_count,
+        'fps_logic': Math.trunc(1000 / (new Date().getTime() - fps_logic)),
         'id_count': entity_id_count,
         'opaque_count': entity_groups._length.opaque,
         'particles_count': entity_groups._length.particles || 0,
@@ -947,18 +957,10 @@ function repo_logic(){
         'transparent_count': entity_groups._length.transparent,
       },
     });
-
-    for(const property in webgl_properties){
-        core_ui_update({
-          'ids': {
-            ['properties_' + property]: JSON.stringify(webgl_properties[property]),
-          },
-          'todo': 'value',
-        });
-    }
     update_selected_character();
     update_selected_entity();
     update_selected_path();
+    fps_logic = new Date().getTime();
 }
 
 function shader_set(){
