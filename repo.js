@@ -661,6 +661,8 @@ function repo_init(){
       },
       'globals': {
         'context': 0,
+        'fps_draw': 0,
+        'fps_draw_time': 0,
         'fps_logic': 0,
       },
       'keybinds': {
@@ -849,9 +851,9 @@ function repo_init(){
         },
       },
       'title': 'MultiverseEditor.htm',
-      'ui': '<button id=spawn type=button>Spawn</button><button id=camera_zoom_set type=button>Zoom</button> <span id=camera_zoom_min></span><input class=mini id=camera_zoom readonly type=text><span id=camera_zoom_max></span> <button id=screenshot type=button>Screenshot</button><br>'
-        + '<button id=position_x_set type=button>x</button><input class=left id=position_x readonly type=text><button id=rotate_x_set type=button>x°</button><input class="left mini" id=rotate_x readonly type=text><button id=context_toggle type=button>Context</button><br>'
-        + '<button id=position_y_set type=button>y</button><input class=left id=position_y readonly type=text><button id=rotate_y_set type=button>y°</button><input class="left mini" id=rotate_y readonly type=text><span id=picking_color_display></span><br>'
+      'ui': '<button id=spawn type=button>Spawn</button><button id=camera_zoom_set type=button>Zoom</button> <span id=camera_zoom_min></span><input class=mini id=camera_zoom readonly type=text><span id=camera_zoom_max></span> <button id=context_toggle type=button>Context</button><button id=screenshot type=button>Screenshot</button><br>'
+        + '<button id=position_x_set type=button>x</button><input class=left id=position_x readonly type=text><button id=rotate_x_set type=button>x°</button><input class="left mini" id=rotate_x readonly type=text><span id=picking_color_display></span><br>'
+        + '<button id=position_y_set type=button>y</button><input class=left id=position_y readonly type=text><button id=rotate_y_set type=button>y°</button><input class="left mini" id=rotate_y readonly type=text>Draw FPS: <span id=fps_draw></span><br>'
         + '<button id=position_z_set type=button>z</button><input class=left id=position_z readonly type=text><button id=rotate_z_set type=button>z°</button><input class="left mini" id=rotate_z readonly type=text>Logic FPS: <span id=fps_logic></span><br>'
         + '<span id=tabs_editor></span><div id=tabcontents_editor></div>',
       'ui_elements': [
@@ -861,6 +863,12 @@ function repo_init(){
         'tabcontent_properties',
       ],
     });
+    globalThis.webgl_drawloop = function(){
+        webgl_draw();
+        core_interval_animationFrame('webgl_drawloop');
+        fps_draw = Math.trunc(1000 / (new Date().getTime() - fps_draw_time));
+        fps_draw_time = new Date().getTime();
+    };
 }
 
 function repo_level_load(){
@@ -936,6 +944,7 @@ function repo_logic(){
         'camera_zoom_max': webgl_properties.camera_zoom_max,
         'camera_zoom_min': webgl_properties.camera_zoom_min,
         'character_count': webgl_character_count,
+        'fps_draw': fps_draw,
         'fps_logic': Math.trunc(1000 / (new Date().getTime() - fps_logic)),
         'id_count': entity_id_count,
         'opaque_count': entity_groups._length.opaque,
