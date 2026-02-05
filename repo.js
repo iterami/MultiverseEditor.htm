@@ -408,14 +408,14 @@ function repo_init(){
               );
           },
         },
-        'entity_generate': {
+        'entity_add': {
           'onclick': function(){
               if(core_menu_lock){
                   return;
               }
 
               const properties = core_args({
-                'args': JSON.parse(document.getElementById('generate_properties').value),
+                'args': JSON.parse(document.getElementById('add_properties').value),
                 'defaults': {
                   'vertices': [],
                 },
@@ -541,21 +541,21 @@ function repo_init(){
               );
           },
         },
-        'prefab_generate': {
+        'prefab_add': {
           'onclick': function(){
               if(core_menu_lock){
                   return;
               }
 
               const properties = core_args({
-                'args': JSON.parse(document.getElementById('generate_properties').value),
+                'args': JSON.parse(document.getElementById('add_properties').value),
                 'defaults': {
                   'character': webgl_character_id,
                   'prefix': entity_id_count,
                 },
               });
 
-              globalThis[document.getElementById('prefabs_select').value]?.(properties);
+              globalThis[document.getElementById('add_type').value]?.(properties);
           },
         },
         'remove_textures': {
@@ -776,22 +776,7 @@ function repo_init(){
         + '<td>Picking Color Display<input id=picking_color type=checkbox></table>',
       'tabs': {
         'add': {
-          'content': '<button id=entity_generate type=button>Generate Entity</button><select id=prefabs_select>'
-              + '<option value=webgl_primitive_cuboid>webgl_primitive_cuboid'
-              + '<option value=webgl_primitive_ellipsoid>webgl_primitive_ellipsoid'
-              + '<option value=webgl_primitive_frustum>webgl_primitive_frustum'
-              + '<option value=webgl_primitive_stars>webgl_primitive_stars'
-              + '<option value=webgl_primitive_terrain>webgl_primitive_terrain'
-              + '<option disabled value=webgl_tiles>webgl_tiles'
-              + '<option value=prefabs_webgl_cuboid_tree>prefabs_webgl_cuboid_tree'
-              + '<option value=prefabs_webgl_frustum_tree>prefabs_webgl_frustum_tree'
-              + '<option value=prefabs_webgl_humanoid>prefabs_webgl_humanoid'
-              + '<option value=prefabs_webgl_lines_path>prefabs_webgl_lines_path'
-              + '<option value=prefabs_webgl_lines_shrub>prefabs_webgl_lines_shrub'
-              + '<option value=prefabs_webgl_lines_tree>prefabs_webgl_lines_tree'
-              + '<option value=prefabs_webgl_tree_2d>prefabs_webgl_tree_2d'
-            + '</select><button id=prefab_generate type=button>Generate Prefab</button><br>'
-            + '<textarea id=generate_properties>{\n}</textarea>',
+          'content': '<button id=entity_add type=button>Add Entity</button><input id=add_type type=text value=webgl_primitive_cuboid><button id=prefab_add type=button>Add Prefab/Primitive</button><br><textarea id=add_properties>{\n}</textarea>',
           'group': 'editor',
           'label': 'Add',
         },
