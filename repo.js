@@ -130,16 +130,26 @@ function level_export(){
 }
 
 function property_table(id, properties, type){
-    const properties_table = document.getElementById(id);
+    if(!properties){
+        return;
+    }
 
+    const properties_table = document.getElementById(id);
     if(!properties_table.innerHTML.length){
+        const keys = core_sort_strings({
+          'array': Object.keys(properties),
+        });
+
         let properties_html = '';
-        for(const property in properties){
-            if(core_type(properties[property]) === 'boolean'){
-                properties_html += '<tr><td>' + property + '<td><input id="' + id + '_' + property + '" type=checkbox>';
+        for(const i in keys){
+            const key = keys[i];
+            const property = properties[key];
+
+            if(core_type(property) === 'boolean'){
+                properties_html += '<tr><td>' + key + '<td><input id="' + id + '_' + key + '" type=checkbox>';
 
             }else{
-                properties_html += '<tr><td><button id="' + id + '_button_' + property + '" type=button>' + property + '</button><td><input id="' + id + '_' + property + '" readonly type=text>';
+                properties_html += '<tr><td><button id="' + id + '_button_' + key + '" type=button>' + key + '</button><td><input id="' + id + '_' + key + '" readonly type=text>';
             }
         }
         properties_table.innerHTML = properties_html;
