@@ -960,6 +960,29 @@ function repo_logic(){
     fps_logic = new Date().getTime();
 }
 
+function set_property(properties, property, label, complex){
+    const value = complex
+      ? JSON.stringify(properties[property])
+      : properties[property];
+    const result = globalThis.prompt(
+      'Set ' + label + ' ' + property + ' to:',
+      value
+    );
+
+    if(result === null){
+        return;
+    }
+
+    properties[property] = core_type_convert({
+      'template': properties[property],
+      'value': complex
+        ? JSON.parse(result)
+        : result,
+    });
+
+    webgl_uniform_update();
+}
+
 function shader_set(){
     if(webgl === 0){
         return;
@@ -990,35 +1013,16 @@ function shader_set(){
     core_escape();
 }
 
-function set_property(properties, property, label, complex){
-    const value = JSON.stringify(properties[property]);
-    const result = globalThis.prompt(
-      'Set ' + label + ' ' + property + ' to:',
-      value
-    );
-
-    if(result === null){
-        return;
-    }
-
-    properties[property] = core_type_convert({
-      'template': properties[property],
-      'value': complex
-        ? JSON.parse(result)
-        : result,
-    });
-
-    webgl_uniform_update();
-}
-
 function update_properties(source, type){
     for(const property in source){
         const value = source[property];
+        const stringify = core_type(value) === 'array' || core_type(value) === 'object';
+
         core_ui_update({
           'ids': {
-            [type + 'properties_' + property]: core_type(value) === 'boolean'
-              ? value
-              : JSON.stringify(value),
+            [type + 'properties_' + property]: stringify
+              ? JSON.stringify(value)
+              : value,
           },
           'todo': 'value',
         });
