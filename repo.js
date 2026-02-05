@@ -344,10 +344,6 @@ function repo_init(){
       'events': {
         'camera_zoom_set': {
           'onclick': function(){
-              if(core_menu_lock){
-                  return;
-              }
-
               character_set_axis(
                 'camera',
                 'zoom'
@@ -357,7 +353,8 @@ function repo_init(){
         'character_control': {
           'onclick': function(){
               const character = core_elements.character_select.value;
-              if(character.length === 0){
+              if(character.length === 0
+               || !globalThis.confirm('Control character "' + character + '"?')){
                   return;
               }
               webgl_character_set(character);
@@ -376,9 +373,11 @@ function repo_init(){
         'character_goto': {
           'onclick': function(){
               const target = core_elements.character_select.value;
-              if(target.length === 0){
+              if(target.length === 0
+               || !globalThis.confirm('Go to character "' + target + '"?')){
                   return;
               }
+
               const character = webgl_characters[webgl_character_id];
               const position = webgl_get_position(webgl_characters[target]);
               character.position_x = position.x;
@@ -420,7 +419,7 @@ function repo_init(){
         },
         'entity_add': {
           'onclick': function(){
-              if(core_menu_lock){
+              if(!globalThis.confirm('Add entity?')){
                   return;
               }
 
@@ -440,9 +439,11 @@ function repo_init(){
         'entity_goto': {
           'onclick': function(){
               const target = core_elements.entity_select.value;
-              if(target.length === 0){
+              if(target.length === 0
+               || !globalThis.confirm('Go to entity "' + target + '"?')){
                   return;
               }
+
               const character = webgl_characters[webgl_character_id];
               const position = webgl_get_position(entity_entities[target]);
               character.position_x = position.x;
@@ -453,9 +454,11 @@ function repo_init(){
         'entity_remake': {
           'onclick': function(){
               const entity = core_elements.entity_select.value;
-              if(entity.length === 0){
+              if(entity.length === 0
+                || !globalThis.confirm('Remake entity "' + entity + '"?')){
                   return;
               }
+
               webgl_entity_init(entity);
           },
         },
@@ -517,10 +520,6 @@ function repo_init(){
         },
         'position_x_set': {
           'onclick': function(){
-              if(core_menu_lock){
-                  return;
-              }
-
               character_set_axis(
                 'position',
                 'x'
@@ -529,10 +528,6 @@ function repo_init(){
         },
         'position_y_set': {
           'onclick': function(){
-              if(core_menu_lock){
-                  return;
-              }
-
               character_set_axis(
                 'position',
                 'y'
@@ -541,10 +536,6 @@ function repo_init(){
         },
         'position_z_set': {
           'onclick': function(){
-              if(core_menu_lock){
-                  return;
-              }
-
               character_set_axis(
                 'position',
                 'z'
@@ -553,7 +544,7 @@ function repo_init(){
         },
         'prefab_add': {
           'onclick': function(){
-              if(core_menu_lock){
+              if(!globalThis.confirm('Add prefab?')){
                   return;
               }
 
@@ -571,7 +562,7 @@ function repo_init(){
         'remove_textures': {
           'onclick': function(){
               if(core_menu_lock
-               || !globalThis.confirm('Remove all textures?')){
+                || !globalThis.confirm('Remove all textures?')){
                   return;
               }
 
@@ -586,10 +577,6 @@ function repo_init(){
         },
         'rotate_x_set': {
           'onclick': function(){
-              if(core_menu_lock){
-                  return;
-              }
-
               character_set_axis(
                 'rotate',
                 'x'
@@ -598,10 +585,6 @@ function repo_init(){
         },
         'rotate_y_set': {
           'onclick': function(){
-              if(core_menu_lock){
-                  return;
-              }
-
               character_set_axis(
                 'rotate',
                 'y'
@@ -610,10 +593,6 @@ function repo_init(){
         },
         'rotate_z_set': {
           'onclick': function(){
-              if(core_menu_lock){
-                  return;
-              }
-
               character_set_axis(
                 'rotate',
                 'z'
@@ -630,7 +609,6 @@ function repo_init(){
               }
 
               const draw_mode = document.getElementById('draw_mode').value;
-
               if(!globalThis.confirm('Set draw mode to "' + draw_mode +  '"?')){
                   return;
               }
@@ -647,10 +625,6 @@ function repo_init(){
         },
         'spawn': {
           'onclick': function(){
-              if(core_menu_lock){
-                  return;
-              }
-
               const character = globalThis.prompt(
                 'Return character to spawn?',
                 webgl_character_id
