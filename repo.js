@@ -915,17 +915,7 @@ function repo_logic(){
         );
     }
 
-    for(const property in webgl_properties){
-        const value = webgl_properties[property];
-        core_ui_update({
-          'ids': {
-            ['properties_' + property]: core_type(value) === 'boolean'
-              ? value
-              : JSON.stringify(value),
-          },
-          'todo': 'value',
-        });
-    }
+    update_properties(webgl_properties, '');
     core_ui_update({
       'ids': {
         'camera_zoom': webgl_characters[webgl_character_id].camera_zoom,
@@ -1011,6 +1001,20 @@ function set_property(properties, property, label, complex){
     webgl_uniform_update();
 }
 
+function update_properties(source, type){
+    for(const property in source){
+        const value = source[property];
+        core_ui_update({
+          'ids': {
+            [type + 'properties_' + property]: core_type(value) === 'boolean'
+              ? value
+              : JSON.stringify(value),
+          },
+          'todo': 'value',
+        });
+    }
+}
+
 function update_select_options(id, source){
     const select = document.getElementById(id + '_select');
     let selected_option = select.value;
@@ -1042,18 +1046,7 @@ function update_select_options(id, source){
 
 function update_selected(type, source){
     const select_element = document.getElementById(type + '_select');
-    const selected = select_element.value;
-    for(const property in source[selected]){
-        const value = source[selected][property];
-        core_ui_update({
-          'ids': {
-            [type + '_properties_' + property]: core_type(value) === 'boolean'
-              ? value
-              : JSON.stringify(value),
-          },
-          'todo': 'value',
-        });
-    }
+    update_properties(source[select_element.value] , type + '_');
 }
 
 function update_selected_character(){
