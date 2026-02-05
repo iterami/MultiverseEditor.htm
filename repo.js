@@ -916,9 +916,12 @@ function repo_logic(){
     }
 
     for(const property in webgl_properties){
+        const value = webgl_properties[property];
         core_ui_update({
           'ids': {
-            ['properties_' + property]: JSON.stringify(webgl_properties[property]),
+            ['properties_' + property]: core_type(value) === 'boolean'
+              ? value
+              : JSON.stringify(value),
           },
           'todo': 'value',
         });
@@ -1041,9 +1044,12 @@ function update_selected(type, source){
     const select_element = document.getElementById(type + '_select');
     const selected = select_element.value;
     for(const property in source[selected]){
+        const value = source[selected][property];
         core_ui_update({
           'ids': {
-            [type + '_properties_' + property]: JSON.stringify(source[selected][property]),
+            [type + '_properties_' + property]: core_type(value) === 'boolean'
+              ? value
+              : JSON.stringify(value),
           },
           'todo': 'value',
         });
