@@ -419,7 +419,7 @@ function repo_init(){
         },
         'entity_add': {
           'onclick': function(){
-              if(!globalThis.confirm('Add entity?')){
+              if(!globalThis.confirm('Add entity from textarea?')){
                   return;
               }
 
@@ -544,19 +544,18 @@ function repo_init(){
         },
         'prefab_add': {
           'onclick': function(){
-              if(!globalThis.confirm('Add prefab?')){
+              const type = globalThis[document.getElementById('add_type').value];
+              if(!type
+                || !globalThis.confirm('Add "' + type + '" prefab from textarea?')){
                   return;
               }
-
-              const properties = core_args({
+              type(core_args({
                 'args': JSON.parse(document.getElementById('add_properties').value),
                 'defaults': {
                   'character': webgl_character_id,
                   'prefix': entity_id_count,
                 },
-              });
-
-              globalThis[document.getElementById('add_type').value]?.(properties);
+              }));
           },
         },
         'remove_textures': {
@@ -629,12 +628,9 @@ function repo_init(){
                 'Return character to spawn?',
                 webgl_character_id
               );
-
-              if(character === null){
-                  return;
+              if(character !== null){
+                  webgl_character_spawn(character);
               }
-
-              webgl_character_spawn(character);
           },
         },
         'update_json': {
@@ -818,6 +814,11 @@ function repo_init(){
           'group': 'editor',
           'label': 'Stats',
         },
+        'timers': {
+          'content': '<table class=center><thead><tr class=header><td>Timer<td>Frames<td>Max<td>Repeat<td>Random<tbody id=timers></table>',
+          'group': 'editor',
+          'label': 'Timers',
+        },
       },
       'title': 'MultiverseEditor.htm',
       'ui': '<button id=spawn type=button>Spawn</button><button id=camera_zoom_set type=button>Zoom</button> <span id=camera_zoom_min></span><input class=mini id=camera_zoom readonly type=text><span id=camera_zoom_max></span> <button id=context_toggle type=button>Context</button><button id=screenshot type=button>Screenshot</button><br>'
@@ -898,6 +899,29 @@ function repo_logic(){
           webgl_paths
         );
     }
+
+    let timers_table = '';
+    const timers = Object.keys(webgl_timers);
+    if(timers.length){
+        core_sort_strings({
+          'array': timers,
+          'clone': false,
+        });
+        for(const id of timers){
+            const timer = webgl_timers[id];
+            timers_table += '<tr><td><input readonly type=text value=' + id
+              + '><td>' + timer.frames
+              + '<td>' + timer.frames_max
+              + '<td>' + timer.repeat
+              + '<td>' + timer.frames_random;
+        }
+    }
+    core_ui_update({
+      'ids': {
+        'timers': timers_table,
+      },
+      'todo': 'innerHTML',
+    });
 
     update_properties(webgl_properties, '');
     core_ui_update({
