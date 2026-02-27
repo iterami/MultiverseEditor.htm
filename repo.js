@@ -423,11 +423,11 @@ function repo_init(){
                   return;
               }
 
-              const properties = core_args({
-                'args': JSON.parse(document.getElementById('add_properties').value),
+              const properties = core_object_defaults({
                 'defaults': {
                   'vertices': [],
                 },
+                'object': JSON.parse(document.getElementById('add_properties').value),
               });
               webgl_entity_create({
                 'entities': [
@@ -544,17 +544,18 @@ function repo_init(){
         },
         'prefab_add': {
           'onclick': function(){
-              const type = globalThis[document.getElementById('add_type').value];
+              const value = document.getElementById('add_type').value;
+              const type = globalThis[value];
               if(!type
-                || !globalThis.confirm('Add "' + type + '" prefab from textarea?')){
+                || !globalThis.confirm('Add "' + value + '" prefab from textarea?')){
                   return;
               }
-              type(core_args({
-                'args': JSON.parse(document.getElementById('add_properties').value),
+              type(core_object_defaults({
                 'defaults': {
                   'character': webgl_character_id,
                   'prefix': entity_id_count,
                 },
+                'object': JSON.parse(document.getElementById('add_properties').value),
               }));
           },
         },
