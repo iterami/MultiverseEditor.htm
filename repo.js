@@ -3,7 +3,7 @@
 function character_set_axis(type, axis){
     const element = document.getElementById(type + '_' + axis);
     let result = globalThis.prompt(
-      'Set ' + type + '_' + axis + ' to:',
+      'Set "' + type + '_' + axis + '" to:',
       element.value
     );
 
@@ -964,7 +964,7 @@ function set_property(properties, property, label, complex){
       ? JSON.stringify(properties[property])
       : properties[property];
     const result = globalThis.prompt(
-      'Set ' + label + ' ' + property + ' to:',
+      'Set "' + property + '" of "' + label + '" to:',
       value
     );
 
