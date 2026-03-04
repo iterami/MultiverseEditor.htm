@@ -395,6 +395,10 @@ function repo_init(){
                   return;
               }
 
+              if(!globalThis.confirm('Toggle context?')){
+                  return;
+              }
+
               if(context === 0){
                   context = webgl.getExtension("WEBGL_lose_context");
                   context.loseContext();
