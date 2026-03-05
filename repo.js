@@ -144,12 +144,13 @@ function property_table(id, properties, type){
         for(const i in keys){
             const key = keys[i];
             const property = properties[key];
+            const id_key = id + '_' + key;
 
             if(core_type(property) === 'boolean'){
-                properties_html += '<tr><td>' + key + '<td><input id="' + id + '_' + key + '" type=checkbox>';
+                properties_html += '<tr><td><label for=' + id_key + '>' + key + '</label><td><input id="' + id_key + '" type=checkbox>';
 
             }else{
-                properties_html += '<tr><td><button id="' + id + '_button_' + key + '" type=button>' + key + '</button><td><input id="' + id + '_' + key + '" readonly type=text>';
+                properties_html += '<tr><td><button id="' + id + '_button_' + key + '" type=button>' + key + '</button><td><input id="' + id_key + '" readonly type=text>';
             }
         }
         properties_table.innerHTML = properties_html;
@@ -737,15 +738,15 @@ function repo_init(){
       },
       'storage_controls': true,
       'storage_menu': '<table><tr><td>Camera/Character<select id=character_state><option value=0>Use Level Properties<option value=1>Override On</select><br>'
-          + '<input id=character_lock type=checkbox><label for=character_lock>Camera Lock</label><br>'
-          + '<input id=character_moves type=checkbox><label for=character_moves>Movement</label><input id=character_moves_x type=checkbox><label for=character_moves_x>X</label><input id=character_moves_y type=checkbox><label for=character_moves_y>Y</label><input id=character_moves_z type=checkbox><label for=character_moves_z>Z</label> <select id=character_automoves><option value=1>on<option selected value=0>off<option value=2>any</select>Automove<br>'
-          + '<input id=character_rotates type=checkbox><label for=character_rotates>Rotation</label><input id=character_rotates_x type=checkbox><label for=character_rotates_x>X</label><input id=character_rotates_y type=checkbox><label for=character_rotates_y>Y</label><input id=character_rotates_z type=checkbox><label for=character_rotates_z>Z</label><br>'
-          + '<input id=character_zoom type=checkbox><label for=character_zoom>Zoom</label><input class=mini id=character_zoom_min step=any type=number>-<input class=mini id=character_zoom_max step=any type=number>'
-        + '<td><input id=paused type=checkbox><label for=paused>Paused</label><br>'
-          + '<input id=gravity_state type=checkbox><label for=gravity_state>Gravity Override</label><br>'
+          + '<label><input id=character_lock type=checkbox>Camera Lock</label><br>'
+          + '<label><input id=character_moves type=checkbox>Movement</label><label><input id=character_moves_x type=checkbox>X</label><label><input id=character_moves_y type=checkbox>Y</label><label><input id=character_moves_z type=checkbox>Z</label> <select id=character_automoves><option value=1>on<option selected value=0>off<option value=2>any</select>Automove<br>'
+          + '<label><input id=character_rotates type=checkbox>Rotation</label><label><input id=character_rotates_x type=checkbox>X</label><label><input id=character_rotates_y type=checkbox>Y</label><label><input id=character_rotates_z type=checkbox>Z</label><br>'
+          + '<label><input id=character_zoom type=checkbox>Zoom</label><input class=mini id=character_zoom_min step=any type=number>-<input class=mini id=character_zoom_max step=any type=number>'
+        + '<td><label><input id=paused type=checkbox>Paused</label><br>'
+          + '<label><input id=gravity_state type=checkbox>Gravity Override</label><br>'
           + '<input class=mini id=gravity_acceleration step=any type=number>Acceleration<input class=mini id=gravity_max step=any type=number>Max<br>'
           + '<input class=mini id=character_speed step=any type=number>Speed<br>'
-          + '<input id=character_collides type=checkbox><label for=character_collides>Collides</label><input class=mini id=character_collide_xz step=any type=number>XZ<br>'
+          + '<label><input id=character_collides type=checkbox>Collides</label><input class=mini id=character_collide_xz step=any type=number>XZ<br>'
           + 'Y<input class=mini id=character_collide_bottom step=any type=number>Bottom<input class=mini id=character_collide_top step=any type=number>Top'
         + '<tr><td>Ambient Light<select id=ambient_state><option value=0>Use Level Properties<option value=1>Override On</select><br>'
           + '<input id=ambient_color type=color><br>'
@@ -758,7 +759,7 @@ function repo_init(){
           + 'Fog<input class=mini id=fog_start step=any type=number>Start<input class=mini id=fog_end step=any type=number>End'
         + '<tr><td>Perspective Matrix<select id=perspective_state><option value=0>Use Level Properties<option value=1>Override On</select><br>'
           + '<input id=perspective>'
-        + '<td>Picking Color Display<input id=picking_color type=checkbox></table>',
+        + '<td><label><input id=picking_color type=checkbox>Picking Color Display</label></table>',
       'tabs': {
         'add': {
           'content': '<button id=entity_add type=button>Add Entity</button><input id=add_type type=text value=webgl_primitive_cuboid><button id=prefab_add type=button>Add Prefab/Primitive</button><br><textarea id=add_properties>{\n}</textarea>',
