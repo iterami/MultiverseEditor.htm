@@ -1014,7 +1014,7 @@ function shader_set(){
     }
 
     webgl_resize();
-    core_escape();
+    core_escape(false);
 }
 
 function update_properties(source, type){
