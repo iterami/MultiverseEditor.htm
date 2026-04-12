@@ -70,7 +70,7 @@ function framebuffer_status(){
 }
 
 function level_export(){
-    if(webgl_character_level() < -1){
+    if(webgl === 0){
         return;
     }
 
@@ -151,7 +151,7 @@ function level_export(){
         json.textures[id] = webgl_uris[id];
     }
 
-    return JSON.stringify(json);
+    document.getElementById('exported').value = JSON.stringify(json);
 }
 
 function property_table(id, properties, type){
@@ -495,6 +495,9 @@ function repo_init(){
         'entity_select': {
           'onchange': update_selected_entity,
         },
+        'export_level': {
+          'onclick': level_export,
+        },
         'framebuffer_status': {
           'onclick': framebuffer_status,
         },
@@ -667,11 +670,6 @@ function repo_init(){
               }
           },
         },
-        'update_json': {
-          'onclick': function(){
-              document.getElementById('exported').value = level_export();
-          },
-        },
       },
       'globals': {
         'context': 0,
@@ -810,7 +808,7 @@ function repo_init(){
         'load': {
           'content': '<input id=level_file type=file><button id=level_load_file type=button>Load Level from File</button><br>'
             + '<button id=level_load_textarea type=button>Load Level from Textarea</button><br><textarea id=level_textarea></textarea><br>'
-            + '<button id=update_json type=button>Export Level JSON</button><br><textarea id=exported readonly></textarea>',
+            + '<button id=export_level type=button>Export Level JSON</button><br><textarea id=exported readonly></textarea>',
           'default': true,
           'group': 'core_menu',
           'label': 'Load/Export Levels',
