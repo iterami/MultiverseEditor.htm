@@ -44,6 +44,14 @@ function delete_selected_option(type, todo){
     globalThis['update_selected_' + type]();
 }
 
+function framebuffer_status(){
+    if(webgl === 0){
+        return;
+    }
+
+    console.log(webgl.checkFramebufferStatus(webgl.FRAMEBUFFER));
+}
+
 function level_export(){
     if(webgl_character_level() < -1){
         return;
@@ -470,6 +478,9 @@ function repo_init(){
         'entity_select': {
           'onchange': update_selected_entity,
         },
+        'framebuffer_status': {
+          'onclick': framebuffer_status,
+        },
         'level_load_file': {
           'onclick': function(){
               const element = document.getElementById('level_file');
@@ -759,7 +770,8 @@ function repo_init(){
           + 'Fog<input class=mini id=fog_start step=any type=number>Start<input class=mini id=fog_end step=any type=number>End'
         + '<tr><td>Perspective Matrix<select id=perspective_state><option value=0>Use Level Properties<option value=1>Override On</select><br>'
           + '<input id=perspective>'
-        + '<td><label><input id=picking_color type=checkbox>Picking Color Display</label></table>',
+        + '<td><label><input id=picking_color type=checkbox>Picking Color Display</label><br>'
+          + '<button id=framebuffer_status>Check Framebuffer Status</button></table>',
       'tabs': {
         'add': {
           'content': '<button id=entity_add type=button>Add Entity</button><input id=add_type type=text value=webgl_primitive_cuboid><button id=prefab_add type=button>Add Prefab/Primitive</button><br><textarea id=add_properties>{\n}</textarea>',
