@@ -802,9 +802,9 @@ function repo_init(){
           'label': 'Properties',
         },
         'shaders': {
-          'content': '<textarea id=shader_fragment></textarea>Fragment<br>'
-            + '<textarea id=shader_vertex></textarea>Vertex<br>'
-            + '<button id=shader_set>Set Shaders</button>',
+          'content': '<button id=shader_set>Set Shaders</button><br>'
+            + '<textarea id=shader_fragment></textarea>Fragment<br>'
+            + '<textarea id=shader_vertex></textarea>Vertex',
           'group': 'core_menu',
           'label': 'Shaders',
         },
