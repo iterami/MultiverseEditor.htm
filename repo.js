@@ -49,7 +49,24 @@ function framebuffer_status(){
         return;
     }
 
-    console.log(webgl.checkFramebufferStatus(webgl.FRAMEBUFFER));
+    const status = webgl.checkFramebufferStatus(webgl.FRAMEBUFFER);
+
+    const statuses = {
+      'COMPLETE': webgl.FRAMEBUFFER_COMPLETE,
+      'FRAMEBUFFER_UNSUPPORTED': webgl.FRAMEBUFFER_UNSUPPORTED,
+      'INCOMPLETE_ATTACHMENT': webgl.FRAMEBUFFER_INCOMPLETE_ATTACHMENT,
+      'INCOMPLETE_DIMENSIONS': webgl.FRAMEBUFFER_INCOMPLETE_DIMENSIONS,
+      'INCOMPLETE_MISSING_ATTACHMENT': webgl.FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT,
+      'INCOMPLETE_MULTISAMPLE': webgl.FRAMEBUFFER_INCOMPLETE_MULTISAMPLE,
+    };
+    for(const id in statuses){
+        if(statuses[id] === status){
+            console.log(status, 'FRAMEBUFFER_' + id);
+            return;
+        }
+    }
+
+    console.log(status, 'Unknown?');
 }
 
 function level_export(){
