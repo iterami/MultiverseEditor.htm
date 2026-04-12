@@ -786,7 +786,8 @@ function repo_init(){
         + '<tr><td>Perspective Matrix<select id=perspective_state><option value=0>Use Level Properties<option value=1>Override On</select><br>'
           + '<input id=perspective>'
         + '<td><label><input id=picking_color type=checkbox>Picking Color Display</label><br>'
-          + '<button id=framebuffer_status>Check Framebuffer Status</button></table>',
+          + '<button id=framebuffer_status>Check Framebuffer Status</button></table>'
+        + '<button id=shader_set>Set Shaders</button><br><textarea id=shader_fragment></textarea>Fragment<br><textarea id=shader_vertex></textarea>Vertex<br>',
       'tabs': {
         'add': {
           'content': '<button id=entity_add type=button>Add Entity</button><input id=add_type type=text value=webgl_primitive_cuboid><button id=prefab_add type=button>Add Prefab/Primitive</button><br><textarea id=add_properties>{\n}</textarea>',
@@ -823,13 +824,6 @@ function repo_init(){
           'content': '<table class=center><thead><tr class=header><td>Property<td>Value<tbody id=properties></table>',
           'group': 'editor',
           'label': 'Properties',
-        },
-        'shaders': {
-          'content': '<button id=shader_set>Set Shaders</button><br>'
-            + '<textarea id=shader_fragment></textarea>Fragment<br>'
-            + '<textarea id=shader_vertex></textarea>Vertex',
-          'group': 'core_menu',
-          'label': 'Shaders',
         },
         'stats': {
           'content': '<table class=right><tr><td>Characters<td id=character_count>'
