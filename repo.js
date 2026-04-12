@@ -1036,14 +1036,9 @@ function shader_set(){
 
 function update_properties(source, type){
     for(const property in source){
-        const value = source[property];
-        const stringify = core_type(value) === 'array' || core_type(value) === 'object';
-
         core_ui_update({
           'ids': {
-            [type + 'properties_' + property]: stringify
-              ? JSON.stringify(value)
-              : value,
+            [type + 'properties_' + property]: JSON.stringify(source[property]),
           },
           'todo': 'value',
         });
