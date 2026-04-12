@@ -790,17 +790,13 @@ function repo_init(){
           'group': 'editor',
           'label': 'Entities',
         },
-        'export': {
-          'content': '<button id=update_json type=button>Update Level JSON</button><br><textarea id=exported></textarea>',
-          'group': 'core_menu',
-          'label': 'Export Level',
-        },
         'load': {
           'content': '<input id=level_file type=file><button id=level_load_file type=button>Load Level from File</button><br>'
-            + '<button id=level_load_textarea type=button>Load Level from Textarea</button><br><textarea id=level_textarea></textarea>',
+            + '<button id=level_load_textarea type=button>Load Level from Textarea</button><br><textarea id=level_textarea></textarea><br>'
+            + '<button id=update_json type=button>Export Level JSON</button><br><textarea id=exported readonly></textarea>',
           'default': true,
           'group': 'core_menu',
-          'label': 'Load Levels',
+          'label': 'Load/Export Levels',
         },
         'paths': {
           'content': '<select id=path_select></select><button id=path_delete type=button>Delete</button>'
