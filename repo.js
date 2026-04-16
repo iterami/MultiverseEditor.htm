@@ -272,6 +272,8 @@ function property_table(id, properties, type){
 }
 
 function repo_escape(){
+    audio_state_all(!core_menu_open);
+
     if(webgl === 0){
         return;
     }
