@@ -700,24 +700,7 @@ function repo_init(){
           },
         },
         'pointerup': {
-          'todo': function(){
-              webgl_pick_entity();
-
-              let color = '';
-              if(core_storage_data.picking_color
-                && webgl !== 0){
-                  webgl_draw();
-                  color = String(webgl_pick_color({
-                    'x': core_pointer.x,
-                    'y': core_pointer.y,
-                  }));
-              }
-              core_ui_update({
-                'ids': {
-                  'picking_color_display': color,
-                },
-              });
-          },
+          'todo': webgl_pick,
         },
         'wheel': {
           'todo': webgl_controls_wheel,
@@ -847,7 +830,7 @@ function repo_init(){
       },
       'title': 'MultiverseEditor.htm',
       'ui': '<button id=spawn type=button>Spawn</button><button id=camera_zoom_set type=button>Zoom</button> <span id=camera_zoom_min></span><input class=mini id=camera_zoom readonly type=text><span id=camera_zoom_max></span> <button id=context_toggle type=button>Context</button><button id=screenshot type=button>Screenshot</button><br>'
-        + '<button id=position_x_set type=button>x</button><input class=left id=position_x readonly type=text><button id=rotate_x_set type=button>x°</button><input class="left mini" id=rotate_x readonly type=text><span id=picking_color_display></span><br>'
+        + '<button id=position_x_set type=button>x</button><input class=left id=position_x readonly type=text><button id=rotate_x_set type=button>x°</button><input class="left mini" id=rotate_x readonly type=text><br>'
         + '<button id=position_y_set type=button>y</button><input class=left id=position_y readonly type=text><button id=rotate_y_set type=button>y°</button><input class="left mini" id=rotate_y readonly type=text>Draw FPS: <span id=fps_draw></span><br>'
         + '<button id=position_z_set type=button>z</button><input class=left id=position_z readonly type=text><button id=rotate_z_set type=button>z°</button><input class="left mini" id=rotate_z readonly type=text>Logic FPS: <span id=fps_logic></span><br>'
         + '<span id=tabs_editor></span><div id=tabcontents_editor></div>',
