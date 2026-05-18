@@ -844,8 +844,9 @@ function repo_init(){
     globalThis.webgl_drawloop = function(){
         webgl_draw();
         core_interval_animationFrame('webgl_drawloop');
-        fps_draw = Math.trunc(1000 / (new Date().getTime() - fps_draw_time));
-        fps_draw_time = new Date().getTime();
+        const now = globalThis.performance.now();
+        fps_draw = Math.trunc(1000 / (now - fps_draw_time));
+        fps_draw_time = now;
     };
 }
 
@@ -932,6 +933,13 @@ function repo_logic(){
     });
 
     update_properties(webgl_properties, '');
+    update_selected_character();
+    update_selected_entity();
+    update_selected_path();
+
+    const now = globalThis.performance.now();
+    const logic_fps = Math.trunc(1000 / (now - fps_logic));
+    fps_logic = now;
     core_ui_update({
       'ids': {
         'camera_zoom': webgl_characters[webgl_character_id].camera_zoom,
@@ -939,7 +947,7 @@ function repo_logic(){
         'camera_zoom_min': webgl_properties.camera_zoom_min,
         'character_count': webgl_character_count,
         'fps_draw': fps_draw,
-        'fps_logic': Math.trunc(1000 / (new Date().getTime() - fps_logic)),
+        'fps_logic': logic_fps,
         'id_count': entity_id_count,
         'opaque_count': entity_groups._length.opaque,
         'particles_count': entity_groups._length.particles || 0,
@@ -960,10 +968,6 @@ function repo_logic(){
         'transparent_count': entity_groups._length.transparent,
       },
     });
-    update_selected_character();
-    update_selected_entity();
-    update_selected_path();
-    fps_logic = new Date().getTime();
 }
 
 function set_property(properties, property, label, complex){
