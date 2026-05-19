@@ -26,6 +26,15 @@ function character_set_axis(type, axis){
     });
 }
 
+function debug_drawloop(){
+    webgl_draw();
+    core_interval_animationFrame('webgl_drawloop');
+
+    const now = globalThis.performance.now();
+    fps_draw = Math.trunc(1000 / (now - fps_draw_time));
+    fps_draw_time = now;
+}
+
 function delete_selected_option(type, todo){
     const select_element = document.getElementById(type + '_select');
     const select_value = select_element.value;
@@ -841,13 +850,7 @@ function repo_init(){
         'tabcontent_properties',
       ],
     });
-    globalThis.webgl_drawloop = function(){
-        webgl_draw();
-        core_interval_animationFrame('webgl_drawloop');
-        const now = globalThis.performance.now();
-        fps_draw = Math.trunc(1000 / (now - fps_draw_time));
-        fps_draw_time = now;
-    };
+    globalThis.webgl_drawloop = debug_drawloop;
 }
 
 function repo_level_load(){
@@ -940,6 +943,7 @@ function repo_logic(){
     const now = globalThis.performance.now();
     const logic_fps = Math.trunc(1000 / (now - fps_logic));
     fps_logic = now;
+
     core_ui_update({
       'ids': {
         'camera_zoom': webgl_characters[webgl_character_id].camera_zoom,
