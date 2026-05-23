@@ -672,12 +672,12 @@ function repo_init(){
         },
         'spawn': {
           'onclick': function(){
-              const character = globalThis.prompt(
+              const id = globalThis.prompt(
                 'Return character to spawn?',
                 webgl_character_id
               );
-              if(character !== null){
-                  webgl_character_spawn(character);
+              if(id !== null){
+                  webgl_character_spawn(id);
               }
           },
         },
@@ -690,9 +690,7 @@ function repo_init(){
       },
       'keybinds': {
         'Backquote': {
-          'down': function(){
-              webgl_character_automove();
-          },
+          'down': webgl_character_automove,
         },
         'KeyV': {
           'down': function(){
