@@ -756,15 +756,15 @@ function repo_init(){
       },
       'storage_controls': true,
       'storage_menu': '<table><tr><td>Camera/Character<select id=character_state><option value=0>Use Level Properties<option value=1>Override On</select><br>'
-          + '<label><input id=character_lock type=checkbox>Camera Lock</label><br>'
-          + '<label><input id=character_moves type=checkbox>Movement</label><label><input id=character_moves_x type=checkbox>X</label><label><input id=character_moves_y type=checkbox>Y</label><label><input id=character_moves_z type=checkbox>Z</label> <select id=character_automoves><option value=1>on<option selected value=0>off<option value=2>any</select>Automove<br>'
-          + '<label><input id=character_rotates type=checkbox>Rotation</label><label><input id=character_rotates_x type=checkbox>X</label><label><input id=character_rotates_y type=checkbox>Y</label><label><input id=character_rotates_z type=checkbox>Z</label><br>'
-          + '<label><input id=character_zoom type=checkbox>Zoom</label><input class=mini id=character_zoom_min step=any type=number>-<input class=mini id=character_zoom_max step=any type=number>'
-        + '<td><label><input id=paused type=checkbox>Paused</label><br>'
-          + '<label><input id=gravity_state type=checkbox>Gravity Override</label><br>'
+          + '<label><input id=character_lock type=checkbox> Camera Lock</label><br>'
+          + '<label><input id=character_moves type=checkbox> Movement</label> <label><input id=character_moves_x type=checkbox>X</label> <label><input id=character_moves_y type=checkbox>Y</label> <label><input id=character_moves_z type=checkbox>Z</label> <select id=character_automoves><option value=1>on<option selected value=0>off<option value=2>any</select>Automove<br>'
+          + '<label><input id=character_rotates type=checkbox> Rotation</label> <label><input id=character_rotates_x type=checkbox>X</label> <label><input id=character_rotates_y type=checkbox>Y</label> <label><input id=character_rotates_z type=checkbox>Z</label><br>'
+          + '<label><input id=character_zoom type=checkbox> Zoom</label><input class=mini id=character_zoom_min step=any type=number>-<input class=mini id=character_zoom_max step=any type=number>'
+        + '<td><label><input id=paused type=checkbox> Paused</label><br>'
+          + '<label><input id=gravity_state type=checkbox> Gravity Override</label><br>'
           + '<input class=mini id=gravity_acceleration step=any type=number>Acceleration<input class=mini id=gravity_max step=any type=number>Max<br>'
           + '<input class=mini id=character_speed step=any type=number>Speed<br>'
-          + '<label><input id=character_collides type=checkbox>Collides</label><input class=mini id=character_collide_xz step=any type=number>XZ<br>'
+          + '<label><input id=character_collides type=checkbox> Collides</label> <input class=mini id=character_collide_xz step=any type=number>XZ<br>'
           + 'Y<input class=mini id=character_collide_bottom step=any type=number>Bottom<input class=mini id=character_collide_top step=any type=number>Top'
         + '<tr><td>Ambient Light<select id=ambient_state><option value=0>Use Level Properties<option value=1>Override On</select><br>'
           + '<input id=ambient_color type=color><br>'
@@ -777,7 +777,7 @@ function repo_init(){
           + 'Fog<input class=mini id=fog_start step=any type=number>Start<input class=mini id=fog_end step=any type=number>End'
         + '<tr><td>Perspective Matrix<select id=perspective_state><option value=0>Use Level Properties<option value=1>Override On</select><br>'
           + '<input id=perspective>'
-        + '<td><label><input id=picking_color type=checkbox>Picking Color Display</label><br>'
+        + '<td><label><input id=picking_color type=checkbox> Picking Color Display</label><br>'
           + '<button id=framebuffer_status>Check Framebuffer Status</button></table>'
         + '<button id=shader_set>Set Shaders</button><br><textarea id=shader_fragment></textarea>Fragment<br><textarea id=shader_vertex></textarea>Vertex<br>',
       'tabs': {
