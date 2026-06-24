@@ -646,9 +646,6 @@ function repo_init(){
               );
           },
         },
-        'screenshot': {
-          'onclick': webgl_screenshot,
-        },
         'set_draw_mode': {
           'onclick': function(){
               if(core_menu_lock){
@@ -836,7 +833,7 @@ function repo_init(){
         },
       },
       'title': 'MultiverseEditor.htm',
-      'ui': '<button id=spawn type=button>Spawn</button><button id=camera_zoom_set type=button>Zoom</button> <span id=camera_zoom_min></span><input class=mini id=camera_zoom readonly type=text><span id=camera_zoom_max></span> <button id=context_toggle type=button>Context</button><button id=screenshot type=button>Screenshot</button><br>'
+      'ui': '<button id=spawn type=button>Spawn</button><button id=camera_zoom_set type=button>Zoom</button> <span id=camera_zoom_min></span><input class=mini id=camera_zoom readonly type=text><span id=camera_zoom_max></span> <button id=context_toggle type=button>Context</button><br>'
         + '<button id=position_x_set type=button>x</button><input class=left id=position_x readonly type=text><button id=rotate_x_set type=button>x°</button><input class="left mini" id=rotate_x readonly type=text><br>'
         + '<button id=position_y_set type=button>y</button><input class=left id=position_y readonly type=text><button id=rotate_y_set type=button>y°</button><input class="left mini" id=rotate_y readonly type=text>Draw FPS: <span id=fps_draw></span><br>'
         + '<button id=position_z_set type=button>z</button><input class=left id=position_z readonly type=text><button id=rotate_z_set type=button>z°</button><input class="left mini" id=rotate_z readonly type=text>Logic FPS: <span id=fps_logic></span><br>'
