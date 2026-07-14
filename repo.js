@@ -785,7 +785,7 @@ function repo_init(){
           'label': 'Entities',
         },
         'load': {
-          'content': '<input id=level_file type=file><button id=level_load_file type=button>Load Level from File</button><br>'
+          'content': '<input accept=".json,application/json" id=level_file type=file><button id=level_load_file type=button>Load Level from File</button><br>'
             + '<button id=level_load_textarea type=button>Load Level from Textarea</button><br><textarea id=level_textarea></textarea><br>'
             + '<button id=export_level type=button>Export Level JSON</button><br><textarea id=exported readonly></textarea>',
           'default': true,
