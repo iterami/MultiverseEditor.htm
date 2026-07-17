@@ -283,88 +283,83 @@ function property_table(id, properties, type){
 function repo_escape(){
     audio_state_all(!core_menu_open);
 
-    if(webgl === 0){
+    if(core_menu_open
+      || webgl === 0
+      || webgl_character_level() <= -2){
         return;
     }
 
-    if(!core_menu_open
-      && webgl_character_level() > -2){
+    if(core_storage_data.ambient_state !== 0){
+        const rgb = core_hex_to_rgb(core_storage_data.ambient_color);
+        webgl_properties.ambient_color = [
+          rgb.red / 255,
+          rgb.green / 255,
+          rgb.blue / 255,
+        ];
+    }
+    if(core_storage_data.clearcolor_state !== 0){
+        const rgb = core_hex_to_rgb(core_storage_data.clearcolor);
+        webgl_color_set({
+          'blue': rgb.blue / 255,
+          'green': rgb.green / 255,
+          'red': rgb.red / 255,
+        });
+    }
+    if(core_storage_data.directional_state !== 0){
+        webgl_properties.directional_state = core_storage_data.directional_state === 1;
 
-        if(core_storage_data.ambient_state !== 0){
-            const rgb = core_hex_to_rgb(core_storage_data.ambient_color);
-            webgl_properties.ambient_color = [
+        if(webgl_properties.directional_state){
+            const rgb = core_hex_to_rgb(core_storage_data.directional_color);
+            webgl_properties.directional_color = [
               rgb.red / 255,
               rgb.green / 255,
               rgb.blue / 255,
             ];
+            webgl_properties.directional_vector = [
+              core_storage_data.directional_vector_x,
+              core_storage_data.directional_vector_y,
+              core_storage_data.directional_vector_z,
+            ];
         }
-        if(core_storage_data.clearcolor_state !== 0){
-            const rgb = core_hex_to_rgb(core_storage_data.clearcolor);
-            webgl_color_set({
-              'blue': rgb.blue / 255,
-              'green': rgb.green / 255,
-              'red': rgb.red / 255,
-            });
-        }
-        if(core_storage_data.directional_state !== 0){
-            webgl_properties.directional_state = core_storage_data.directional_state === 1;
-
-            if(webgl_properties.directional_state){
-                const rgb = core_hex_to_rgb(core_storage_data.directional_color);
-                webgl_properties.directional_color = [
-                  rgb.red / 255,
-                  rgb.green / 255,
-                  rgb.blue / 255,
-                ];
-                webgl_properties.directional_vector = [
-                  core_storage_data.directional_vector_x,
-                  core_storage_data.directional_vector_y,
-                  core_storage_data.directional_vector_z,
-                ];
-            }
-        }
-        if(core_storage_data.fog_end >= 0){
-            webgl_properties.fog_end = core_storage_data.fog_end;
-            webgl_properties.fog_start = core_storage_data.fog_start;
-        }
-        if(core_storage_data.gravity_state){
-            webgl_properties.gravity_acceleration = core_storage_data.gravity_acceleration;
-            webgl_properties.gravity_max = core_storage_data.gravity_max;
-        }
-        webgl_properties.paused = core_storage_data.paused;
-
-        if(core_storage_data.character_state){
-            webgl_properties.camera_zoom_max = core_storage_data.character_zoom_max;
-            webgl_properties.camera_zoom_min = core_storage_data.character_zoom_min;
-            if(core_storage_data.character_automoves !== 2){
-                webgl_characters[webgl_character_id].automove = Boolean(core_storage_data.character_automoves);
-            }
-            webgl_characters[webgl_character_id].camera_lock = core_storage_data.character_lock;
-            webgl_characters[webgl_character_id].collide_bottom = core_storage_data.character_collide_bottom;
-            webgl_characters[webgl_character_id].collide_top = core_storage_data.character_collide_top;
-            webgl_characters[webgl_character_id].collide_xz = core_storage_data.character_collide_xz;
-            webgl_characters[webgl_character_id].collides = core_storage_data.character_collides;
-            webgl_characters[webgl_character_id].speed = core_storage_data.character_speed;
-        }
-        if(core_storage_data.perspective_state){
-            const perspective = core_storage_data.perspective.split(',');
-            for(const i in perspective){
-                if(perspective[i] !== 'x'){
-                    webgl_matrices.perspective[i] = perspective[i];
-                }
-            }
-            webgl.uniformMatrix4fv(
-              webgl_shaders.default.uniforms.perspective,
-              false,
-              webgl_matrices.perspective
-            );
-        }
-
-        webgl_uniform_update();
-
-    }else{
-        core_elements.tabcontent_properties.style.display = 'none';
     }
+    if(core_storage_data.fog_end >= 0){
+        webgl_properties.fog_end = core_storage_data.fog_end;
+        webgl_properties.fog_start = core_storage_data.fog_start;
+    }
+    if(core_storage_data.gravity_state){
+        webgl_properties.gravity_acceleration = core_storage_data.gravity_acceleration;
+        webgl_properties.gravity_max = core_storage_data.gravity_max;
+    }
+    webgl_properties.paused = core_storage_data.paused;
+
+    if(core_storage_data.character_state){
+        webgl_properties.camera_zoom_max = core_storage_data.character_zoom_max;
+        webgl_properties.camera_zoom_min = core_storage_data.character_zoom_min;
+        if(core_storage_data.character_automoves !== 2){
+            webgl_characters[webgl_character_id].automove = Boolean(core_storage_data.character_automoves);
+        }
+        webgl_characters[webgl_character_id].camera_lock = core_storage_data.character_lock;
+        webgl_characters[webgl_character_id].collide_bottom = core_storage_data.character_collide_bottom;
+        webgl_characters[webgl_character_id].collide_top = core_storage_data.character_collide_top;
+        webgl_characters[webgl_character_id].collide_xz = core_storage_data.character_collide_xz;
+        webgl_characters[webgl_character_id].collides = core_storage_data.character_collides;
+        webgl_characters[webgl_character_id].speed = core_storage_data.character_speed;
+    }
+    if(core_storage_data.perspective_state){
+        const perspective = core_storage_data.perspective.split(',');
+        for(const i in perspective){
+            if(perspective[i] !== 'x'){
+                webgl_matrices.perspective[i] = perspective[i];
+            }
+        }
+        webgl.uniformMatrix4fv(
+          webgl_shaders.default.uniforms.perspective,
+          false,
+          webgl_matrices.perspective
+        );
+    }
+
+    webgl_uniform_update();
 }
 
 function repo_init(){
@@ -824,9 +819,9 @@ function repo_init(){
       'title': 'MultiverseEditor.htm',
       'ui': '<button id=spawn type=button>Spawn</button><button id=camera_zoom_set type=button>Zoom</button> <span id=camera_zoom_min></span><input class=mini id=camera_zoom readonly type=text><span id=camera_zoom_max></span> <button id=context_toggle type=button>Context</button><br>'
         + '<button id=position_x_set type=button>x</button><input class=left id=position_x readonly type=text><button id=rotate_x_set type=button>x°</button><input class="left mini" id=rotate_x readonly type=text><br>'
-        + '<button id=position_y_set type=button>y</button><input class=left id=position_y readonly type=text><button id=rotate_y_set type=button>y°</button><input class="left mini" id=rotate_y readonly type=text>Draw FPS: <span id=fps_draw></span><br>'
-        + '<button id=position_z_set type=button>z</button><input class=left id=position_z readonly type=text><button id=rotate_z_set type=button>z°</button><input class="left mini" id=rotate_z readonly type=text>Logic FPS: <span id=fps_logic></span><br>'
-        + '<span id=tabs_editor></span><div id=tabcontents_editor></div>',
+        + '<button id=position_y_set type=button>y</button><input class=left id=position_y readonly type=text><button id=rotate_y_set type=button>y°</button><input class="left mini" id=rotate_y readonly type=text> Draw FPS: <span id=fps_draw></span><br>'
+        + '<button id=position_z_set type=button>z</button><input class=left id=position_z readonly type=text><button id=rotate_z_set type=button>z°</button><input class="left mini" id=rotate_z readonly type=text>Logic FPS: <span id=fps_logic></span>'
+        + '<div id=tabs_editor></div><div id=tabcontents_editor></div>',
       'ui_elements': [
         'character_select',
         'entity_select',
