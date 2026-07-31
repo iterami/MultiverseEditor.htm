@@ -14,9 +14,9 @@ function character_set_axis(type, axis){
 
     result = Number.parseFloat(result);
 
-    webgl_characters[webgl_character_id][type + '_' + axis] = result;
+    webgl_characters[webgl_player_id][type + '_' + axis] = result;
     if(type === 'rotate'){
-        webgl_characters[webgl_character_id]['camera_rotate_' + axis] = result;
+        webgl_characters[webgl_player_id]['camera_rotate_' + axis] = result;
     }
 
     core_ui_update({
@@ -336,14 +336,14 @@ function repo_escape(){
         webgl_properties.camera_zoom_max = core_storage_data.character_zoom_max;
         webgl_properties.camera_zoom_min = core_storage_data.character_zoom_min;
         if(core_storage_data.character_automoves !== 2){
-            webgl_characters[webgl_character_id].automove = Boolean(core_storage_data.character_automoves);
+            webgl_characters[webgl_player_id].automove = Boolean(core_storage_data.character_automoves);
         }
-        webgl_characters[webgl_character_id].camera_lock = core_storage_data.character_lock;
-        webgl_characters[webgl_character_id].collide_bottom = core_storage_data.character_collide_bottom;
-        webgl_characters[webgl_character_id].collide_top = core_storage_data.character_collide_top;
-        webgl_characters[webgl_character_id].collide_xz = core_storage_data.character_collide_xz;
-        webgl_characters[webgl_character_id].collides = core_storage_data.character_collides;
-        webgl_characters[webgl_character_id].speed = core_storage_data.character_speed;
+        webgl_characters[webgl_player_id].camera_lock = core_storage_data.character_lock;
+        webgl_characters[webgl_player_id].collide_bottom = core_storage_data.character_collide_bottom;
+        webgl_characters[webgl_player_id].collide_top = core_storage_data.character_collide_top;
+        webgl_characters[webgl_player_id].collide_xz = core_storage_data.character_collide_xz;
+        webgl_characters[webgl_player_id].collides = core_storage_data.character_collides;
+        webgl_characters[webgl_player_id].speed = core_storage_data.character_speed;
     }
     if(core_storage_data.perspective_state){
         const perspective = core_storage_data.perspective.split(',');
@@ -407,7 +407,7 @@ function repo_init(){
                   return;
               }
 
-              const character = webgl_characters[webgl_character_id];
+              const character = webgl_characters[webgl_player_id];
               const position = webgl_get_position(webgl_characters[target]);
               character.position_x = position.x;
               character.position_y = position.y;
@@ -475,7 +475,7 @@ function repo_init(){
                   return;
               }
 
-              const character = webgl_characters[webgl_character_id];
+              const character = webgl_characters[webgl_player_id];
               const position = webgl_get_position(entity_entities[target]);
               character.position_x = position.x;
               character.position_y = position.y;
@@ -589,7 +589,7 @@ function repo_init(){
               }
               type(core_object_defaults({
                 'defaults': {
-                  'character': webgl_character_id,
+                  'character': webgl_player_id,
                   'prefix': entity_id_count,
                 },
                 'object': JSON.parse(document.getElementById('add_properties').value),
@@ -661,7 +661,7 @@ function repo_init(){
           'onclick': function(){
               const id = globalThis.prompt(
                 'Return character to spawn?',
-                webgl_character_id
+                webgl_player_id
               );
               if(id !== null){
                   webgl_character_spawn(id);
@@ -681,7 +681,7 @@ function repo_init(){
         },
         'KeyV': {
           'down': function(){
-              webgl_characters[webgl_character_id].collides = !webgl_characters[webgl_character_id].collides;
+              webgl_characters[webgl_player_id].collides = !webgl_characters[webgl_player_id].collides;
           },
         },
       },
@@ -847,28 +847,28 @@ function repo_level_load(){
 function repo_logic(){
     if(core_storage_data.character_state){
         if(!core_storage_data.character_moves || !core_storage_data.character_moves_x){
-            webgl_characters[webgl_character_id].position_x = core_ui_values.position_x || 0;
+            webgl_characters[webgl_player_id].position_x = core_ui_values.position_x || 0;
         }
         if(!core_storage_data.character_moves || !core_storage_data.character_moves_y){
-            webgl_characters[webgl_character_id].position_y = core_ui_values.position_y || 0;
+            webgl_characters[webgl_player_id].position_y = core_ui_values.position_y || 0;
         }
         if(!core_storage_data.character_moves || !core_storage_data.character_moves_z){
-            webgl_characters[webgl_character_id].position_z = core_ui_values.position_z || 0;
+            webgl_characters[webgl_player_id].position_z = core_ui_values.position_z || 0;
         }
         if(!core_storage_data.character_rotates || !core_storage_data.character_rotates_x){
-            webgl_characters[webgl_character_id].camera_rotate_x = core_ui_values.rotate_x || 0;
-            webgl_characters[webgl_character_id].rotate_x = core_ui_values.rotate_x || 0;
+            webgl_characters[webgl_player_id].camera_rotate_x = core_ui_values.rotate_x || 0;
+            webgl_characters[webgl_player_id].rotate_x = core_ui_values.rotate_x || 0;
         }
         if(!core_storage_data.character_rotates || !core_storage_data.character_rotates_y){
-            webgl_characters[webgl_character_id].camera_rotate_y = core_ui_values.rotate_y || 0;
-            webgl_characters[webgl_character_id].rotate_y = core_ui_values.rotate_y || 0;
+            webgl_characters[webgl_player_id].camera_rotate_y = core_ui_values.rotate_y || 0;
+            webgl_characters[webgl_player_id].rotate_y = core_ui_values.rotate_y || 0;
         }
         if(!core_storage_data.character_rotates || !core_storage_data.character_rotates_z){
-            webgl_characters[webgl_character_id].camera_rotate_z = core_ui_values.rotate_z || 0;
-            webgl_characters[webgl_character_id].rotate_z = core_ui_values.rotate_z || 0;
+            webgl_characters[webgl_player_id].camera_rotate_z = core_ui_values.rotate_z || 0;
+            webgl_characters[webgl_player_id].rotate_z = core_ui_values.rotate_z || 0;
         }
         if(!core_storage_data.character_zoom){
-            webgl_characters[webgl_character_id].camera_zoom = core_ui_values.camera_zoom || 0;
+            webgl_characters[webgl_player_id].camera_zoom = core_ui_values.camera_zoom || 0;
         }
     }
 
@@ -925,7 +925,7 @@ function repo_logic(){
 
     core_ui_update({
       'ids': {
-        'camera_zoom': webgl_characters[webgl_character_id].camera_zoom,
+        'camera_zoom': webgl_characters[webgl_player_id].camera_zoom,
         'camera_zoom_max': webgl_properties.camera_zoom_max,
         'camera_zoom_min': webgl_properties.camera_zoom_min,
         'character_count': webgl_character_count,
@@ -935,17 +935,17 @@ function repo_logic(){
         'opaque_count': entity_groups._length.opaque,
         'particles_count': entity_groups._length.particles || 0,
         'path_count': Object.keys(webgl_paths).length,
-        'position_x': webgl_characters[webgl_character_id].position_x,
-        'position_y': webgl_characters[webgl_character_id].position_y,
-        'position_z': webgl_characters[webgl_character_id].position_z,
+        'position_x': webgl_characters[webgl_player_id].position_x,
+        'position_y': webgl_characters[webgl_player_id].position_y,
+        'position_z': webgl_characters[webgl_player_id].position_z,
         'rotate_x': core_round({
-          'number': webgl_characters[webgl_character_id].camera_rotate_x,
+          'number': webgl_characters[webgl_player_id].camera_rotate_x,
         }),
         'rotate_y': core_round({
-          'number': webgl_characters[webgl_character_id].camera_rotate_y,
+          'number': webgl_characters[webgl_player_id].camera_rotate_y,
         }),
         'rotate_z': core_round({
-          'number': webgl_characters[webgl_character_id].camera_rotate_z,
+          'number': webgl_characters[webgl_player_id].camera_rotate_z,
         }),
         'skybox_count': entity_groups._length.skybox,
         'transparent_count': entity_groups._length.transparent,
