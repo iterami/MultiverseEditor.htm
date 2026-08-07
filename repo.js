@@ -386,7 +386,7 @@ function repo_init(){
                || !globalThis.confirm('Control character "' + character + '"?')){
                   return;
               }
-              webgl_character_set(character);
+              webgl_player_set(character);
           },
         },
         'character_delete': {
