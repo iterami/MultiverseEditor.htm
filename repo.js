@@ -101,13 +101,6 @@ function level_export(){
         json.groups.push(id);
         groups.push(id);
     }
-    for(const id in webgl_particles){
-        if(!json.particles){
-            json.particles = {};
-        }
-
-        json.particles[id] = webgl_particles[id];
-    }
     for(const id in webgl_paths){
         if(!json.paths){
             json.paths = {};
@@ -804,7 +797,6 @@ function repo_init(){
             + '<tr><td>Paths<td id=path_count>'
             + '<tr class=header><td>Group<td>Count'
             + '<tr><td>opaque<td id=opaque_count>'
-            + '<tr><td>particles<td id=particles_count>'
             + '<tr><td>skybox<td id=skybox_count>'
             + '<tr><td>transparent<td id=transparent_count></table>',
           'group': 'editor',
@@ -933,7 +925,6 @@ function repo_logic(){
         'fps_logic': logic_fps,
         'id_count': entity_id_count,
         'opaque_count': entity_groups._length.opaque,
-        'particles_count': entity_groups._length.particles || 0,
         'path_count': Object.keys(webgl_paths).length,
         'position_x': webgl_characters[webgl_player_id].position_x,
         'position_y': webgl_characters[webgl_player_id].position_y,
