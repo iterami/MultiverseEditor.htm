@@ -436,9 +436,7 @@ function repo_init(){
               delete_selected_option(
                 'entity',
                 function(entity){
-                    entity_remove({
-                      'entities': [entity],
-                    });
+                    webgl_entity_remove(entity);
                 }
               );
           },
